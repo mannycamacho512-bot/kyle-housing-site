@@ -24,29 +24,107 @@
     }
 
     .topbar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      align-items: center;
-      margin-bottom: 30px;
-    }
+  display: grid;
+  grid-template-columns: 2fr auto auto 1.4fr;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 24px;
+}
 
-    .peace-button {
-      display: inline-block;
-      padding: 8px 14px;
-      border: 1px solid #000;
-      border-radius: 999px;
-      text-decoration: none;
-      color: #000;
-      font-size: 13px;
-      font-weight: 600;
-      background: #fff;
-      white-space: nowrap;
-    }
+.top-note {
+  font-size: 14px;
+  line-height: 1.45;
+}
 
-    .peace-button:hover {
-      opacity: .85;
-    }
+.logo-mini {
+  display: inline-block;
+  position: relative;
+  width: 120px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-mini img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.logo-mini-label {
+  position: absolute;
+  top: 50%;
+  left: 73%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  font-weight: 700;
+  color: #333;
+  white-space: nowrap;
+}
+
+.top-link {
+  font-size: 14px;
+}
+
+.top-id {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+
+  .top-note {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+
+  .logo-wrap,
+  .top-link,
+  .top-id {
+    text-align: center;
+  }
+
+  .top-id {
+    grid-column: 1 / -1;
+  }
+
+  .subdivGridDesktop {
+    display: none;
+  }
+
+  .subdivMobileRow {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding: 8px 6px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  .subdivMobileRow .subdivCard {
+    flex: 0 0 82%;
+    max-width: 360px;
+    scroll-snap-align: start;
+  }
+
+  .subdivMobileRow .wb-card-img {
+    height: auto !important;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .subdivMobileRow .wb-card-photo {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block;
+  }
+}
 
     .subdivGridDesktop {
       display: grid;
@@ -82,73 +160,39 @@
       max-width: 320px;
     }
 
-    @media (max-width: 768px) {
-      .topbar {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .subdivGridDesktop {
-        display: none;
-      }
-
-      .subdivMobileRow {
-        display: flex;
-        gap: 14px;
-        overflow-x: auto;
-        padding: 8px 6px;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-      }
-
-      .subdivMobileRow .subdivCard {
-        flex: 0 0 82%;
-        max-width: 360px;
-        scroll-snap-align: start;
-      }
-
-      .subdivMobileRow .wb-card-img {
-        height: auto !important;
-        aspect-ratio: 16 / 9;
-        overflow: hidden;
-        border-radius: 16px;
-      }
-
-      .subdivMobileRow .wb-card-photo {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        display: block;
-      }
-    }
+    
   </style>
 </head>
 <body>
   <div class="page-wrap">
 
     <div class="topbar">
-  <div>
-    <strong>A quiet starting point.</strong><br>
-    Answer a few questions, discover the neighborhood that aligns with your life, and move toward your next home with peace of mind.
-  </div>
+      <div class="top-note">
+        <strong>A quiet starting point.</strong><br>
+        Answer a few questions, discover the neighborhood that aligns with your life, and move toward your next home with peace of mind.
+      </div>
 
-  <div style="text-align:center;">
-    <a href="/your-missing-peace-form" class="peace-button">
-      Your Missing Peace
-    </a>
-  </div>
+      <div class="logo-wrap">
+        <a href="/your-missing-peace-form" class="logo-mini">
+          <img
+            src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Copilot_20251215_150322-1920w.png"
+            alt="Your Missing Peace"
+          >
+          <span class="logo-mini-label">Your Missing Peace</span>
+        </a>
+      </div>
 
-  <div style="font-size:14px;">
-    <a href="/contact" style="text-decoration:underline;">Need Help or Have Questions?</a>
-  </div>
+      <div class="top-link">
+        <a href="/contact" style="text-decoration:underline;">Need Help or Have Questions?</a>
+      </div>
 
-  <div>
-    <div>Realtor® in Kyle, TX</div>
-    <div>Emmanuel "Manny" Camacho</div>
-    <div>Dalton Wade Real Estate Group</div>
-  </div>
-</div>
-  
+      <div class="top-id">
+        <div>Realtor® in Kyle, TX</div>
+        <div>Emmanuel "Manny" Camacho</div>
+        <div>Dalton Wade Real Estate Group</div>
+      </div>
+    </div>
+
     <h1 style="text-align:center; font-size:26px; margin-top:0;">Homes for Sale in Kyle, TX</h1>
 
     <!-- PASTE YOUR HOMEPAGE SECTION BLOCKS BELOW THIS LINE -->
