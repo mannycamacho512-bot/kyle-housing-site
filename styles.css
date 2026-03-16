@@ -1,0 +1,167 @@
+/* =========================
+   Base Layout
+========================= */
+
+:root {
+  --emerald: #065f46;           /* Dark emerald accent */
+  --emerald-soft: rgba(6,95,70,.08);
+  --text: #0f172a;
+  --muted: rgba(15,23,42,.65);
+  --border: rgba(15,23,42,.08);
+  --bg: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.wrap {
+  max-width: 1000px;
+  margin: 24px auto;
+  padding: 16px;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+
+/* =========================
+   Responsive Grid
+========================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Phone */
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .value {
+    font-size: 20px;
+  }
+}
+
+/* =========================
+   Cards
+========================= */
+
+.card,
+.panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  overflow: hidden;
+  transition: all .2s ease;
+}
+
+.card:hover,
+.panel:hover {
+  border-color: rgba(6,95,70,.25);
+  box-shadow: 0 6px 18px rgba(6,95,70,.08);
+}
+
+/* =========================
+   Typography
+========================= */
+
+.label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+
+.value {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.1;
+  color: var(--text);
+  word-break: break-word;
+}
+
+.sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.muted {
+  color: var(--muted);
+  margin: 6px 0;
+}
+
+/* =========================
+   Select Dropdown
+========================= */
+
+select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  background: #fff;
+  color: var(--text);
+}
+
+/* =========================
+   Panels (for signals)
+========================= */
+
+.panel {
+  margin-top: 16px;
+}
+
+.panelTitle {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+/* =========================
+   Chart Containers
+========================= */
+
+.canvasWrap {
+  height: 140px;  /* smaller, cleaner */
+  position: relative;
+}
+
+/* =========================
+   Emerald Accent Utilities
+========================= */
+
+/* For bars / highlights later */
+.accent {
+  color: var(--emerald);
+}
+
+.accent-bg {
+  background: var(--emerald-soft);
+}
+/* Show desktop layout by default */
+.desktopOnly { display: block; }
+.mobileOnly { display: none; }
+
+/* On phone, swap: show mobile layout, hide desktop layout */
+@media (max-width: 560px) {
+  .desktopOnly { display: none; }
+  .mobileOnly { display: block; }
+}
