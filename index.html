@@ -5,41 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live in Kyle</title>
   <style>
-    <style>
-
-body {
-  margin: 0;
-  padding: 20px;
-  font-family: "Hedvig Letters Serif", serif;
-  background: white;
-  color: black;
-}
-
-.page-wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Your Missing Peace button */
-
-.peace-button{
-  display:inline-block;
-  padding:8px 14px;
-  border:1px solid #000;
-  border-radius:999px;
-  text-decoration:none;
-  color:#000;
-  font-size:13px;
-  font-weight:600;
-  background:#fff;
-  white-space:nowrap;
-}
-
-.peace-button:hover{
-  opacity:.85;
-}
-
-</style>
     body {
       margin: 0;
       padding: 20px;
@@ -66,6 +31,23 @@ body {
       margin-bottom: 30px;
     }
 
+    .peace-button {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid #000;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #000;
+      font-size: 13px;
+      font-weight: 600;
+      background: #fff;
+      white-space: nowrap;
+    }
+
+    .peace-button:hover {
+      opacity: .85;
+    }
+
     .subdivGridDesktop {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -75,6 +57,29 @@ body {
 
     .subdivMobileRow {
       display: none;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 4fr 3fr 5fr;
+      gap: 24px;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .footer-box {
+      text-align: center;
+    }
+
+    .footer-box img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .footer-badge img {
+      max-width: 320px;
     }
 
     @media (max-width: 768px) {
@@ -116,63 +121,32 @@ body {
         display: block;
       }
     }
-    <style>
-
-body {
-  margin: 0;
-  padding: 20px;
-  font-family: "Hedvig Letters Serif", serif;
-  background: white;
-  color: black;
-}
-
-.page-wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* FOOTER STYLES */
-
-.footer-grid{
-  display:grid;
-  grid-template-columns: 4fr 3fr 5fr;
-  gap:24px;
-  align-items:center;
-  margin-top:40px;
-}
-
-.footer-box{
-  text-align:center;
-}
-
-.footer-box img{
-  max-width:100%;
-  height:auto;
-  display:block;
-  margin:0 auto;
-}
-
-.footer-badge img{
-  max-width:320px;
-}
-
-</style>
   </style>
 </head>
 <body>
   <div class="page-wrap">
 
     <div class="topbar">
-      <div>
-        <strong>A quiet starting point.</strong><br>
-        Answer a few questions, discover the neighborhood that aligns with your life, and move toward your next home with peace of mind.
-      </div>
+  <div>
+    <strong>A quiet starting point.</strong><br>
+    Answer a few questions, discover the neighborhood that aligns with your life, and move toward your next home with peace of mind.
+  </div>
 
-      <div style="text-align:center;">
-<div style="text-align:center;">
-  <a href="/your-missing-peace-form" class="peace-button">
-    <span>Your Missing Peace</span>
-  </a>
+  <div style="text-align:center;">
+    <a href="/your-missing-peace-form" class="peace-button">
+      Your Missing Peace
+    </a>
+  </div>
+
+  <div style="font-size:14px;">
+    <a href="/contact" style="text-decoration:underline;">Need Help or Have Questions?</a>
+  </div>
+
+  <div>
+    <div>Realtor® in Kyle, TX</div>
+    <div>Emmanuel "Manny" Camacho</div>
+    <div>Dalton Wade Real Estate Group</div>
+  </div>
 </div>
     </div>
   </a>
@@ -181,57 +155,6 @@ body {
     <h1 style="text-align:center; font-size:26px; margin-top:0;">Homes for Sale in Kyle, TX</h1>
 
     <!-- PASTE YOUR HOMEPAGE SECTION BLOCKS BELOW THIS LINE -->
-<!-- AUTO-GENERATED HOMEPAGE SECTIONS (TOP 4 EACH) -->
- <!-- ===============================
-  DESKTOP/TABLET: 4-column grid
-  MOBILE: one horizontal scrolling row (all cards in one row)
-================================== -->
- <style>
-  /* Desktop/tablet: show grid, hide mobile row */
-@media (min-width: 769px) {
-  .subdivMobileRow { display: none !important; }
-}
-/* Mobile: hide grid, show one horizontal scroll row */
-@media (max-width: 768px) {
-  .subdivGridDesktop { display: none !important; }
-  .subdivMobileRow{
-    display:flex !important;
-    gap:14px !important;
-    overflow-x:auto !important;
-    padding:8px 6px !important;
-    -webkit-overflow-scrolling:touch;
-    scroll-snap-type:x mandatory;
-  }
-  /* Each card is a consistent width in the row */
-  .subdivMobileRow .subdivCard{
-    flex: 0 0 82% !important;     /* <- tweak: 90% = bigger, 70% = smaller */
-    max-width: 360px !important;  /* prevents huge cards on large phones */
-    scroll-snap-align: start;
-  }
-  /* Keep your image ratio on mobile */
-  .subdivMobileRow .wb-card-img{
-    height:auto !important;
-    aspect-ratio: 16 / 9;
-    overflow:hidden;
-    border-radius:16px;
-  }
-  .subdivMobileRow .wb-card-photo{
-    width:100% !important;
-    height:100% !important;
-    object-fit:cover !important;
-    display:block;
-  }
-  /* Hide placeholders entirely on mobile (we won't generate them for mobile anyway) */
-  .subdivCard--placeholder{ display:none !important; }
-}
-/* Desktop placeholders keep the grid shape */
-@media (min-width: 769px) {
-  .subdivCard--placeholder{
-    visibility:hidden;
-    pointer-events:none;
-  }
-}
- </style>
  <div style="margin-top:34px; margin-bottom:10px;">
   <h2 style="text-align:left; font-family:'Hedvig Letters Serif'; font-size:22px; font-weight:700; color:#000; margin:0; padding:0;">
    Master-Planned Communities in Kyle, TX
