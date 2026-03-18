@@ -5,20 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live in Kyle</title>
   <style>
-    body {
+    html,
+body {
   margin: 0;
-  padding: 20px;
-  font-family: "Hedvig Letters Serif", serif;
-  background: white;
-  color: black;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
 }
 
-    .page-wrap {
+body {
+  font-family: "Hedvig Letters Serif", serif;
+  background: white;
+  color: black;
+}
+
+.page-wrap {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  padding: 20px;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 *,
@@ -91,9 +99,9 @@
 }
 
 @media (max-width: 768px) {
-  body {
-    padding: 14px;
-  }
+  .page-wrap {
+  padding: 14px;
+}
     .logo-mini-label {
     white-space: normal;
     left: 50%;
@@ -149,6 +157,9 @@
   scroll-snap-type: x proximity;
   scrollbar-width: none;
   width: 100%;
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
 }
 
 .subdivMobileRow::-webkit-scrollbar {
@@ -191,102 +202,7 @@
     line-height: 1.15;
   }
 }
-   .subdivRow {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-  margin-bottom: 8px;
-}
-
-.subdivCard {
-  min-width: 0;
-}
-
-.subdivCard a {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.wb-card-img {
-  aspect-ratio: 16 / 10;
-  border-radius: 16px;
-  overflow: hidden;
-  width: 100%;
-}
-
-.wb-card-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.subdivCardText {
-  text-align: center;
-  margin-top: 8px;
-  line-height: 1.25;
-  font-family: "Hedvig Letters Serif", serif;
-}
-
-.subdivTitle {
-  font-weight: 600;
-  font-size: 18px;
-  margin: 0;
-}
-
-.subdivPrice {
-  font-size: 14px;
-  margin-top: 2px;
-}
-
-.subdivAvail {
-  font-size: 13px;
-  color: #555;
-  margin-top: 2px;
-}
-
-@media (max-width: 1024px) {
-  .subdivRow {
-    gap: 14px;
-  }
-
-  .subdivTitle {
-    font-size: 16px;
-  }
-
-  .subdivPrice,
-  .subdivAvail {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 768px) {
-  body {
-    padding: 14px;
-  }
-
-  .subdivRow {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
-  }
-
-  .wb-card-img {
-    aspect-ratio: 1 / 1;
-    border-radius: 12px;
-  }
-
-  .subdivTitle {
-    font-size: 13px;
-  }
-
-  .subdivPrice,
-  .subdivAvail {
-    font-size: 11px;
-    line-height: 1.2;
-  }
-}
-
+   
     .footer-grid {
       display: grid;
       grid-template-columns: 4fr 3fr 5fr;
