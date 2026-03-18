@@ -155,17 +155,43 @@
     }
 
     .subdivGridDesktop {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, 260px);
-      gap: 24px;
-      justify-content: start;
-      margin-bottom: 8px;
-    }
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-bottom: 8px;
+}
 
-    .subdivMobileRow {
-      display: none;
-    }
+.subdivCard {
+  min-width: 0;
+}
 
+.wb-card-img {
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.wb-card-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.subdivMobileRow {
+  display: none !important;
+}
+
+@media (max-width: 1100px) {
+  .subdivGridDesktop {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* =========================
+   FOOTER
+========================== */
+.footer-grid {
     /* =========================
        FOOTER
     ========================== */
@@ -248,63 +274,34 @@
       }
 
       .subdivGridDesktop {
-        display: none !important;
-      }
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
 
-      .subdivMobileRow {
-        display: flex !important;
-        gap: 10px;
-        padding: 0 0 4px 0;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x proximity;
-        scrollbar-width: none;
-        width: 100%;
-        max-width: 100%;
-        overscroll-behavior-x: contain;
-        touch-action: pan-auto;
-      }
+.wb-card-img {
+  height: auto;
+  aspect-ratio: 3 / 2;
+  border-radius: 12px;
+}
 
-      .subdivMobileRow::-webkit-scrollbar {
-        display: none;
-      }
+.subdivTitle {
+  font-size: 13px !important;
+  line-height: 1.15;
+}
 
-      .subdivMobileRow .subdivCard {
-        flex: 0 0 calc((100% - 20px) / 2.2);
-        max-width: calc((100% - 20px) / 2.2);
-        min-width: 0;
-        scroll-snap-align: start;
-      }
+.subdivPrice {
+  font-size: 11px !important;
+  line-height: 1.15;
+}
 
-      .subdivMobileRow .wb-card-img {
-        height: auto !important;
-        aspect-ratio: 3 / 2;
-        border-radius: 12px;
-        overflow: hidden;
-      }
+.subdivAvail {
+  font-size: 10px !important;
+  line-height: 1.15;
+}
 
-      .subdivMobileRow .wb-card-photo {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        display: block;
-      }
-
-      .subdivMobileRow .subdivTitle {
-        font-size: 13px !important;
-        line-height: 1.15;
-      }
-
-      .subdivMobileRow .subdivPrice {
-        font-size: 11px !important;
-        line-height: 1.15;
-      }
-
-      .subdivMobileRow .subdivAvail {
-        font-size: 10px !important;
-        line-height: 1.15;
-      }
+.subdivMobileRow {
+  display: none !important;
+}
 
       .footer-grid {
         grid-template-columns: 1.2fr 1fr 1.2fr;
@@ -355,66 +352,24 @@
 
   <div class="page-wrap">
     <h1>Homes for Sale in Kyle, TX</h1>
+    <div style="margin-top:34px; margin-bottom:10px;">
+  <h2 style="text-align:left; font-family:'Hedvig Letters Serif'; font-size:22px; font-weight:700; color:#000; margin:0; padding:0;">
+    Master-Planned Communities
+  </h2>
+</div>
+
+<div style="max-width:900px; margin-bottom:22px; font-size:16px; line-height:1.6;">
+  An MPC is a self contained community where the developer lays out a long-term vision that goes beyond just homes. It's planned in phases, often over decades, and includes residential, recreational, commercial and sometimes institutional uses.
+</div>
 
     <!-- AUTO-GENERATED REGION PAGE (ALL) - DESKTOP GRID + MOBILE ROW -->
 <!-- ===============================
   DESKTOP/TABLET: 4-column grid
   MOBILE: one horizontal scrolling row (all cards in one row)
 ================================== -->
-<style>
-/* Desktop/tablet: show grid, hide mobile row */
-@media (min-width: 769px) {
-  .subdivMobileRow { display: none !important; }
-}
 
-/* Mobile: hide grid, show one horizontal scroll row */
-@media (max-width: 768px) {
-  .subdivGridDesktop { display: none !important; }
-
-  .subdivMobileRow{
-    display:flex !important;
-    gap:14px !important;
-    overflow-x:auto !important;
-    padding:8px 6px !important;
-    -webkit-overflow-scrolling:touch;
-    scroll-snap-type:x mandatory;
-  }
-
-  /* Each card is a consistent width in the row */
-  .subdivMobileRow .subdivCard{
-    flex: 0 0 82% !important;     /* <- tweak: 90% = bigger, 70% = smaller */
-    max-width: 360px !important;  /* prevents huge cards on large phones */
-    scroll-snap-align: start;
-  }
-
-  /* Keep your image ratio on mobile */
-  .subdivMobileRow .wb-card-img{
-    height:auto !important;
-    aspect-ratio: 16 / 9;
-    overflow:hidden;
-    border-radius:16px;
-  }
-  .subdivMobileRow .wb-card-photo{
-    width:100% !important;
-    height:100% !important;
-    object-fit:cover !important;
-    display:block;
-  }
-
-  /* Hide placeholders entirely on mobile (we won't generate them for mobile anyway) */
-  .subdivCard--placeholder{ display:none !important; }
-}
-
-/* Desktop placeholders keep the grid shape */
-@media (min-width: 769px) {
-  .subdivCard--placeholder{
-    visibility:hidden;
-    pointer-events:none;
-  }
-}
-</style>
 <!-- Desktop grid -->
-<div class="subdivGridDesktop" style="display:grid; grid-template-columns: repeat(4, 1fr); gap:24px; margin-bottom:0px;">
+<div class="subdivGridDesktop" style="margin-bottom:0px;">
 <div class="subdivCard">
   <a href="/6-Creeks" style="text-decoration:none; color:inherit; display:block;">
     <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
@@ -541,17 +496,7 @@
     </div>
   </a>
 </div>
-<div class="subdivCard subdivCard--placeholder" aria-hidden="true"></div>
-<div class="subdivCard subdivCard--placeholder" aria-hidden="true"></div>
 </div>
-
-<!-- Mobile horizontal row -->
-<div class="subdivMobileRow">
-<div class="subdivCard">
-  <a href="/6-Creeks" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/6-Creeks_2.81.1.png" alt="6 Creeks" style="width:100%; height:100%; object-fit:cover; display:block;"/>
-    </div>
 
     <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
       <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
