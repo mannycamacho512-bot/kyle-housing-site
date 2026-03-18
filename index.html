@@ -139,17 +139,27 @@
   }
 
   .subdivMobileRow {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
-    padding: 0;
-    overflow: visible;
-  }
+  display: flex !important;
+  gap: 10px;
+  padding: 0 0 4px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+.subdivMobileRow::-webkit-scrollbar {
+  display: none;
+}
 
   .subdivMobileRow .subdivCard {
-    min-width: 0;
-    max-width: none;
-  }
+  flex: 0 0 calc((100% - 20px) / 2.5);
+  max-width: calc((100% - 20px) / 2.5);
+  min-width: 0;
+  scroll-snap-align: start;
+}
 
   .subdivMobileRow .wb-card-img {
   height: auto !important;
