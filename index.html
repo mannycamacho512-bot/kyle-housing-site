@@ -65,35 +65,33 @@ h1 {
 }
 
 .topbar.shrink {
-  grid-template-columns: 1fr;
-  gap: 0;
   margin-bottom: 8px;
   padding-top: 4px;
   padding-bottom: 4px;
-  justify-items: center;
 }
 
 .topbar.shrink .top-link,
 .topbar.shrink .top-id {
   opacity: 0;
   pointer-events: none;
-  height: 0;
+  max-height: 0;
   overflow: hidden;
 }
 
 .topbar.shrink .logo-wrap {
-  grid-column: 1;
-  transform: none;
-  margin: 0;
+  transform: translateY(100px);
 }
 
 .topbar.shrink .logo-mini {
-  width: 60px;
+  width: 70px;
+}
+    .topbar {
+  min-height: 170px;
 }
     .logo-wrap {
   grid-column: 2;
   text-align: center;
-  margin-top: 12px;
+  transform: translateY(100px);
 }
 
 .top-link {
