@@ -21,14 +21,13 @@ body {
 }
 
 .page-wrap {
-  max-width: 1200px;
-  margin: 0 auto;
   width: 100%;
-  padding: 20px;
+  max-width: none;
+  margin: 0;
+  padding: 20px 32px;
   box-sizing: border-box;
   overflow-x: hidden;
 }
-
 *,
 *::before,
 *::after {
@@ -89,8 +88,9 @@ body {
 }
 .subdivGridDesktop {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, 260px);
   gap: 24px;
+  justify-content: start;
   margin-bottom: 8px;
 }
 
@@ -263,7 +263,7 @@ body {
   </h2>
  </div>
  <!-- Desktop grid -->
- <div class="subdivGridDesktop" style="display:grid; grid-template-columns: repeat(4, 1fr); gap:24px; margin-bottom:8px;">
+ <div class="subdivGridDesktop">
   <div class="subdivCard">
    <a href="/6-Creeks" style="text-decoration:none; color:inherit; display:block;">
     <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
@@ -418,7 +418,7 @@ body {
   </h2>
  </div>
  <!-- Desktop grid -->
- <div class="subdivGridDesktop" style="display:grid; grid-template-columns: repeat(4, 1fr); gap:24px; margin-bottom:8px;">
+ <div class="subdivGridDesktop">
   <div class="subdivCard">
    <a href="/hometown-kyle" style="text-decoration:none; color:inherit; display:block;">
     <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
@@ -573,7 +573,7 @@ body {
   </h2>
  </div>
  <!-- Desktop grid -->
- <div class="subdivGridDesktop" style="display:grid; grid-template-columns: repeat(4, 1fr); gap:24px; margin-bottom:8px;">
+ <div class="subdivGridDesktop">
   <div class="subdivCard">
    <a href="/copy-of-bunton-creek" style="text-decoration:none; color:inherit; display:block;">
     <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
@@ -728,7 +728,7 @@ body {
   </h2>
  </div>
  <!-- Desktop grid -->
- <div class="subdivGridDesktop" style="display:grid; grid-template-columns: repeat(4, 1fr); gap:24px; margin-bottom:8px;">
+ <div class="subdivGridDesktop">
   <div class="subdivCard">
    <a href="/paramount" style="text-decoration:none; color:inherit; display:block;">
     <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
@@ -883,7 +883,7 @@ body {
   </h2>
  </div>
  <!-- Desktop grid -->
- <div class="subdivGridDesktop" style="display:grid; grid-template-columns: repeat(4, 1fr); gap:24px; margin-bottom:8px;">
+ <div class="subdivGridDesktop">
   <div class="subdivCard">
    <a href="/bunton-creek" style="text-decoration:none; color:inherit; display:block;">
     <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
