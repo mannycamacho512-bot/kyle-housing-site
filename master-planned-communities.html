@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live in Kyle</title>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Hedvig Letters Serif", serif;
+      background: white;
+      color: black;
+    }
+
+    h1 {
+      position: absolute !important;
+      left: -9999px !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       FIXED HEADER
+    ========================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: white;
+      z-index: 9999;
+      border-bottom: 0;
+      transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 20px;
+      min-height: 170px;
+      padding: 8px 32px 0 32px;
+      transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+    }
+
+    .top-link,
+    .top-id,
+    .logo-wrap,
+    .logo-mini {
+      transition: all 0.25s ease;
+    }
+
+    .logo-wrap {
+      grid-column: 2;
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .top-link {
+      grid-column: 1;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .top-id {
+      grid-column: 3;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .top-note {
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .logo-mini {
+      display: inline-block;
+      position: relative;
+      width: 90px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-mini img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .logo-mini-label {
+      position: absolute;
+      top: 50%;
+      left: 73%;
+      transform: translate(-50%, -50%);
+      font-size: 10px;
+      font-weight: 700;
+      color: #333;
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    /* SHRINK STATE */
+    .site-header.shrink {
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+
+    .site-header.shrink .topbar {
+      min-height: 78px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .site-header.shrink .top-link,
+    .site-header.shrink .top-id {
+      opacity: 0;
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(-8px);
+    }
+
+    .site-header.shrink .logo-mini {
+      width: 70px;
+    }
+
+    /* =========================
+       PAGE CONTENT
+    ========================== */
+    .page-wrap {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 190px 32px 20px 32px; /* room for full header */
+      box-sizing: border-box;
+    }
+
+    .subdivGridDesktop {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 260px);
+      gap: 24px;
+      justify-content: start;
+      margin-bottom: 8px;
+    }
+
+    .subdivMobileRow {
+      display: none;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .footer-box {
+      min-width: 0;
+    }
+
+    .footer-box:first-child {
+      grid-column: 1;
+      text-align: left;
+    }
+
+    .footer-badge {
+      grid-column: 3;
+      justify-self: end;
+      text-align: right;
+    }
+
+    .footer-box img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .footer-badge img {
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+    @media (max-width: 768px) {
+      .topbar {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        align-items: center;
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .logo-wrap,
+      .top-link,
+      .top-id {
+        text-align: center;
+      }
+
+      .top-id {
+        font-size: 12px;
+        line-height: 1.5;
+        letter-spacing: 0.2px;
+      }
+
+      .logo-mini-label {
+        white-space: normal;
+        left: 50%;
+        width: 100px;
+        text-align: center;
+      }
+
+      .page-wrap {
+        padding: 190px 14px 14px 14px;
+      }
+
+      .site-header.shrink .topbar {
+        min-height: 70px;
+      }
+
+      .site-header.shrink .logo-mini {
+        width: 64px;
+      }
+
+      .subdivGridDesktop {
+        display: none !important;
+      }
+
+      .subdivMobileRow {
+        display: flex !important;
+        gap: 10px;
+        padding: 0 0 4px 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+        width: 100%;
+        max-width: 100%;
+        overscroll-behavior-x: contain;
+        touch-action: pan-auto;
+      }
+
+      .subdivMobileRow::-webkit-scrollbar {
+        display: none;
+      }
+
+      .subdivMobileRow .subdivCard {
+        flex: 0 0 calc((100% - 20px) / 2.2);
+        max-width: calc((100% - 20px) / 2.2);
+        min-width: 0;
+        scroll-snap-align: start;
+      }
+
+      .subdivMobileRow .wb-card-img {
+        height: auto !important;
+        aspect-ratio: 3 / 2;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .subdivMobileRow .wb-card-photo {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block;
+      }
+
+      .subdivMobileRow .subdivTitle {
+        font-size: 13px !important;
+        line-height: 1.15;
+      }
+
+      .subdivMobileRow .subdivPrice {
+        font-size: 11px !important;
+        line-height: 1.15;
+      }
+
+      .subdivMobileRow .subdivAvail {
+        font-size: 10px !important;
+        line-height: 1.15;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.2fr 1fr 1.2fr;
+        gap: 12px;
+      }
+
+      .footer-box div {
+        word-wrap: break-word;
+      }
+
+      .footer-badge {
+        overflow: hidden;
+      }
+
+      .footer-badge img {
+        width: 100%;
+        max-width: 110px;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="topbar">
+      <div class="logo-wrap">
+        <a href="/your-missing-peace-form" class="logo-mini">
+          <img
+            src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Copilot_20251215_150322-1920w.png"
+            alt="Your Missing Peace"
+          />
+          <span class="logo-mini-label">Your Missing Peace</span>
+        </a>
+      </div>
+
+      <div class="top-link">
+        <a href="/contact" style="text-decoration:underline;">Need Help or Have Questions?</a>
+      </div>
+
+      <div class="top-id">
+        <div>Realtor® in Kyle, TX</div>
+        <div>Emmanuel "Manny" Camacho</div>
+        <div>Dalton Wade Real Estate Group</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+    <h1>Homes for Sale in Kyle, TX</h1>
+
+    <!-- AUTO-GENERATED REGION PAGE (ALL) - DESKTOP GRID + MOBILE ROW -->
+<!-- ===============================
+  DESKTOP/TABLET: 4-column grid
+  MOBILE: one horizontal scrolling row (all cards in one row)
+================================== -->
+<style>
+/* Desktop/tablet: show grid, hide mobile row */
+@media (min-width: 769px) {
+  .subdivMobileRow { display: none !important; }
+}
+
+/* Mobile: hide grid, show one horizontal scroll row */
+@media (max-width: 768px) {
+  .subdivGridDesktop { display: none !important; }
+
+  .subdivMobileRow{
+    display:flex !important;
+    gap:14px !important;
+    overflow-x:auto !important;
+    padding:8px 6px !important;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+  }
+
+  /* Each card is a consistent width in the row */
+  .subdivMobileRow .subdivCard{
+    flex: 0 0 82% !important;     /* <- tweak: 90% = bigger, 70% = smaller */
+    max-width: 360px !important;  /* prevents huge cards on large phones */
+    scroll-snap-align: start;
+  }
+
+  /* Keep your image ratio on mobile */
+  .subdivMobileRow .wb-card-img{
+    height:auto !important;
+    aspect-ratio: 16 / 9;
+    overflow:hidden;
+    border-radius:16px;
+  }
+  .subdivMobileRow .wb-card-photo{
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    display:block;
+  }
+
+  /* Hide placeholders entirely on mobile (we won't generate them for mobile anyway) */
+  .subdivCard--placeholder{ display:none !important; }
+}
+
+/* Desktop placeholders keep the grid shape */
+@media (min-width: 769px) {
+  .subdivCard--placeholder{
+    visibility:hidden;
+    pointer-events:none;
+  }
+}
+</style>
+<!-- Desktop grid -->
+<div class="subdivGridDesktop" style="display:grid; grid-template-columns: repeat(4, 1fr); gap:24px; margin-bottom:0px;">
+<div class="subdivCard">
+  <a href="/6-Creeks" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/6-Creeks_2.81.1.png" alt="6 Creeks" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        6 Creeks
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $369,990 &ndash; $799,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        90 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="/plum-creek" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Plum-Creek-Original_2.19.1.png" alt="Plum Creek" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Plum Creek
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $216,990 &ndash; $500,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        55 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="/anthem" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Anthem_2.78.1.png" alt="Anthem" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Anthem
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $269,990 &ndash; $699,990
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        43 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="/crosswinds" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Crosswinds_2.10.1.png" alt="Crosswinds" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Crosswinds
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $270,000 &ndash; $589,900
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        38 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="/waterstone" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Waterstone_2.61.1.png" alt="Waterstone" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Waterstone
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $209,490 &ndash; $406,990
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        23 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="/waterleaf" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Waterleaf_2.64.1.png" alt="Waterleaf" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Waterleaf
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $219,000 &ndash; $419,990
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        15 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard subdivCard--placeholder" aria-hidden="true"></div>
+<div class="subdivCard subdivCard--placeholder" aria-hidden="true"></div>
+</div>
+
+<!-- Mobile horizontal row -->
+<div class="subdivMobileRow">
+<div class="subdivCard">
+  <a href="/6-Creeks" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/6-Creeks_2.81.1.png" alt="6 Creeks" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        6 Creeks
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $369,990 &ndash; $799,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        90 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="/plum-creek" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Plum-Creek-Original_2.19.1.png" alt="Plum Creek" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Plum Creek
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $216,990 &ndash; $500,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        55 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="/anthem" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Anthem_2.78.1.png" alt="Anthem" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Anthem
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $269,990 &ndash; $699,990
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        43 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="/crosswinds" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Crosswinds_2.10.1.png" alt="Crosswinds" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Crosswinds
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $270,000 &ndash; $589,900
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        38 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="/waterstone" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Waterstone_2.61.1.png" alt="Waterstone" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Waterstone
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $209,490 &ndash; $406,990
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        23 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="/waterleaf" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Waterleaf_2.64.1.png" alt="Waterleaf" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Waterleaf
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $219,000 &ndash; $419,990
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        15 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+</div>
+
+
+  <script>
+    const siteHeader = document.querySelector('.site-header');
+
+    function handleHeaderShrink() {
+      if (window.scrollY > 80) {
+        siteHeader.classList.add('shrink');
+      } else {
+        siteHeader.classList.remove('shrink');
+      }
+    }
+
+    window.addEventListener('scroll', handleHeaderShrink, { passive: true });
+    window.addEventListener('load', handleHeaderShrink);
+  </script>
+</body>
+</html>
