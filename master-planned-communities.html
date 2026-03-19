@@ -120,8 +120,13 @@
   max-width: none;
   text-align: left;
   line-height: 1;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
-
+.site-header.shrink .logo-mini-label {
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+}
 .site-header.shrink .topbar {
   min-height: 78px;
   padding-top: 0;
