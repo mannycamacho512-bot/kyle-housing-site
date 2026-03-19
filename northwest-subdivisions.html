@@ -96,7 +96,7 @@
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 140px;
+  width: 132px;
   text-decoration: none;
   color: inherit;
 }
@@ -105,7 +105,7 @@
   display: block;
   width: 100%;
   height: auto;
-  transform: translateX(-18px);
+  transform: translateX(-15px);
 }
 
 .logo-mini-label {
@@ -120,8 +120,13 @@
   max-width: none;
   text-align: left;
   line-height: 1;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
-
+.site-header.shrink .logo-mini-label {
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+}
 .site-header.shrink .topbar {
   min-height: 78px;
   padding-top: 0;
