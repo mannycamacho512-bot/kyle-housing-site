@@ -82,7 +82,7 @@
   transform: translateX(-50%);
   display: flex;
   align-items: flex-end;
-  gap: 0px;
+  gap: 0;
 }
 
 .header-action {
@@ -94,6 +94,18 @@
   padding: 0;
   line-height: 1;
   text-decoration: none;
+  margin-right: -22px;
+}
+
+.header-action:last-child {
+  margin-right: 0;
+}
+
+.action-icon {
+  display: block;
+  height: auto;
+  margin: 0;
+  padding: 0;
 }
 
 .action-label {
@@ -105,15 +117,17 @@
   color: #000;
   text-align: center;
 }
+
 .connect-btn {
   width: 90px;
-  height: auto;
-  display: block;
-  margin: 0;
-  padding: 0;
 }
-    .match-btn {
+
+.match-btn {
   width: 80px;
+}
+
+.data-btn {
+  width: 82px;
 }
 .top-id {
   margin-left: auto;
@@ -314,7 +328,7 @@
   transform: translateX(-50%);
   display: flex;
   align-items: flex-end;
-  gap: 0px;
+  gap: 0;
 }
 
 .top-id {
@@ -425,13 +439,18 @@
 
       <div class="top-link">
   <a href="/kyle-housing-site/match" class="header-action match-action">
-    <img src="images/match2.png" alt="Match" class="connect-btn match-btn">
+    <img src="images/match2.png" alt="Match" class="action-icon match-btn">
     <span class="action-label">Match</span>
   </a>
 
   <a href="/kyle-housing-site/contact" class="header-action connect-action">
-    <img src="images/connect2.png" alt="Connect" class="connect-btn">
+    <img src="images/connect2.png" alt="Connect" class="action-icon connect-btn">
     <span class="action-label">Connect</span>
+  </a>
+
+  <a href="/kyle-housing-site/data" class="header-action data-action">
+    <img src="images/graph.png" alt="Data" class="action-icon data-btn">
+    <span class="action-label">Data</span>
   </a>
 </div>
 
