@@ -368,11 +368,17 @@
 
 .wb-card-img {
   aspect-ratio: 4 / 3;
-  border-radius: 16px;
+  border-radius: 20px;
+  overflow: hidden;
   background: #f5f5f5;
 }
+
 .wb-card-photo {
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
 }
 .subdivTitle {
   font-size: 13px !important;
