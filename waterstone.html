@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Waterstone Homes for Sale | Kyle, TX</title>
+  <meta
+    name="description"
+    content="Looking at Waterstone in Kyle TX? Explore available homes, price ranges, traffic insights, and neighborhood details."
+  />
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Hedvig Letters Serif", serif;
+      background: #fff;
+      color: #000;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: white;
+      z-index: 9999;
+      border-bottom: 0;
+      transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .topbar {
+      position: relative;
+      min-height: 90px;
+      padding: 0;
+      transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+    }
+
+    .top-link,
+    .top-id,
+    .logo-wrap,
+    .logo-mini {
+      transition: all 0.25s ease;
+    }
+
+    .logo-wrap {
+      position: absolute;
+      top: -14px;
+      left: -8px;
+      margin: 0;
+      text-align: left;
+      z-index: 2;
+    }
+
+    .top-link {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+    }
+
+    .header-action {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+      text-decoration: none;
+      margin-right: -22px;
+    }
+
+    .header-action:last-child {
+      margin-right: 0;
+    }
+
+    .action-icon {
+      display: block;
+      height: auto;
+      margin: 0;
+      padding: 0;
+    }
+
+    .action-label {
+      margin-top: -8px;
+      font-family: "Hedvig Letters Serif", serif;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+      color: #000;
+      text-align: center;
+    }
+
+    .connect-btn {
+      width: 90px;
+    }
+
+    .match-btn {
+      width: 80px;
+    }
+
+    .data-btn {
+      width: 82px;
+    }
+
+    .top-id {
+      margin-left: auto;
+      padding-top: 8px;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .logo-mini {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 132px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-mini:hover {
+      opacity: 0.85;
+    }
+
+    .logo-mini img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform: translateX(-15px);
+    }
+
+    .logo-mini-label {
+      position: static;
+      transform: none;
+      margin-top: -18px;
+      margin-left: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #333;
+      white-space: nowrap;
+      max-width: none;
+      text-align: left;
+      line-height: 1;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .site-header.shrink .logo-mini-label {
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+    }
+
+    .site-header.shrink .topbar {
+      min-height: 78px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .site-header.shrink .top-link,
+    .site-header.shrink .top-id {
+      opacity: 0;
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(-8px);
+    }
+
+    .site-header.shrink .logo-mini {
+      width: 132px;
+    }
+
+    .page-wrap {
+      width: 100%;
+      margin: 0;
+      padding: 190px 20px 24px;
+    }
+
+    .content-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .page-top-meta {
+      margin-bottom: 22px;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 13px;
+      text-decoration: underline;
+      margin-bottom: 8px;
+    }
+
+    .page-updated {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .hero-section h1 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 14px;
+    }
+
+    .hero-copy {
+      max-width: 880px;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #000;
+      text-align: center;
+    }
+
+    .hero-copy p {
+      margin: 0 0 16px;
+    }
+
+    .section-block {
+      margin-bottom: 28px;
+    }
+
+    .gallery-2,
+    .gallery-3,
+    .gallery-split {
+      display: grid;
+      gap: 16px;
+    }
+
+    .gallery-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gallery-split {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery-card,
+    .feature-image {
+      border-radius: 18px;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .gallery-card img,
+    .feature-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .market-grid,
+    .info-grid,
+    .nearby-grid,
+    .split-feature {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .info-card,
+    .market-card,
+    .nearby-card,
+    .split-copy,
+    .split-photo {
+      background: #fff;
+      border: 1px solid #ececec;
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .split-photo {
+      padding: 0;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .split-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .market-card {
+      text-align: center;
+    }
+
+    .card-kicker {
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .market-value {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #000;
+    }
+
+    .fine-note {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .cta-stack {
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .cta-stack a {
+      text-decoration: underline;
+    }
+
+    .dashboard-wrap iframe,
+    .map-wrap iframe {
+      width: 100%;
+      border: 0;
+      border-radius: 18px;
+      display: block;
+    }
+
+    .dashboard-wrap iframe {
+      height: 280px;
+    }
+
+    .map-wrap iframe {
+      height: 480px;
+    }
+
+    .info-card h2,
+    .info-card h3,
+    .nearby-card h3,
+    .split-copy h3,
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.3;
+    }
+
+    .info-card p,
+    .info-card li,
+    .nearby-card li,
+    .split-copy p,
+    .split-copy li {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #000;
+    }
+
+    .info-card ul,
+    .nearby-card ul,
+    .split-copy ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .info-card li,
+    .nearby-card li,
+    .split-copy li {
+      margin-bottom: 6px;
+    }
+
+    .traffic-badges {
+      margin-bottom: 14px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #000;
+    }
+
+    .map-heading {
+      margin: 0 0 12px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .footer-box {
+      min-width: 0;
+    }
+
+    .footer-box:first-child {
+      grid-column: 1;
+      text-align: left;
+    }
+
+    .footer-badge {
+      grid-column: 3;
+      justify-self: end;
+      text-align: right;
+    }
+
+    .footer-box img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .footer-badge img {
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    @media (max-width: 768px) {
+      .topbar {
+        min-height: 140px;
+        padding: 0 10px;
+      }
+
+      .logo-wrap {
+        position: absolute;
+        top: -4px;
+        left: 0;
+        text-align: left;
+      }
+
+      .top-link {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: flex-end;
+        gap: 0;
+      }
+
+      .top-id {
+        position: absolute;
+        top: 8px;
+        right: 6px;
+        text-align: right;
+        font-size: 10px;
+        line-height: 1.2;
+        letter-spacing: 0;
+        max-width: 145px;
+      }
+
+      .logo-mini-label {
+        white-space: nowrap;
+        width: auto;
+        text-align: left;
+        left: auto;
+      }
+
+      .page-wrap {
+        padding: 190px 14px 16px;
+      }
+
+      .content-shell {
+        max-width: 100%;
+      }
+
+      .site-header.shrink .topbar {
+        min-height: 86px;
+      }
+
+      .site-header.shrink .logo-mini {
+        width: 110px;
+      }
+
+      .hero-section h1 {
+        font-size: 24px;
+      }
+
+      .hero-subtitle {
+        font-size: 14px;
+      }
+
+      .hero-copy {
+        font-size: 15px;
+        line-height: 1.65;
+        text-align: left;
+      }
+
+      .gallery-2,
+      .gallery-3,
+      .gallery-split,
+      .market-grid,
+      .info-grid,
+      .nearby-grid,
+      .split-feature,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-2,
+      .gallery-3 {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+
+      .gallery-card {
+        flex: 0 0 88%;
+        scroll-snap-align: start;
+      }
+
+      .dashboard-wrap iframe {
+        height: 260px;
+      }
+
+      .map-wrap iframe {
+        height: 360px;
+      }
+
+      .footer-box,
+      .footer-badge {
+        text-align: left;
+        justify-self: start;
+      }
+
+      .footer-badge img {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        max-width: 110px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar">
+      <div class="logo-wrap">
+        <a href="/kyle-housing-site/" class="logo-mini">
+          <img src="images/logo.png" alt="Your Missing Peace" />
+          <span class="logo-mini-label">Your Missing Peace</span>
+        </a>
+      </div>
+
+      <div class="top-link">
+        <a href="/kyle-housing-site/match" class="header-action match-action">
+          <img src="images/match2.png" alt="Match" class="action-icon match-btn">
+          <span class="action-label">Match</span>
+        </a>
+
+        <a href="/kyle-housing-site/contact" class="header-action connect-action">
+          <img src="images/connect2.png" alt="Connect" class="action-icon connect-btn">
+          <span class="action-label">Connect</span>
+        </a>
+
+        <a href="/kyle-housing-site/data" class="header-action data-action">
+          <img src="images/graph.png" alt="Data" class="action-icon data-btn">
+          <span class="action-label">Data</span>
+        </a>
+      </div>
+
+      <div class="top-id">
+        <div>Realtor® in Kyle, TX</div>
+        <div>Emmanuel "Manny" Camacho</div>
+        <div>Dalton Wade Real Estate Group</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <div class="content-shell">
+      <div class="page-top-meta">
+        <a href="/kyle-housing-site/master-planned-communities" class="back-link">
+          &larr; Back to Master Planned Communities
+        </a>
+        <div class="page-updated">Last updated: March 16, 2026</div>
+      </div>
+
+      <section class="hero-section section-block">
+        <h1>Waterstone in Kyle, TX</h1>
+        <div class="hero-subtitle">Where Growth and Belonging Take Shape Together</div>
+
+        <div class="hero-copy">
+          <p>
+            Waterstone is a place still taking shape, and that’s its strength. The drive south of Kyle falls away, and you arrive in a community that’s growing with intention — streets, trails, and everyday rhythms forming in real time.
+          </p>
+          <p>
+            Every home built adds to the story. Every family that arrives shapes the feel of the neighborhood. The community isn’t fixed; it’s becoming — and you become part of that becoming.
+          </p>
+          <p>
+            You’re not stepping into a finished past. You’re choosing a place with room to grow, room to breathe, and room to build a life as the community builds around you.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="gallery-2">
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Waterstone+playground_2.97.1-1920w.jpg" alt="Playground in Waterstone community, Kyle TX" loading="lazy">
+          </div>
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Waterstone+sidewalk_2.99.1-1920w.jpg" alt="Waterstone community sidewalk in Kyle TX" loading="lazy">
+          </div>
+        </div>
+      </section>
+
+      <section class="market-grid section-block">
+        <div class="market-card">
+          <h2 class="card-kicker">Homes Available in Waterstone, Kyle TX</h2>
+          <div id="homes-available-text" class="market-value">Loading...</div>
+
+          <div class="cta-stack">
+            <div>
+              <a href="/kyle-housing-site/schedule-walkthrough">🏡 Plan a walkthrough at your pace</a>
+            </div>
+            <div>Need help or have questions?</div>
+            <div>Call or text: <a href="tel:5122987455">512-298-7455</a></div>
+            <div>Or <a href="/kyle-housing-site/contact">email me here</a></div>
+          </div>
+        </div>
+
+        <div class="market-card">
+          <h2 class="card-kicker">Price Ranges in Waterstone, Kyle TX</h2>
+          <div class="market-value">
+            <div>
+              <span>Value around:</span>
+              <span>🏷️</span>
+              <span id="price-range-text">Loading...</span>
+            </div>
+            <div style="margin-top: 6px;">Median Price near this area: ≈315k</div>
+            <div style="margin-top: 10px;">
+              <a href="https://emmanuelcamacho.daltonwade.com/index.php?advanced=1&min=0&max=100000000&beds=0&baths=0&types%5B%5D=1&types%5B%5D=4&types%5B%5D=12&types%5B%5D=15&minfootage=0&maxfootage=30000&minacres=0&maxacres=0&yearbuilt=0&maxyearbuilt=0&walkscore=0&keywords=&sortby=listings.listingdate+DESC&rtype=map&polygons%5B%5D=-97.8699016571045%2C29.958466838097465%2C-97.87329196929933%2C29.960586150916935%2C-97.86874294281007%2C29.964824640994827%2C-97.86732673645021%2C29.965159250934146%2C-97.85925865173341%2C29.957871935149075%2C-97.84574031829835%2C29.946307801991264%2C-97.85200595855714%2C29.94322132688195%2C-97.86243438720705%2C29.953112583398518%2C-97.8699016571045%2C29.958466838097465" style="text-decoration: underline;">
+                Explore available homes in Waterstone
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard-wrap section-block">
+        <iframe src="https://mannycamacho512-bot.github.io/subdivision-dashboard/?sub=WATERSTONE" loading="lazy"></iframe>
+      </section>
+
+      <section class="info-grid section-block">
+        <div class="info-card">
+          <h2>Information to Consider</h2>
+          <ul>
+            <li>HOA dues are approximately <strong>$720 annually</strong> (about $60 monthly).</li>
+            <li>Estimated tax rate is around <strong>2.6%</strong>. On a $300,000 home, annual taxes are roughly <strong>$7,800</strong>.</li>
+          </ul>
+
+          <div class="cta-stack">
+            <div><strong>Need help or have questions?</strong></div>
+            <div>Call or text: <a href="tel:5122987455">512-298-7455</a></div>
+            <div>Or <a href="/kyle-housing-site/contact">email me here</a></div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h2>Community Specifics in Waterstone, Kyle TX</h2>
+          <ul>
+            <li>Built from 2024 to 2025</li>
+            <li>3–5 bedroom homes</li>
+            <li>SqFt: 1,225 – 2,500</li>
+            <li>Builder: Meritage Homes and Lennar Homes</li>
+            <li>Amenities: Playgrounds, basketball &amp; pickleball courts, swimming pool, and walkable trails</li>
+            <li>Clubhouse, fitness center, and pond</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="info-grid section-block">
+        <div class="info-card">
+          <h2>Road &amp; Traffic Conditions in Waterstone, Kyle TX</h2>
+
+          <div class="traffic-badges">
+            <div>🚧 <strong>Road Quality:</strong> ★★★☆☆</div>
+            <div>🚗 <strong>Neighborhood Traffic:</strong> Medium</div>
+          </div>
+
+          <h3>Nearby Schools</h3>
+          <div class="fine-note" style="margin-bottom: 8px;">
+            School assignments may vary. This information is provided as a general reference to help families begin their research.
+          </div>
+
+          <ul>
+            <li><strong>Elementary:</strong> Hemphill Elementary School</li>
+            <li><strong>Middle:</strong> Laura B. Wallace Middle School</li>
+            <li><strong>High:</strong> Jack C. Hays High School</li>
+            <li><strong>Charter / Alternative:</strong> Valor Education and IDEA Public Schools</li>
+          </ul>
+
+          <div class="fine-note" style="margin-top: 12px;">Last updated: January 22, 2026</div>
+        </div>
+
+        <div class="split-photo">
+          <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Waterstone+Crossing_2.96.1-1920w.jpg" alt="Waterstone Crossing" loading="lazy">
+        </div>
+      </section>
+
+      <section class="split-feature section-block">
+        <div class="split-copy">
+          <h3>When You Arrive</h3>
+          <p>
+            You arrive at Waterstone and the pace shifts. The drive south of Kyle fades behind you, replaced by the quiet rhythm of a master-planned community that feels intentional in every detail.
+          </p>
+
+          <h3>Community Overview</h3>
+          <ul>
+            <li>Waterstone includes one active subdivision, <strong>Waterstone Crossing</strong>, built by Meritage Homes.</li>
+            <li>The remainder of the community is built by Lennar Homes and organized into a series of home collections.</li>
+          </ul>
+
+          <h3>Lennar Home Collections</h3>
+          <ul>
+            <li><strong>Stonehill Collection</strong>
+              <ul>
+                <li>3 bedrooms · 2 bathrooms</li>
+                <li>Approx. 1,450 sq ft</li>
+                <li>Starting around $244,490</li>
+              </ul>
+            </li>
+            <li><strong>Highlands Collection</strong>
+              <ul>
+                <li>3 bedrooms · 2 bathrooms</li>
+                <li>Approx. 1,662 sq ft</li>
+                <li>Starting around $299,990</li>
+              </ul>
+            </li>
+            <li><strong>Classic Collection</strong>
+              <ul>
+                <li>3 bedrooms · 2 bathrooms</li>
+                <li>Approx. 1,602 sq ft</li>
+                <li>Starting around $307,490</li>
+              </ul>
+            </li>
+            <li><strong>Claremont Collection</strong>
+              <ul>
+                <li>3 bedrooms · 2 bathrooms</li>
+                <li>Approx. 2,143 sq ft</li>
+                <li>Starting around $313,990</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="split-photo">
+          <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Waterstone+Crossing_2.96.1-1920w.jpg" alt="Waterstone Crossing neighborhood" loading="lazy">
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="gallery-split">
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Waterstone+Pickleball_2.98.1-1920w.jpg" alt="Waterstone pickleball courts" loading="lazy">
+          </div>
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Waterstone+playground2_2.100.1-1920w.jpg" alt="Waterstone playground" loading="lazy">
+          </div>
+        </div>
+      </section>
+
+      <section class="nearby-grid section-block">
+        <div class="nearby-card">
+          <h3>3–7 Minutes Away</h3>
+
+          <strong>🍽 Restaurants / Food Trucks</strong>
+          <ul>
+            <li>New World Bakery</li>
+            <li>Super Tacos</li>
+            <li>Garcia's Mexican Restaurant</li>
+            <li>Papa Johns</li>
+            <li>Dairy Queen</li>
+            <li>Sonic</li>
+          </ul>
+
+          <strong>🛍 Retail / Convenience</strong>
+          <ul>
+            <li>Dollar General</li>
+            <li>Texaco</li>
+            <li>TXB</li>
+            <li>7-Eleven</li>
+            <li>Shell</li>
+            <li>Dollar Tree</li>
+            <li>AutoZone</li>
+            <li>O’Reilly Auto Parts</li>
+          </ul>
+
+          <strong>🌳 Parks &amp; Recreation</strong>
+          <ul>
+            <li>Lake Kyle Park</li>
+            <li>Steeplechase Park</li>
+          </ul>
+
+          <strong>☕ Coffee / Cafés</strong>
+          <ul>
+            <li>Starbucks</li>
+          </ul>
+        </div>
+
+        <div class="nearby-card">
+          <h3>10–25 Minutes Away</h3>
+
+          <strong>🍽 Restaurants</strong>
+          <ul>
+            <li>Taqueria jaliscienses</li>
+            <li>Domino’s Pizza</li>
+            <li>McDonald’s</li>
+            <li>Chick-fil-A</li>
+            <li>Jack in the Box</li>
+            <li>Wendy’s</li>
+            <li>Popeyes</li>
+            <li>Hawaiian Bros</li>
+            <li>Ocean Blue Oyster Bar</li>
+            <li>Waffle House</li>
+            <li>Taco Cabana</li>
+            <li>Cici’s Pizza</li>
+            <li>Marco’s Pizza</li>
+            <li>Many more..</li>
+          </ul>
+
+          <strong>☕ Coffee / Cafés</strong>
+          <ul>
+            <li>Dutch Bros Coffee</li>
+            <li>Dunkin</li>
+          </ul>
+
+          <strong>🛍 Retail / Shopping</strong>
+          <ul>
+            <li>Target</li>
+            <li>Kohl’s</li>
+            <li>HEB</li>
+            <li>Walmart</li>
+            <li>Discount Tire</li>
+            <li>Lowe’s Home Improvement</li>
+            <li>Academy</li>
+            <li>Hobby Lobby</li>
+            <li>Walgreens</li>
+            <li>Many more..</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="map-heading">Explore Nearby Subdivisions</div>
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=29.959070301665058%2C-97.86426016885102&z=16"
+            loading="lazy">
+          </iframe>
+        </div>
+      </section>
+
+      <div class="footer-grid">
+        <div class="footer-box">
+          <div style="font-weight:bold; font-size:16px; margin-bottom:10px;">
+            Data-driven guidance: negotiate based on comps, pace, and competition.
+          </div>
+          <div style="font-size:14px;">
+            <a href="/kyle-housing-site/contact" style="color:#000; text-decoration:underline;">
+              Ask me for a quick read on your neighborhood.
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-box footer-badge">
+          <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const siteHeader = document.querySelector('.site-header');
+
+    function handleHeaderShrink() {
+      if (window.scrollY > 80) {
+        siteHeader.classList.add('shrink');
+      } else {
+        siteHeader.classList.remove('shrink');
+      }
+    }
+
+    window.addEventListener('scroll', handleHeaderShrink, { passive: true });
+    window.addEventListener('load', handleHeaderShrink);
+
+    (async function () {
+      const subdivisionName = "WATERSTONE";
+      try {
+        const res = await fetch(
+          "https://mannycamacho512-bot.github.io/subdivision-dashboard/data/subdivision_page_data.json",
+          { cache: "no-store" }
+        );
+        const allData = await res.json();
+        const data = allData[subdivisionName];
+        if (!data) throw new Error("Subdivision not found");
+
+        const homesEl = document.getElementById("homes-available-text");
+        if (homesEl) {
+          const count = Number(data.homesAvailable || 0);
+          homesEl.textContent = `${count} ${count === 1 ? "home" : "homes"} available`;
+        }
+
+        const priceRangeEl = document.getElementById("price-range-text");
+        if (priceRangeEl) {
+          const money = (n) => {
+            if (!n) return "n/a";
+            return Number(n).toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+              maximumFractionDigits: 0
+            });
+          };
+          priceRangeEl.textContent = `${money(data.minPrice)} – ${money(data.maxPrice)}`;
+        }
+      } catch (err) {
+        console.error(err);
+        const homesEl = document.getElementById("homes-available-text");
+        const priceRangeEl = document.getElementById("price-range-text");
+        if (homesEl) homesEl.textContent = "Data unavailable";
+        if (priceRangeEl) priceRangeEl.textContent = "Data unavailable";
+      }
+    })();
+  </script>
+</body>
+</html>
