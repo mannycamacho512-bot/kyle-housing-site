@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plum Creek Homes for Sale | Kyle, TX</title>
+  <meta
+    name="description"
+    content="Looking at Plum Creek in Kyle TX? Explore available homes, price ranges, traffic insights, and neighborhood details."
+  />
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Hedvig Letters Serif", serif;
+      background: #fff;
+      color: #000;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: white;
+      z-index: 9999;
+      border-bottom: 0;
+      transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .topbar {
+      position: relative;
+      min-height: 90px;
+      padding: 0;
+      transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+    }
+
+    .top-link,
+    .top-id,
+    .logo-wrap,
+    .logo-mini {
+      transition: all 0.25s ease;
+    }
+
+    .logo-wrap {
+      position: absolute;
+      top: -14px;
+      left: -8px;
+      margin: 0;
+      text-align: left;
+      z-index: 2;
+    }
+
+    .top-link {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+    }
+
+    .header-action {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+      text-decoration: none;
+      margin-right: -22px;
+    }
+
+    .header-action:last-child {
+      margin-right: 0;
+    }
+
+    .action-icon {
+      display: block;
+      height: auto;
+      margin: 0;
+      padding: 0;
+    }
+
+    .action-label {
+      margin-top: -8px;
+      font-family: "Hedvig Letters Serif", serif;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+      color: #000;
+      text-align: center;
+    }
+
+    .connect-btn {
+      width: 90px;
+    }
+
+    .match-btn {
+      width: 80px;
+    }
+
+    .data-btn {
+      width: 82px;
+    }
+
+    .top-id {
+      margin-left: auto;
+      padding-top: 8px;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .logo-mini {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 132px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-mini:hover {
+      opacity: 0.85;
+    }
+
+    .logo-mini img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform: translateX(-15px);
+    }
+
+    .logo-mini-label {
+      position: static;
+      transform: none;
+      margin-top: -18px;
+      margin-left: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #333;
+      white-space: nowrap;
+      max-width: none;
+      text-align: left;
+      line-height: 1;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .site-header.shrink .logo-mini-label {
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+    }
+
+    .site-header.shrink .topbar {
+      min-height: 78px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .site-header.shrink .top-link,
+    .site-header.shrink .top-id {
+      opacity: 0;
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(-8px);
+    }
+
+    .site-header.shrink .logo-mini {
+      width: 132px;
+    }
+
+    .page-wrap {
+      width: 100%;
+      margin: 0;
+      padding: 190px 20px 24px;
+    }
+
+    .content-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .page-top-meta {
+      margin-bottom: 22px;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 13px;
+      text-decoration: underline;
+      margin-bottom: 8px;
+    }
+
+    .page-updated {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .hero-section h1 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 14px;
+    }
+
+    .hero-copy {
+      max-width: 880px;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #000;
+      text-align: center;
+    }
+
+    .hero-copy p {
+      margin: 0 0 16px;
+    }
+
+    .section-block {
+      margin-bottom: 28px;
+    }
+
+    .gallery-2,
+    .gallery-3,
+    .gallery-split {
+      display: grid;
+      gap: 16px;
+    }
+
+    .gallery-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gallery-split {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery-card,
+    .feature-image {
+      border-radius: 18px;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .gallery-card img,
+    .feature-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .market-grid,
+    .info-grid,
+    .nearby-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .info-card,
+    .market-card,
+    .nearby-card {
+      background: #fff;
+      border: 1px solid #ececec;
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .market-card {
+      text-align: center;
+    }
+
+    .card-kicker {
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .market-value {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #000;
+    }
+
+    .fine-note {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .cta-stack {
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .cta-stack a {
+      text-decoration: underline;
+    }
+
+    .dashboard-wrap iframe,
+    .map-wrap iframe {
+      width: 100%;
+      border: 0;
+      border-radius: 18px;
+      display: block;
+    }
+
+    .dashboard-wrap iframe {
+      height: 280px;
+    }
+
+    .map-wrap iframe {
+      height: 480px;
+    }
+
+    .info-card h2,
+    .info-card h3,
+    .nearby-card h3,
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.3;
+    }
+
+    .info-card p,
+    .info-card li,
+    .nearby-card li,
+    .neighborhood-description p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #000;
+    }
+
+    .info-card ul,
+    .nearby-card ul,
+    .neighborhood-description ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .info-card li,
+    .nearby-card li,
+    .neighborhood-description li {
+      margin-bottom: 6px;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .traffic-badges {
+      margin-bottom: 14px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #000;
+    }
+
+    .neighborhood-description {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .map-heading {
+      margin: 0 0 12px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .footer-box {
+      min-width: 0;
+    }
+
+    .footer-box:first-child {
+      grid-column: 1;
+      text-align: left;
+    }
+
+    .footer-badge {
+      grid-column: 3;
+      justify-self: end;
+      text-align: right;
+    }
+
+    .footer-box img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .footer-badge img {
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    @media (max-width: 768px) {
+      .topbar {
+        min-height: 140px;
+        padding: 0 10px;
+      }
+
+      .logo-wrap {
+        position: absolute;
+        top: -4px;
+        left: 0;
+        text-align: left;
+      }
+
+      .top-link {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: flex-end;
+        gap: 0;
+      }
+
+      .top-id {
+        position: absolute;
+        top: 8px;
+        right: 6px;
+        text-align: right;
+        font-size: 10px;
+        line-height: 1.2;
+        letter-spacing: 0;
+        max-width: 145px;
+      }
+
+      .logo-mini-label {
+        white-space: nowrap;
+        width: auto;
+        text-align: left;
+        left: auto;
+      }
+
+      .page-wrap {
+        padding: 190px 14px 16px;
+      }
+
+      .content-shell {
+        max-width: 100%;
+      }
+
+      .site-header.shrink .topbar {
+        min-height: 86px;
+      }
+
+      .site-header.shrink .logo-mini {
+        width: 110px;
+      }
+
+      .hero-section h1 {
+        font-size: 24px;
+      }
+
+      .hero-subtitle {
+        font-size: 14px;
+      }
+
+      .hero-copy {
+        font-size: 15px;
+        line-height: 1.65;
+        text-align: left;
+      }
+
+      .gallery-2,
+      .gallery-3,
+      .gallery-split,
+      .market-grid,
+      .info-grid,
+      .nearby-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-2,
+      .gallery-3 {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+
+      .gallery-card {
+        flex: 0 0 88%;
+        scroll-snap-align: start;
+      }
+
+      .dashboard-wrap iframe {
+        height: 260px;
+      }
+
+      .map-wrap iframe {
+        height: 360px;
+      }
+
+      .footer-box,
+      .footer-badge {
+        text-align: left;
+        justify-self: start;
+      }
+
+      .footer-badge img {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        max-width: 110px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar">
+      <div class="logo-wrap">
+        <a href="/kyle-housing-site/" class="logo-mini">
+          <img src="images/logo.png" alt="Your Missing Peace" />
+          <span class="logo-mini-label">Your Missing Peace</span>
+        </a>
+      </div>
+
+      <div class="top-link">
+        <a href="/kyle-housing-site/match" class="header-action match-action">
+          <img src="images/match2.png" alt="Match" class="action-icon match-btn">
+          <span class="action-label">Match</span>
+        </a>
+
+        <a href="/kyle-housing-site/contact" class="header-action connect-action">
+          <img src="images/connect2.png" alt="Connect" class="action-icon connect-btn">
+          <span class="action-label">Connect</span>
+        </a>
+
+        <a href="/kyle-housing-site/data" class="header-action data-action">
+          <img src="images/graph.png" alt="Data" class="action-icon data-btn">
+          <span class="action-label">Data</span>
+        </a>
+      </div>
+
+      <div class="top-id">
+        <div>Realtor® in Kyle, TX</div>
+        <div>Emmanuel "Manny" Camacho</div>
+        <div>Dalton Wade Real Estate Group</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <div class="content-shell">
+      <div class="page-top-meta">
+        <a href="/kyle-housing-site/master-planned-communities" class="back-link">
+          &larr; Back to Master Planned Communities
+        </a>
+        <div class="page-updated">Last updated: March 16, 2026</div>
+      </div>
+
+      <section class="hero-section section-block">
+        <h1>Plum Creek in Kyle, TX</h1>
+        <div class="hero-subtitle">Big Landscape, Quiet Life</div>
+
+        <div class="hero-copy">
+          <p>Plum Creek is big — but it feels peaceful.</p>
+          <p>You don’t just move here; you exhale here.</p>
+          <p>
+            The pace softens, the noise falls away, and the neighborhood moves with a steady, human flow.
+          </p>
+          <p>
+            Trails draw you outside, and those walks become a kind of reset — the same loops, the same friendly faces, the same quiet reassurance.
+          </p>
+          <p>
+            Porches sit close, sidewalks link everything, and even with all the different homes, the feeling stays the same: easy, safe, settled.
+          </p>
+          <p>
+            You’re not just living in Plum Creek. You’re finding your calm in it.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="gallery-2">
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Plum+Creek+Original+kirby+st_2.21.1-1920w.jpg" alt="Plum Creek original Kirby Street" loading="lazy">
+          </div>
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Plum+Creek+Original+Pball_2.20.1-1920w.jpg" alt="Plum Creek original pickleball courts" loading="lazy">
+          </div>
+        </div>
+      </section>
+
+      <section class="market-grid section-block">
+        <div class="market-card">
+          <h2 class="card-kicker">Homes Available in Plum Creek, Kyle TX</h2>
+          <div id="homes-available-text" class="market-value">Loading...</div>
+
+          <div class="cta-stack">
+            <div>
+              <a href="/kyle-housing-site/schedule-walkthrough">🏡 Plan a walkthrough at your pace</a>
+            </div>
+            <div>Need help or have questions?</div>
+            <div>Call or text: <a href="tel:5122987455">512-298-7455</a></div>
+            <div>Or <a href="/kyle-housing-site/contact">email me here</a></div>
+          </div>
+        </div>
+
+        <div class="market-card">
+          <h2 class="card-kicker">Price Ranges in Plum Creek, Kyle TX</h2>
+          <div class="market-value">
+            <div>
+              <span>Value around:</span>
+              <span>🏷️</span>
+              <span id="price-range-text">Loading...</span>
+            </div>
+            <div style="margin-top: 6px;">Median Price near this area: 410k</div>
+            <div style="margin-top: 10px;">
+              <a href="https://emmanuelcamacho.daltonwade.com/index.php?advanced=1&display=&min=0&max=100000000&beds=0&baths=0&types%5B%5D=1&types%5B%5D=4&types%5B%5D=12&types%5B%5D=15&minfootage=0&maxfootage=30000&minacres=0&maxacres=0&yearbuilt=0&maxyearbuilt=0&walkscore=0&keywords=&sortby=listings.listingdate+DESC&rtype=map&polygons%5B%5D=-97.88975000381471%2C30.01071144643248%2C-97.88455724716188%2C30.006084698652703%2C-97.8830659389496%2C30.00480254964071%2C-97.8780448436737%2C30.00900199045993%2C-97.87384986877441%2C30.01271816150686%2C-97.87408590316774%2C30.013777244762018%2C-97.87474036216737%2C30.014622645208846%2C-97.87477254867555%2C30.015198628199176%2C-97.87734746932983%2C30.017103064271364%2C-97.88189649581909%2C30.013823695523104%2C-97.88410663604738%2C30.016750049614302%2C-97.88568377494812%2C30.01811565197373%2C-97.88172483444215%2C30.019100360373354%2C-97.88265824317934%2C30.023354931433754%2C-97.88230419158937%2C30.02599304536827%2C-97.88288354873657%2C30.02769291962034%2C-97.88288354873657%2C30.02825953789345%2C-97.8799331188202%2C30.02829669307688%2C-97.87996530532838%2C30.032095737067444%2C-97.88188576698303%2C30.034547854391366%2C-97.87776589393617%2C30.037176382476247%2C-97.87567377090456%2C30.038941079527074%2C-97.87745475769044%2C30.040984373689792%2C-97.883677482605%2C30.042665415927566%2C-97.88568377494812%2C30.03852312780273%2C-97.88777589797974%2C30.034046289874567%2C-97.88893461227418%2C30.02901192764373%2C-97.88921356201172%2C30.02792514061576%2C-97.88949251174927%2C30.025314945320606%2C-97.88973927497865%2C30.024246696110787%2C-97.88970708847047%2C30.021896507332904%2C-97.88934230804445%2C30.018886698060697%2C-97.89029717445375%2C30.014892057023932%2C-97.89024353027344%2C30.012523065989555%2C-97.88975000381471%2C30.01071144643248" style="text-decoration: underline;">
+                Explore available homes in Plum Creek
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard-wrap section-block">
+        <iframe src="https://mannycamacho512-bot.github.io/subdivision-dashboard/?sub=PLUM%20CREEK" loading="lazy"></iframe>
+      </section>
+
+      <section class="info-grid section-block">
+        <div class="info-card">
+          <h2>Information to Consider</h2>
+          <ul>
+            <li>HOA dues vary based on location.</li>
+            <li>Estimated tax rate is around <strong>2.45%</strong>. Without exemptions, on a $450,000 home, annual taxes are roughly <strong>$11,025</strong>.</li>
+            <li>Homes are relatively newer, which generally supports a higher likelihood of <strong>FHA loan approval</strong>.</li>
+          </ul>
+
+          <div class="cta-stack">
+            <div><strong>Need help or have questions?</strong></div>
+            <div>Call or text: <a href="tel:5122987455">512-298-7455</a></div>
+            <div>Or <a href="/kyle-housing-site/contact">email me here</a></div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h2>Local Neighbor Comments</h2>
+          <div class="quote">“We moved into the neighborhood in April of 2023. Great community, quiet neighborhood with several amenities. There are nice walking trails, a small park with a playscape, pool, and dog park. The community feels very safe, close to schools, downtown, and Kyle shopping centers.”</div>
+          <div class="quote">“We live in PC for about 4 years. We absolutely love it - community garage sales, parades, parks, trails and great neighbors. Anytime someone visits it’s always mentioned how much they love the Pleasantville atmosphere.”</div>
+          <div class="quote">“Plum Creek North has some very nice new build options. It’s in the Negley-Barton-Hays High pipeline too. We’ve had a pretty good experience so far in this school pipeline, better than AISD despite the financial hurdles of the state.”</div>
+          <div class="quote">“It's quieter than our old neighborhood, but if you have a nearby house with dogs that bark constantly, it'll wear on your last nerve. The neighborhood is awesome on holidays, especially Halloween &amp; XMAS.”</div>
+          <div class="quote">“We bought a house in Plum Creek a couple years ago and it is an amazing neighborhood with a chill HOA. Multiple private parks, private lake, etc, very nice.”</div>
+          <div class="quote">“We’ve been in PC North for almost 4 years now. We don’t really love it and miss living in Plum Creek, but we do like that the kids can ride the bus home from Negley and they have a ton of classmates in the neighborhood, but that’s about it.”</div>
+        </div>
+      </section>
+
+      <section class="info-grid section-block">
+        <div class="info-card">
+          <h2>Community Specifics in Plum Creek, Kyle TX</h2>
+          <ul>
+            <li>Southwest section are the Original Plum Creek homes.</li>
+            <li>Next section: The Peninsula at Plum Creek (first named subdivision).</li>
+            <li>Farther north: Plum Creek North — starts around Kohlers Crossing.</li>
+            <li>Above Rikardson: Still Plum Creek North, often called “Lennar at Plum Creek North” since Lennar built those homes.</li>
+            <li>2,500+ existing single-family homes ranging from $250k to $500k.</li>
+          </ul>
+
+          <h3 style="margin-top:16px;">Amenities</h3>
+          <ul>
+            <li>Hike and Bike Paths</li>
+            <li>Basketball Court</li>
+            <li>Parks</li>
+            <li>Golf Course</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h2>Road &amp; Traffic Conditions in Plum Creek, Kyle TX</h2>
+
+          <div class="traffic-badges">
+            <div>🚧 <strong>Road Quality:</strong> ★★★★★</div>
+            <div>🚗 <strong>Neighborhood Traffic:</strong> Medium</div>
+          </div>
+
+          <h3>Nearby Schools</h3>
+          <div class="fine-note" style="margin-bottom: 8px;">
+            School assignments may vary. This information is provided as a general reference to help families begin their research.
+          </div>
+
+          <ul>
+            <li><strong>Elementary:</strong> Laura B. Negley Elementary School</li>
+            <li><strong>Middle:</strong> R C Barton Middle School</li>
+            <li><strong>High:</strong> Jack C. Hays High School</li>
+            <li><strong>Charter / Alternative:</strong> Valor Education and IDEA Public Schools</li>
+          </ul>
+
+          <div class="fine-note" style="margin-top: 12px;">Last updated: January 22, 2026</div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="feature-image">
+          <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Plum+Creek+The+Peninsula_2.22.1-1920w.jpg" alt="The Peninsula at Plum Creek" loading="lazy">
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="neighborhood-description">
+          <p><strong>Living in Peninsula feels calm, tucked away, and purposeful.</strong> This gated enclave within Plum Creek offers a quieter, more private atmosphere, with golf course surroundings that create a relaxed, resort-like rhythm to everyday life.</p>
+          <p>Morning walks along the trails, afternoons fishing at the waterhole, and evenings watching the light fade over the fairways shape a lifestyle centered on ease and intention. Peninsula is designed for those who value space, simplicity, and low-maintenance living. Residents also enjoy access to Plum Creek’s parks, pools, basketball and pickleball courts, making it easy to balance peaceful living with active options nearby.</p>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="feature-image">
+          <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Plum+Creek+North_2.16.1-1920w.jpg" alt="Plum Creek North" loading="lazy">
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="gallery-split">
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Plum+Creek+North+Playground_2.18.1-1920w.jpg" alt="Plum Creek North playground" loading="lazy">
+          </div>
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Plum+Creek+North+tarp+wseats_2.17.1-1920w.jpg" alt="Plum Creek North shaded seating area" loading="lazy">
+          </div>
+        </div>
+      </section>
+
+      <section class="nearby-grid section-block">
+        <div class="nearby-card">
+          <h3>5–10 Minutes Away</h3>
+
+          <strong>🍽 Restaurants</strong>
+          <ul>
+            <li>Golden Chick</li>
+            <li>Los Vaqueros Café &amp; Grill</li>
+            <li>Texas Pie Company</li>
+            <li>Bloodworth BBQ</li>
+            <li>Centerfield Sports Bar &amp; Grill</li>
+            <li>Smokey Mo’s BBQ</li>
+            <li>Pizza Hut</li>
+            <li>Which Wich</li>
+            <li>Shipley Do-Nuts</li>
+            <li>Sonic Drive-In</li>
+            <li>Big Rob’s Burgers</li>
+            <li>Flamin’ Burger</li>
+            <li>Spicy Bite</li>
+            <li>Domino’s Pizza</li>
+            <li>Jimmy John’s</li>
+            <li>Panera Bread</li>
+            <li>Snooze, an A.M. Eatery</li>
+            <li>Crust Pizza Co.</li>
+            <li>Spoon + Fork Thai Kitchen</li>
+            <li>McDonald’s</li>
+            <li>Chick-fil-A</li>
+            <li>Jack in the Box</li>
+            <li>Subway</li>
+            <li>Casa Garcias</li>
+            <li>Whataburger</li>
+            <li>Pho Thaison</li>
+            <li>Ilarios Italian Cuisine</li>
+            <li>Panda Express</li>
+            <li>IHOP</li>
+            <li>Applebee’s Grill and Bar</li>
+          </ul>
+        </div>
+
+        <div class="nearby-card">
+          <h3>More Nearby Essentials</h3>
+
+          <strong>🛍 Retail / Convenience</strong>
+          <ul>
+            <li>Dollar General</li>
+            <li>HEB</li>
+            <li>Kohl’s</li>
+            <li>Target</li>
+            <li>Dollar Tree</li>
+            <li>Petco</li>
+            <li>Ross</li>
+            <li>Sprouts</li>
+          </ul>
+
+          <strong>🌳 Parks &amp; Recreation</strong>
+          <ul>
+            <li>Gregg-Clarke Park</li>
+          </ul>
+
+          <strong>📚 Community / City Services</strong>
+          <ul>
+            <li>Kyle Public Library</li>
+          </ul>
+
+          <strong>💊 Essentials / Pharmacies</strong>
+          <ul>
+            <li>Walgreens</li>
+          </ul>
+
+          <strong>☕ Coffee / Cafés</strong>
+          <ul>
+            <li>Kyle’s Daily Grind</li>
+            <li>Starbucks</li>
+            <li>Black Rock Coffee Bar</li>
+            <li>Summer Moon Coffee</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="map-heading">Explore Nearby Subdivisions</div>
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=30.030000573205676%2C-97.87553393927058&z=14"
+            loading="lazy">
+          </iframe>
+        </div>
+      </section>
+
+      <div class="footer-grid">
+        <div class="footer-box">
+          <div style="font-weight:bold; font-size:16px; margin-bottom:10px;">
+            Data-driven guidance: negotiate based on comps, pace, and competition.
+          </div>
+          <div style="font-size:14px;">
+            <a href="/kyle-housing-site/contact" style="color:#000; text-decoration:underline;">
+              Ask me for a quick read on your neighborhood.
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-box footer-badge">
+          <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const siteHeader = document.querySelector('.site-header');
+
+    function handleHeaderShrink() {
+      if (window.scrollY > 80) {
+        siteHeader.classList.add('shrink');
+      } else {
+        siteHeader.classList.remove('shrink');
+      }
+    }
+
+    window.addEventListener('scroll', handleHeaderShrink, { passive: true });
+    window.addEventListener('load', handleHeaderShrink);
+
+    (async function () {
+      const subdivisionName = "PLUM CREEK";
+      try {
+        const res = await fetch(
+          "https://mannycamacho512-bot.github.io/subdivision-dashboard/data/subdivision_page_data.json",
+          { cache: "no-store" }
+        );
+        const allData = await res.json();
+        const data = allData[subdivisionName];
+        if (!data) throw new Error("Subdivision not found");
+
+        const homesEl = document.getElementById("homes-available-text");
+        if (homesEl) {
+          const count = Number(data.homesAvailable || 0);
+          homesEl.textContent = `${count} ${count === 1 ? "home" : "homes"} available`;
+        }
+
+        const priceRangeEl = document.getElementById("price-range-text");
+        if (priceRangeEl) {
+          const money = (n) => {
+            if (!n) return "n/a";
+            return Number(n).toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+              maximumFractionDigits: 0
+            });
+          };
+          priceRangeEl.textContent = `${money(data.minPrice)} – ${money(data.maxPrice)}`;
+        }
+      } catch (err) {
+        console.error(err);
+        const homesEl = document.getElementById("homes-available-text");
+        const priceRangeEl = document.getElementById("price-range-text");
+        if (homesEl) homesEl.textContent = "Data unavailable";
+        if (priceRangeEl) priceRangeEl.textContent = "Data unavailable";
+      }
+    })();
+  </script>
+</body>
+</html>
