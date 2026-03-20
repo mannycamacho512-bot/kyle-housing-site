@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Live in Kyle</title>
+  <title>6 Creeks Homes for Sale | Kyle, TX</title>
+  <meta
+    name="description"
+    content="Looking at 6 Creeks in Kyle TX? Explore available homes, price ranges, traffic insights, and neighborhood details."
+  />
 
   <style>
     html,
@@ -17,13 +21,8 @@
 
     body {
       font-family: "Hedvig Letters Serif", serif;
-      background: white;
-      color: black;
-    }
-
-    h1 {
-      position: absolute !important;
-      left: -9999px !important;
+      background: #fff;
+      color: #000;
     }
 
     *,
@@ -37,8 +36,14 @@
       text-decoration: none;
     }
 
-    /* =========================       
-    FIXED HEADER
+    img {
+      max-width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    /* =========================
+       FIXED HEADER
     ========================== */
     .site-header {
       position: fixed;
@@ -53,230 +58,385 @@
     }
 
     .topbar {
-  position: relative;
-  min-height: 90px;
-  padding: 0;
-  transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
-}
+      position: relative;
+      min-height: 90px;
+      padding: 0;
+      transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+    }
 
-.top-link,
-.top-id,
-.logo-wrap,
-.logo-mini {
-  transition: all 0.25s ease;
-}
+    .top-link,
+    .top-id,
+    .logo-wrap,
+    .logo-mini {
+      transition: all 0.25s ease;
+    }
 
-.logo-wrap {
-  position: absolute;
-  top: -14px;
-  left: -8px;
-  margin: 0;
-  text-align: left;
-  z-index: 2;
-}
+    .logo-wrap {
+      position: absolute;
+      top: -14px;
+      left: -8px;
+      margin: 0;
+      text-align: left;
+      z-index: 2;
+    }
 
-.top-link {
-  position: absolute;
-  bottom: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: flex-end;
-  gap: 0;
-}
+    .top-link {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+    }
 
-.header-action {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-  text-decoration: none;
-  margin-right: -22px;
-}
+    .header-action {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+      text-decoration: none;
+      margin-right: -22px;
+    }
 
-.header-action:last-child {
-  margin-right: 0;
-}
+    .header-action:last-child {
+      margin-right: 0;
+    }
 
-.action-icon {
-  display: block;
-  height: auto;
-  margin: 0;
-  padding: 0;
-}
+    .action-icon {
+      display: block;
+      height: auto;
+      margin: 0;
+      padding: 0;
+    }
 
-.action-label {
-  margin-top: -8px;
-  font-family: "Hedvig Letters Serif", serif;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1;
-  color: #000;
-  text-align: center;
-}
+    .action-label {
+      margin-top: -8px;
+      font-family: "Hedvig Letters Serif", serif;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+      color: #000;
+      text-align: center;
+    }
 
-.connect-btn {
-  width: 90px;
-}
+    .connect-btn {
+      width: 90px;
+    }
 
-.match-btn {
-  width: 80px;
-}
+    .match-btn {
+      width: 80px;
+    }
 
-.data-btn {
-  width: 82px;
-}
-.top-id {
-  margin-left: auto;
-  padding-top: 8px;
-  text-align: right;
-  font-size: 14px;
-  line-height: 1.4;
-}
+    .data-btn {
+      width: 82px;
+    }
 
-.logo-mini {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 132px;
-  text-decoration: none;
-  color: inherit;
-}
+    .top-id {
+      margin-left: auto;
+      padding-top: 8px;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.4;
+    }
 
-.logo-mini:hover {
-  opacity: 0.85;
-}
+    .logo-mini {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 132px;
+      text-decoration: none;
+      color: inherit;
+    }
 
-.logo-mini img {
-  display: block;
-  width: 100%;
-  height: auto;
-  transform: translateX(-15px);
-}
+    .logo-mini:hover {
+      opacity: 0.85;
+    }
 
-.logo-mini-label {
-  position: static;
-  transform: none;
-  margin-top: -18px;
-  margin-left: 8px;
-  font-size: 10px;
-  font-weight: 700;
-  color: #333;
-  white-space: nowrap;
-  max-width: none;
-  text-align: left;
-  line-height: 1;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-.site-header.shrink .logo-mini-label {
-  opacity: 0;
-  transform: translateY(-6px);
-  pointer-events: none;
-}
-.site-header.shrink .topbar {
-  min-height: 78px;
-  padding-top: 0;
-  padding-bottom: 0;
-}
+    .logo-mini img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform: translateX(-15px);
+    }
 
-.site-header.shrink .top-link,
-.site-header.shrink .top-id {
-  opacity: 0;
-  pointer-events: none;
-  max-height: 0;
-  overflow: hidden;
-  transform: translateY(-8px);
-}
+    .logo-mini-label {
+      position: static;
+      transform: none;
+      margin-top: -18px;
+      margin-left: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #333;
+      white-space: nowrap;
+      max-width: none;
+      text-align: left;
+      line-height: 1;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
 
-.site-header.shrink .logo-mini {
-  width: 132px;
-}
+    .site-header.shrink .logo-mini-label {
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+    }
+
+    .site-header.shrink .topbar {
+      min-height: 78px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .site-header.shrink .top-link,
+    .site-header.shrink .top-id {
+      opacity: 0;
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(-8px);
+    }
+
+    .site-header.shrink .logo-mini {
+      width: 132px;
+    }
 
     /* =========================
        PAGE CONTENT
     ========================== */
     .page-wrap {
       width: 100%;
-      max-width: none;
       margin: 0;
-      padding: 190px 32px 20px 32px; /* room for full header */
-      box-sizing: border-box;
+      padding: 190px 20px 24px;
     }
 
-    .subdivGridDesktop {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin-bottom: 8px;
-}
+    .content-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
 
-.subdivCard {
-  min-width: 0;
-}
+    .page-top-meta {
+      margin-bottom: 22px;
+    }
 
-.wb-card-img {
-  aspect-ratio: 4 / 3;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #f5f5f5;
-}
+    .back-link {
+      display: inline-block;
+      font-size: 13px;
+      text-decoration: underline;
+      margin-bottom: 8px;
+    }
 
-.wb-card-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+    .page-updated {
+      font-size: 12px;
+      color: #666;
+    }
 
-.subdivMobileRow {
-  display: none !important;
-}
+    .hero-section {
+      text-align: center;
+      margin-bottom: 28px;
+    }
 
-@media (max-width: 1100px) {
-  .subdivGridDesktop {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
+    .hero-section h1 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.2;
+    }
 
-/* =========================
-   FOOTER
-========================== */
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 24px;
-  margin-top: 40px;
-}
+    .hero-subtitle {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 14px;
+    }
 
-.footer-box {
-  min-width: 0;
-}
+    .hero-copy {
+      max-width: 880px;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #000;
+      text-align: center;
+    }
 
-.footer-box:first-child {
-  grid-column: 1;
-  text-align: left;
-}
+    .hero-copy p {
+      margin: 0 0 16px;
+    }
 
-.footer-badge {
-  justify-self: end;
-  text-align: right;
-}
+    .section-block {
+      margin-bottom: 28px;
+    }
 
-.footer-box img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+    .gallery-2,
+    .gallery-3,
+    .gallery-split {
+      display: grid;
+      gap: 16px;
+    }
 
-.footer-badge img {
-  max-width: 320px;
-  margin-left: auto;
-  margin-right: 0;
-}
+    .gallery-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gallery-split {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery-card,
+    .feature-image {
+      border-radius: 18px;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .gallery-card img,
+    .feature-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .market-grid,
+    .info-grid,
+    .nearby-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .info-card,
+    .market-card,
+    .nearby-card {
+      background: #fff;
+      border: 1px solid #ececec;
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .market-card {
+      text-align: center;
+    }
+
+    .card-kicker {
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .market-value {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #000;
+    }
+
+    .market-note,
+    .fine-note {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .cta-stack {
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .cta-stack a {
+      text-decoration: underline;
+    }
+
+    .dashboard-wrap iframe,
+    .map-wrap iframe {
+      width: 100%;
+      border: 0;
+      border-radius: 18px;
+      display: block;
+    }
+
+    .dashboard-wrap iframe {
+      height: 280px;
+    }
+
+    .map-wrap iframe {
+      height: 480px;
+    }
+
+    .info-card h2,
+    .info-card h3,
+    .nearby-card h3,
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.3;
+    }
+
+    .info-card p,
+    .info-card li,
+    .nearby-card li,
+    .neighborhood-description p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #000;
+    }
+
+    .info-card ul,
+    .nearby-card ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .info-card li,
+    .nearby-card li {
+      margin-bottom: 6px;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .traffic-badges {
+      margin-bottom: 14px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #000;
+    }
+
+    .neighborhood-description {
+      max-width: 880px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .map-heading {
+      margin: 0 0 12px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      margin-top: 40px;
+    }
 
     .footer-box {
       min-width: 0;
@@ -310,47 +470,51 @@
     ========================== */
     @media (max-width: 768px) {
       .topbar {
-  min-height: 140px;
-  padding: 0 10px;
-}
+        min-height: 140px;
+        padding: 0 10px;
+      }
 
-.logo-wrap {
-  position: absolute;
-  top: -4px;
-  left: 0;
-  text-align: left;
-}
+      .logo-wrap {
+        position: absolute;
+        top: -4px;
+        left: 0;
+        text-align: left;
+      }
 
-.top-link {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: flex-end;
-  gap: 0;
-}
+      .top-link {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: flex-end;
+        gap: 0;
+      }
 
-.top-id {
-  position: absolute;
-  top: 8px;
-  right: 6px;
-  text-align: right;
-  font-size: 10px;
-  line-height: 1.2;
-  letter-spacing: 0;
-  max-width: 145px;
-}
+      .top-id {
+        position: absolute;
+        top: 8px;
+        right: 6px;
+        text-align: right;
+        font-size: 10px;
+        line-height: 1.2;
+        letter-spacing: 0;
+        max-width: 145px;
+      }
 
       .logo-mini-label {
-  white-space: nowrap;
-  width: auto;
-  text-align: left;
-  left: auto;
-}
+        white-space: nowrap;
+        width: auto;
+        text-align: left;
+        left: auto;
+      }
 
       .page-wrap {
-        padding: 190px 14px 14px 14px;
+        padding: 190px 14px 16px;
+      }
+
+      .content-shell {
+        max-width: 100%;
       }
 
       .site-header.shrink .topbar {
@@ -361,106 +525,94 @@
         width: 110px;
       }
 
-      .subdivGridDesktop {
-  grid-template-columns: 1fr;
-  gap: 18px;
-}
-
-.wb-card-img {
-  aspect-ratio: 4 / 3;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #f5f5f5;
-}
-
-.wb-card-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: inherit;
-}
-.subdivTitle {
-  font-size: 13px !important;
-  line-height: 1.15;
-}
-
-.subdivPrice {
-  font-size: 11px !important;
-  line-height: 1.15;
-}
-
-.subdivAvail {
-  font-size: 10px !important;
-  line-height: 1.15;
-}
-
-.subdivMobileRow {
-  display: none !important;
-}
-
-      .footer-grid {
-  grid-template-columns: 1fr;
-  gap: 18px;
-}
-
-.footer-box,
-.footer-badge {
-  text-align: left;
-  justify-self: start;
-}
-
-.footer-badge img {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-      .footer-box div {
-        word-wrap: break-word;
+      .hero-section h1 {
+        font-size: 24px;
       }
 
+      .hero-subtitle {
+        font-size: 14px;
+      }
+
+      .hero-copy {
+        font-size: 15px;
+        line-height: 1.65;
+        text-align: left;
+      }
+
+      .gallery-2,
+      .gallery-3,
+      .gallery-split,
+      .market-grid,
+      .info-grid,
+      .nearby-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-2,
+      .gallery-3 {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+
+      .gallery-card {
+        flex: 0 0 88%;
+        scroll-snap-align: start;
+      }
+
+      .dashboard-wrap iframe {
+        height: 260px;
+      }
+
+      .map-wrap iframe {
+        height: 360px;
+      }
+
+      .footer-box,
       .footer-badge {
-        overflow: hidden;
+        text-align: left;
+        justify-self: start;
       }
 
       .footer-badge img {
+        margin-left: 0;
+        margin-right: 0;
         width: 100%;
         max-width: 110px;
-        height: auto;
       }
     }
   </style>
 </head>
 <body>
-
   <header class="site-header">
     <div class="topbar">
       <div class="logo-wrap">
         <a href="/kyle-housing-site/" class="logo-mini">
-          <img
-            src="images/logo.png"
-            alt="Your Missing Peace"
-          />
+          <img src="images/logo.png" alt="Your Missing Peace" />
           <span class="logo-mini-label">Your Missing Peace</span>
         </a>
       </div>
 
       <div class="top-link">
-  <a href="/kyle-housing-site/match" class="header-action match-action">
-    <img src="images/match2.png" alt="Match" class="action-icon match-btn">
-    <span class="action-label">Match</span>
-  </a>
+        <a href="/kyle-housing-site/match" class="header-action match-action">
+          <img src="images/match2.png" alt="Match" class="action-icon match-btn">
+          <span class="action-label">Match</span>
+        </a>
 
-  <a href="/kyle-housing-site/contact" class="header-action connect-action">
-    <img src="images/connect2.png" alt="Connect" class="action-icon connect-btn">
-    <span class="action-label">Connect</span>
-  </a>
+        <a href="/kyle-housing-site/contact" class="header-action connect-action">
+          <img src="images/connect2.png" alt="Connect" class="action-icon connect-btn">
+          <span class="action-label">Connect</span>
+        </a>
 
-  <a href="/kyle-housing-site/data" class="header-action data-action">
-    <img src="images/graph.png" alt="Data" class="action-icon data-btn">
-    <span class="action-label">Data</span>
-  </a>
-</div>
+        <a href="/kyle-housing-site/data" class="header-action data-action">
+          <img src="images/graph.png" alt="Data" class="action-icon data-btn">
+          <span class="action-label">Data</span>
+        </a>
+      </div>
 
       <div class="top-id">
         <div>Realtor® in Kyle, TX</div>
@@ -470,393 +622,282 @@
     </div>
   </header>
 
-    <div class="page-wrap">
-     <div dmwrapped="true" id="dmFirstContainer" class="dmBody u_dmStyle_template_6-creeks dm-home-page" themewaschanged="true"> <div id="allWrapper" class="allWrapper"><!-- navigation placeholders --> <div id="dm_content" class="dmContent" role="main"> <div dm:templateorder="170" class="dmHomeRespTmpl mainBorder dmRespRowsWrapper dmFullRowRespTmpl" id="1716942098"> <div class="u_1806402465 dmRespRow" id="1806402465"> <div class="dmRespColsWrapper" id="1368133147"> <div class="dmRespCol small-12 large-6 medium-6" id="1948016174"> <div data-element-type="html" class="dmCustomHtml u_1146678397" id="1146678397"> <div style="font-size:13px;font-family:'Hedvig Letters Serif';margin-bottom:12px;"> <a href="/master-planned-communities" style="color:#000; text-decoration:underline;">&larr; Back to Master Planned Kyle neighborhoods</a> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespCol large-6 medium-6 small-12" id="1335770626"> <div data-element-type="html" class="dmCustomHtml u_1915949961" id="1915949961"> <p>Last updated: 3/16/2026</p> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="u_1243667655 dmRespRow" style="text-align: center;" id="1243667655"> <div class="dmRespColsWrapper" id="1173148036"> <div class="dmRespCol small-12 u_1620106714 medium-12 large-12" id="1620106714"> <div class="dmRespRow" id="1299945849"> <div class="dmRespColsWrapper" id="1905823147"> <div class="dmRespCol small-12 medium-12 large-12 u_1140677594" id="1140677594"> <div data-element-type="html" class="u_1815138417 dmCustomHtml" id="1815138417"><!-- Subdivision Header --> <div style="text-align:center; line-height:1.4; margin-bottom:20px;"> <h1 style="color:#000;font-weight:600;font-size:22px;font-family:'Hedvig Letters Serif';margin-bottom:6px;">6 Creeks in Kyle, Tx</h1> 
- <div style="font-size:14px; color:#555; margin-bottom:12px;">Peace Written in Every Curve and Corner</div> 
-</div> 
-<!-- 6 Creeks Description --> <div style="color:#000; line-height:1.6; max-width:900px; margin:0 auto;"> <p>In 6 Creeks, peace begins with what your eyes receive.
-You imagine yourself strolling the streets you call home,
-paths that wind with quiet purpose,
-sidewalks sliding gently from curve to curve.</p> 
- <p></p> 
-Familiar sights and sounds settle into place.
-You notice the lawns of near neighbors
-meticulously mowed for blusterous bragging,
-fences forming small sanctuaries of shade and stillness,
-and the bright, bounding joy
-carried on the voices of neighborhood youth. <p></p> 
- <p>With every slow step, your mind loosens.
-Thoughts wander, return,
-and settle again in the calm the neighborhood offers.
-And in that calm, you begin to see what&rsquo;s always been there &mdash;
-homes that aren&rsquo;t copies,
-but places shaped with their own character,
-their own care,
-their own quiet story.</p> 
- <p></p> 
-So when friends or family ask where you live,
-you simply say:
-6 Creeks &mdash; a peaceful place to call home. <p></p> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespRow u_1202926166" id="1202926166"> <div class="dmRespColsWrapper" id="1565059610"> <div class="dmRespCol small-12 u_1315592936 medium-12 large-12" id="1315592936"> <div data-element-type="html" class="dmCustomHtml" id="1680519486"> <style>.sc-gallery{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
-    margin-top:16px;
-  }
-  .sc-item{
-    border-radius:16px;
-    overflow:hidden;
-  }
-  .sc-item img{
-    width:100%;
-    height:auto;   /* natural proportions */
-    display:block;
-  }
-  /* Mobile swipe layout */
-  @media (max-width:768px){
-    .sc-gallery{
-      display:flex;
-      gap:14px;
-      overflow-x:auto;
-      padding:6px 4px;
-      -webkit-overflow-scrolling:touch;
-      scroll-snap-type:x mandatory;
-    }
-    .sc-item{
-      flex:0 0 300px;
-      scroll-snap-align:start;
-    }
-  }</style> 
- <div class="sc-gallery"> <div class="sc-item"><img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+Little+Creek_2.82.1-1920w.jpg" alt="6 Creeks Little Creek area" loading="lazy" onerror="handleImageLoadError(this)"/></div> 
- <div class="sc-item"><img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+Dove+Creek_2.84.1-1920w.jpg" alt="6 Creeks Dove Creek section" loading="lazy" onerror="handleImageLoadError(this)"/></div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespRow" id="1301770290"> <div class="dmRespColsWrapper" id="1304859337"> <div class="dmRespCol small-12 medium-6 large-6" id="1469615483"> <div data-element-type="html" class="dmCustomHtml u_1671174117" id="1671174117"><!-- Homes Available --> <div style="font-size:13px;font-family:'Hedvig Letters Serif';margin-top:6px;text-align:center;"><!-- Section Header --> <h2 style="color:#000;font-weight:600;font-size:13px;font-family:'Hedvig Letters Serif';margin-bottom:4px;">Homes Available in 6 Creeks, Kyle TX</h2> 
- <div id="homes-available-text" style="font-weight:600; margin-bottom:4px;">Loading...</div> 
- <div style="margin-bottom:4px;"> <a href="/schedule-walkthrough" style="color:#000; text-decoration:underline;">🏡 Plan a walkthrough at your pace</a> 
- <div style="margin-bottom:4px;">Need help or Have Questions?</div> 
- <div style="margin-bottom:4px;">Call or text: <a href="tel:5122987455" style="color:#000; text-decoration:underline;">512-298-7455</a> 
-</div> 
- <div>Or <a href="/contact" style="color:#000; text-decoration:underline;">email me here</a> 
-</div> 
-</div> 
-</div> 
- <script>
+  <main class="page-wrap">
+    <div class="content-shell">
+      <div class="page-top-meta">
+        <a href="/kyle-housing-site/master-planned-communities" class="back-link">
+          &larr; Back to Master Planned Communities
+        </a>
+        <div class="page-updated">Last updated: March 16, 2026</div>
+      </div>
 
+      <section class="hero-section section-block">
+        <h1>6 Creeks in Kyle, TX</h1>
+        <div class="hero-subtitle">Peace Written in Every Curve and Corner</div>
 
-(async function () {
-const subdivisionName = "6 CREEKS"; // CHANGE THIS PER PAGE
-try {
-const res = await fetch(
-"https://mannycamacho512-bot.github.io/subdivision-dashboard/data/subdivision_page_data.json",
-{ cache: "no-store" }
-);
-const allData = await res.json();
-const data = allData[subdivisionName];
-if (!data) throw new Error("Subdivision not found");
-const homesEl = document.getElementById("homes-available-text");
-if (homesEl) {
-const count = Number(data.homesAvailable || 0);
-homesEl.textContent =
-`${count} ${count === 1 ? "home" : "homes"} available`;
-}
-} catch (err) {
-console.error(err);
-const homesEl = document.getElementById("homes-available-text");
-if (homesEl) homesEl.textContent = "Data unavailable";
-}
-})();
-                                             
+        <div class="hero-copy">
+          <p>
+            In 6 Creeks, peace begins with what your eyes receive. You imagine yourself strolling the streets you call home, paths that wind with quiet purpose, sidewalks sliding gently from curve to curve.
+          </p>
+          <p>
+            Familiar sights and sounds settle into place. You notice the lawns of near neighbors, fences forming small sanctuaries of shade and stillness, and the bright, bounding joy carried on the voices of neighborhood youth.
+          </p>
+          <p>
+            With every slow step, your mind loosens. Thoughts wander, return, and settle again in the calm the neighborhood offers. And in that calm, you begin to see what’s always been there — homes that aren’t copies, but places shaped with their own character, their own care, and their own quiet story.
+          </p>
+          <p>
+            So when friends or family ask where you live, you simply say: 6 Creeks — a peaceful place to call home.
+          </p>
+        </div>
+      </section>
 
-                </script> 
-</div> 
-</div> 
- <div class="dmRespCol small-12 medium-6 large-6" id="1139089204"> <div data-element-type="html" class="u_1456799955 dmCustomHtml" id="1456799955"><!-- Price / Value --> <div style="font-size:13px;font-family:'Hedvig Letters Serif';margin-top:6px;line-height:1.3;text-align:center;"><!-- Section Header --> <h3 style="color:#000;font-weight:600;font-size:13px;font-family:'Hedvig Letters Serif';margin-bottom:4px;">Price Ranges in 6 Creeks, Kyle TX</h3> 
- <div style="text-align: center; font-size: 13px; margin-top: 6px; line-height: 1.3;"> <span>Value around:</span> 
- <span style="color:#ff007f;">🏷️</span> 
- <span id="price-range-text">Loading...</span> 
- <div style="margin-top: 2px;">Median Price near this area: 410k</div> 
- <div style="margin-top: 4px;"> <a href="https://emmanuelcamacho.daltonwade.com/index.php?advanced=1&display=Six+Creeks+TX&min=0&max=100000000&beds=0&baths=0&types%5B%5D=1&types%5B%5D=4&types%5B%5D=12&types%5B%5D=15&minfootage=0&maxfootage=30000&minacres=0&maxacres=0&yearbuilt=0&maxyearbuilt=0&walkscore=0&keywords=&areas%5B%5D=&sortby=listings.listingdate+DESC&rtype=map&polygons%5B%5D=-97.91032791137697%2C29.995919960971584%2C-97.90783882141115%2C29.999041965592372%2C-97.90481328964235%2C29.994693432287836%2C-97.90288209915163%2C29.994061578263103%2C-97.89402008056642%2C30.000844506871918%2C-97.89603710174562%2C30.00649349630336%2C-97.89605855941774%2C30.006549241307063%2C-97.89689540863037%2C30.010637122872325%2C-97.90165901184083%2C30.01281106399926%2C-97.90399789810182%2C30.007887111998713%2C-97.90955543518068%2C30.00846313410139%2C-97.90961980819704%2C30.011993519079738%2C-97.91427612304688%2C30.01156616337184%2C-97.9150700569153%2C30.00621477081517%2C-97.91867494583131%2C30.00627051597546%2C-97.91927576065065%2C30.00223820191165%2C-97.91575670242311%2C30.001773639073285%2C-97.91558504104616%2C30.000528599941713%2C-97.91446924209596%2C29.997555308973297%2C-97.9120445251465%2C29.9948792709414%2C-97.91032791137697%2C29.995919960971584">Explore available homes in 6 Creeks</a> 
-</div> 
-</div> 
-</div> 
- <script>
+      <section class="section-block">
+        <div class="gallery-2">
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+Little+Creek_2.82.1-1920w.jpg" alt="6 Creeks Little Creek area" loading="lazy">
+          </div>
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+Dove+Creek_2.84.1-1920w.jpg" alt="6 Creeks Dove Creek section" loading="lazy">
+          </div>
+        </div>
+      </section>
 
+      <section class="market-grid section-block">
+        <div class="market-card">
+          <h2 class="card-kicker">Homes Available in 6 Creeks, Kyle TX</h2>
+          <div id="homes-available-text" class="market-value">Loading...</div>
 
-(async function () {
-const subdivisionName = "6 CREEKS"; // CHANGE THIS FOR EACH PAGE
-function money(n) {
-if (!n) return "n/a";
-return Number(n).toLocaleString("en-US", {
-style: "currency",
-currency: "USD",
-maximumFractionDigits: 0
-});
-}
-try {
-const res = await fetch(
-"https://mannycamacho512-bot.github.io/subdivision-dashboard/data/subdivision_page_data.json",
-{ cache: "no-store" }
-);
-const allData = await res.json();
-const data = allData[subdivisionName];
-if (!data) throw new Error("Subdivision not found");
-const priceRangeEl = document.getElementById("price-range-text");
-if (priceRangeEl) {
-priceRangeEl.textContent =
-`${money(data.minPrice)} – ${money(data.maxPrice)}`;
-}
-} catch (err) {
-console.error(err);
-const priceRangeEl = document.getElementById("price-range-text");
-if (priceRangeEl) priceRangeEl.textContent = "Data unavailable";
-}
-})();
-                                                               
+          <div class="cta-stack">
+            <div>
+              <a href="/kyle-housing-site/schedule-walkthrough">🏡 Plan a walkthrough at your pace</a>
+            </div>
+            <div>Need help or have questions?</div>
+            <div>Call or text: <a href="tel:5122987455">512-298-7455</a></div>
+            <div>Or <a href="/kyle-housing-site/contact">email me here</a></div>
+          </div>
+        </div>
 
-                </script> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="u_1975303284 dmRespRow" id="1975303284"> <div class="dmRespColsWrapper" id="1940562412"> <div class="dmRespCol large-12 medium-12 small-12" id="1055747095"> <div data-element-type="html" class="dmCustomHtml u_1824525988" id="1824525988"> <iframe src="https://mannycamacho512-bot.github.io/subdivision-dashboard/?sub=6%20CREEKS" style="width:100%; border:0; height:260px; border-radius:16px;" loading="lazy"></iframe> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespRow" id="1261623945"> <div class="dmRespColsWrapper" id="1673811160"> <div class="dmRespCol small-12 large-6 medium-6" id="1572849454"> <div data-element-type="html" class="dmCustomHtml u_1933969878" id="1933969878"> <div style="text-align:left; font-size:13px; margin-top:10px; line-height:1.5;"> <div style="font-weight:600; margin-bottom:6px;">Information to Consider</div> 
- <ul style="margin-left:18px; margin-top:4px; margin-bottom:10px;"> <li>HOA dues are approximately <strong>$800 annually</strong>(about $200 quarterly).</li> 
- <li>Estimated ad valorem tax rate: <strong>~1.75% (does not include PID assessment)</strong>.  
-      Example: on a $500,000 home, ad valorem taxes would be roughly <strong>$8,750</strong>.</li> 
- <li>Six Creeks is in the City of Kyle extraterritorial jurisdiction and receives City water; it is not in a MUD.</li> 
- <li>The community is in a Public Improvement District (PID). The PID uses a fixed annual assessment to fund neighborhood improvements such as roads, parks, and landscaping; that assessment appears as a separate line item from ad valorem taxes.</li> 
- <li>Because Six Creeks uses a PID rather than a MUD, the ad valorem tax rate is lower; homeowners still pay the PID assessment in addition to ad valorem taxes.</li> 
-</ul> 
- <div style="margin-top:8px; font-weight:600;">Need help or have questions?</div> 
- <div style="margin-top:4px;">Call or text: <a href="tel:5122987455" style="color:#000; text-decoration:underline;">512-298-7455</a> 
-</div> 
- <div style="margin-top:4px;">Or <a href="/contact" style="color:#000; text-decoration:underline;">email me here</a> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespCol large-6 medium-6 small-12" id="1847507624"> <div data-element-type="html" class="u_1484711147 dmCustomHtml" id="1484711147"><!-- Local Neighbor Comments --> <div style="font-weight:600; font-size:13px; margin-bottom:4px;">Local Neighbor Comments:</div> 
- <div style="font-size:13px; font-style:italic; color:#333; line-height:1.5; margin-bottom:6px;"> <span>&ldquo;Calm and quiet,&rdquo; and neighbors are friendly and approachable.</span> 
-</div> 
- <div style="font-size:13px; font-style:italic; color:#333; line-height:1.5; margin-bottom:6px;"> <span>&ldquo;Heads up with water utilities: I believe there are 6 creeks, and being outside Kyle city limits, rates are hiked up 77%. Look it up prior.&rdquo;</span> 
-</div> 
- <div style="font-size:13px; font-style:italic; color:#333; line-height:1.5;"> <span>&ldquo;Live in 6 creeks and a lot of young couples with kids, very friendly neighbors! Water bills yes are high depending on your sqft&rdquo;</span> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="u_1042576569 dmRespRow" id="1042576569"> <div class="dmRespColsWrapper" id="1653833464"> <div class="dmRespCol small-12 large-6 medium-6" id="1781902077"> <div class="dmRespRow" id="1281738414"> <div class="dmRespColsWrapper" id="1575851534"> <div class="dmRespCol small-12 medium-12 large-12" id="1409407930"> <div data-element-type="html" class="dmCustomHtml u_1398150954" id="1398150954"><!-- Community Specifics --> <div style="margin-top:15px; color:#000;"><!-- Title --> <h3 style="color:#000;font-weight:600;font-size:16px;font-family:'Hedvig Letters Serif';margin-bottom:6px;">Community Specifics in 6 Creeks, Kyle TX</h3> 
-<!-- List --> <ul style="font-size:14px; line-height:1.5; padding-left:20px; margin-top:4px;"> <li>Built from 2019 and ongoing</li> 
- <li>3&ndash;5 bedroom homes</li> 
- <li>SqFt: 1,728 sqft to 4,098 sqft</li> 
- <li>Builder: Pulte Homes, Perry Homes, Risewell Homes, Taylor Morrison, Trendmaker Homes, Highland Homes, M/I Homes, and Coventry Homes</li> 
- <li>The community includes amenities like a community pool, pickleball courtspavilion, trails, fishing pond, and green space.</li> 
- <li>Homes are served by Hays CISD schools (e.g., Cullen Elementary, Barton Middle, Jack C. Hays High).</li> 
-</ul> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespCol large-6 medium-6 small-12" id="1180337723"> <div data-element-type="html" class="dmCustomHtml u_1386249327" id="1386249327"><!-- Road & Traffic Conditions --> <div style="margin-top:12px; font-size:13px; line-height:1.6; color:#555;"><!-- Title --> <h3 style="color:#000;font-weight:600;font-size:16px;font-family:'Hedvig Letters Serif';margin-bottom:6px;">Road &amp; Traffic Conditions in 6 Creeks, Kyle TX</h3> 
- <div style="margin-top:12px; font-size:13px; line-height:1.6; color:#555;"> <div style="margin-bottom:4px;">🚧 <strong>Road Quality:</strong> 
-★★★★★</div> 
- <div>🚗 <strong>Neighborhood Traffic:</strong> 
-Medium</div> 
-</div> 
-<!-- Nearby Schools --> <div style="color:#000;font-weight:600;font-size:16px;margin-top:12px;font-family:'Hedvig Letters Serif';margin-bottom:4px;">Nearby Schools</div> 
- <div style="font-size:13px; line-height:1.6; color:#555;"><!-- Elementary Schools --> <div style="margin-bottom:4px;">🎒 <strong>Elementary Schools:</strong> 
-Jim Cullen Elementary School &amp; Laura B Negley Elementary School</div> 
-<!-- Middle Schools --> <div style="margin-bottom:4px;">📘 <strong>Middle Schools:</strong> 
-R C Barton Middle School</div> 
-<!-- High School --> <div style="margin-bottom:4px;">🎓 <strong>High School:</strong> 
-Jack C. Hays High School &amp; Lehman High School</div> 
-<!-- Charter / Special Schools --> <div style="margin-bottom:4px;">🏫 <strong>Charter / Alternative Schools:</strong> 
-Valor Education and IDEA Public Schools</div> 
- <div style="font-size:0.9em; color:#777;">School assignments may vary. This information is provided as a general reference to help families begin their research.</div> 
-</div> 
-<!-- Last Updated --> <div style="margin-top:12px; font-size:13px; color:#555;">Last updated: <strong>01/22/2026</strong> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespRow" id="1789316171"> <div class="dmRespColsWrapper" id="1119208771"> <div class="u_1341850126 dmRespCol small-12 medium-12 large-12" id="1341850126"> <div data-element-type="html" class="dmCustomHtml" id="1655578191"> <style>.sixc-gallery{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:16px;
-    margin-top:16px;
-  }
-  .sixc-item{
-    border-radius:16px;
-    overflow:hidden;
-  }
-  .sixc-item img{
-    width:100%;
-    height:auto;
-    display:block;
-  }
-  /* Mobile swipe layout */
-  @media (max-width:768px){
-    .sixc-gallery{
-      display:flex;
-      gap:14px;
-      overflow-x:auto;
-      padding:6px 4px;
-      -webkit-overflow-scrolling:touch;
-      scroll-snap-type:x mandatory;
-    }
-    .sixc-item{
-      flex:0 0 300px;
-      scroll-snap-align:start;
-    }
-  }</style> 
- <div class="sixc-gallery"> <div class="sixc-item"><img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+Berry+Creek_2.85.1-1920w.jpg" alt="6 Creeks Berry Creek" loading="lazy" onerror="handleImageLoadError(this)"/></div> 
- <div class="sixc-item"><img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+walkway_2.83.1-1920w.jpg" alt="6 Creeks walking path" loading="lazy" onerror="handleImageLoadError(this)"/></div> 
- <div class="sixc-item"><img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+Willow+Creek_2.86.1-1920w.jpg" alt="6 Creeks Willow Creek section" loading="lazy" onerror="handleImageLoadError(this)"/></div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespRow" id="1004880060"> <div class="dmRespColsWrapper" id="1751359355"> <div class="dmRespCol large-12 medium-12 small-12" id="1347962191"> <div class="imageWidget align-center u_1045852421" data-element-type="image" data-widget-type="image" id="1045852421"><img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+Pond_2.94.1-1920w.jpg" alt="" id="1814038094" class="" width="1920" height="1080" data-dm-image-path="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/6+Creeks+Pond_2.94.1.jpg" onerror="handleImageLoadError(this)"/></div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespRow" id="1416750395"> <div class="dmRespColsWrapper" id="1852444474"> <div class="dmRespCol large-12 medium-12 small-12" id="1011971921"> <div data-element-type="html" class="dmCustomHtml" id="1098108282"> <section class="neighborhood-description"> <p> <strong>6 Creeks at Waterridge</strong> 
-consists of homes built by Highland Homes, largely situated on the southwest side of the 6 Creeks master-planned community. 12 of the 74 homes available are Waterridge.</p> 
- <p>The community&rsquo;s name is inspired by the creeks and natural waterways in and around the area, which contribute to its connection to the Blanco River watershed and its Hill Country feel.</p> 
-</section> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespRow" id="1264265258"> <div class="dmRespColsWrapper" id="1941370873"> <div class="dmRespCol small-12 large-6 medium-6" id="1268429338"> <div class="imageWidget align-center u_1254784491" data-element-type="image" data-widget-type="image" id="1254784491"><img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+Playground_2.92.1-1920w.jpg" alt="" id="1331290334" class="" width="1920" height="1080" data-dm-image-path="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/6+Creeks+Playground_2.92.1.jpg" onerror="handleImageLoadError(this)"/></div> 
-</div> 
- <div class="dmRespCol large-6 medium-6 small-12" id="1346002897"> <div class="imageWidget align-center u_1170000237" data-element-type="image" data-widget-type="image" id="1170000237"><img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+trail_2.93.1-1920w.jpg" alt="" id="1834727134" class="" width="1920" height="1080" data-dm-image-path="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/6+Creeks+trail_2.93.1.jpg" onerror="handleImageLoadError(this)"/></div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespRow" id="1381002471"> <div class="dmRespColsWrapper" id="1146672146"> <div class="dmRespCol small-12 large-6 medium-6" id="1931436220"> <div class="dmRespRow" id="1513467361"> <div class="dmRespColsWrapper" id="1964843629"> <div class="dmRespCol large-6 medium-6 small-12" id="1840761335"> <div data-element-type="html" class="dmCustomHtml u_1525338219" id="1525338219"> <div style="margin-top:15px; font-size:14px; line-height:1.5; color:#000;"> <div style="font-size:16px; font-weight:600; margin-bottom:6px;">2&ndash;5 Minutes Away</div> 
- <div style="margin-bottom:6px;">🍽 <strong>Restaurants</strong> 
- <ul style="margin:4px 0 8px 20px;"> <li>Golden Chick</li> 
- <li>Los Vaqueros Caf&eacute; &amp; Grill</li> 
- <li>Texas Pie Company</li> 
- <li>Bloodworth BBQ</li> 
- <li>Centerfield Sports Bar &amp; Grill</li> 
-</ul> 
-</div> 
- <div style="margin-bottom:6px;">🛍 <strong>Retail / Convenience</strong> 
- <ul style="margin:4px 0 8px 20px;"> <li>Dollar General</li> 
-</ul> 
-</div> 
- <div style="margin-bottom:6px;">🌳 <strong>Parks &amp; Recreation</strong> 
- <ul style="margin:4px 0 8px 20px;"> <li>Gregg-Clarke Park</li> 
-</ul> 
-</div> 
- <div>📚 <strong>Community / City Services</strong> 
- <ul style="margin:4px 0 0 20px;"> <li>Kyle Public Library</li> 
-</ul> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespCol large-6 medium-6 small-12" id="1657265520"> <div data-element-type="html" class="dmCustomHtml" id="1340405222"> <div style="margin-top:15px; font-size:14px; line-height:1.5; color:#000;"> <div style="font-size:16px; font-weight:600; margin-bottom:6px;">5&ndash;10 Minutes Away</div> 
- <div style="margin-bottom:6px;">🍽 <strong>Restaurants</strong> 
- <ul style="margin:4px 0 8px 20px;"> <li>Sonic Drive-In</li> 
- <li>Big Rob&rsquo;s Burgers</li> 
- <li>Flamin&rsquo; Burger</li> 
- <li>Spicy Bite</li> 
- <li>Domino&rsquo;s Pizza</li> 
- <li>McDonald&rsquo;s</li> 
- <li>Chick-fil-A</li> 
- <li>Jack in the Box</li> 
- <li>Hays City Store &amp; Ice House</li> 
-</ul> 
-</div> 
- <div style="margin-bottom:6px;">🛍 <strong>Retail / Shopping</strong> 
- <ul style="margin:4px 0 8px 20px;"> <li>Target</li> 
- <li>Kohl&rsquo;s</li> 
-</ul> 
-</div> 
- <div style="margin-bottom:6px;">💊 <strong>Essentials / Pharmacies</strong> 
- <ul style="margin:4px 0 8px 20px;"> <li>Walgreens</li> 
-</ul> 
-</div> 
- <div>☕ <strong>Coffee / Caf&eacute;s</strong> 
- <ul style="margin:4px 0 0 20px;"> <li>Kyle&rsquo;s Daily Grind</li> 
- <li>Starbucks</li> 
-</ul> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- <div class="dmRespCol empty-column large-6 medium-6 small-12" id="1063205089"></div> 
-</div> 
-</div> 
- <div class="dmRespRow" id="1947458161"> <div class="dmRespColsWrapper" id="1883325969"> <div class="dmRespCol large-12 medium-12 small-12" id="1790838044"> <div data-element-type="html" class="dmCustomHtml u_1351790634" id="1351790634"> <div style="font-size:18px; font-weight:bold; margin-bottom:10px; color:#000;">Explore Nearby Subdivisions</div> 
- <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=30.003124373098622%2C-97.90638944836003&z=15" width="100%" height="480"></iframe> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
-</div> 
- 
+        <div class="market-card">
+          <h2 class="card-kicker">Price Ranges in 6 Creeks, Kyle TX</h2>
+          <div class="market-value">
+            <div>
+              <span>Value around:</span>
+              <span>🏷️</span>
+              <span id="price-range-text">Loading...</span>
+            </div>
+            <div style="margin-top: 6px;">Median Price near this area: 410k</div>
+            <div style="margin-top: 10px;">
+              <a href="https://emmanuelcamacho.daltonwade.com/index.php?advanced=1&display=Six+Creeks+TX&min=0&max=100000000&beds=0&baths=0&types%5B%5D=1&types%5B%5D=4&types%5B%5D=12&types%5B%5D=15&minfootage=0&maxfootage=30000&minacres=0&maxacres=0&yearbuilt=0&maxyearbuilt=0&walkscore=0&keywords=&areas%5B%5D=&sortby=listings.listingdate+DESC&rtype=map&polygons%5B%5D=-97.91032791137697%2C29.995919960971584%2C-97.90783882141115%2C29.999041965592372%2C-97.90481328964235%2C29.994693432287836%2C-97.90288209915163%2C29.994061578263103%2C-97.89402008056642%2C30.000844506871918%2C-97.89603710174562%2C30.00649349630336%2C-97.89605855941774%2C30.006549241307063%2C-97.89689540863037%2C30.010637122872325%2C-97.90165901184083%2C30.01281106399926%2C-97.90399789810182%2C30.007887111998713%2C-97.90955543518068%2C30.00846313410139%2C-97.90961980819704%2C30.011993519079738%2C-97.91427612304688%2C30.01156616337184%2C-97.9150700569153%2C30.00621477081517%2C-97.91867494583131%2C30.00627051597546%2C-97.91927576065065%2C30.00223820191165%2C-97.91575670242311%2C30.001773639073285%2C-97.91558504104616%2C30.000528599941713%2C-97.91446924209596%2C29.997555308973297%2C-97.9120445251465%2C29.9948792709414%2C-97.91032791137697%2C29.995919960971584" style="text-decoration: underline;">
+                Explore available homes in 6 Creeks
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <section class="dashboard-wrap section-block">
+        <iframe src="https://mannycamacho512-bot.github.io/subdivision-dashboard/?sub=6%20CREEKS" loading="lazy"></iframe>
+      </section>
 
-    <div class="footer-grid">
-  <div class="footer-box">
-    <div style="font-weight:bold; font-size:16px; margin-bottom:10px;">
-      Data-driven guidance: negotiate based on comps, pace, and competition.
+      <section class="info-grid section-block">
+        <div class="info-card">
+          <h2>Information to Consider</h2>
+          <ul>
+            <li>HOA dues are approximately <strong>$800 annually</strong> (about $200 quarterly).</li>
+            <li>Estimated ad valorem tax rate: <strong>~1.75% (does not include PID assessment)</strong>. Example: on a $500,000 home, ad valorem taxes would be roughly <strong>$8,750</strong>.</li>
+            <li>Six Creeks is in the City of Kyle extraterritorial jurisdiction and receives City water; it is not in a MUD.</li>
+            <li>The community is in a Public Improvement District (PID). The PID uses a fixed annual assessment to fund neighborhood improvements such as roads, parks, and landscaping; that assessment appears as a separate line item from ad valorem taxes.</li>
+            <li>Because Six Creeks uses a PID rather than a MUD, the ad valorem tax rate is lower; homeowners still pay the PID assessment in addition to ad valorem taxes.</li>
+          </ul>
+
+          <div class="cta-stack">
+            <div><strong>Need help or have questions?</strong></div>
+            <div>Call or text: <a href="tel:5122987455">512-298-7455</a></div>
+            <div>Or <a href="/kyle-housing-site/contact">email me here</a></div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h2>Local Neighbor Comments</h2>
+          <div class="quote">“Calm and quiet,” and neighbors are friendly and approachable.</div>
+          <div class="quote">“Heads up with water utilities: I believe there are 6 creeks, and being outside Kyle city limits, rates are hiked up 77%. Look it up prior.”</div>
+          <div class="quote">“Live in 6 creeks and a lot of young couples with kids, very friendly neighbors! Water bills yes are high depending on your sqft”</div>
+        </div>
+      </section>
+
+      <section class="info-grid section-block">
+        <div class="info-card">
+          <h2>Community Specifics in 6 Creeks, Kyle TX</h2>
+          <ul>
+            <li>Built from 2019 and ongoing</li>
+            <li>3–5 bedroom homes</li>
+            <li>SqFt: 1,728 sqft to 4,098 sqft</li>
+            <li>Builder: Pulte Homes, Perry Homes, Risewell Homes, Taylor Morrison, Trendmaker Homes, Highland Homes, M/I Homes, and Coventry Homes</li>
+            <li>The community includes amenities like a community pool, pickleball courts, pavilion, trails, fishing pond, and green space.</li>
+            <li>Homes are served by Hays CISD schools (e.g., Cullen Elementary, Barton Middle, Jack C. Hays High).</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h2>Road &amp; Traffic Conditions in 6 Creeks, Kyle TX</h2>
+
+          <div class="traffic-badges">
+            <div>🚧 <strong>Road Quality:</strong> ★★★★★</div>
+            <div>🚗 <strong>Neighborhood Traffic:</strong> Medium</div>
+          </div>
+
+          <h3>Nearby Schools</h3>
+          <div class="fine-note" style="margin-bottom: 8px;">
+            School assignments may vary. This information is provided as a general reference to help families begin their research.
+          </div>
+
+          <ul>
+            <li><strong>Elementary:</strong> Jim Cullen Elementary School &amp; Laura B Negley Elementary School</li>
+            <li><strong>Middle:</strong> R C Barton Middle School</li>
+            <li><strong>High:</strong> Jack C. Hays High School &amp; Lehman High School</li>
+            <li><strong>Charter / Alternative:</strong> Valor Education and IDEA Public Schools</li>
+          </ul>
+
+          <div class="fine-note" style="margin-top: 12px;">Last updated: January 22, 2026</div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="gallery-3">
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+Berry+Creek_2.85.1-1920w.jpg" alt="6 Creeks Berry Creek" loading="lazy">
+          </div>
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+walkway_2.83.1-1920w.jpg" alt="6 Creeks walking path" loading="lazy">
+          </div>
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+Willow+Creek_2.86.1-1920w.jpg" alt="6 Creeks Willow Creek section" loading="lazy">
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="feature-image">
+          <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+Pond_2.94.1-1920w.jpg" alt="6 Creeks pond" loading="lazy">
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="neighborhood-description">
+          <p>
+            <strong>6 Creeks at Waterridge</strong> consists of homes built by Highland Homes, largely situated on the southwest side of the 6 Creeks master-planned community. 12 of the 74 homes available are Waterridge.
+          </p>
+          <p>
+            The community’s name is inspired by the creeks and natural waterways in and around the area, which contribute to its connection to the Blanco River watershed and its Hill Country feel.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="gallery-split">
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+Playground_2.92.1-1920w.jpg" alt="6 Creeks playground" loading="lazy">
+          </div>
+          <div class="gallery-card">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/6+Creeks+trail_2.93.1-1920w.jpg" alt="6 Creeks trail" loading="lazy">
+          </div>
+        </div>
+      </section>
+
+      <section class="nearby-grid section-block">
+        <div class="nearby-card">
+          <h3>2–5 Minutes Away</h3>
+
+          <strong>🍽 Restaurants</strong>
+          <ul>
+            <li>Golden Chick</li>
+            <li>Los Vaqueros Café &amp; Grill</li>
+            <li>Texas Pie Company</li>
+            <li>Bloodworth BBQ</li>
+            <li>Centerfield Sports Bar &amp; Grill</li>
+          </ul>
+
+          <strong>🛍 Retail / Convenience</strong>
+          <ul>
+            <li>Dollar General</li>
+          </ul>
+
+          <strong>🌳 Parks &amp; Recreation</strong>
+          <ul>
+            <li>Gregg-Clarke Park</li>
+          </ul>
+
+          <strong>📚 Community / City Services</strong>
+          <ul>
+            <li>Kyle Public Library</li>
+          </ul>
+        </div>
+
+        <div class="nearby-card">
+          <h3>5–10 Minutes Away</h3>
+
+          <strong>🍽 Restaurants</strong>
+          <ul>
+            <li>Sonic Drive-In</li>
+            <li>Big Rob’s Burgers</li>
+            <li>Flamin’ Burger</li>
+            <li>Spicy Bite</li>
+            <li>Domino’s Pizza</li>
+            <li>McDonald’s</li>
+            <li>Chick-fil-A</li>
+            <li>Jack in the Box</li>
+            <li>Hays City Store &amp; Ice House</li>
+          </ul>
+
+          <strong>🛍 Retail / Shopping</strong>
+          <ul>
+            <li>Target</li>
+            <li>Kohl’s</li>
+          </ul>
+
+          <strong>💊 Essentials / Pharmacies</strong>
+          <ul>
+            <li>Walgreens</li>
+          </ul>
+
+          <strong>☕ Coffee / Cafés</strong>
+          <ul>
+            <li>Kyle’s Daily Grind</li>
+            <li>Starbucks</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="map-heading">Explore Nearby Subdivisions</div>
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=30.003124373098622%2C-97.90638944836003&z=15"
+            loading="lazy">
+          </iframe>
+        </div>
+      </section>
+
+      <div class="footer-grid">
+        <div class="footer-box">
+          <div style="font-weight:bold; font-size:16px; margin-bottom:10px;">
+            Data-driven guidance: negotiate based on comps, pace, and competition.
+          </div>
+          <div style="font-size:14px;">
+            <a href="/kyle-housing-site/contact" style="color:#000; text-decoration:underline;">
+              Ask me for a quick read on your neighborhood.
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-box footer-badge">
+          <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
+          </a>
+        </div>
+      </div>
     </div>
-    <div style="font-size:14px;">
-      <a href="/kyle-housing-site/contact" style="color:#000; text-decoration:underline;">
-        Ask me for a quick read on your neighborhood.
-      </a>
-    </div>
-  </div>
-
-  <div class="footer-box footer-badge">
-    <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
-      <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
-    </a>
-  </div>
-</div>
-  </div>
+  </main>
 
   <script>
     const siteHeader = document.querySelector('.site-header');
@@ -871,6 +912,44 @@ consists of homes built by Highland Homes, largely situated on the southwest sid
 
     window.addEventListener('scroll', handleHeaderShrink, { passive: true });
     window.addEventListener('load', handleHeaderShrink);
+
+    (async function () {
+      const subdivisionName = "6 CREEKS";
+      try {
+        const res = await fetch(
+          "https://mannycamacho512-bot.github.io/subdivision-dashboard/data/subdivision_page_data.json",
+          { cache: "no-store" }
+        );
+        const allData = await res.json();
+        const data = allData[subdivisionName];
+        if (!data) throw new Error("Subdivision not found");
+
+        const homesEl = document.getElementById("homes-available-text");
+        if (homesEl) {
+          const count = Number(data.homesAvailable || 0);
+          homesEl.textContent = `${count} ${count === 1 ? "home" : "homes"} available`;
+        }
+
+        const priceRangeEl = document.getElementById("price-range-text");
+        if (priceRangeEl) {
+          const money = (n) => {
+            if (!n) return "n/a";
+            return Number(n).toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+              maximumFractionDigits: 0
+            });
+          };
+          priceRangeEl.textContent = `${money(data.minPrice)} – ${money(data.maxPrice)}`;
+        }
+      } catch (err) {
+        console.error(err);
+        const homesEl = document.getElementById("homes-available-text");
+        const priceRangeEl = document.getElementById("price-range-text");
+        if (homesEl) homesEl.textContent = "Data unavailable";
+        if (priceRangeEl) priceRangeEl.textContent = "Data unavailable";
+      }
+    })();
   </script>
 </body>
 </html>
