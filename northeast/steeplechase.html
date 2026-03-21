@@ -266,7 +266,8 @@
     .gallery-2,
     .market-grid,
     .info-grid,
-    .nearby-grid {
+    .nearby-grid,
+    .amenities-grid {
       display: grid;
       gap: 22px;
     }
@@ -280,6 +281,10 @@
     .info-grid,
     .nearby-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .amenities-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .gallery-card,
@@ -303,7 +308,8 @@
 
     .info-card,
     .market-card,
-    .nearby-card {
+    .nearby-card,
+    .amenity-card {
       background: #fff;
       border: 1px solid #ececec;
       border-radius: 18px;
@@ -362,6 +368,7 @@
     .info-card h2,
     .info-card h3,
     .nearby-card h3,
+    .amenity-card h3,
     .section-title {
       margin: 0 0 10px;
       font-size: 18px;
@@ -372,20 +379,23 @@
 
     .info-card p,
     .info-card li,
-    .nearby-card li {
+    .nearby-card li,
+    .amenity-card li {
       font-size: 14px;
       line-height: 1.7;
       color: #000;
     }
 
     .info-card ul,
-    .nearby-card ul {
+    .nearby-card ul,
+    .amenity-card ul {
       margin: 0;
       padding-left: 20px;
     }
 
     .info-card li,
-    .nearby-card li {
+    .nearby-card li,
+    .amenity-card li {
       margin-bottom: 6px;
     }
 
@@ -513,7 +523,8 @@
       .market-grid,
       .info-grid,
       .nearby-grid,
-      .footer-grid {
+      .footer-grid,
+      .amenities-grid {
         grid-template-columns: 1fr;
       }
 
@@ -697,8 +708,10 @@
             <div>🚧 <strong>Road Quality:</strong> ★★★☆☆</div>
             <div>🚗 <strong>Neighborhood Traffic:</strong> Medium</div>
           </div>
+        </div>
 
-          <h3>Nearby Schools</h3>
+        <div class="info-card">
+          <h2>Nearby Schools</h2>
           <div class="fine-note" style="margin-bottom: 8px;">
             School assignments may vary. This information is provided as a general reference to help families begin their research.
           </div>
@@ -712,84 +725,61 @@
 
           <div class="fine-note" style="margin-top: 12px;">Last updated: January 22, 2026</div>
         </div>
-
-        <div class="info-card">
-          <h2>Nearby Amenities 2–5 Minutes Away</h2>
-
-          <strong>🍽 Restaurants / Food Trailer</strong>
-          <ul>
-            <li>Taqueria Jaliscienses</li>
-            <li>Domino’s Pizza</li>
-            <li>Pizza Leon</li>
-            <li>Garcia’s Mexican Restaurant</li>
-            <li>Sonic</li>
-            <li>Wendy's</li>
-            <li>Popeyes</li>
-            <li>Centerfield Sports Bar &amp; Grill</li>
-            <li>Dairy Queen</li>
-            <li>Sonic</li>
-            <li>McDonald’s</li>
-            <li>Chick-fil-A</li>
-            <li>Panda Express</li>
-          </ul>
-
-          <strong>🛍 Retail / Convenience</strong>
-          <ul>
-            <li>Dollar General</li>
-            <li>Dollar Tree</li>
-            <li>TXB</li>
-            <li>Walmart</li>
-            <li>Texaco</li>
-            <li>Goodwill</li>
-            <li>Hobby Lobby</li>
-            <li>Academy Sports &amp; Outdoors</li>
-            <li>Lowe’s</li>
-            <li>Target</li>
-            <li>Kohl’s</li>
-          </ul>
-
-          <strong>🌳 Parks &amp; Recreation</strong>
-          <ul>
-            <li>Steeplechase Park</li>
-            <li>Gregg-Clarke Park</li>
-          </ul>
-        </div>
       </section>
 
-      <section class="info-grid section-block">
-        <div class="info-card">
-          <h2>Health, Essentials &amp; Coffee</h2>
+      <section class="section-block">
+        <div class="amenities-grid">
+          <div class="amenity-card">
+            <h3>Restaurants / Food</h3>
+            <ul>
+              <li>Taqueria Jaliscienses</li>
+              <li>Domino’s Pizza</li>
+              <li>Pizza Leon</li>
+              <li>Garcia’s Mexican Restaurant</li>
+              <li>Sonic</li>
+              <li>Wendy's</li>
+              <li>Popeyes</li>
+              <li>Centerfield Sports Bar &amp; Grill</li>
+              <li>Dairy Queen</li>
+              <li>McDonald’s</li>
+              <li>Chick-fil-A</li>
+              <li>Panda Express</li>
+            </ul>
+          </div>
 
-          <strong>💪 Health &amp; Fitness</strong>
-          <ul>
-            <li>Anytime Fitness</li>
-            <li>Orangetheory Fitness</li>
-            <li>Twisted Steel Barbell</li>
-            <li>CrossFit</li>
-          </ul>
+          <div class="amenity-card">
+            <h3>Stores / Parks</h3>
+            <ul>
+              <li>Dollar General</li>
+              <li>Dollar Tree</li>
+              <li>TXB</li>
+              <li>Walmart</li>
+              <li>Texaco</li>
+              <li>Goodwill</li>
+              <li>Hobby Lobby</li>
+              <li>Academy Sports &amp; Outdoors</li>
+              <li>Lowe’s</li>
+              <li>Target</li>
+              <li>Kohl’s</li>
+              <li>Steeplechase Park</li>
+              <li>Gregg-Clarke Park</li>
+            </ul>
+          </div>
 
-          <strong>💊 Essentials / Pharmacies</strong>
-          <ul>
-            <li>Walgreens</li>
-            <li>CVS</li>
-            <li>Walmart</li>
-            <li>Target</li>
-          </ul>
-
-          <strong>☕ Coffee / Cafés</strong>
-          <ul>
-            <li>Starbucks</li>
-          </ul>
-        </div>
-
-        <div class="info-card">
-          <h2>Neighborhood Snapshot</h2>
-          <p>
-            Steeplechase blends an older, established housing stock with strong park access, multiple ways in and out, and a lifestyle that feels both active and convenient.
-          </p>
-          <p>
-            It stands out for buyers who want nearby recreation, practical access around Kyle, and a neighborhood that feels lived-in rather than brand new.
-          </p>
+          <div class="amenity-card">
+            <h3>Health / Pharmacy / Coffee</h3>
+            <ul>
+              <li>Anytime Fitness</li>
+              <li>Orangetheory Fitness</li>
+              <li>Twisted Steel Barbell</li>
+              <li>CrossFit</li>
+              <li>Walgreens</li>
+              <li>CVS</li>
+              <li>Walmart</li>
+              <li>Target</li>
+              <li>Starbucks</li>
+            </ul>
+          </div>
         </div>
       </section>
 
