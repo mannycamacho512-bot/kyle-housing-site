@@ -340,6 +340,10 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
+    .stats-grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .stat-box {
       min-height: 170px;
     }
@@ -364,6 +368,66 @@
     .stat-note {
       font-size: 14px;
       line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* =========================
+       CHARTS
+    ========================== */
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .chart-box h3 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .chart-subtext {
+      margin: -4px 0 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .chart-area {
+      position: relative;
+      width: 100%;
+      min-height: 300px;
+      border: 1px solid var(--border);
+      padding: 12px;
+    }
+
+    .chart-area canvas {
+      width: 100%;
+      height: 260px;
+      display: block;
+    }
+
+    /* =========================
+       EXPLAINERS
+    ========================== */
+    .explain-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .explain-box h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .explain-box p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.7;
       color: var(--muted);
     }
 
@@ -423,7 +487,10 @@
     @media (max-width: 900px) {
       .toolbar-grid,
       .footer-grid,
-      .stats-grid-4 {
+      .stats-grid-4,
+      .stats-grid-3,
+      .chart-grid,
+      .explain-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -542,8 +609,8 @@
         <div class="panel data-hero">
           <h1>Kyle Subdivision Data</h1>
           <p>
-            Switch between subdivisions and study pricing, inventory, and annual market movement
-            in one place.
+            Switch between subdivisions and study pricing, inventory, annual performance,
+            and current market pressure in one place.
           </p>
         </div>
       </section>
@@ -649,25 +716,54 @@
           </div>
         </div>
       </section>
-      <section class="section-block">
-  <div class="stats-grid stats-grid-2">
-    <article class="panel">
-      <h2 class="section-title">Pricing Trend</h2>
-      <div class="chart-area">
-        <canvas id="priceChart"></canvas>
-      </div>
-      <div class="stat-note">Emerald line/bar chart for pricing history.</div>
-    </article>
 
-    <article class="panel">
-      <h2 class="section-title">Market Pace</h2>
-      <div class="chart-area">
-        <canvas id="paceChart"></canvas>
-      </div>
-      <div class="stat-note">Use for sold volume, DOM, or pressure trend.</div>
-    </article>
-  </div>
-</section>
+      <section class="section-block">
+        <div class="chart-grid">
+          <article class="panel chart-box">
+            <h3>Annual Price Comparison</h3>
+            <p class="chart-subtext">
+              Compare 2025 and 2026 median and average sold prices for the selected subdivision.
+            </p>
+            <div class="chart-area">
+              <canvas id="annualPriceChart"></canvas>
+            </div>
+          </article>
+
+          <article class="panel chart-box">
+            <h3>Annual Sales &amp; DOM</h3>
+            <p class="chart-subtext">
+              Compare annual sold volume and median days on market across 2025 and 2026.
+            </p>
+            <div class="chart-area">
+              <canvas id="annualVolumeDomChart"></canvas>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="chart-grid">
+          <article class="panel chart-box">
+            <h3>Current Month Pressure</h3>
+            <p class="chart-subtext">
+              This month’s absorption, sell-through, failure rate, and withdrawn / expired count.
+            </p>
+            <div class="chart-area">
+              <canvas id="currentPressureChart"></canvas>
+            </div>
+          </article>
+
+          <article class="panel explain-box">
+            <h3>What These Charts Mean</h3>
+            <p>
+              The annual charts help you see whether pricing, volume, and pace are changing year over year.
+              The current pressure chart helps show whether the subdivision is converting activity into closings
+              or losing listings along the way. Higher sell-through and absorption tend to reflect stronger movement,
+              while higher failure or a rising withdrawn count can suggest friction.
+            </p>
+          </article>
+        </div>
+      </section>
     </div>
   </main>
 
@@ -704,6 +800,8 @@
       </div>
     </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
     (function () {
@@ -746,6 +844,14 @@
       };
 
       let allData = [];
+      let annualPriceChart = null;
+      let annualVolumeDomChart = null;
+      let currentPressureChart = null;
+
+      const chartTextColor = "rgba(255,255,255,0.75)";
+      const chartGridColor = "rgba(255,255,255,0.12)";
+      const emerald = "#065f46";
+      const emeraldSoft = "rgba(6,95,70,0.28)";
 
       function fmtNumber(v) {
         if (v === null || v === undefined || v === "") return "--";
@@ -776,11 +882,199 @@
         els.y2025MedianDom.textContent = "--";
       }
 
+      function destroyCharts() {
+        if (annualPriceChart) {
+          annualPriceChart.destroy();
+          annualPriceChart = null;
+        }
+        if (annualVolumeDomChart) {
+          annualVolumeDomChart.destroy();
+          annualVolumeDomChart = null;
+        }
+        if (currentPressureChart) {
+          currentPressureChart.destroy();
+          currentPressureChart = null;
+        }
+      }
+
+      function chartOptionsBase() {
+        return {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: {
+                color: chartTextColor
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: chartTextColor
+              },
+              grid: {
+                color: chartGridColor
+              }
+            },
+            y: {
+              ticks: {
+                color: chartTextColor
+              },
+              grid: {
+                color: chartGridColor
+              }
+            }
+          }
+        };
+      }
+
+      function renderCharts(row) {
+        destroyCharts();
+
+        const annualPriceCtx = document.getElementById("annualPriceChart");
+        const annualVolumeDomCtx = document.getElementById("annualVolumeDomChart");
+        const currentPressureCtx = document.getElementById("currentPressureChart");
+
+        annualPriceChart = new Chart(annualPriceCtx, {
+          type: "bar",
+          data: {
+            labels: ["2025 Median", "2025 Average", "2026 Median", "2026 Average"],
+            datasets: [
+              {
+                label: "Price",
+                data: [
+                  row.y2025_median_sold_price ?? null,
+                  row.y2025_avg_sold_price ?? null,
+                  row.y2026_median_sold_price ?? null,
+                  row.y2026_avg_sold_price ?? null
+                ],
+                backgroundColor: emeraldSoft,
+                borderColor: emerald,
+                borderWidth: 2
+              }
+            ]
+          },
+          options: {
+            ...chartOptionsBase(),
+            plugins: {
+              legend: {
+                display: false
+              }
+            }
+          }
+        });
+
+        annualVolumeDomChart = new Chart(annualVolumeDomCtx, {
+          data: {
+            labels: ["2025", "2026"],
+            datasets: [
+              {
+                type: "bar",
+                label: "Sold",
+                data: [
+                  row.y2025_sold ?? null,
+                  row.y2026_sold ?? null
+                ],
+                backgroundColor: emeraldSoft,
+                borderColor: emerald,
+                borderWidth: 2,
+                yAxisID: "y"
+              },
+              {
+                type: "line",
+                label: "Median DOM",
+                data: [
+                  row.y2025_median_dom ?? null,
+                  row.y2026_median_dom ?? null
+                ],
+                borderColor: emerald,
+                backgroundColor: emerald,
+                borderWidth: 2,
+                tension: 0.25,
+                pointRadius: 4,
+                pointHoverRadius: 4,
+                yAxisID: "y1"
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                labels: {
+                  color: chartTextColor
+                }
+              }
+            },
+            scales: {
+              x: {
+                ticks: {
+                  color: chartTextColor
+                },
+                grid: {
+                  color: chartGridColor
+                }
+              },
+              y: {
+                position: "left",
+                ticks: {
+                  color: chartTextColor
+                },
+                grid: {
+                  color: chartGridColor
+                }
+              },
+              y1: {
+                position: "right",
+                ticks: {
+                  color: chartTextColor
+                },
+                grid: {
+                  drawOnChartArea: false
+                }
+              }
+            }
+          }
+        });
+
+        currentPressureChart = new Chart(currentPressureCtx, {
+          type: "bar",
+          data: {
+            labels: ["Absorption", "Sell-Through", "Failure", "Withdrawn/Expired"],
+            datasets: [
+              {
+                label: "Current Month",
+                data: [
+                  row.this_month_absorption_rate != null ? Number(row.this_month_absorption_rate) * 100 : null,
+                  row.this_month_sell_through_rate != null ? Number(row.this_month_sell_through_rate) * 100 : null,
+                  row.this_month_failure_rate != null ? Number(row.this_month_failure_rate) * 100 : null,
+                  row.this_month_withdrawn_expired ?? null
+                ],
+                backgroundColor: emeraldSoft,
+                borderColor: emerald,
+                borderWidth: 2
+              }
+            ]
+          },
+          options: {
+            ...chartOptionsBase(),
+            plugins: {
+              legend: {
+                display: false
+              }
+            }
+          }
+        });
+      }
+
       function renderSubdivision(name) {
         const row = allData.find(item => item.subdivision === name);
 
         if (!row) {
           setEmptyState();
+          destroyCharts();
           return;
         }
 
@@ -800,6 +1094,8 @@
         els.y2025MedianPrice.textContent = fmtMoney(row.y2025_median_sold_price);
         els.y2025AvgPrice.textContent = fmtMoney(row.y2025_avg_sold_price);
         els.y2025MedianDom.textContent = fmtNumber(row.y2025_median_dom);
+
+        renderCharts(row);
       }
 
       async function loadData() {
@@ -825,10 +1121,12 @@
             renderSubdivision(names[0]);
           } else {
             setEmptyState("No subdivision data found.");
+            destroyCharts();
           }
         } catch (error) {
           console.error(error);
           setEmptyState("Data file not connected yet.");
+          destroyCharts();
         }
       }
 
