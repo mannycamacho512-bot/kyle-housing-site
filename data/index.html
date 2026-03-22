@@ -336,7 +336,17 @@
     /* =========================
        STATS GRID
     ========================== */
-    .stats-grid {
+   .section-title {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.stats-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+ .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
@@ -491,6 +501,9 @@
         grid-template-columns: 1fr;
       }
     }
+    .stats-grid-4 {
+  grid-template-columns: 1fr;
+}
 
     @media (max-width: 768px) {
       .topbar {
@@ -630,109 +643,90 @@
         </div>
       </section>
 
-      <section class="section-block">
-        <div class="stats-grid">
-          <article class="panel stat-box">
-            <div class="stat-label">Active Listings</div>
-            <div class="stat-value" id="activeListings">--</div>
-            <div class="stat-note">Homes currently competing for buyers right now.</div>
-          </article>
+     <section class="section-block">
+  <div class="panel">
+    <h2 class="section-title">Current Snapshot</h2>
+    <div class="stats-grid stats-grid-4">
+      <article class="panel stat-box">
+        <div class="stat-label">Active Listings</div>
+        <div class="stat-value" id="activeListings">--</div>
+        <div class="stat-note">Homes currently competing for buyers right now.</div>
+      </article>
 
-          <article class="panel stat-box">
-            <div class="stat-label">Sold</div>
-            <div class="stat-value" id="soldHomes">--</div>
-            <div class="stat-note">Homes that successfully closed in the selected period.</div>
-          </article>
+      <article class="panel stat-box">
+        <div class="stat-label">This Month Sold</div>
+        <div class="stat-value" id="thisMonthSold">--</div>
+        <div class="stat-note">Homes closed so far this month.</div>
+      </article>
 
-          <article class="panel stat-box">
-            <div class="stat-label">Withdrawn / Expired</div>
-            <div class="stat-value" id="withdrawnExpired">--</div>
-            <div class="stat-note">Listings that left the market without selling.</div>
-          </article>
+      <article class="panel stat-box">
+        <div class="stat-label">This Month Median Price</div>
+        <div class="stat-value" id="thisMonthMedianPrice">--</div>
+        <div class="stat-note">Typical sold price this month so far.</div>
+      </article>
 
-          <article class="panel stat-box">
-            <div class="stat-label">Median Sold Price</div>
-            <div class="stat-value" id="medianSoldPrice">--</div>
-            <div class="stat-note">Typical sold price, less influenced by outliers.</div>
-          </article>
+      <article class="panel stat-box">
+        <div class="stat-label">This Month Median DOM</div>
+        <div class="stat-value" id="thisMonthMedianDom">--</div>
+        <div class="stat-note">Typical days on market this month so far.</div>
+      </article>
+    </div>
+  </div>
+</section>
 
-          <article class="panel stat-box">
-            <div class="stat-label">Average Sold Price</div>
-            <div class="stat-value" id="avgSoldPrice">--</div>
-            <div class="stat-note">The average of all sold prices in the selected period.</div>
-          </article>
+<section class="section-block">
+  <div class="panel">
+    <h2 class="section-title">2026 Annual</h2>
+    <div class="stats-grid stats-grid-4">
+      <article class="panel stat-box">
+        <div class="stat-label">2026 Sold</div>
+        <div class="stat-value" id="y2026Sold">--</div>
+      </article>
 
-          <article class="panel stat-box">
-            <div class="stat-label">Median Sold DOM</div>
-            <div class="stat-value" id="medianDom">--</div>
-            <div class="stat-note">Typical time it took sold homes to go under contract.</div>
-          </article>
+      <article class="panel stat-box">
+        <div class="stat-label">2026 Median Price</div>
+        <div class="stat-value" id="y2026MedianPrice">--</div>
+      </article>
 
-          <article class="panel stat-box">
-            <div class="stat-label">Absorption Rate</div>
-            <div class="stat-value" id="absorptionRate">--</div>
-            <div class="stat-note">How quickly current supply is being absorbed by demand.</div>
-          </article>
+      <article class="panel stat-box">
+        <div class="stat-label">2026 Average Price</div>
+        <div class="stat-value" id="y2026AvgPrice">--</div>
+      </article>
 
-          <article class="panel stat-box">
-            <div class="stat-label">Sell-Through Rate</div>
-            <div class="stat-value" id="sellThroughRate">--</div>
-            <div class="stat-note">How often resolved listings ended in a sale instead of failure.</div>
-          </article>
+      <article class="panel stat-box">
+        <div class="stat-label">2026 Median DOM</div>
+        <div class="stat-value" id="y2026MedianDom">--</div>
+      </article>
+    </div>
+  </div>
+</section>
 
-          <article class="panel stat-box">
-            <div class="stat-label">Failure Rate</div>
-            <div class="stat-value" id="failureRate">--</div>
-            <div class="stat-note">How often resolved listings exited without a successful sale.</div>
-          </article>
-        </div>
-      </section>
+<section class="section-block">
+  <div class="panel">
+    <h2 class="section-title">2025 Annual</h2>
+    <div class="stats-grid stats-grid-4">
+      <article class="panel stat-box">
+        <div class="stat-label">2025 Sold</div>
+        <div class="stat-value" id="y2025Sold">--</div>
+      </article>
 
-      <section class="section-block">
-        <div class="chart-grid">
-          <article class="panel chart-box">
-            <h2>Pricing Trend</h2>
-            <div class="chart-area">
-              <canvas id="priceChart" aria-label="Pricing trend chart"></canvas>
-            </div>
-            <div class="chart-note">
-              This area is ready for an emerald line or bar chart once your data file is connected.
-            </div>
-          </article>
+      <article class="panel stat-box">
+        <div class="stat-label">2025 Median Price</div>
+        <div class="stat-value" id="y2025MedianPrice">--</div>
+      </article>
 
-          <article class="panel chart-box">
-            <h2>Market Pace</h2>
-            <div class="chart-area">
-              <canvas id="paceChart" aria-label="Market pace chart"></canvas>
-            </div>
-            <div class="chart-note">
-              Use this section later for DOM, absorption, or sold-versus-active trend data.
-            </div>
-          </article>
-        </div>
-      </section>
+      <article class="panel stat-box">
+        <div class="stat-label">2025 Average Price</div>
+        <div class="stat-value" id="y2025AvgPrice">--</div>
+      </article>
 
-      <section class="section-block">
-        <div class="explain-grid">
-          <article class="panel explain-box">
-            <h3>How to Read Active Listings</h3>
-            <p>
-              Active listings show the supply still competing for buyer attention. By themselves,
-              they do not say whether a neighborhood is strong or weak. They become more useful
-              when compared with sold volume and time on market.
-            </p>
-          </article>
-
-          <article class="panel explain-box">
-            <h3>How to Read Absorption Rate</h3>
-            <p>
-              Absorption rate helps show how quickly demand is working through current inventory.
-              Higher absorption usually means stronger movement relative to supply. Lower absorption
-              can suggest slower conditions or growing inventory pressure.
-            </p>
-          </article>
-        </div>
-      </section>
+      <article class="panel stat-box">
+        <div class="stat-label">2025 Median DOM</div>
+        <div class="stat-value" id="y2025MedianDom">--</div>
+      </article>
+    </div>
+  </div>
+</section>
     </div>
   </main>
 
