@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kyle Subdivision Data | Manny</title>
+  <meta
+    name="description"
+    content="Subdivision-level housing data for Kyle, Texas. Compare market activity, pricing, speed, and inventory by neighborhood."
+  />
+
+  <style>
+    :root {
+      --emerald: #065f46;
+      --emerald-soft: rgba(6,95,70,.08);
+
+      --bg: #000000;
+      --panel: #000000;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,.72);
+      --border: rgba(255,255,255,.18);
+
+      --maxw: 1120px;
+      --radius: 0px;
+      --shadow: none;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Hedvig Letters Serif", serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    /* =========================
+       KEEP YOUR EXISTING HEADER STYLES
+       If your current site already has these,
+       you can remove duplicates.
+    ========================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: #000;
+      z-index: 9999;
+      border-bottom: 1px solid var(--border);
+      transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .topbar {
+      position: relative;
+      min-height: 90px;
+      padding: 0;
+      transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+    }
+
+    .top-link,
+    .top-id,
+    .logo-wrap,
+    .logo-mini {
+      transition: all 0.25s ease;
+    }
+
+    .logo-wrap {
+      position: absolute;
+      top: -14px;
+      left: -8px;
+      margin: 0;
+      text-align: left;
+      z-index: 2;
+    }
+
+    .top-link {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+    }
+
+    .header-action {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+      text-decoration: none;
+      margin-right: -22px;
+    }
+
+    .header-action:last-child {
+      margin-right: 0;
+    }
+
+    .action-icon {
+      display: block;
+      height: auto;
+      margin: 0;
+      padding: 0;
+    }
+
+    .action-label {
+      margin-top: -8px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+      color: #fff;
+      text-align: center;
+    }
+
+    .connect-btn { width: 90px; }
+    .match-btn { width: 80px; }
+    .data-btn { width: 82px; }
+
+    .top-id {
+      margin-left: auto;
+      padding-top: 8px;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #fff;
+    }
+
+    .logo-mini {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 132px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-mini:hover {
+      opacity: 0.85;
+    }
+
+    .logo-mini img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform: translateX(-15px);
+    }
+
+    .logo-mini-label {
+      position: static;
+      transform: none;
+      margin-top: -18px;
+      margin-left: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: rgba(255,255,255,.8);
+      white-space: nowrap;
+      max-width: none;
+      text-align: left;
+      line-height: 1;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .site-header.shrink .logo-mini-label {
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+    }
+
+    .site-header.shrink .topbar {
+      min-height: 78px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .site-header.shrink .top-link,
+    .site-header.shrink .top-id {
+      opacity: 0;
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(-8px);
+    }
+
+    .site-header.shrink .logo-mini {
+      width: 132px;
+    }
+
+    /* =========================
+       PAGE
+    ========================== */
+    .page-wrap {
+      width: 100%;
+      margin: 0;
+      padding: 190px 20px 32px;
+      background: var(--bg);
+    }
+
+    .content-shell {
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+
+    .page-top-meta {
+      margin-bottom: 24px;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 13px;
+      text-decoration: underline;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .page-updated {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .section-block {
+      margin-bottom: 18px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+    .data-hero {
+      padding: 22px;
+    }
+
+    .data-hero h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.15;
+      color: #fff;
+    }
+
+    .data-hero p {
+      margin: 0;
+      max-width: 760px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* =========================
+       TOOLBAR
+    ========================== */
+    .toolbar-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 18px;
+    }
+
+    .toolbar-box {
+      padding: 18px;
+    }
+
+    .toolbar-label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .toolbar-select {
+      width: 100%;
+      padding: 12px 14px;
+      background: #000;
+      color: #fff;
+      border: 1px solid var(--border);
+      outline: none;
+    }
+
+    .toolbar-select:focus {
+      border-color: var(--emerald);
+      box-shadow: 0 0 0 1px var(--emerald);
+    }
+
+    .toolbar-mini {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       STATS GRID
+    ========================== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .stat-box {
+      padding: 18px;
+      min-height: 170px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      color: #fff;
+      word-break: break-word;
+    }
+
+    .stat-note {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* =========================
+       CHARTS
+    ========================== */
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .chart-box {
+      padding: 18px;
+    }
+
+    .chart-box h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .chart-area {
+      position: relative;
+      width: 100%;
+      min-height: 300px;
+      border: 1px solid var(--border);
+      padding: 12px;
+    }
+
+    .chart-area canvas {
+      width: 100%;
+      height: 260px;
+      display: block;
+    }
+
+    .chart-note {
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* =========================
+       EXPLAINERS
+    ========================== */
+    .explain-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .explain-box {
+      padding: 18px;
+    }
+
+    .explain-box h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .explain-box p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      background: #000;
+      color: #fff;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+    @media (max-width: 900px) {
+      .stats-grid,
+      .chart-grid,
+      .explain-grid,
+      .toolbar-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-wrap {
+        padding: 170px 14px 24px;
+      }
+
+      .data-hero h1 {
+        font-size: 25px;
+      }
+
+      .stat-value {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================
+       KEEP YOUR EXISTING HEADER MARKUP HERE
+       Replace this whole header with your real one
+  ========================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="topbar">
+      <div class="logo-wrap">
+        <a href="/" class="logo-mini">
+          <!-- Replace logo path -->
+          <img src="/kyle-housing-site/images/logo.png" alt="Site logo" />
+          <span class="logo-mini-label">Kyle Housing</span>
+        </a>
+      </div>
+
+      <div class="top-link">
+        <a class="header-action" href="/connect">
+          <span class="action-label">Connect</span>
+        </a>
+        <a class="header-action" href="/matchmaker">
+          <span class="action-label">Matchmaker</span>
+        </a>
+        <a class="header-action" href="/data/">
+          <span class="action-label">Data</span>
+        </a>
+      </div>
+
+      <div class="top-id">
+        Manny<br />
+        Realtor
+      </div>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <div class="content-shell">
+
+      <div class="page-top-meta">
+        <a href="/kyle-housing-site/" class="back-link">&larr; Back to Home</a>
+        <div class="page-updated" id="pageUpdated">Updated monthly</div>
+      </div>
+
+      <section class="section-block">
+        <div class="panel data-hero">
+          <h1>Kyle Subdivision Data</h1>
+          <p>
+            Switch between subdivisions and study pricing, inventory, speed, and market pressure
+            in one place. This page is meant to show the numbers and what they likely mean.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="toolbar-grid">
+          <div class="panel toolbar-box">
+            <label class="toolbar-label" for="subdivisionSelect">Subdivision</label>
+            <select id="subdivisionSelect" class="toolbar-select">
+              <option value="">Choose a subdivision</option>
+            </select>
+          </div>
+
+          <div class="panel toolbar-box">
+            <div class="toolbar-mini" id="subdivisionSummary">
+              Select a subdivision to load its market snapshot.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="stats-grid">
+          <article class="panel stat-box">
+            <div class="stat-label">Active Listings</div>
+            <div class="stat-value" id="activeListings">--</div>
+            <div class="stat-note">Homes currently competing for buyers right now.</div>
+          </article>
+
+          <article class="panel stat-box">
+            <div class="stat-label">Sold</div>
+            <div class="stat-value" id="soldHomes">--</div>
+            <div class="stat-note">Homes that successfully closed in the selected period.</div>
+          </article>
+
+          <article class="panel stat-box">
+            <div class="stat-label">Withdrawn / Expired</div>
+            <div class="stat-value" id="withdrawnExpired">--</div>
+            <div class="stat-note">Listings that left the market without selling.</div>
+          </article>
+
+          <article class="panel stat-box">
+            <div class="stat-label">Median Sold Price</div>
+            <div class="stat-value" id="medianSoldPrice">--</div>
+            <div class="stat-note">Typical sold price, less influenced by outliers.</div>
+          </article>
+
+          <article class="panel stat-box">
+            <div class="stat-label">Average Sold Price</div>
+            <div class="stat-value" id="avgSoldPrice">--</div>
+            <div class="stat-note">The average of all sold prices in the selected period.</div>
+          </article>
+
+          <article class="panel stat-box">
+            <div class="stat-label">Median Sold DOM</div>
+            <div class="stat-value" id="medianDom">--</div>
+            <div class="stat-note">Typical time it took sold homes to go under contract.</div>
+          </article>
+
+          <article class="panel stat-box">
+            <div class="stat-label">Absorption Rate</div>
+            <div class="stat-value" id="absorptionRate">--</div>
+            <div class="stat-note">How quickly current supply is being absorbed by demand.</div>
+          </article>
+
+          <article class="panel stat-box">
+            <div class="stat-label">Sell-Through Rate</div>
+            <div class="stat-value" id="sellThroughRate">--</div>
+            <div class="stat-note">How often resolved listings ended in a sale instead of failure.</div>
+          </article>
+
+          <article class="panel stat-box">
+            <div class="stat-label">Failure Rate</div>
+            <div class="stat-value" id="failureRate">--</div>
+            <div class="stat-note">How often resolved listings exited without a successful sale.</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="chart-grid">
+          <article class="panel chart-box">
+            <h2>Pricing Trend</h2>
+            <div class="chart-area">
+              <canvas id="priceChart" aria-label="Pricing trend chart"></canvas>
+            </div>
+            <div class="chart-note">
+              Emerald should be the only accent used for the line or bars here.
+            </div>
+          </article>
+
+          <article class="panel chart-box">
+            <h2>Market Pace</h2>
+            <div class="chart-area">
+              <canvas id="paceChart" aria-label="Market pace chart"></canvas>
+            </div>
+            <div class="chart-note">
+              Use this area later for DOM, absorption, or sold vs active trend.
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="explain-grid">
+          <article class="panel explain-box">
+            <h3>How to Read Active Listings</h3>
+            <p>
+              Active listings show the supply still competing for buyer attention. On their own,
+              they do not tell you whether a neighborhood is strong or weak. They become more useful
+              when compared against sold volume and days on market.
+            </p>
+          </article>
+
+          <article class="panel explain-box">
+            <h3>How to Read Absorption Rate</h3>
+            <p>
+              Absorption rate helps show how quickly demand is working through current inventory.
+              Higher absorption usually means stronger movement relative to supply. Lower absorption
+              can point to slower conditions or growing inventory pressure.
+            </p>
+          </article>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================
+       KEEP YOUR EXISTING FOOTER MARKUP HERE
+       Replace this whole footer with your real one
+  ========================== -->
+  <footer class="site-footer">
+    <div style="max-width:1120px;margin:0 auto;padding:24px 20px;color:rgba(255,255,255,.72);font-size:14px;">
+      Footer placeholder
+    </div>
+  </footer>
+
+  <script>
+    /* =========================
+       HEADER SHRINK
+    ========================== */
+    (function () {
+      const header = document.getElementById("siteHeader");
+      if (!header) return;
+
+      function onScroll() {
+        if (window.scrollY > 20) {
+          header.classList.add("shrink");
+        } else {
+          header.classList.remove("shrink");
+        }
+      }
+
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    })();
+
+    /* =========================
+       DATA LOADER
+       This expects a JSON file later, for example:
+       /kyle-housing-site/data/subdivision_data_page.json
+    ========================== */
+    (function () {
+      const subdivisionSelect = document.getElementById("subdivisionSelect");
+
+      const els = {
+        summary: document.getElementById("subdivisionSummary"),
+        active: document.getElementById("activeListings"),
+        sold: document.getElementById("soldHomes"),
+        withdrawn: document.getElementById("withdrawnExpired"),
+        medianSoldPrice: document.getElementById("medianSoldPrice"),
+        avgSoldPrice: document.getElementById("avgSoldPrice"),
+        medianDom: document.getElementById("medianDom"),
+        absorptionRate: document.getElementById("absorptionRate"),
+        sellThroughRate: document.getElementById("sellThroughRate"),
+        failureRate: document.getElementById("failureRate")
+      };
+
+      let allData = [];
+
+      function fmtNumber(v) {
+        if (v === null || v === undefined || v === "") return "--";
+        return Number(v).toLocaleString();
+      }
+
+      function fmtMoney(v) {
+        if (v === null || v === undefined || v === "") return "--";
+        return "$" + Number(v).toLocaleString();
+      }
+
+      function fmtPercent(v) {
+        if (v === null || v === undefined || v === "") return "--";
+        return (Number(v) * 100).toFixed(0) + "%";
+      }
+
+      function setEmptyState() {
+        els.summary.textContent = "Select a subdivision to load its market snapshot.";
+        els.active.textContent = "--";
+        els.sold.textContent = "--";
+        els.withdrawn.textContent = "--";
+        els.medianSoldPrice.textContent = "--";
+        els.avgSoldPrice.textContent = "--";
+        els.medianDom.textContent = "--";
+        els.absorptionRate.textContent = "--";
+        els.sellThroughRate.textContent = "--";
+        els.failureRate.textContent = "--";
+      }
+
+      function renderSubdivision(name) {
+        const row = allData.find(item => item.subdivision === name);
+
+        if (!row) {
+          setEmptyState();
+          return;
+        }
+
+        els.summary.textContent = row.summary || (row.subdivision + " market snapshot");
+        els.active.textContent = fmtNumber(row.active);
+        els.sold.textContent = fmtNumber(row.sold);
+        els.withdrawn.textContent = fmtNumber(row.withdrawn_expired);
+        els.medianSoldPrice.textContent = fmtMoney(row.median_sold_price);
+        els.avgSoldPrice.textContent = fmtMoney(row.avg_sold_price);
+        els.medianDom.textContent = fmtNumber(row.median_sold_dom);
+        els.absorptionRate.textContent = fmtPercent(row.absorption_rate);
+        els.sellThroughRate.textContent = fmtPercent(row.sell_through_rate);
+        els.failureRate.textContent = fmtPercent(row.failure_rate);
+      }
+
+      async function loadData() {
+        try {
+          const response = await fetch("/kyle-housing-site/data/subdivision_data_page.json");
+          if (!response.ok) throw new Error("Could not load data file.");
+
+          allData = await response.json();
+
+          const names = [...new Set(allData.map(item => item.subdivision))].sort();
+
+          names.forEach(name => {
+            const option = document.createElement("option");
+            option.value = name;
+            option.textContent = name;
+            subdivisionSelect.appendChild(option);
+          });
+
+          if (names.length) {
+            subdivisionSelect.value = names[0];
+            renderSubdivision(names[0]);
+          } else {
+            setEmptyState();
+          }
+        } catch (error) {
+          console.error(error);
+          els.summary.textContent = "Data file not connected yet.";
+          setEmptyState();
+        }
+      }
+
+      subdivisionSelect.addEventListener("change", function (e) {
+        renderSubdivision(e.target.value);
+      });
+
+      setEmptyState();
+      loadData();
+    })();
+  </script>
+</body>
+</html>
