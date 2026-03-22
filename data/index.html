@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kyle Subdivision Data | Manny</title>
+  <title>Kyle Subdivision Data | Emmanuel "Manny" Camacho</title>
   <meta
     name="description"
     content="Subdivision-level housing data for Kyle, Texas. Compare market activity, pricing, speed, and inventory by neighborhood."
@@ -21,8 +21,6 @@
       --border: rgba(255,255,255,.18);
 
       --maxw: 1120px;
-      --radius: 0px;
-      --shadow: none;
     }
 
     html,
@@ -65,9 +63,7 @@
     }
 
     /* =========================
-       KEEP YOUR EXISTING HEADER STYLES
-       If your current site already has these,
-       you can remove duplicates.
+       REAL HEADER
     ========================== */
     .site-header {
       position: fixed;
@@ -75,9 +71,9 @@
       left: 0;
       right: 0;
       width: 100%;
-      background: #000;
+      background: white;
       z-index: 9999;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 0;
       transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
     }
 
@@ -139,24 +135,34 @@
 
     .action-label {
       margin-top: -8px;
+      font-family: "Hedvig Letters Serif", serif;
       font-size: 12px;
       font-weight: 600;
       line-height: 1;
-      color: #fff;
+      color: #000;
       text-align: center;
     }
 
-    .connect-btn { width: 90px; }
-    .match-btn { width: 80px; }
-    .data-btn { width: 82px; }
+    .connect-btn {
+      width: 90px;
+    }
+
+    .match-btn {
+      width: 80px;
+    }
+
+    .data-btn {
+      width: 82px;
+    }
 
     .top-id {
       margin-left: auto;
       padding-top: 8px;
+      padding-right: 14px;
       text-align: right;
       font-size: 14px;
       line-height: 1.4;
-      color: #fff;
+      color: #000;
     }
 
     .logo-mini {
@@ -186,7 +192,7 @@
       margin-left: 8px;
       font-size: 10px;
       font-weight: 700;
-      color: rgba(255,255,255,.8);
+      color: #333;
       white-space: nowrap;
       max-width: none;
       text-align: left;
@@ -218,46 +224,7 @@
     .site-header.shrink .logo-mini {
       width: 132px;
     }
-.footer-shell {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 32px 20px;
-}
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-}
-
-.footer-col {
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--muted);
-}
-
-.footer-col a {
-  display: block;
-  margin-bottom: 6px;
-  text-decoration: underline;
-  color: var(--muted);
-}
-
-.footer-title {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-  color: #fff;
-}
-
-.footer-bottom {
-  margin-top: 24px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
-  font-size: 12px;
-  color: var(--muted);
-}
     /* =========================
        PAGE
     ========================== */
@@ -297,17 +264,12 @@
     .panel {
       border: 1px solid var(--border);
       background: var(--panel);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      padding: 20px;
     }
 
     /* =========================
        HERO
     ========================== */
-    .data-hero {
-      padding: 22px;
-    }
-
     .data-hero h1 {
       margin: 0 0 8px;
       font-size: 30px;
@@ -331,10 +293,6 @@
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 18px;
-    }
-
-    .toolbar-box {
-      padding: 18px;
     }
 
     .toolbar-label {
@@ -381,7 +339,6 @@
     }
 
     .stat-box {
-      padding: 18px;
       min-height: 170px;
     }
 
@@ -415,10 +372,6 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
-    }
-
-    .chart-box {
-      padding: 18px;
     }
 
     .chart-box h2 {
@@ -458,10 +411,6 @@
       gap: 18px;
     }
 
-    .explain-box {
-      padding: 18px;
-    }
-
     .explain-box h3 {
       margin: 0 0 8px;
       font-size: 17px;
@@ -485,21 +434,116 @@
       color: #fff;
     }
 
+    .footer-shell {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 32px 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .footer-col {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .footer-col a {
+      display: block;
+      margin-bottom: 6px;
+      text-decoration: underline;
+      color: var(--muted);
+    }
+
+    .footer-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .footer-bottom {
+      margin-top: 24px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
     /* =========================
-       RESPONSIVE
+       MOBILE
     ========================== */
     @media (max-width: 900px) {
       .stats-grid,
       .chart-grid,
       .explain-grid,
-      .toolbar-grid {
+      .toolbar-grid,
+      .footer-grid {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 768px) {
+      .topbar {
+        min-height: 140px;
+        padding: 0 10px;
+      }
+
+      .logo-wrap {
+        position: absolute;
+        top: -4px;
+        left: 0;
+        text-align: left;
+      }
+
+      .top-link {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: flex-end;
+        gap: 0;
+      }
+
+      .top-id {
+        position: absolute;
+        top: 8px;
+        right: 6px;
+        text-align: right;
+        font-size: 10px;
+        line-height: 1.2;
+        letter-spacing: 0;
+        max-width: 145px;
+        padding-right: 0;
+      }
+
+      .logo-mini-label {
+        white-space: nowrap;
+        width: auto;
+        text-align: left;
+        left: auto;
+      }
+
       .page-wrap {
-        padding: 170px 14px 24px;
+        padding: 190px 14px 24px;
+      }
+
+      .content-shell {
+        max-width: 100%;
+      }
+
+      .site-header.shrink .topbar {
+        min-height: 86px;
+      }
+
+      .site-header.shrink .logo-mini {
+        width: 110px;
       }
 
       .data-hero h1 {
@@ -513,43 +557,42 @@
   </style>
 </head>
 <body>
-
-  <!-- =========================
-       KEEP YOUR EXISTING HEADER MARKUP HERE
-       Replace this whole header with your real one
-  ========================== -->
   <header class="site-header" id="siteHeader">
     <div class="topbar">
       <div class="logo-wrap">
-        <a href="/" class="logo-mini">
-          <!-- Replace logo path -->
-          <img src="/kyle-housing-site/images/logo.png" alt="Site logo" />
-          <span class="logo-mini-label">Kyle Housing</span>
+        <a href="/kyle-housing-site/" class="logo-mini">
+          <img src="../../images/logo.png" alt="Your Missing Peace" />
+          <span class="logo-mini-label">Your Missing Peace</span>
         </a>
       </div>
 
       <div class="top-link">
-        <a class="header-action" href="/connect">
+        <a href="/kyle-housing-site/match" class="header-action match-action">
+          <img src="../../images/match2.png" alt="Match" class="action-icon match-btn">
+          <span class="action-label">Match</span>
+        </a>
+
+        <a href="/kyle-housing-site/contact" class="header-action connect-action">
+          <img src="../../images/connect2.png" alt="Connect" class="action-icon connect-btn">
           <span class="action-label">Connect</span>
         </a>
-        <a class="header-action" href="/matchmaker">
-          <span class="action-label">Matchmaker</span>
-        </a>
-        <a class="header-action" href="/data/">
+
+        <a href="/kyle-housing-site/data" class="header-action data-action">
+          <img src="../../images/graph.png" alt="Data" class="action-icon data-btn">
           <span class="action-label">Data</span>
         </a>
       </div>
 
       <div class="top-id">
-        Manny<br />
-        Realtor
+        <div>Realtor® in Kyle, TX</div>
+        <div>Emmanuel "Manny" Camacho</div>
+        <div>Dalton Wade Real Estate Group</div>
       </div>
     </div>
   </header>
 
   <main class="page-wrap">
     <div class="content-shell">
-
       <div class="page-top-meta">
         <a href="/kyle-housing-site/" class="back-link">&larr; Back to Home</a>
         <div class="page-updated" id="pageUpdated">Updated monthly</div>
@@ -560,21 +603,22 @@
           <h1>Kyle Subdivision Data</h1>
           <p>
             Switch between subdivisions and study pricing, inventory, speed, and market pressure
-            in one place. This page is meant to show the numbers and what they likely mean.
+            in one place. The goal is not just to show numbers, but to explain what those numbers
+            may actually be saying.
           </p>
         </div>
       </section>
 
       <section class="section-block">
         <div class="toolbar-grid">
-          <div class="panel toolbar-box">
+          <div class="panel">
             <label class="toolbar-label" for="subdivisionSelect">Subdivision</label>
             <select id="subdivisionSelect" class="toolbar-select">
               <option value="">Choose a subdivision</option>
             </select>
           </div>
 
-          <div class="panel toolbar-box">
+          <div class="panel">
             <div class="toolbar-mini" id="subdivisionSummary">
               Select a subdivision to load its market snapshot.
             </div>
@@ -648,7 +692,7 @@
               <canvas id="priceChart" aria-label="Pricing trend chart"></canvas>
             </div>
             <div class="chart-note">
-              Emerald should be the only accent used for the line or bars here.
+              This area is ready for an emerald line or bar chart once your data file is connected.
             </div>
           </article>
 
@@ -658,7 +702,7 @@
               <canvas id="paceChart" aria-label="Market pace chart"></canvas>
             </div>
             <div class="chart-note">
-              Use this area later for DOM, absorption, or sold vs active trend.
+              Use this section later for DOM, absorption, or sold-versus-active trend data.
             </div>
           </article>
         </div>
@@ -669,9 +713,9 @@
           <article class="panel explain-box">
             <h3>How to Read Active Listings</h3>
             <p>
-              Active listings show the supply still competing for buyer attention. On their own,
-              they do not tell you whether a neighborhood is strong or weak. They become more useful
-              when compared against sold volume and days on market.
+              Active listings show the supply still competing for buyer attention. By themselves,
+              they do not say whether a neighborhood is strong or weak. They become more useful
+              when compared with sold volume and time on market.
             </p>
           </article>
 
@@ -680,79 +724,66 @@
             <p>
               Absorption rate helps show how quickly demand is working through current inventory.
               Higher absorption usually means stronger movement relative to supply. Lower absorption
-              can point to slower conditions or growing inventory pressure.
+              can suggest slower conditions or growing inventory pressure.
             </p>
           </article>
         </div>
       </section>
-
     </div>
   </main>
 
-  <!-- =========================
-       KEEP YOUR EXISTING FOOTER MARKUP HERE
-       Replace this whole footer with your real one
-  ========================== -->
   <footer class="site-footer">
-  <div class="footer-shell">
-    <div class="footer-grid">
+    <div class="footer-shell">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-title">Kyle Housing Data</div>
+          <p>
+            Subdivision-level housing data designed to bring clarity to pricing,
+            demand, and market movement in Kyle, Texas.
+          </p>
+        </div>
 
-      <div class="footer-col">
-        <div class="footer-title">Kyle Housing Data</div>
-        <p>
-          Subdivision-level housing data designed to bring clarity to pricing,
-          demand, and market movement in Kyle, Texas.
-        </p>
+        <div class="footer-col">
+          <div class="footer-title">Explore</div>
+          <a href="/kyle-housing-site/">Home</a>
+          <a href="/kyle-housing-site/data/">Data Page</a>
+          <a href="/kyle-housing-site/contact">Connect</a>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-title">About</div>
+          <p>
+            Emmanuel "Manny" Camacho<br />
+            Realtor® in Kyle, TX<br />
+            Dalton Wade Real Estate Group
+          </p>
+        </div>
       </div>
 
-      <div class="footer-col">
-        <div class="footer-title">Explore</div>
-        <a href="/kyle-housing-site/">Home</a>
-        <a href="/kyle-housing-site/data/">Data Page</a>
-        <a href="/kyle-housing-site/connect/">Connect</a>
+      <div class="footer-bottom">
+        <span>© 2026 Kyle Housing Data</span>
       </div>
-
-      <div class="footer-col">
-        <div class="footer-title">About</div>
-        <p>
-          Manny<br/>
-          Realtor
-        </p>
-      </div>
-
     </div>
-
-    <div class="footer-bottom">
-      <span>© 2026 Kyle Housing Data</span>
-    </div>
-  </div>
-</footer>
+  </footer>
 
   <script>
-    /* =========================
-       HEADER SHRINK
-    ========================== */
     (function () {
-      const header = document.getElementById("siteHeader");
-      if (!header) return;
+      const siteHeader = document.getElementById("siteHeader");
+      if (!siteHeader) return;
 
-      function onScroll() {
-        if (window.scrollY > 20) {
-          header.classList.add("shrink");
+      function handleHeaderShrink() {
+        if (window.scrollY > 80) {
+          siteHeader.classList.add("shrink");
         } else {
-          header.classList.remove("shrink");
+          siteHeader.classList.remove("shrink");
         }
       }
 
-      onScroll();
-      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("scroll", handleHeaderShrink, { passive: true });
+      window.addEventListener("load", handleHeaderShrink);
+      handleHeaderShrink();
     })();
 
-    /* =========================
-       DATA LOADER
-       This expects a JSON file later, for example:
-       /kyle-housing-site/data/subdivision_data_page.json
-    ========================== */
     (function () {
       const subdivisionSelect = document.getElementById("subdivisionSelect");
 
@@ -786,8 +817,8 @@
         return (Number(v) * 100).toFixed(0) + "%";
       }
 
-      function setEmptyState() {
-        els.summary.textContent = "Select a subdivision to load its market snapshot.";
+      function setEmptyState(message) {
+        els.summary.textContent = message || "Select a subdivision to load its market snapshot.";
         els.active.textContent = "--";
         els.sold.textContent = "--";
         els.withdrawn.textContent = "--";
@@ -821,7 +852,7 @@
 
       async function loadData() {
         try {
-          const response = await fetch("/kyle-housing-site/data/subdivision_data_page.json");
+          const response = await fetch("subdivision_data_page.json", { cache: "no-store" });
           if (!response.ok) throw new Error("Could not load data file.");
 
           allData = await response.json();
@@ -839,12 +870,11 @@
             subdivisionSelect.value = names[0];
             renderSubdivision(names[0]);
           } else {
-            setEmptyState();
+            setEmptyState("No subdivision data found.");
           }
         } catch (error) {
           console.error(error);
-          els.summary.textContent = "Data file not connected yet.";
-          setEmptyState();
+          setEmptyState("Data file not connected yet.");
         }
       }
 
