@@ -218,7 +218,46 @@
     .site-header.shrink .logo-mini {
       width: 132px;
     }
+.footer-shell {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 32px 20px;
+}
 
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.footer-col {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.footer-col a {
+  display: block;
+  margin-bottom: 6px;
+  text-decoration: underline;
+  color: var(--muted);
+}
+
+.footer-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.footer-bottom {
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+}
     /* =========================
        PAGE
     ========================== */
@@ -655,10 +694,39 @@
        Replace this whole footer with your real one
   ========================== -->
   <footer class="site-footer">
-    <div style="max-width:1120px;margin:0 auto;padding:24px 20px;color:rgba(255,255,255,.72);font-size:14px;">
-      Footer placeholder
+  <div class="footer-shell">
+    <div class="footer-grid">
+
+      <div class="footer-col">
+        <div class="footer-title">Kyle Housing Data</div>
+        <p>
+          Subdivision-level housing data designed to bring clarity to pricing,
+          demand, and market movement in Kyle, Texas.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Explore</div>
+        <a href="/kyle-housing-site/">Home</a>
+        <a href="/kyle-housing-site/data/">Data Page</a>
+        <a href="/kyle-housing-site/connect/">Connect</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">About</div>
+        <p>
+          Manny<br/>
+          Realtor
+        </p>
+      </div>
+
     </div>
-  </footer>
+
+    <div class="footer-bottom">
+      <span>© 2026 Kyle Housing Data</span>
+    </div>
+  </div>
+</footer>
 
   <script>
     /* =========================
