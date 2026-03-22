@@ -6,7 +6,7 @@
   <title>Kyle Subdivision Data | Emmanuel "Manny" Camacho</title>
   <meta
     name="description"
-    content="Subdivision-level housing data for Kyle, Texas. Compare market activity, pricing, speed, and inventory by neighborhood."
+    content="Subdivision-level housing data for Kyle, Texas. Compare market activity, pricing, and annual neighborhood performance."
   />
 
   <style>
@@ -63,7 +63,7 @@
     }
 
     /* =========================
-       REAL HEADER
+       HEADER
     ========================== */
     .site-header {
       position: fixed;
@@ -73,7 +73,7 @@
       width: 100%;
       background: #000;
       z-index: 9999;
-      border-bottom: 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
       transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
     }
 
@@ -143,17 +143,9 @@
       text-align: center;
     }
 
-    .connect-btn {
-      width: 90px;
-    }
-
-    .match-btn {
-      width: 80px;
-    }
-
-    .data-btn {
-      width: 82px;
-    }
+    .connect-btn { width: 90px; }
+    .match-btn { width: 80px; }
+    .data-btn { width: 82px; }
 
     .top-id {
       margin-left: auto;
@@ -224,10 +216,6 @@
     .site-header.shrink .logo-mini {
       width: 132px;
     }
-    .site-header {
-  background: #000;
-  border-bottom: 1px solid rgba(255,255,255,.1);
-}
 
     /* =========================
        PAGE
@@ -334,22 +322,22 @@
     }
 
     /* =========================
-       STATS GRID
+       STATS
     ========================== */
-   .section-title {
-  margin: 0 0 16px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #fff;
-}
+    .section-title {
+      margin: 0 0 16px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
 
-.stats-grid-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
- .stats-grid {
+    .stats-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
+    }
+
+    .stats-grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     .stat-box {
@@ -376,66 +364,6 @@
     .stat-note {
       font-size: 14px;
       line-height: 1.6;
-      color: var(--muted);
-    }
-
-    /* =========================
-       CHARTS
-    ========================== */
-    .chart-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .chart-box h2 {
-      margin: 0 0 14px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .chart-area {
-      position: relative;
-      width: 100%;
-      min-height: 300px;
-      border: 1px solid var(--border);
-      padding: 12px;
-    }
-
-    .chart-area canvas {
-      width: 100%;
-      height: 260px;
-      display: block;
-    }
-
-    .chart-note {
-      margin-top: 10px;
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    /* =========================
-       EXPLAINERS
-    ========================== */
-    .explain-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .explain-box h3 {
-      margin: 0 0 8px;
-      font-size: 17px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .explain-box p {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.7;
       color: var(--muted);
     }
 
@@ -493,17 +421,12 @@
        MOBILE
     ========================== */
     @media (max-width: 900px) {
-      .stats-grid,
-      .chart-grid,
-      .explain-grid,
       .toolbar-grid,
-      .footer-grid {
+      .footer-grid,
+      .stats-grid-4 {
         grid-template-columns: 1fr;
       }
     }
-    .stats-grid-4 {
-  grid-template-columns: 1fr;
-}
 
     @media (max-width: 768px) {
       .topbar {
@@ -619,9 +542,8 @@
         <div class="panel data-hero">
           <h1>Kyle Subdivision Data</h1>
           <p>
-            Switch between subdivisions and study pricing, inventory, speed, and market pressure
-            in one place. The goal is not just to show numbers, but to explain what those numbers
-            may actually be saying.
+            Switch between subdivisions and study pricing, inventory, and annual market movement
+            in one place.
           </p>
         </div>
       </section>
@@ -643,90 +565,90 @@
         </div>
       </section>
 
-     <section class="section-block">
-  <div class="panel">
-    <h2 class="section-title">Current Snapshot</h2>
-    <div class="stats-grid stats-grid-4">
-      <article class="panel stat-box">
-        <div class="stat-label">Active Listings</div>
-        <div class="stat-value" id="activeListings">--</div>
-        <div class="stat-note">Homes currently competing for buyers right now.</div>
-      </article>
+      <section class="section-block">
+        <div class="panel">
+          <h2 class="section-title">Current Snapshot</h2>
+          <div class="stats-grid stats-grid-4">
+            <article class="panel stat-box">
+              <div class="stat-label">Active Listings</div>
+              <div class="stat-value" id="activeListings">--</div>
+              <div class="stat-note">Homes currently competing for buyers right now.</div>
+            </article>
 
-      <article class="panel stat-box">
-        <div class="stat-label">This Month Sold</div>
-        <div class="stat-value" id="thisMonthSold">--</div>
-        <div class="stat-note">Homes closed so far this month.</div>
-      </article>
+            <article class="panel stat-box">
+              <div class="stat-label">This Month Sold</div>
+              <div class="stat-value" id="thisMonthSold">--</div>
+              <div class="stat-note">Homes closed so far this month.</div>
+            </article>
 
-      <article class="panel stat-box">
-        <div class="stat-label">This Month Median Price</div>
-        <div class="stat-value" id="thisMonthMedianPrice">--</div>
-        <div class="stat-note">Typical sold price this month so far.</div>
-      </article>
+            <article class="panel stat-box">
+              <div class="stat-label">This Month Median Price</div>
+              <div class="stat-value" id="thisMonthMedianPrice">--</div>
+              <div class="stat-note">Typical sold price this month so far.</div>
+            </article>
 
-      <article class="panel stat-box">
-        <div class="stat-label">This Month Median DOM</div>
-        <div class="stat-value" id="thisMonthMedianDom">--</div>
-        <div class="stat-note">Typical days on market this month so far.</div>
-      </article>
-    </div>
-  </div>
-</section>
+            <article class="panel stat-box">
+              <div class="stat-label">This Month Median DOM</div>
+              <div class="stat-value" id="thisMonthMedianDom">--</div>
+              <div class="stat-note">Typical days on market this month so far.</div>
+            </article>
+          </div>
+        </div>
+      </section>
 
-<section class="section-block">
-  <div class="panel">
-    <h2 class="section-title">2026 Annual</h2>
-    <div class="stats-grid stats-grid-4">
-      <article class="panel stat-box">
-        <div class="stat-label">2026 Sold</div>
-        <div class="stat-value" id="y2026Sold">--</div>
-      </article>
+      <section class="section-block">
+        <div class="panel">
+          <h2 class="section-title">2026 Annual</h2>
+          <div class="stats-grid stats-grid-4">
+            <article class="panel stat-box">
+              <div class="stat-label">2026 Sold</div>
+              <div class="stat-value" id="y2026Sold">--</div>
+            </article>
 
-      <article class="panel stat-box">
-        <div class="stat-label">2026 Median Price</div>
-        <div class="stat-value" id="y2026MedianPrice">--</div>
-      </article>
+            <article class="panel stat-box">
+              <div class="stat-label">2026 Median Price</div>
+              <div class="stat-value" id="y2026MedianPrice">--</div>
+            </article>
 
-      <article class="panel stat-box">
-        <div class="stat-label">2026 Average Price</div>
-        <div class="stat-value" id="y2026AvgPrice">--</div>
-      </article>
+            <article class="panel stat-box">
+              <div class="stat-label">2026 Average Price</div>
+              <div class="stat-value" id="y2026AvgPrice">--</div>
+            </article>
 
-      <article class="panel stat-box">
-        <div class="stat-label">2026 Median DOM</div>
-        <div class="stat-value" id="y2026MedianDom">--</div>
-      </article>
-    </div>
-  </div>
-</section>
+            <article class="panel stat-box">
+              <div class="stat-label">2026 Median DOM</div>
+              <div class="stat-value" id="y2026MedianDom">--</div>
+            </article>
+          </div>
+        </div>
+      </section>
 
-<section class="section-block">
-  <div class="panel">
-    <h2 class="section-title">2025 Annual</h2>
-    <div class="stats-grid stats-grid-4">
-      <article class="panel stat-box">
-        <div class="stat-label">2025 Sold</div>
-        <div class="stat-value" id="y2025Sold">--</div>
-      </article>
+      <section class="section-block">
+        <div class="panel">
+          <h2 class="section-title">2025 Annual</h2>
+          <div class="stats-grid stats-grid-4">
+            <article class="panel stat-box">
+              <div class="stat-label">2025 Sold</div>
+              <div class="stat-value" id="y2025Sold">--</div>
+            </article>
 
-      <article class="panel stat-box">
-        <div class="stat-label">2025 Median Price</div>
-        <div class="stat-value" id="y2025MedianPrice">--</div>
-      </article>
+            <article class="panel stat-box">
+              <div class="stat-label">2025 Median Price</div>
+              <div class="stat-value" id="y2025MedianPrice">--</div>
+            </article>
 
-      <article class="panel stat-box">
-        <div class="stat-label">2025 Average Price</div>
-        <div class="stat-value" id="y2025AvgPrice">--</div>
-      </article>
+            <article class="panel stat-box">
+              <div class="stat-label">2025 Average Price</div>
+              <div class="stat-value" id="y2025AvgPrice">--</div>
+            </article>
 
-      <article class="panel stat-box">
-        <div class="stat-label">2025 Median DOM</div>
-        <div class="stat-value" id="y2025MedianDom">--</div>
-      </article>
-    </div>
-  </div>
-</section>
+            <article class="panel stat-box">
+              <div class="stat-label">2025 Median DOM</div>
+              <div class="stat-value" id="y2025MedianDom">--</div>
+            </article>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 
@@ -787,15 +709,21 @@
 
       const els = {
         summary: document.getElementById("subdivisionSummary"),
+
         active: document.getElementById("activeListings"),
-        sold: document.getElementById("soldHomes"),
-        withdrawn: document.getElementById("withdrawnExpired"),
-        medianSoldPrice: document.getElementById("medianSoldPrice"),
-        avgSoldPrice: document.getElementById("avgSoldPrice"),
-        medianDom: document.getElementById("medianDom"),
-        absorptionRate: document.getElementById("absorptionRate"),
-        sellThroughRate: document.getElementById("sellThroughRate"),
-        failureRate: document.getElementById("failureRate")
+        thisMonthSold: document.getElementById("thisMonthSold"),
+        thisMonthMedianPrice: document.getElementById("thisMonthMedianPrice"),
+        thisMonthMedianDom: document.getElementById("thisMonthMedianDom"),
+
+        y2026Sold: document.getElementById("y2026Sold"),
+        y2026MedianPrice: document.getElementById("y2026MedianPrice"),
+        y2026AvgPrice: document.getElementById("y2026AvgPrice"),
+        y2026MedianDom: document.getElementById("y2026MedianDom"),
+
+        y2025Sold: document.getElementById("y2025Sold"),
+        y2025MedianPrice: document.getElementById("y2025MedianPrice"),
+        y2025AvgPrice: document.getElementById("y2025AvgPrice"),
+        y2025MedianDom: document.getElementById("y2025MedianDom")
       };
 
       let allData = [];
@@ -810,22 +738,23 @@
         return "$" + Number(v).toLocaleString();
       }
 
-      function fmtPercent(v) {
-        if (v === null || v === undefined || v === "") return "--";
-        return (Number(v) * 100).toFixed(0) + "%";
-      }
-
       function setEmptyState(message) {
         els.summary.textContent = message || "Select a subdivision to load its market snapshot.";
+
         els.active.textContent = "--";
-        els.sold.textContent = "--";
-        els.withdrawn.textContent = "--";
-        els.medianSoldPrice.textContent = "--";
-        els.avgSoldPrice.textContent = "--";
-        els.medianDom.textContent = "--";
-        els.absorptionRate.textContent = "--";
-        els.sellThroughRate.textContent = "--";
-        els.failureRate.textContent = "--";
+        els.thisMonthSold.textContent = "--";
+        els.thisMonthMedianPrice.textContent = "--";
+        els.thisMonthMedianDom.textContent = "--";
+
+        els.y2026Sold.textContent = "--";
+        els.y2026MedianPrice.textContent = "--";
+        els.y2026AvgPrice.textContent = "--";
+        els.y2026MedianDom.textContent = "--";
+
+        els.y2025Sold.textContent = "--";
+        els.y2025MedianPrice.textContent = "--";
+        els.y2025AvgPrice.textContent = "--";
+        els.y2025MedianDom.textContent = "--";
       }
 
       function renderSubdivision(name) {
@@ -836,16 +765,22 @@
           return;
         }
 
-        els.summary.textContent = row.summary || (row.subdivision + " market snapshot");
+        els.summary.textContent = row.summary || (row.subdivision + " annual + current snapshot");
+
         els.active.textContent = fmtNumber(row.active);
-        els.sold.textContent = fmtNumber(row.sold);
-        els.withdrawn.textContent = fmtNumber(row.withdrawn_expired);
-        els.medianSoldPrice.textContent = fmtMoney(row.median_sold_price);
-        els.avgSoldPrice.textContent = fmtMoney(row.avg_sold_price);
-        els.medianDom.textContent = fmtNumber(row.median_sold_dom);
-        els.absorptionRate.textContent = fmtPercent(row.absorption_rate);
-        els.sellThroughRate.textContent = fmtPercent(row.sell_through_rate);
-        els.failureRate.textContent = fmtPercent(row.failure_rate);
+        els.thisMonthSold.textContent = fmtNumber(row.this_month_sold);
+        els.thisMonthMedianPrice.textContent = fmtMoney(row.this_month_median_sold_price);
+        els.thisMonthMedianDom.textContent = fmtNumber(row.this_month_median_dom);
+
+        els.y2026Sold.textContent = fmtNumber(row.y2026_sold);
+        els.y2026MedianPrice.textContent = fmtMoney(row.y2026_median_sold_price);
+        els.y2026AvgPrice.textContent = fmtMoney(row.y2026_avg_sold_price);
+        els.y2026MedianDom.textContent = fmtNumber(row.y2026_median_dom);
+
+        els.y2025Sold.textContent = fmtNumber(row.y2025_sold);
+        els.y2025MedianPrice.textContent = fmtMoney(row.y2025_median_sold_price);
+        els.y2025AvgPrice.textContent = fmtMoney(row.y2025_avg_sold_price);
+        els.y2025MedianDom.textContent = fmtNumber(row.y2025_median_dom);
       }
 
       async function loadData() {
@@ -856,6 +791,8 @@
           allData = await response.json();
 
           const names = [...new Set(allData.map(item => item.subdivision))].sort();
+
+          subdivisionSelect.innerHTML = '<option value="">Choose a subdivision</option>';
 
           names.forEach(name => {
             const option = document.createElement("option");
