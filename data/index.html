@@ -2,1144 +2,168 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kyle Subdivision Data | Emmanuel "Manny" Camacho</title>
-  <meta
-    name="description"
-    content="Subdivision-level housing data for Kyle, Texas. Compare market activity, pricing, and annual neighborhood performance."
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kyle Subdivision Data</title>
 
   <style>
-    :root {
-      --emerald: #065f46;
-      --emerald-soft: rgba(6,95,70,.08);
-
-      --bg: #000000;
-      --panel: #000000;
-      --text: #ffffff;
-      --muted: rgba(255,255,255,.72);
-      --border: rgba(255,255,255,.18);
-
-      --maxw: 1120px;
-    }
-
-    html,
     body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
-
-    body {
-      font-family: "Hedvig Letters Serif", serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-      height: auto;
-    }
-
-    button,
-    input,
-    select,
-    textarea {
-      font: inherit;
-    }
-
-    /* =========================
-       HEADER
-    ========================== */
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
+      font-family: Arial, sans-serif;
       background: #000;
-      z-index: 9999;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-      transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .topbar {
-      position: relative;
-      min-height: 90px;
-      padding: 0;
-      transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
-    }
-
-    .top-link,
-    .top-id,
-    .logo-wrap,
-    .logo-mini {
-      transition: all 0.25s ease;
-    }
-
-    .logo-wrap {
-      position: absolute;
-      top: -14px;
-      left: -8px;
-      margin: 0;
-      text-align: left;
-      z-index: 2;
-    }
-
-    .top-link {
-      position: absolute;
-      bottom: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: flex-end;
-      gap: 0;
-    }
-
-    .header-action {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      margin: 0;
-      padding: 0;
-      line-height: 1;
-      text-decoration: none;
-      margin-right: -22px;
-    }
-
-    .header-action:last-child {
-      margin-right: 0;
-    }
-
-    .action-icon {
-      display: block;
-      height: auto;
-      margin: 0;
-      padding: 0;
-    }
-
-    .action-label {
-      margin-top: -8px;
-      font-family: "Hedvig Letters Serif", serif;
-      font-size: 12px;
-      font-weight: 600;
-      line-height: 1;
       color: #fff;
-      text-align: center;
-    }
-
-    .connect-btn { width: 90px; }
-    .match-btn { width: 80px; }
-    .data-btn { width: 82px; }
-
-    .top-id {
-      margin-left: auto;
-      padding-top: 8px;
-      padding-right: 14px;
-      text-align: right;
-      font-size: 14px;
-      line-height: 1.4;
-      color: #fff;
-    }
-
-    .logo-mini {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-start;
-      width: 132px;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .logo-mini:hover {
-      opacity: 0.85;
-    }
-
-    .logo-mini img {
-      display: block;
-      width: 100%;
-      height: auto;
-      transform: translateX(-15px);
-    }
-
-    .logo-mini-label {
-      position: static;
-      transform: none;
-      margin-top: -18px;
-      margin-left: 8px;
-      font-size: 10px;
-      font-weight: 700;
-      color: rgba(255,255,255,.8);
-      white-space: nowrap;
-      max-width: none;
-      text-align: left;
-      line-height: 1;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .site-header.shrink .logo-mini-label {
-      opacity: 0;
-      transform: translateY(-6px);
-      pointer-events: none;
-    }
-
-    .site-header.shrink .topbar {
-      min-height: 78px;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-
-    .site-header.shrink .top-link,
-    .site-header.shrink .top-id {
-      opacity: 0;
-      pointer-events: none;
-      max-height: 0;
-      overflow: hidden;
-      transform: translateY(-8px);
-    }
-
-    .site-header.shrink .logo-mini {
-      width: 132px;
-    }
-
-    /* =========================
-       PAGE
-    ========================== */
-    .page-wrap {
-      width: 100%;
       margin: 0;
-      padding: 190px 20px 32px;
-      background: var(--bg);
-    }
-
-    .content-shell {
-      max-width: var(--maxw);
-      margin: 0 auto;
-    }
-
-    .page-top-meta {
-      margin-bottom: 24px;
-    }
-
-    .back-link {
-      display: inline-block;
-      font-size: 13px;
-      text-decoration: underline;
-      margin-bottom: 8px;
-      color: #fff;
-    }
-
-    .page-updated {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .section-block {
-      margin-bottom: 18px;
-    }
-
-    .panel {
-      border: 1px solid var(--border);
-      background: var(--panel);
       padding: 20px;
     }
 
-    /* =========================
-       HERO
-    ========================== */
-    .data-hero h1 {
-      margin: 0 0 8px;
-      font-size: 30px;
-      font-weight: 600;
-      line-height: 1.15;
-      color: #fff;
+    select {
+      padding: 10px;
+      margin-bottom: 20px;
+      width: 300px;
     }
 
-    .data-hero p {
-      margin: 0;
-      max-width: 760px;
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
-    /* =========================
-       TOOLBAR
-    ========================== */
-    .toolbar-grid {
+    .grid {
       display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 18px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
     }
 
-    .toolbar-label {
-      display: block;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .toolbar-select {
-      width: 100%;
-      padding: 12px 14px;
-      background: #000;
-      color: #fff;
-      border: 1px solid var(--border);
-      outline: none;
-    }
-
-    .toolbar-select:focus {
-      border-color: var(--emerald);
-      box-shadow: 0 0 0 1px var(--emerald);
-    }
-
-    .toolbar-mini {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100%;
-      color: var(--muted);
-      text-align: center;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    /* =========================
-       STATS
-    ========================== */
-    .section-title {
-      margin: 0 0 16px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .stats-grid {
-      display: grid;
-      gap: 18px;
-    }
-
-    .stats-grid-4 {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .stats-grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .stat-box {
-      min-height: 170px;
-    }
-
-    .stat-label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .stat-value {
-      font-size: 34px;
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 10px;
-      color: #fff;
-      word-break: break-word;
-    }
-
-    .stat-note {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    /* =========================
-       CHARTS
-    ========================== */
-    .chart-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .chart-box h3 {
-      margin: 0 0 14px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .chart-subtext {
-      margin: -4px 0 14px;
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    .chart-area {
-      position: relative;
-      width: 100%;
-      min-height: 300px;
-      border: 1px solid var(--border);
-      padding: 12px;
-    }
-
-    .chart-area canvas {
-      width: 100%;
-      height: 260px;
-      display: block;
-    }
-
-    /* =========================
-       EXPLAINERS
-    ========================== */
-    .explain-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .explain-box h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .explain-box p {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-    .site-footer {
-      border-top: 1px solid var(--border);
-      background: #000;
-      color: #fff;
-    }
-
-    .footer-shell {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 32px 20px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 28px;
-    }
-
-    .footer-col {
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
-    .footer-col a {
-      display: block;
-      margin-bottom: 6px;
-      text-decoration: underline;
-      color: var(--muted);
-    }
-
-    .footer-title {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-      color: #fff;
-    }
-
-    .footer-bottom {
-      margin-top: 24px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* =========================
-       MOBILE
-    ========================== */
-    @media (max-width: 900px) {
-      .toolbar-grid,
-      .footer-grid,
-      .stats-grid-4,
-      .stats-grid-3,
-      .chart-grid,
-      .explain-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .topbar {
-        min-height: 140px;
-        padding: 0 10px;
-      }
-
-      .logo-wrap {
-        position: absolute;
-        top: -4px;
-        left: 0;
-        text-align: left;
-      }
-
-      .top-link {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: flex-end;
-        gap: 0;
-      }
-
-      .top-id {
-        position: absolute;
-        top: 8px;
-        right: 6px;
-        text-align: right;
-        font-size: 10px;
-        line-height: 1.2;
-        letter-spacing: 0;
-        max-width: 145px;
-        padding-right: 0;
-      }
-
-      .logo-mini-label {
-        white-space: nowrap;
-        width: auto;
-        text-align: left;
-        left: auto;
-      }
-
-      .page-wrap {
-        padding: 190px 14px 24px;
-      }
-
-      .content-shell {
-        max-width: 100%;
-      }
-
-      .site-header.shrink .topbar {
-        min-height: 86px;
-      }
-
-      .site-header.shrink .logo-mini {
-        width: 110px;
-      }
-
-      .data-hero h1 {
-        font-size: 25px;
-      }
-
-      .stat-value {
-        font-size: 28px;
-      }
+    canvas {
+      background: #111;
+      padding: 10px;
     }
   </style>
 </head>
+
 <body>
-  <header class="site-header" id="siteHeader">
-    <div class="topbar">
-      <div class="logo-wrap">
-        <a href="/kyle-housing-site/" class="logo-mini">
-          <img src="/kyle-housing-site/images/logo.png" alt="Your Missing Peace" />
-          <span class="logo-mini-label">Your Missing Peace</span>
-        </a>
-      </div>
 
-      <div class="top-link">
-        <a href="/kyle-housing-site/match" class="header-action match-action">
-          <img src="/kyle-housing-site/images/match2.png" alt="Match" class="action-icon match-btn">
-          <span class="action-label">Match</span>
-        </a>
-
-        <a href="/kyle-housing-site/contact" class="header-action connect-action">
-          <img src="/kyle-housing-site/images/connect2.png" alt="Connect" class="action-icon connect-btn">
-          <span class="action-label">Connect</span>
-        </a>
-
-        <a href="/kyle-housing-site/data" class="header-action data-action">
-          <img src="/kyle-housing-site/images/graph.png" alt="Data" class="action-icon data-btn">
-          <span class="action-label">Data</span>
-        </a>
-      </div>
-
-      <div class="top-id">
-        <div>Realtor® in Kyle, TX</div>
-        <div>Emmanuel "Manny" Camacho</div>
-        <div>Dalton Wade Real Estate Group</div>
-      </div>
-    </div>
-  </header>
-
-  <main class="page-wrap">
-    <div class="content-shell">
-      <div class="page-top-meta">
-        <a href="/kyle-housing-site/" class="back-link">&larr; Back to Home</a>
-        <div class="page-updated" id="pageUpdated">Updated monthly</div>
-      </div>
-
-      <section class="section-block">
-        <div class="panel data-hero">
-          <h1>Kyle Subdivision Data</h1>
-          <p>
-            Switch between subdivisions and study pricing, inventory, annual performance,
-            and current market pressure in one place.
-          </p>
-        </div>
-      </section>
-
-      <section class="section-block">
-        <div class="toolbar-grid">
-          <div class="panel">
-            <label class="toolbar-label" for="subdivisionSelect">Subdivision</label>
-            <select id="subdivisionSelect" class="toolbar-select">
-              <option value="">Choose a subdivision</option>
-            </select>
-          </div>
-
-          <div class="panel">
-            <div class="toolbar-mini" id="subdivisionSummary">
-              Select a subdivision to load its market snapshot.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section-block">
-        <div class="panel">
-          <h2 class="section-title">Current Snapshot</h2>
-          <div class="stats-grid stats-grid-4">
-            <article class="panel stat-box">
-              <div class="stat-label">Active Listings</div>
-              <div class="stat-value" id="activeListings">--</div>
-              <div class="stat-note">Homes currently competing for buyers right now.</div>
-            </article>
-
-            <article class="panel stat-box">
-              <div class="stat-label">This Month Sold</div>
-              <div class="stat-value" id="thisMonthSold">--</div>
-              <div class="stat-note">Homes closed so far this month.</div>
-            </article>
-
-            <article class="panel stat-box">
-              <div class="stat-label">This Month Median Price</div>
-              <div class="stat-value" id="thisMonthMedianPrice">--</div>
-              <div class="stat-note">Typical sold price this month so far.</div>
-            </article>
-
-            <article class="panel stat-box">
-              <div class="stat-label">This Month Median DOM</div>
-              <div class="stat-value" id="thisMonthMedianDom">--</div>
-              <div class="stat-note">Typical days on market this month so far.</div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section-block">
-        <div class="panel">
-          <h2 class="section-title">2026 Annual</h2>
-          <div class="stats-grid stats-grid-4">
-            <article class="panel stat-box">
-              <div class="stat-label">2026 Sold</div>
-              <div class="stat-value" id="y2026Sold">--</div>
-            </article>
-
-            <article class="panel stat-box">
-              <div class="stat-label">2026 Median Price</div>
-              <div class="stat-value" id="y2026MedianPrice">--</div>
-            </article>
-
-            <article class="panel stat-box">
-              <div class="stat-label">2026 Average Price</div>
-              <div class="stat-value" id="y2026AvgPrice">--</div>
-            </article>
-
-            <article class="panel stat-box">
-              <div class="stat-label">2026 Median DOM</div>
-              <div class="stat-value" id="y2026MedianDom">--</div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section-block">
-        <div class="panel">
-          <h2 class="section-title">2025 Annual</h2>
-          <div class="stats-grid stats-grid-4">
-            <article class="panel stat-box">
-              <div class="stat-label">2025 Sold</div>
-              <div class="stat-value" id="y2025Sold">--</div>
-            </article>
-
-            <article class="panel stat-box">
-              <div class="stat-label">2025 Median Price</div>
-              <div class="stat-value" id="y2025MedianPrice">--</div>
-            </article>
-
-            <article class="panel stat-box">
-              <div class="stat-label">2025 Average Price</div>
-              <div class="stat-value" id="y2025AvgPrice">--</div>
-            </article>
-
-            <article class="panel stat-box">
-              <div class="stat-label">2025 Median DOM</div>
-              <div class="stat-value" id="y2025MedianDom">--</div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section-block">
-        <div class="chart-grid">
-          <article class="panel chart-box">
-            <h3>Annual Price Comparison</h3>
-            <p class="chart-subtext">
-              Compare 2025 and 2026 median and average sold prices for the selected subdivision.
-            </p>
-            <div class="chart-area">
-              <canvas id="annualPriceChart"></canvas>
-            </div>
-          </article>
-
-          <article class="panel chart-box">
-            <h3>Annual Sales &amp; DOM</h3>
-            <p class="chart-subtext">
-              Compare annual sold volume and median days on market across 2025 and 2026.
-            </p>
-            <div class="chart-area">
-              <canvas id="annualVolumeDomChart"></canvas>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section-block">
-        <div class="chart-grid">
-          <article class="panel chart-box">
-            <h3>Current Month Pressure</h3>
-            <p class="chart-subtext">
-              This month’s absorption, sell-through, failure rate, and withdrawn / expired count.
-            </p>
-            <div class="chart-area">
-              <canvas id="currentPressureChart"></canvas>
-            </div>
-          </article>
-
-          <article class="panel explain-box">
-            <h3>What These Charts Mean</h3>
-            <p>
-              The annual charts help you see whether pricing, volume, and pace are changing year over year.
-              The current pressure chart helps show whether the subdivision is converting activity into closings
-              or losing listings along the way. Higher sell-through and absorption tend to reflect stronger movement,
-              while higher failure or a rising withdrawn count can suggest friction.
-            </p>
-          </article>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-shell">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <div class="footer-title">Kyle Housing Data</div>
-          <p>
-            Subdivision-level housing data designed to bring clarity to pricing,
-            demand, and market movement in Kyle, Texas.
-          </p>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-title">Explore</div>
-          <a href="/kyle-housing-site/">Home</a>
-          <a href="/kyle-housing-site/data/">Data Page</a>
-          <a href="/kyle-housing-site/contact">Connect</a>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-title">About</div>
-          <p>
-            Emmanuel "Manny" Camacho<br />
-            Realtor® in Kyle, TX<br />
-            Dalton Wade Real Estate Group
-          </p>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <span>© 2026 Kyle Housing Data</span>
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <script>
-    (function () {
-      const siteHeader = document.getElementById("siteHeader");
-      if (!siteHeader) return;
-
-      function handleHeaderShrink() {
-        if (window.scrollY > 80) {
-          siteHeader.classList.add("shrink");
-        } else {
-          siteHeader.classList.remove("shrink");
-        }
-      }
-
-      window.addEventListener("scroll", handleHeaderShrink, { passive: true });
-      window.addEventListener("load", handleHeaderShrink);
-      handleHeaderShrink();
-    })();
-
-    (function () {
-      const subdivisionSelect = document.getElementById("subdivisionSelect");
-
-      const els = {
-        summary: document.getElementById("subdivisionSummary"),
-
-        active: document.getElementById("activeListings"),
-        thisMonthSold: document.getElementById("thisMonthSold"),
-        thisMonthMedianPrice: document.getElementById("thisMonthMedianPrice"),
-        thisMonthMedianDom: document.getElementById("thisMonthMedianDom"),
-
-        y2026Sold: document.getElementById("y2026Sold"),
-        y2026MedianPrice: document.getElementById("y2026MedianPrice"),
-        y2026AvgPrice: document.getElementById("y2026AvgPrice"),
-        y2026MedianDom: document.getElementById("y2026MedianDom"),
-
-        y2025Sold: document.getElementById("y2025Sold"),
-        y2025MedianPrice: document.getElementById("y2025MedianPrice"),
-        y2025AvgPrice: document.getElementById("y2025AvgPrice"),
-        y2025MedianDom: document.getElementById("y2025MedianDom")
-      };
-
-      let allData = [];
-      let annualPriceChart = null;
-      let annualVolumeDomChart = null;
-      let currentPressureChart = null;
-
-      const chartTextColor = "rgba(255,255,255,0.75)";
-      const chartGridColor = "rgba(255,255,255,0.12)";
-      const emerald = "#065f46";
-      const emeraldSoft = "rgba(6,95,70,0.28)";
-
-      function fmtNumber(v) {
-        if (v === null || v === undefined || v === "") return "--";
-        return Number(v).toLocaleString();
-      }
-
-      function fmtMoney(v) {
-        if (v === null || v === undefined || v === "") return "--";
-        return "$" + Number(v).toLocaleString();
-      }
-
-      function setEmptyState(message) {
-        els.summary.textContent = message || "Select a subdivision to load its market snapshot.";
-
-        els.active.textContent = "--";
-        els.thisMonthSold.textContent = "--";
-        els.thisMonthMedianPrice.textContent = "--";
-        els.thisMonthMedianDom.textContent = "--";
-
-        els.y2026Sold.textContent = "--";
-        els.y2026MedianPrice.textContent = "--";
-        els.y2026AvgPrice.textContent = "--";
-        els.y2026MedianDom.textContent = "--";
-
-        els.y2025Sold.textContent = "--";
-        els.y2025MedianPrice.textContent = "--";
-        els.y2025AvgPrice.textContent = "--";
-        els.y2025MedianDom.textContent = "--";
-      }
-
-      function destroyCharts() {
-        if (annualPriceChart) {
-          annualPriceChart.destroy();
-          annualPriceChart = null;
-        }
-        if (annualVolumeDomChart) {
-          annualVolumeDomChart.destroy();
-          annualVolumeDomChart = null;
-        }
-        if (currentPressureChart) {
-          currentPressureChart.destroy();
-          currentPressureChart = null;
-        }
-      }
-
-      function chartOptionsBase() {
-        return {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              labels: {
-                color: chartTextColor
-              }
-            }
-          },
-          scales: {
-            x: {
-              ticks: {
-                color: chartTextColor
-              },
-              grid: {
-                color: chartGridColor
-              }
-            },
-            y: {
-              ticks: {
-                color: chartTextColor
-              },
-              grid: {
-                color: chartGridColor
-              }
-            }
-          }
-        };
-      }
-
-      function renderCharts(row) {
-        destroyCharts();
-
-        const annualPriceCtx = document.getElementById("annualPriceChart");
-        const annualVolumeDomCtx = document.getElementById("annualVolumeDomChart");
-        const currentPressureCtx = document.getElementById("currentPressureChart");
-
-        annualPriceChart = new Chart(annualPriceCtx, {
-          type: "bar",
-          data: {
-            labels: ["2025 Median", "2025 Average", "2026 Median", "2026 Average"],
-            datasets: [
-              {
-                label: "Price",
-                data: [
-                  row.y2025_median_sold_price ?? null,
-                  row.y2025_avg_sold_price ?? null,
-                  row.y2026_median_sold_price ?? null,
-                  row.y2026_avg_sold_price ?? null
-                ],
-                backgroundColor: emeraldSoft,
-                borderColor: emerald,
-                borderWidth: 2
-              }
-            ]
-          },
-          options: {
-            ...chartOptionsBase(),
-            plugins: {
-              legend: {
-                display: false
-              }
-            }
-          }
-        });
-
-        annualVolumeDomChart = new Chart(annualVolumeDomCtx, {
-          data: {
-            labels: ["2025", "2026"],
-            datasets: [
-              {
-                type: "bar",
-                label: "Sold",
-                data: [
-                  row.y2025_sold ?? null,
-                  row.y2026_sold ?? null
-                ],
-                backgroundColor: emeraldSoft,
-                borderColor: emerald,
-                borderWidth: 2,
-                yAxisID: "y"
-              },
-              {
-                type: "line",
-                label: "Median DOM",
-                data: [
-                  row.y2025_median_dom ?? null,
-                  row.y2026_median_dom ?? null
-                ],
-                borderColor: emerald,
-                backgroundColor: emerald,
-                borderWidth: 2,
-                tension: 0.25,
-                pointRadius: 4,
-                pointHoverRadius: 4,
-                yAxisID: "y1"
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                labels: {
-                  color: chartTextColor
-                }
-              }
-            },
-            scales: {
-              x: {
-                ticks: {
-                  color: chartTextColor
-                },
-                grid: {
-                  color: chartGridColor
-                }
-              },
-              y: {
-                position: "left",
-                ticks: {
-                  color: chartTextColor
-                },
-                grid: {
-                  color: chartGridColor
-                }
-              },
-              y1: {
-                position: "right",
-                ticks: {
-                  color: chartTextColor
-                },
-                grid: {
-                  drawOnChartArea: false
-                }
-              }
-            }
-          }
-        });
-
-        currentPressureChart = new Chart(currentPressureCtx, {
-          type: "bar",
-          data: {
-            labels: ["Absorption", "Sell-Through", "Failure", "Withdrawn/Expired"],
-            datasets: [
-              {
-                label: "Current Month",
-                data: [
-                  row.this_month_absorption_rate != null ? Number(row.this_month_absorption_rate) * 100 : null,
-                  row.this_month_sell_through_rate != null ? Number(row.this_month_sell_through_rate) * 100 : null,
-                  row.this_month_failure_rate != null ? Number(row.this_month_failure_rate) * 100 : null,
-                  row.this_month_withdrawn_expired ?? null
-                ],
-                backgroundColor: emeraldSoft,
-                borderColor: emerald,
-                borderWidth: 2
-              }
-            ]
-          },
-          options: {
-            ...chartOptionsBase(),
-            plugins: {
-              legend: {
-                display: false
-              }
-            }
-          }
-        });
-      }
-
-      function renderSubdivision(name) {
-        const row = allData.find(item => item.subdivision === name);
-
-        if (!row) {
-          setEmptyState();
-          destroyCharts();
-          return;
-        }
-
-        els.summary.textContent = row.summary || (row.subdivision + " annual + current snapshot");
-
-        els.active.textContent = fmtNumber(row.active);
-        els.thisMonthSold.textContent = fmtNumber(row.this_month_sold);
-        els.thisMonthMedianPrice.textContent = fmtMoney(row.this_month_median_sold_price);
-        els.thisMonthMedianDom.textContent = fmtNumber(row.this_month_median_dom);
-
-        els.y2026Sold.textContent = fmtNumber(row.y2026_sold);
-        els.y2026MedianPrice.textContent = fmtMoney(row.y2026_median_sold_price);
-        els.y2026AvgPrice.textContent = fmtMoney(row.y2026_avg_sold_price);
-        els.y2026MedianDom.textContent = fmtNumber(row.y2026_median_dom);
-
-        els.y2025Sold.textContent = fmtNumber(row.y2025_sold);
-        els.y2025MedianPrice.textContent = fmtMoney(row.y2025_median_sold_price);
-        els.y2025AvgPrice.textContent = fmtMoney(row.y2025_avg_sold_price);
-        els.y2025MedianDom.textContent = fmtNumber(row.y2025_median_dom);
-
-        renderCharts(row);
-      }
-
-      async function loadData() {
-        try {
-          const response = await fetch("subdivision_dashboard.json", { cache: "no-store" });
-          if (!response.ok) throw new Error("Could not load data file.");
-
-          allData = await response.json();
-
-          const normalize = name => name.replace(/PHASE.*|PH.*|SEC.*|UNIT.*|\d+$/gi, '').trim();
-
-const names = [...new Set(allData.map(item => normalize(item.subdivision)))].sort();
-
-          subdivisionSelect.innerHTML = '<option value="">Choose a subdivision</option>';
-
-          names.forEach(name => {
-            const option = document.createElement("option");
-            option.value = name;
-            option.textContent = name;
-            subdivisionSelect.appendChild(option);
-          });
-
-          if (names.length) {
-            subdivisionSelect.value = names[0];
-            renderSubdivision(names[0]);
-          } else {
-            setEmptyState("No subdivision data found.");
-            destroyCharts();
-          }
-        } catch (error) {
-          console.error(error);
-          setEmptyState("Data file not connected yet.");
-          destroyCharts();
-        }
-      }
-
-      subdivisionSelect.addEventListener("change", function (e) {
-        renderSubdivision(e.target.value);
-      });
-
-      setEmptyState();
-      loadData();
-    })();
-  </script>
+<h1>Kyle Subdivision Data</h1>
+
+<select id="subdivisionSelect">
+  <option value="">Choose a subdivision</option>
+</select>
+
+<div id="summary"></div>
+
+<div class="grid">
+  <canvas id="priceChart"></canvas>
+  <canvas id="volumeChart"></canvas>
+  <canvas id="failureChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const subdivisionSelect = document.getElementById("subdivisionSelect");
+const summary = document.getElementById("summary");
+
+let allData = [];
+let priceChart, volumeChart, failureChart;
+
+function destroyCharts() {
+  if (priceChart) priceChart.destroy();
+  if (volumeChart) volumeChart.destroy();
+  if (failureChart) failureChart.destroy();
+}
+
+async function loadData() {
+  try {
+    const response = await fetch("subdivision_dashboard.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Data not found");
+
+    allData = await response.json();
+
+    const names = [...new Set(allData.map(x => x.subdivision))].sort();
+
+    subdivisionSelect.innerHTML = '<option value="">Choose a subdivision</option>';
+
+    names.forEach(name => {
+      const opt = document.createElement("option");
+      opt.value = name;
+      opt.textContent = name;
+      subdivisionSelect.appendChild(opt);
+    });
+
+    if (names.length) {
+      subdivisionSelect.value = names[0];
+      renderSubdivision(names[0]);
+    }
+
+  } catch (err) {
+    console.error(err);
+    summary.textContent = "Error loading data.";
+  }
+}
+
+function renderSubdivision(name) {
+  const row = allData.find(x => x.subdivision === name);
+
+  if (!row || !row.months) {
+    summary.textContent = "No data.";
+    destroyCharts();
+    return;
+  }
+
+  const months = row.months;
+
+  const labels = months.map(m => m.month);
+  const prices = months.map(m => m.median_price);
+  const sold = months.map(m => m.sold);
+  const failure = months.map(m => (m.failure_rate || 0) * 100);
+
+  summary.textContent = name;
+
+  destroyCharts();
+
+  // PRICE
+  priceChart = new Chart(document.getElementById("priceChart"), {
+    type: "line",
+    data: {
+      labels,
+      datasets: [{
+        label: "Median Price",
+        data: prices,
+        borderColor: "#00ff88",
+        tension: 0.3
+      }]
+    }
+  });
+
+  // SOLD
+  volumeChart = new Chart(document.getElementById("volumeChart"), {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        label: "Sold",
+        data: sold,
+        backgroundColor: "#00ff88"
+      }]
+    }
+  });
+
+  // FAILURE
+  failureChart = new Chart(document.getElementById("failureChart"), {
+    type: "line",
+    data: {
+      labels,
+      datasets: [{
+        label: "Failure %",
+        data: failure,
+        borderColor: "#ff4444",
+        tension: 0.3
+      }]
+    }
+  });
+}
+
+/* ===== EVENT LISTENER (CORRECT PLACE) ===== */
+subdivisionSelect.addEventListener("change", function (e) {
+  renderSubdivision(e.target.value);
+});
+
+/* ===== RUN ===== */
+loadData();
+
+</script>
 
 </body>
 </html>
