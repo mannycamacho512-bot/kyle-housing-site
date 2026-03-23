@@ -374,6 +374,25 @@
       height: 280px;
       display: block;
     }
+    .chart-area-xl {
+  min-height: 480px;
+}
+
+.chart-area-xl canvas {
+  height: 430px !important;
+}
+
+.chart-area-sm {
+  min-height: 220px;
+}
+
+.chart-area-sm canvas {
+  height: 180px !important;
+}
+
+.chart-grid-stack {
+  grid-template-columns: 1fr;
+}
 
     .site-footer {
       border-top: 1px solid var(--border);
@@ -595,64 +614,116 @@
       </section>
 
       <section class="section-block">
-        <div class="chart-grid">
-          <article class="panel chart-box">
-            <h3>Median Price Trend</h3>
-            <p class="chart-subtext">Monthly median sold price history.</p>
-            <div class="chart-area">
-              <canvas id="priceTrendChart"></canvas>
-            </div>
-          </article>
+  <div class="panel">
+    <h2 class="section-title">Signal Strip</h2>
+    <p class="chart-subtext" id="signalStripExplain">
+      A quick read on movement, friction, and failed-listing pressure in the latest month.
+    </p>
+    <div class="stats-grid stats-grid-6">
+      <article class="panel stat-box">
+        <div class="stat-label">Active Now</div>
+        <div class="stat-value" id="activeListings">--</div>
+        <div class="stat-note">Current competing inventory in the subdivision.</div>
+      </article>
 
-          <article class="panel chart-box">
-            <h3>Sold vs Active</h3>
-            <p class="chart-subtext">Monthly sales versus current/period inventory counts.</p>
-            <div class="chart-area">
-              <canvas id="soldActiveChart"></canvas>
-            </div>
-          </article>
-        </div>
-      </section>
+      <article class="panel stat-box">
+        <div class="stat-label">Latest Sold</div>
+        <div class="stat-value" id="latestSold">--</div>
+        <div class="stat-note">Closed sales in the latest month on record.</div>
+      </article>
 
-      <section class="section-block">
-        <div class="chart-grid">
-          <article class="panel chart-box">
-            <h3>Sell-Through vs Failure</h3>
-            <p class="chart-subtext">Monthly conversion quality and failed outcome pressure.</p>
-            <div class="chart-area">
-              <canvas id="conversionChart"></canvas>
-            </div>
-          </article>
+      <article class="panel stat-box">
+        <div class="stat-label">Latest Median Price</div>
+        <div class="stat-value" id="latestMedianPrice">--</div>
+        <div class="stat-note">Middle sold price for the latest month.</div>
+      </article>
 
-          <article class="panel chart-box">
-            <h3>DOM vs Withdrawn / Expired</h3>
-            <p class="chart-subtext">Time to move versus listing fallout.</p>
-            <div class="chart-area">
-              <canvas id="domWithdrawnChart"></canvas>
-            </div>
-          </article>
-        </div>
-      </section>
+      <article class="panel stat-box">
+        <div class="stat-label">Pain Index</div>
+        <div class="stat-value" id="painIndex">--</div>
+        <div class="stat-note">Higher means more friction: slower DOM and/or more fallout pressure.</div>
+      </article>
 
-      <section class="section-block">
-        <div class="chart-grid">
-          <article class="panel chart-box">
-            <h3>Absorption Rate</h3>
-            <p class="chart-subtext">Monthly absorption across the full history.</p>
-            <div class="chart-area">
-              <canvas id="absorptionChart"></canvas>
-            </div>
-          </article>
+      <article class="panel stat-box">
+        <div class="stat-label">Liquidity Index</div>
+        <div class="stat-value" id="liquidityIndex">--</div>
+        <div class="stat-note">Higher means listings are resolving into sales more easily.</div>
+      </article>
 
-          <article class="panel chart-box">
-            <h3>Average Price Trend</h3>
-            <p class="chart-subtext">Monthly average sold price history.</p>
-            <div class="chart-area">
-              <canvas id="avgPriceChart"></canvas>
-            </div>
-          </article>
-        </div>
-      </section>
+      <article class="panel stat-box">
+        <div class="stat-label">Failure Risk</div>
+        <div class="stat-value" id="failureRisk">--</div>
+        <div class="stat-note">Share of resolved listings that failed instead of selling.</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section-block">
+  <article class="panel chart-box">
+    <h3>Median Price Trend</h3>
+    <p class="chart-subtext">
+      Main trend chart. Read this like a neighborhood tape: direction, volatility, and momentum in sold prices.
+    </p>
+    <div class="chart-area chart-area-xl">
+      <canvas id="priceTrendChart"></canvas>
+    </div>
+  </article>
+</section>
+
+<section class="section-block">
+  <div class="chart-grid chart-grid-stack">
+    <article class="panel chart-box">
+      <h3>Average Price Trend</h3>
+      <p class="chart-subtext">Secondary price panel under the median trend.</p>
+      <div class="chart-area chart-area-sm">
+        <canvas id="avgPriceChart"></canvas>
+      </div>
+    </article>
+
+    <article class="panel chart-box">
+      <h3>Absorption Rate</h3>
+      <p class="chart-subtext">How much of competing inventory is being absorbed each month.</p>
+      <div class="chart-area chart-area-sm">
+        <canvas id="absorptionChart"></canvas>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section-block">
+  <div class="chart-grid">
+    <article class="panel chart-box">
+      <h3>DOM vs Withdrawn / Expired</h3>
+      <p class="chart-subtext">Median days on market against failed listing outcomes.</p>
+      <div class="chart-area">
+        <canvas id="domWithdrawnChart"></canvas>
+      </div>
+    </article>
+
+    <article class="panel chart-box">
+      <h3>Sell-Through vs Failure</h3>
+      <p class="chart-subtext">Whether resolved listings are converting into closings or breaking down.</p>
+      <div class="chart-area">
+        <canvas id="conversionChart"></canvas>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section-block">
+  <div class="chart-grid">
+    <article class="panel chart-box">
+      <h3>Sold vs Listings</h3>
+      <p class="chart-subtext" id="soldListingsSubtext">
+        Needs monthly new-listings data from export. Current JSON does not include that field.
+      </p>
+      <div class="chart-area">
+        <canvas id="soldActiveChart"></canvas>
+      </div>
+    </article>
+  </div>
+</section>
     </div>
   </main>
 
@@ -763,254 +834,136 @@
         charts = {};
       }
 
-      function baseOptions() {
-        return {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              labels: { color: chartTextColor }
-            }
-          },
-          scales: {
-            x: {
-              ticks: { color: chartTextColor },
-              grid: { color: chartGridColor }
-            },
-            y: {
-              ticks: { color: chartTextColor },
-              grid: { color: chartGridColor }
-            }
-          }
-        };
+      const crosshairPlugin = {
+  id: "crosshairLine",
+  afterDatasetsDraw(chart) {
+    const { ctx, tooltip, chartArea } = chart;
+    if (!tooltip || !tooltip._active || !tooltip._active.length) return;
+
+    const x = tooltip._active[0].element.x;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x, chartArea.top);
+    ctx.lineTo(x, chartArea.bottom);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(255,255,255,0.28)";
+    ctx.stroke();
+    ctx.restore();
+  }
+};
+
+Chart.register(crosshairPlugin);
+
+function moneyCompact(value) {
+  if (value === null || value === undefined) return "--";
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+    notation: "compact"
+  }).format(value);
+}
+
+function pct1(value) {
+  if (value === null || value === undefined) return "--";
+  return Number(value).toFixed(1) + "%";
+}
+
+function commonInteractionOptions() {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: {
+      mode: "index",
+      intersect: false
+    },
+    plugins: {
+      legend: {
+        labels: { color: chartTextColor }
+      },
+      tooltip: {
+        backgroundColor: "#111",
+        borderColor: "rgba(255,255,255,0.15)",
+        borderWidth: 1,
+        titleColor: "#fff",
+        bodyColor: "#fff"
       }
-
-      function dualAxisOptions() {
-        return {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              labels: { color: chartTextColor }
-            }
-          },
-          scales: {
-            x: {
-              ticks: { color: chartTextColor },
-              grid: { color: chartGridColor }
-            },
-            y: {
-              position: "left",
-              ticks: { color: chartTextColor },
-              grid: { color: chartGridColor }
-            },
-            y1: {
-              position: "right",
-              ticks: { color: chartTextColor },
-              grid: { drawOnChartArea: false }
-            }
-          }
-        };
+    },
+    scales: {
+      x: {
+        ticks: { color: chartTextColor, maxRotation: 0, autoSkip: true, maxTicksLimit: 10 },
+        grid: { color: chartGridColor }
+      },
+      y: {
+        ticks: { color: chartTextColor },
+        grid: { color: chartGridColor }
       }
+    }
+  };
+}
 
-      function renderSubdivision(name) {
-        const row = allData.find(item => item.subdivision === name);
+function priceOptions() {
+  const opts = commonInteractionOptions();
+  opts.plugins.legend.display = false;
+  opts.scales.y.ticks.callback = (v) => moneyCompact(v);
+  return opts;
+}
 
-        if (!row || !row.months || !row.months.length) {
-          setEmptyState();
-          destroyCharts();
-          return;
-        }
+function percentOptions() {
+  const opts = commonInteractionOptions();
+  opts.scales.y.ticks.callback = (v) => v + "%";
+  return opts;
+}
 
-        const months = row.months;
-        const latest = months[months.length - 1];
-
-        els.summary.textContent = row.summary || row.subdivision;
-        els.active.textContent = fmtNumber(row.active);
-        els.latestSold.textContent = fmtNumber(latest.sold);
-        els.latestMedianPrice.textContent = fmtMoney(latest.median_price);
-        els.painIndex.textContent = fmtPercentWhole(row.pain_index);
-        els.liquidityIndex.textContent = fmtPercentWhole(row.liquidity_index);
-        els.failureRisk.textContent = fmtPercentWhole(row.failure_risk);
-
-        const labels = months.map(m => m.month);
-        const medianPrices = months.map(m => m.median_price);
-        const avgPrices = months.map(m => m.avg_price);
-        const sold = months.map(m => m.sold);
-        const active = months.map(m => m.active);
-        const sellThrough = months.map(m => m.sell_through_rate != null ? m.sell_through_rate * 100 : null);
-        const failure = months.map(m => m.failure_rate != null ? m.failure_rate * 100 : null);
-        const dom = months.map(m => m.median_dom);
-        const withdrawn = months.map(m => m.withdrawn_expired);
-        const absorption = months.map(m => m.absorption_rate != null ? m.absorption_rate * 100 : null);
-
-        destroyCharts();
-
-        charts.priceTrendChart = new Chart(document.getElementById("priceTrendChart"), {
-          type: "line",
-          data: {
-            labels,
-            datasets: [{
-              label: "Median Price",
-              data: medianPrices,
-              borderColor: emerald,
-              backgroundColor: emeraldSoft,
-              tension: 0.22,
-              pointRadius: 2
-            }]
-          },
-          options: baseOptions()
-        });
-
-        charts.soldActiveChart = new Chart(document.getElementById("soldActiveChart"), {
-          data: {
-            labels,
-            datasets: [
-              {
-                type: "bar",
-                label: "Sold",
-                data: sold,
-                backgroundColor: emeraldSoft,
-                borderColor: emerald,
-                borderWidth: 2
-              },
-              {
-                type: "line",
-                label: "Active",
-                data: active,
-                borderColor: "#ffffff",
-                borderWidth: 2,
-                tension: 0.22,
-                pointRadius: 2
-              }
-            ]
-          },
-          options: baseOptions()
-        });
-
-        charts.conversionChart = new Chart(document.getElementById("conversionChart"), {
-          type: "line",
-          data: {
-            labels,
-            datasets: [
-              {
-                label: "Sell-Through %",
-                data: sellThrough,
-                borderColor: emerald,
-                tension: 0.22,
-                pointRadius: 2
-              },
-              {
-                label: "Failure %",
-                data: failure,
-                borderColor: "#ffffff",
-                tension: 0.22,
-                pointRadius: 2
-              }
-            ]
-          },
-          options: baseOptions()
-        });
-
-        charts.domWithdrawnChart = new Chart(document.getElementById("domWithdrawnChart"), {
-          data: {
-            labels,
-            datasets: [
-              {
-                type: "line",
-                label: "Median DOM",
-                data: dom,
-                borderColor: emerald,
-                borderWidth: 2,
-                tension: 0.22,
-                yAxisID: "y"
-              },
-              {
-                type: "bar",
-                label: "Withdrawn / Expired",
-                data: withdrawn,
-                backgroundColor: "rgba(255,255,255,0.18)",
-                borderColor: "#ffffff",
-                borderWidth: 1,
-                yAxisID: "y1"
-              }
-            ]
-          },
-          options: dualAxisOptions()
-        });
-
-        charts.absorptionChart = new Chart(document.getElementById("absorptionChart"), {
-          type: "line",
-          data: {
-            labels,
-            datasets: [{
-              label: "Absorption %",
-              data: absorption,
-              borderColor: emerald,
-              backgroundColor: emeraldSoft,
-              tension: 0.22,
-              pointRadius: 2
-            }]
-          },
-          options: baseOptions()
-        });
-
-        charts.avgPriceChart = new Chart(document.getElementById("avgPriceChart"), {
-          type: "line",
-          data: {
-            labels,
-            datasets: [{
-              label: "Average Price",
-              data: avgPrices,
-              borderColor: "#ffffff",
-              backgroundColor: "rgba(255,255,255,0.08)",
-              tension: 0.22,
-              pointRadius: 2
-            }]
-          },
-          options: baseOptions()
-        });
+function dualAxisOptions() {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: {
+      mode: "index",
+      intersect: false
+    },
+    plugins: {
+      legend: {
+        labels: { color: chartTextColor }
+      },
+      tooltip: {
+        backgroundColor: "#111",
+        borderColor: "rgba(255,255,255,0.15)",
+        borderWidth: 1,
+        titleColor: "#fff",
+        bodyColor: "#fff"
       }
-
-      async function loadData() {
-        try {
-          const response = await fetch("subdivision_dashboard.json", { cache: "no-store" });
-          if (!response.ok) throw new Error("Could not load data file.");
-
-          allData = await response.json();
-
-          const names = [...new Set(allData.map(item => item.subdivision))].sort();
-
-          subdivisionSelect.innerHTML = '<option value="">Choose a subdivision</option>';
-
-          names.forEach(name => {
-            const option = document.createElement("option");
-            option.value = name;
-            option.textContent = name;
-            subdivisionSelect.appendChild(option);
-          });
-
-          if (names.length) {
-            subdivisionSelect.value = names[0];
-            renderSubdivision(names[0]);
-          } else {
-            setEmptyState("No subdivision data found.");
-            destroyCharts();
-          }
-        } catch (error) {
-          console.error(error);
-          setEmptyState("Data file not connected yet.");
-          destroyCharts();
-        }
+    },
+    scales: {
+      x: {
+        ticks: { color: chartTextColor, maxRotation: 0, autoSkip: true, maxTicksLimit: 10 },
+        grid: { color: chartGridColor }
+      },
+      y: {
+        position: "left",
+        ticks: { color: chartTextColor },
+        grid: { color: chartGridColor }
+      },
+      y1: {
+        position: "right",
+        ticks: { color: chartTextColor },
+        grid: { drawOnChartArea: false }
       }
+    }
+  };
+}
 
-      subdivisionSelect.addEventListener("change", function (e) {
-        renderSubdivision(e.target.value);
-      });
+  }
 
-      setEmptyState();
-      loadData();
-    })();
-  </script>
+subdivisionSelect.addEventListener("change", function (e) {
+  renderSubdivision(e.target.value);
+});
+
+setEmptyState();
+loadData();
+
+})();
+</script>
 </body>
 </html>
