@@ -939,9 +939,9 @@ function renderSubdivision(name) {
   els.active.textContent = fmtNumber(row.active);
   els.latestSold.textContent = fmtNumber(latest.sold);
   els.latestMedianPrice.textContent = fmtMoney(latest.median_price);
-  els.painIndex.textContent = pct1(latest.failure_rate * 100);
-  els.liquidityIndex.textContent = pct1(latest.sell_through_rate * 100);
-  els.failureRisk.textContent = pct1(latest.failure_rate * 100);
+  els.painIndex.textContent = pct1((latest.failure_rate || 0) * 100);
+  els.liquidityIndex.textContent = pct1((latest.sell_through_rate || 0) * 100);
+  els.failureRisk.textContent = pct1((latest.failure_rate || 0) * 100);
 
   const labels = months.map(m => m.month);
 
@@ -952,6 +952,7 @@ function renderSubdivision(name) {
     data: {
       labels,
       datasets: [{
+        label: "Median Price",
         data: months.map(m => m.median_price),
         borderColor: emerald,
         borderWidth: 2.5,
@@ -962,7 +963,7 @@ function renderSubdivision(name) {
     options: priceOptions(false)
   });
 
-    charts.avgPriceChart = new Chart(document.getElementById("avgPriceChart"), {
+  charts.avgPriceChart = new Chart(document.getElementById("avgPriceChart"), {
     type: "bar",
     data: {
       labels,
@@ -980,7 +981,6 @@ function renderSubdivision(name) {
   });
 
   charts.absorptionChart = new Chart(document.getElementById("absorptionChart"), {
-    charts.absorptionChart = new Chart(document.getElementById("absorptionChart"), {
     type: "bar",
     data: {
       labels,
@@ -1003,14 +1003,21 @@ function renderSubdivision(name) {
       datasets: [
         {
           type: "line",
-          data: months.map(m => m.median_dom),
+          label: "Median DOM",
+          data: months.map(m => m.median_dom || 0),
           borderColor: emerald,
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.2,
           yAxisID: "y"
         },
         {
           type: "bar",
-          data: months.map(m => m.withdrawn_expired),
+          label: "Withdrawn / Expired",
+          data: months.map(m => m.withdrawn_expired || 0),
           backgroundColor: "rgba(255,255,255,0.2)",
+          borderColor: "#ffffff",
+          borderWidth: 1,
           yAxisID: "y1"
         }
       ]
@@ -1018,7 +1025,7 @@ function renderSubdivision(name) {
     options: dualAxisOptions()
   });
 
-    charts.conversionChart = new Chart(document.getElementById("conversionChart"), {
+  charts.conversionChart = new Chart(document.getElementById("conversionChart"), {
     type: "bar",
     data: {
       labels,
@@ -1084,13 +1091,20 @@ function renderSubdivision(name) {
       datasets: [
         {
           type: "bar",
-          data: months.map(m => m.sold),
-          backgroundColor: emeraldSoft
+          label: "Sold",
+          data: months.map(m => m.sold || 0),
+          backgroundColor: emeraldSoft,
+          borderColor: emerald,
+          borderWidth: 1
         },
         {
           type: "line",
-          data: months.map(m => m.active),
-          borderColor: "#fff"
+          label: "Active",
+          data: months.map(m => m.active || 0),
+          borderColor: "#fff",
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.2
         }
       ]
     },
