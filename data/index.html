@@ -393,6 +393,29 @@
 .chart-grid-stack {
   grid-template-columns: 1fr;
 }
+/* NEW — stacked Bloomberg-style layout */
+.stacked-chart-wrap {
+  display: grid;
+  grid-template-rows: minmax(380px, auto) minmax(120px, auto) minmax(120px, auto);
+  gap: 10px;
+}
+
+.chart-area-main {
+  min-height: 420px;
+}
+
+.chart-area-main canvas {
+  height: 390px !important;
+}
+
+.chart-area-strip {
+  min-height: 140px;
+  padding: 8px 12px;
+}
+
+.chart-area-strip canvas {
+  height: 110px !important;
+}
 
     .site-footer {
       border-top: 1px solid var(--border);
@@ -613,82 +636,27 @@
         </div>
       </section>
 
-      <section class="section-block">
-  <div class="panel">
-    <h2 class="section-title">Signal Strip</h2>
-    <p class="chart-subtext" id="signalStripExplain">
-      A quick read on movement, friction, and failed-listing pressure in the latest month.
-    </p>
-    <div class="stats-grid stats-grid-6">
-      <article class="panel stat-box">
-        <div class="stat-label">Active Now</div>
-        <div class="stat-value" id="activeListings">--</div>
-        <div class="stat-note">Current competing inventory in the subdivision.</div>
-      </article>
-
-      <article class="panel stat-box">
-        <div class="stat-label">Latest Sold</div>
-        <div class="stat-value" id="latestSold">--</div>
-        <div class="stat-note">Closed sales in the latest month on record.</div>
-      </article>
-
-      <article class="panel stat-box">
-        <div class="stat-label">Latest Median Price</div>
-        <div class="stat-value" id="latestMedianPrice">--</div>
-        <div class="stat-note">Middle sold price for the latest month.</div>
-      </article>
-
-      <article class="panel stat-box">
-        <div class="stat-label">Pain Index</div>
-        <div class="stat-value" id="painIndex">--</div>
-        <div class="stat-note">Higher means more friction: slower DOM and/or more fallout pressure.</div>
-      </article>
-
-      <article class="panel stat-box">
-        <div class="stat-label">Liquidity Index</div>
-        <div class="stat-value" id="liquidityIndex">--</div>
-        <div class="stat-note">Higher means listings are resolving into sales more easily.</div>
-      </article>
-
-      <article class="panel stat-box">
-        <div class="stat-label">Failure Risk</div>
-        <div class="stat-value" id="failureRisk">--</div>
-        <div class="stat-note">Share of resolved listings that failed instead of selling.</div>
-      </article>
-    </div>
-  </div>
-</section>
-
 <section class="section-block">
   <article class="panel chart-box">
-    <h3>Median Price Trend</h3>
+    <h3>Price Structure</h3>
     <p class="chart-subtext">
-      Main trend chart. Read this like a neighborhood tape: direction, volatility, and momentum in sold prices.
+      Median price as the main tape, with average price and absorption as supporting strips below.
     </p>
-    <div class="chart-area chart-area-xl">
-      <canvas id="priceTrendChart"></canvas>
-    </div>
-  </article>
-</section>
 
-<section class="section-block">
-  <div class="chart-grid chart-grid-stack">
-    <article class="panel chart-box">
-      <h3>Average Price Trend</h3>
-      <p class="chart-subtext">Secondary price panel under the median trend.</p>
-      <div class="chart-area chart-area-sm">
+    <div class="stacked-chart-wrap">
+      <div class="chart-area chart-area-main">
+        <canvas id="priceTrendChart"></canvas>
+      </div>
+
+      <div class="chart-area chart-area-strip">
         <canvas id="avgPriceChart"></canvas>
       </div>
-    </article>
 
-    <article class="panel chart-box">
-      <h3>Absorption Rate</h3>
-      <p class="chart-subtext">How much of competing inventory is being absorbed each month.</p>
-      <div class="chart-area chart-area-sm">
+      <div class="chart-area chart-area-strip">
         <canvas id="absorptionChart"></canvas>
       </div>
-    </article>
-  </div>
+    </div>
+  </article>
 </section>
 
 <section class="section-block">
@@ -902,10 +870,11 @@ function commonInteractionOptions() {
   };
 }
 
-function priceOptions() {
+function priceOptions(showXAxis = true) {
   const opts = commonInteractionOptions();
   opts.plugins.legend.display = false;
   opts.scales.y.ticks.callback = (v) => moneyCompact(v);
+  opts.scales.x.display = showXAxis;
   return opts;
 }
 
@@ -942,13 +911,15 @@ function dualAxisOptions() {
       },
       y: {
         position: "left",
-        ticks: { color: chartTextColor },
-        grid: { color: chartGridColor }
+        ticks: { color: chartTextColor, callback: (v) => Number(v).toLocaleString() + " DOM" },
+        grid: { color: chartGridColor },
+        beginAtZero: true
       },
       y1: {
         position: "right",
-        ticks: { color: chartTextColor },
-        grid: { drawOnChartArea: false }
+        ticks: { color: chartTextColor, precision: 0 },
+        grid: { drawOnChartArea: false },
+        beginAtZero: true
       }
     }
   };
@@ -988,30 +959,39 @@ function renderSubdivision(name) {
         tension: 0.18
       }]
     },
-    options: priceOptions()
+    options: priceOptions(false)
   });
 
-  charts.avgPriceChart = new Chart(document.getElementById("avgPriceChart"), {
-    type: "line",
+    charts.avgPriceChart = new Chart(document.getElementById("avgPriceChart"), {
+    type: "bar",
     data: {
       labels,
       datasets: [{
+        label: "Average Price",
         data: months.map(m => m.avg_price),
-        borderColor: "#fff",
-        pointRadius: 0
+        backgroundColor: "rgba(255,255,255,0.18)",
+        borderColor: "#ffffff",
+        borderWidth: 1,
+        barPercentage: 0.9,
+        categoryPercentage: 0.9
       }]
     },
-    options: priceOptions()
+    options: priceOptions(false)
   });
 
   charts.absorptionChart = new Chart(document.getElementById("absorptionChart"), {
-    type: "line",
+    charts.absorptionChart = new Chart(document.getElementById("absorptionChart"), {
+    type: "bar",
     data: {
       labels,
       datasets: [{
-        data: months.map(m => m.absorption_rate * 100),
+        label: "Absorption Rate",
+        data: months.map(m => (m.absorption_rate || 0) * 100),
+        backgroundColor: "rgba(6,95,70,0.45)",
         borderColor: emerald,
-        pointRadius: 0
+        borderWidth: 1,
+        barPercentage: 0.9,
+        categoryPercentage: 0.9
       }]
     },
     options: percentOptions()
@@ -1038,22 +1018,64 @@ function renderSubdivision(name) {
     options: dualAxisOptions()
   });
 
-  charts.conversionChart = new Chart(document.getElementById("conversionChart"), {
-    type: "line",
+    charts.conversionChart = new Chart(document.getElementById("conversionChart"), {
+    type: "bar",
     data: {
       labels,
       datasets: [
         {
-          data: months.map(m => m.sell_through_rate * 100),
-          borderColor: emerald
+          label: "Sell-Through",
+          data: months.map(m => (m.sell_through_rate || 0) * 100),
+          backgroundColor: "rgba(6,95,70,0.65)",
+          stack: "conversion"
         },
         {
-          data: months.map(m => m.failure_rate * 100),
-          borderColor: "#fff"
+          label: "Failure",
+          data: months.map(m => (m.failure_rate || 0) * 100),
+          backgroundColor: "rgba(255,255,255,0.28)",
+          borderColor: "#ffffff",
+          borderWidth: 1,
+          stack: "conversion"
         }
       ]
     },
-    options: percentOptions()
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "index",
+        intersect: false
+      },
+      plugins: {
+        legend: {
+          labels: { color: chartTextColor }
+        },
+        tooltip: {
+          backgroundColor: "#111",
+          borderColor: "rgba(255,255,255,0.15)",
+          borderWidth: 1,
+          titleColor: "#fff",
+          bodyColor: "#fff"
+        }
+      },
+      scales: {
+        x: {
+          stacked: true,
+          ticks: { color: chartTextColor, maxRotation: 0, autoSkip: true, maxTicksLimit: 10 },
+          grid: { color: chartGridColor }
+        },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            color: chartTextColor,
+            callback: (v) => v + "%"
+          },
+          grid: { color: chartGridColor }
+        }
+      }
+    }
   });
 
   charts.soldActiveChart = new Chart(document.getElementById("soldActiveChart"), {
