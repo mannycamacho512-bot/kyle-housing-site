@@ -1138,5 +1138,83 @@
       loadData();
     })();
   </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+let dashboardData = [];
+let currentSubdivision = null;
+
+async function loadDashboard() {
+  const res = await fetch('/kyle-housing-site/data/subdivision_dashboard.json');
+  dashboardData = await res.json();
+
+  const dropdown = document.getElementById('subdivision-select');
+
+  dashboardData.forEach(sub => {
+    const opt = document.createElement('option');
+    opt.value = sub.subdivision;
+    opt.textContent = sub.subdivision;
+    dropdown.appendChild(opt);
+  });
+
+  dropdown.addEventListener('change', e => {
+    currentSubdivision = dashboardData.find(d => d.subdivision === e.target.value);
+    renderCharts();
+  });
+
+  if (dashboardData.length > 0) {
+    currentSubdivision = dashboardData[0];
+    dropdown.value = currentSubdivision.subdivision;
+    renderCharts();
+  }
+}
+
+function renderCharts() {
+  if (!currentSubdivision) return;
+
+  const months = currentSubdivision.months;
+
+  const labels = months.map(m => m.month);
+  const prices = months.map(m => m.median_price);
+  const sold = months.map(m => m.sold);
+  const failure = months.map(m => (m.failure_rate || 0) * 100);
+
+  renderLineChart('priceChart', labels, prices, 'Median Price');
+  renderLineChart('soldChart', labels, sold, 'Sold');
+  renderLineChart('failureChart', labels, failure, 'Failure %');
+}
+
+function renderLineChart(canvasId, labels, data, label) {
+  const ctx = document.getElementById(canvasId).getContext('2d');
+
+  if (window[canvasId]) {
+    window[canvasId].destroy();
+  }
+
+  window[canvasId] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label,
+        data,
+        borderColor: '#065f46',
+        backgroundColor: 'rgba(6,95,70,.08)',
+        tension: 0.2
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#fff' } },
+        y: { ticks: { color: '#fff' } }
+      }
+    }
+  });
+}
+
+loadDashboard();
+</script>
 </body>
 </html>
