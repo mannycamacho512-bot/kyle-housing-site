@@ -525,6 +525,81 @@
     min-width: 900px;
   }
 }
+    .price-layout {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.price-left-rail {
+  display: grid;
+  grid-template-rows: 420px 140px 140px;
+  gap: 10px;
+}
+
+.rail-box {
+  border: 1px solid var(--border);
+  background: #000;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.rail-box-main {
+  min-height: 420px;
+}
+
+.rail-box-strip {
+  min-height: 140px;
+}
+
+.rail-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.rail-scale {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  color: rgba(255,255,255,0.72);
+  font-size: 12px;
+  padding: 4px 0;
+}
+
+.price-right-scroll {
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .price-layout {
+    grid-template-columns: 110px 1fr;
+    gap: 8px;
+  }
+
+  .price-left-rail {
+    grid-template-rows: 420px 140px 140px;
+  }
+
+  .rail-box {
+    padding: 8px;
+  }
+
+  .rail-title {
+    font-size: 11px;
+    letter-spacing: 0.6px;
+  }
+
+  .rail-scale {
+    font-size: 11px;
+  }
+}
 
     .site-footer {
       border-top: 1px solid var(--border);
@@ -767,19 +842,42 @@
       </div>
     </div>
 
-    <div class="chart-scroll" id="priceChartScroll">
-      <div class="chart-scroll-inner">
-        <div class="stacked-chart-wrap">
-          <div class="chart-area chart-area-main">
-            <canvas id="priceTrendChart"></canvas>
+    <div class="price-layout">
+      <div class="price-left-rail">
+        <div class="rail-box rail-box-main">
+          <div class="rail-title">Median Price</div>
+          <div class="rail-scale" id="medianRailScale">
+            <div>--</div>
+            <div>--</div>
+            <div>--</div>
           </div>
+        </div>
 
-          <div class="chart-area chart-area-strip">
-            <canvas id="avgPriceChart"></canvas>
-          </div>
+        <div class="rail-box rail-box-strip">
+          <div class="rail-title">Average Price</div>
+        </div>
 
-          <div class="chart-area chart-area-strip">
-            <canvas id="absorptionChart"></canvas>
+        <div class="rail-box rail-box-strip">
+          <div class="rail-title">Absorption</div>
+        </div>
+      </div>
+
+      <div class="price-right-scroll">
+        <div class="chart-scroll" id="priceChartScroll">
+          <div class="chart-scroll-inner">
+            <div class="stacked-chart-wrap">
+              <div class="chart-area chart-area-main">
+                <canvas id="priceTrendChart"></canvas>
+              </div>
+
+              <div class="chart-area chart-area-strip">
+                <canvas id="avgPriceChart"></canvas>
+              </div>
+
+              <div class="chart-area chart-area-strip">
+                <canvas id="absorptionChart"></canvas>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1039,36 +1137,7 @@ function bindPriceChartTouch(chart, months) {
   canvas.addEventListener("touchstart", handleTouch, { passive: true });
   canvas.addEventListener("touchmove", handleTouch, { passive: true });
 }
-    charts.soldActiveChart = new Chart(document.getElementById("soldActiveChart"), {
-    data: {
-      labels,
-      datasets: [
-        {
-          type: "bar",
-          label: "Sold",
-          data: months.map(m => m.sold || 0),
-          backgroundColor: emeraldSoft,
-          borderColor: emerald,
-          borderWidth: 1
-        },
-        {
-          type: "line",
-          label: "Active",
-          data: months.map(m => m.active || 0),
-          borderColor: "#fff",
-          borderWidth: 2,
-          pointRadius: 0,
-          tension: 0.2
-        }
-      ]
-    },
-    options: commonInteractionOptions()
-  });
-
-  scrollPriceChartToLatest();
-}
-}
-
+ 
 function commonInteractionOptions() {
   return {
     responsive: true,
@@ -1117,9 +1186,10 @@ function priceOptions(showXAxis = true) {
   return opts;
 }
 
-function percentOptions() {
+function percentOptions(showXAxis = true) {
   const opts = commonInteractionOptions();
   opts.scales.y.ticks.callback = (v) => v + "%";
+  opts.scales.x.display = showXAxis;
   return opts;
 }
 
@@ -1190,12 +1260,14 @@ function renderSubdivision(name) {
   els.failureRisk.textContent = pct1((latest.failure_rate || 0) * 100);
 
   const labels = months.map(m => m.month);
+  updateMedianRailScale(months);
   updatePriceCornerBox(
   latest.month,
   latest.median_price,
   latest.avg_price,
   (latest.absorption_rate || 0) * 100
 );
+  
   
   destroyCharts();
 
@@ -1213,7 +1285,7 @@ function renderSubdivision(name) {
     }]
   },
   options: {
-    ...priceOptions(false),
+    ...priceOptions(true),
     onHover: (event, elements, chart) => {
   if (!elements.length) {
     const last = months[months.length - 1];
@@ -1225,6 +1297,26 @@ function renderSubdivision(name) {
     );
     return;
   }
+      function updateMedianRailScale(months) {
+  const rail = document.getElementById("medianRailScale");
+  if (!rail || !months || !months.length) return;
+
+  const values = months
+    .map(m => Number(m.median_price))
+    .filter(v => !Number.isNaN(v));
+
+  if (!values.length) return;
+
+  const max = Math.max(...values);
+  const min = Math.min(...values);
+  const mid = (max + min) / 2;
+
+  rail.innerHTML = `
+    <div>${moneyCompact(max)}</div>
+    <div>${moneyCompact(mid)}</div>
+    <div>${moneyCompact(min)}</div>
+  `;
+}
       const idx = elements[0].index;
       const point = months[idx];
       if (!point) return;
@@ -1272,7 +1364,7 @@ bindPriceChartTouch(charts.priceTrendChart, months);
         categoryPercentage: 0.9
       }]
     },
-    options: percentOptions()
+    options: percentOptions(false)
   });
 
   charts.domWithdrawnChart = new Chart(document.getElementById("domWithdrawnChart"), {
@@ -1395,6 +1487,7 @@ bindPriceChartTouch(charts.priceTrendChart, months);
     },
     options: commonInteractionOptions()
   });
+    scrollPriceChartToLatest();
 }
 
 // ======================
@@ -1406,6 +1499,7 @@ async function loadData() {
     if (!response.ok) throw new Error();
 
     allData = await response.json();
+    console.log("loaded json", allData);
 
     const names = [...new Set(allData.map(item => item.subdivision))].sort();
 
@@ -1422,9 +1516,10 @@ async function loadData() {
       subdivisionSelect.value = names[0];
       renderSubdivision(names[0]);
     }
-  } catch {
-    setEmptyState("Data file not connected yet.");
-  }
+  } catch (err) {
+  console.error(err);
+  setEmptyState("Data file not connected yet.");
+}
 }
 
 // ======================
