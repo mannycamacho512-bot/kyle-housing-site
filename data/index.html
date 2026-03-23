@@ -416,38 +416,71 @@
 .chart-area-strip canvas {
   height: 110px !important;
 }
-.chart-area-strip canvas {
-  height: 110px !important;
-}
 
 /* ADD THIS RIGHT HERE */
-.chart-area,
-.chart-area-main,
-.chart-area-strip {
-  position: relative;
+.price-header-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
 }
 
 .chart-corner-box {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  min-width: 150px;
-  padding: 8px 10px;
-  background: rgba(0,0,0,0.82);
+  min-width: 220px;
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.86);
   border: 1px solid rgba(255,255,255,0.18);
-  font-size: 12px;
-  line-height: 1.45;
+  font-size: 14px;
+  line-height: 1.5;
   color: #fff;
-  z-index: 5;
-  pointer-events: none;
+}
+
+.chart-corner-box-static {
+  position: static;
 }
 
 .chart-corner-box .label {
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.72);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+}
+
+.chart-corner-box .row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.chart-corner-box .median-row {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.chart-corner-box .median-row span:last-child {
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .price-header-row {
+    justify-content: stretch;
+  }
+
+  .chart-corner-box {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .chart-corner-box .median-row {
+    font-size: 16px;
+  }
+
+  .chart-corner-box .median-row span:last-child {
+    font-size: 19px;
+  }
 }
 
 .chart-corner-box .row {
@@ -456,12 +489,6 @@
   gap: 10px;
 }
 
-.chart-scroll {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-}
 .chart-scroll {
   width: 100%;
   overflow-x: auto;
@@ -716,32 +743,35 @@
   <article class="panel chart-box">
     <h3>Price Structure</h3>
     <p class="chart-subtext">
-  Median shows the middle sold price, average shows the overall average, and absorption shows how quickly inventory is being bought up.
-</p>
+      Median shows the middle sold price, average shows the overall average, and absorption shows how quickly inventory is being bought up.
+    </p>
 
-    <div class="chart-scroll">
-  <div class="chart-scroll-inner">
-    <div class="stacked-chart-wrap">
-      <div class="chart-area chart-area-main">
-  <div class="chart-corner-box" id="priceCornerBox">
-    <div class="label">Hover data</div>
-    <div class="row"><span>Median</span><span>--</span></div>
-    <div class="row"><span>Average</span><span>--</span></div>
-    <div class="row"><span>Absorption</span><span>--</span></div>
-  </div>
-  <canvas id="priceTrendChart"></canvas>
-</div>
-
-      <div class="chart-area chart-area-strip">
-        <canvas id="avgPriceChart"></canvas>
-      </div>
-
-      <div class="chart-area chart-area-strip">
-        <canvas id="absorptionChart"></canvas>
+    <div class="price-header-row">
+      <div class="chart-corner-box chart-corner-box-static" id="priceCornerBox">
+        <div class="label">Latest data</div>
+        <div class="row median-row"><span>Median</span><span>--</span></div>
+        <div class="row"><span>Average</span><span>--</span></div>
+        <div class="row"><span>Absorption</span><span>--</span></div>
       </div>
     </div>
-  </div>
-</div>
+
+    <div class="chart-scroll">
+      <div class="chart-scroll-inner">
+        <div class="stacked-chart-wrap">
+          <div class="chart-area chart-area-main">
+            <canvas id="priceTrendChart"></canvas>
+          </div>
+
+          <div class="chart-area chart-area-strip">
+            <canvas id="avgPriceChart"></canvas>
+          </div>
+
+          <div class="chart-area chart-area-strip">
+            <canvas id="absorptionChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
   </article>
 </section>
 
@@ -924,9 +954,34 @@ function pct1(value) {
   if (value === null || value === undefined) return "--";
   return Number(value).toFixed(1) + "%";
 }
+
 function updatePriceCornerBox(monthLabel, medianValue, avgValue, absorptionValue) {
   const box = document.getElementById("priceCornerBox");
   if (!box) return;
+
+  box.innerHTML = `
+    <div class="label">${monthLabel || "Latest data"}</div>
+    <div class="row median-row"><span>Median</span><span>${medianValue != null ? moneyCompact(medianValue) : "--"}</span></div>
+    <div class="row"><span>Average</span><span>${avgValue != null ? moneyCompact(avgValue) : "--"}</span></div>
+    <div class="row"><span>Absorption</span><span>${absorptionValue != null ? Number(absorptionValue).toFixed(1) + "%" : "--"}</span></div>
+  `;
+}
+
+function yearTickLabel(value, index, labels) {
+  const label = labels[index];
+  if (!label) return "";
+
+  const str = String(label);
+
+  if (str.includes("-")) {
+    const parts = str.split("-");
+    const year = parts[0];
+    const month = parts[1];
+    return month === "01" ? year : "";
+  }
+
+  return index % 12 === 0 ? str : "";
+}
 
   box.innerHTML = `
     <div class="label">${monthLabel || "Hover data"}</div>
@@ -958,9 +1013,16 @@ function commonInteractionOptions() {
     },
     scales: {
       x: {
-        ticks: { color: chartTextColor, maxRotation: 0, autoSkip: true, maxTicksLimit: 10 },
-        grid: { color: chartGridColor }
-      },
+  ticks: {
+    color: chartTextColor,
+    maxRotation: 0,
+    autoSkip: false,
+    callback: function(value, index) {
+      return yearTickLabel(value, index, this.getLabels());
+    }
+  },
+  grid: { color: chartGridColor }
+},
       y: {
         ticks: { color: chartTextColor },
         grid: { color: chartGridColor }
@@ -1005,9 +1067,16 @@ function dualAxisOptions() {
     },
     scales: {
       x: {
-        ticks: { color: chartTextColor, maxRotation: 0, autoSkip: true, maxTicksLimit: 10 },
-        grid: { color: chartGridColor }
-      },
+  ticks: {
+    color: chartTextColor,
+    maxRotation: 0,
+    autoSkip: false,
+    callback: function(value, index) {
+      return yearTickLabel(value, index, this.getLabels());
+    }
+  },
+  grid: { color: chartGridColor }
+},
       y: {
         position: "left",
         ticks: { color: chartTextColor, callback: (v) => Number(v).toLocaleString() + " DOM" },
@@ -1068,7 +1137,16 @@ function renderSubdivision(name) {
   options: {
     ...priceOptions(false),
     onHover: (event, elements, chart) => {
-      if (!elements.length) return;
+  if (!elements.length) {
+    const last = months[months.length - 1];
+    updatePriceCornerBox(
+      last.month,
+      last.median_price,
+      last.avg_price,
+      (last.absorption_rate || 0) * 100
+    );
+    return;
+  }
       const idx = elements[0].index;
       const point = months[idx];
       if (!point) return;
@@ -1187,10 +1265,17 @@ function renderSubdivision(name) {
       },
       scales: {
         x: {
-          stacked: true,
-          ticks: { color: chartTextColor, maxRotation: 0, autoSkip: true, maxTicksLimit: 10 },
-          grid: { color: chartGridColor }
-        },
+  stacked: true,
+  ticks: {
+    color: chartTextColor,
+    maxRotation: 0,
+    autoSkip: false,
+    callback: function(value, index) {
+      return yearTickLabel(value, index, this.getLabels());
+    }
+  },
+  grid: { color: chartGridColor }
+},
         y: {
           stacked: true,
           beginAtZero: true,
