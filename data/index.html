@@ -2,168 +2,1015 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kyle Subdivision Data</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kyle Subdivision Data | Emmanuel "Manny" Camacho</title>
+  <meta
+    name="description"
+    content="Subdivision-level housing data for Kyle, Texas. Bloomberg-style market dashboard by subdivision."
+  />
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
+    :root {
+      --emerald: #065f46;
+      --emerald-soft: rgba(6,95,70,.12);
+      --bg: #000000;
+      --panel: #000000;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,.72);
+      --border: rgba(255,255,255,.18);
+      --maxw: 1240px;
+    }
+
+    html, body {
       margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Hedvig Letters Serif", serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: #000;
+      z-index: 9999;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .topbar {
+      position: relative;
+      min-height: 90px;
+      padding: 0;
+      transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+    }
+
+    .top-link,
+    .top-id,
+    .logo-wrap,
+    .logo-mini {
+      transition: all 0.25s ease;
+    }
+
+    .logo-wrap {
+      position: absolute;
+      top: -14px;
+      left: -8px;
+      margin: 0;
+      text-align: left;
+      z-index: 2;
+    }
+
+    .top-link {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+    }
+
+    .header-action {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+      text-decoration: none;
+      margin-right: -22px;
+    }
+
+    .header-action:last-child {
+      margin-right: 0;
+    }
+
+    .action-icon {
+      display: block;
+      height: auto;
+      margin: 0;
+      padding: 0;
+    }
+
+    .action-label {
+      margin-top: -8px;
+      font-family: "Hedvig Letters Serif", serif;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+      color: #fff;
+      text-align: center;
+    }
+
+    .connect-btn { width: 90px; }
+    .match-btn { width: 80px; }
+    .data-btn { width: 82px; }
+
+    .top-id {
+      margin-left: auto;
+      padding-top: 8px;
+      padding-right: 14px;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #fff;
+    }
+
+    .logo-mini {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 132px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-mini:hover { opacity: 0.85; }
+
+    .logo-mini img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform: translateX(-15px);
+    }
+
+    .logo-mini-label {
+      position: static;
+      transform: none;
+      margin-top: -18px;
+      margin-left: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: rgba(255,255,255,.8);
+      white-space: nowrap;
+      text-align: left;
+      line-height: 1;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .site-header.shrink .logo-mini-label {
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+    }
+
+    .site-header.shrink .topbar {
+      min-height: 78px;
+    }
+
+    .site-header.shrink .top-link,
+    .site-header.shrink .top-id {
+      opacity: 0;
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(-8px);
+    }
+
+    /* =========================
+       PAGE
+    ========================== */
+    .page-wrap {
+      width: 100%;
+      margin: 0;
+      padding: 190px 20px 32px;
+      background: var(--bg);
+    }
+
+    .content-shell {
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+
+    .page-top-meta {
+      margin-bottom: 24px;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 13px;
+      text-decoration: underline;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .page-updated {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .section-block {
+      margin-bottom: 18px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      background: var(--panel);
       padding: 20px;
     }
 
-    select {
-      padding: 10px;
-      margin-bottom: 20px;
-      width: 300px;
+    .data-hero h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.15;
+      color: #fff;
     }
 
-    .grid {
+    .data-hero p {
+      margin: 0;
+      max-width: 860px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .toolbar-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      grid-template-columns: 2fr 1fr;
+      gap: 18px;
     }
 
-    canvas {
-      background: #111;
-      padding: 10px;
+    .toolbar-label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .toolbar-select {
+      width: 100%;
+      padding: 12px 14px;
+      background: #000;
+      color: #fff;
+      border: 1px solid var(--border);
+      outline: none;
+    }
+
+    .toolbar-select:focus {
+      border-color: var(--emerald);
+      box-shadow: 0 0 0 1px var(--emerald);
+    }
+
+    .toolbar-mini {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      margin: 0 0 16px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .stats-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .stats-grid-6 {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .stats-grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .stat-box {
+      min-height: 150px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      color: #fff;
+      word-break: break-word;
+    }
+
+    .stat-note {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .chart-box h3 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .chart-subtext {
+      margin: -4px 0 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .chart-area {
+      position: relative;
+      width: 100%;
+      min-height: 320px;
+      border: 1px solid var(--border);
+      padding: 12px;
+    }
+
+    .chart-area canvas {
+      width: 100%;
+      height: 280px;
+      display: block;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--border);
+      background: #000;
+      color: #fff;
+    }
+
+    .footer-shell {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 32px 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .footer-col {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .footer-col a {
+      display: block;
+      margin-bottom: 6px;
+      text-decoration: underline;
+      color: var(--muted);
+    }
+
+    .footer-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .footer-bottom {
+      margin-top: 24px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 1100px) {
+      .stats-grid-6 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .toolbar-grid,
+      .footer-grid,
+      .stats-grid-4,
+      .stats-grid-6,
+      .chart-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .topbar {
+        min-height: 140px;
+        padding: 0 10px;
+      }
+
+      .logo-wrap {
+        position: absolute;
+        top: -4px;
+        left: 0;
+      }
+
+      .top-link {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .top-id {
+        position: absolute;
+        top: 8px;
+        right: 6px;
+        text-align: right;
+        font-size: 10px;
+        line-height: 1.2;
+        max-width: 145px;
+        padding-right: 0;
+      }
+
+      .page-wrap {
+        padding: 190px 14px 24px;
+      }
+
+      .data-hero h1 {
+        font-size: 25px;
+      }
+
+      .stat-value {
+        font-size: 26px;
+      }
     }
   </style>
 </head>
-
 <body>
+  <header class="site-header" id="siteHeader">
+    <div class="topbar">
+      <div class="logo-wrap">
+        <a href="/kyle-housing-site/" class="logo-mini">
+          <img src="/kyle-housing-site/images/logo.png" alt="Your Missing Peace" />
+          <span class="logo-mini-label">Your Missing Peace</span>
+        </a>
+      </div>
 
-<h1>Kyle Subdivision Data</h1>
+      <div class="top-link">
+        <a href="/kyle-housing-site/match" class="header-action match-action">
+          <img src="/kyle-housing-site/images/match2.png" alt="Match" class="action-icon match-btn">
+          <span class="action-label">Match</span>
+        </a>
 
-<select id="subdivisionSelect">
-  <option value="">Choose a subdivision</option>
-</select>
+        <a href="/kyle-housing-site/contact" class="header-action connect-action">
+          <img src="/kyle-housing-site/images/connect2.png" alt="Connect" class="action-icon connect-btn">
+          <span class="action-label">Connect</span>
+        </a>
 
-<div id="summary"></div>
+        <a href="/kyle-housing-site/data" class="header-action data-action">
+          <img src="/kyle-housing-site/images/graph.png" alt="Data" class="action-icon data-btn">
+          <span class="action-label">Data</span>
+        </a>
+      </div>
 
-<div class="grid">
-  <canvas id="priceChart"></canvas>
-  <canvas id="volumeChart"></canvas>
-  <canvas id="failureChart"></canvas>
-</div>
+      <div class="top-id">
+        <div>Realtor® in Kyle, TX</div>
+        <div>Emmanuel "Manny" Camacho</div>
+        <div>Dalton Wade Real Estate Group</div>
+      </div>
+    </div>
+  </header>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <main class="page-wrap">
+    <div class="content-shell">
+      <div class="page-top-meta">
+        <a href="/kyle-housing-site/" class="back-link">&larr; Back to Home</a>
+        <div class="page-updated" id="pageUpdated">Updated monthly</div>
+      </div>
 
-<script>
-const subdivisionSelect = document.getElementById("subdivisionSelect");
-const summary = document.getElementById("summary");
+      <section class="section-block">
+        <div class="panel data-hero">
+          <h1>Kyle Subdivision Data Terminal</h1>
+          <p>
+            Switch between subdivisions and study long-run price behavior, liquidity, failure risk,
+            pace, and market pressure using monthly history.
+          </p>
+        </div>
+      </section>
 
-let allData = [];
-let priceChart, volumeChart, failureChart;
+      <section class="section-block">
+        <div class="toolbar-grid">
+          <div class="panel">
+            <label class="toolbar-label" for="subdivisionSelect">Subdivision</label>
+            <select id="subdivisionSelect" class="toolbar-select">
+              <option value="">Choose a subdivision</option>
+            </select>
+          </div>
 
-function destroyCharts() {
-  if (priceChart) priceChart.destroy();
-  if (volumeChart) volumeChart.destroy();
-  if (failureChart) failureChart.destroy();
-}
+          <div class="panel">
+            <div class="toolbar-mini" id="subdivisionSummary">
+              Select a subdivision to load its market dashboard.
+            </div>
+          </div>
+        </div>
+      </section>
 
-async function loadData() {
-  try {
-    const response = await fetch("subdivision_dashboard.json", { cache: "no-store" });
-    if (!response.ok) throw new Error("Data not found");
+      <section class="section-block">
+        <div class="panel">
+          <h2 class="section-title">Signal Strip</h2>
+          <div class="stats-grid stats-grid-6">
+            <article class="panel stat-box">
+              <div class="stat-label">Active Now</div>
+              <div class="stat-value" id="activeListings">--</div>
+              <div class="stat-note">Current active listings.</div>
+            </article>
 
-    allData = await response.json();
+            <article class="panel stat-box">
+              <div class="stat-label">Latest Sold</div>
+              <div class="stat-value" id="latestSold">--</div>
+              <div class="stat-note">Closed sales in latest month.</div>
+            </article>
 
-    const names = [...new Set(allData.map(x => x.subdivision))].sort();
+            <article class="panel stat-box">
+              <div class="stat-label">Latest Median Price</div>
+              <div class="stat-value" id="latestMedianPrice">--</div>
+              <div class="stat-note">Median sold price in latest month.</div>
+            </article>
 
-    subdivisionSelect.innerHTML = '<option value="">Choose a subdivision</option>';
+            <article class="panel stat-box">
+              <div class="stat-label">Pain Index</div>
+              <div class="stat-value" id="painIndex">--</div>
+              <div class="stat-note">Current stress / friction signal.</div>
+            </article>
 
-    names.forEach(name => {
-      const opt = document.createElement("option");
-      opt.value = name;
-      opt.textContent = name;
-      subdivisionSelect.appendChild(opt);
-    });
+            <article class="panel stat-box">
+              <div class="stat-label">Liquidity Index</div>
+              <div class="stat-value" id="liquidityIndex">--</div>
+              <div class="stat-note">Current market ease of movement.</div>
+            </article>
 
-    if (names.length) {
-      subdivisionSelect.value = names[0];
-      renderSubdivision(names[0]);
-    }
+            <article class="panel stat-box">
+              <div class="stat-label">Failure Risk</div>
+              <div class="stat-value" id="failureRisk">--</div>
+              <div class="stat-note">Current risk of failed listing outcomes.</div>
+            </article>
+          </div>
+        </div>
+      </section>
 
-  } catch (err) {
-    console.error(err);
-    summary.textContent = "Error loading data.";
-  }
-}
+      <section class="section-block">
+        <div class="chart-grid">
+          <article class="panel chart-box">
+            <h3>Median Price Trend</h3>
+            <p class="chart-subtext">Monthly median sold price history.</p>
+            <div class="chart-area">
+              <canvas id="priceTrendChart"></canvas>
+            </div>
+          </article>
 
-function renderSubdivision(name) {
-  const row = allData.find(x => x.subdivision === name);
+          <article class="panel chart-box">
+            <h3>Sold vs Active</h3>
+            <p class="chart-subtext">Monthly sales versus current/period inventory counts.</p>
+            <div class="chart-area">
+              <canvas id="soldActiveChart"></canvas>
+            </div>
+          </article>
+        </div>
+      </section>
 
-  if (!row || !row.months) {
-    summary.textContent = "No data.";
-    destroyCharts();
-    return;
-  }
+      <section class="section-block">
+        <div class="chart-grid">
+          <article class="panel chart-box">
+            <h3>Sell-Through vs Failure</h3>
+            <p class="chart-subtext">Monthly conversion quality and failed outcome pressure.</p>
+            <div class="chart-area">
+              <canvas id="conversionChart"></canvas>
+            </div>
+          </article>
 
-  const months = row.months;
+          <article class="panel chart-box">
+            <h3>DOM vs Withdrawn / Expired</h3>
+            <p class="chart-subtext">Time to move versus listing fallout.</p>
+            <div class="chart-area">
+              <canvas id="domWithdrawnChart"></canvas>
+            </div>
+          </article>
+        </div>
+      </section>
 
-  const labels = months.map(m => m.month);
-  const prices = months.map(m => m.median_price);
-  const sold = months.map(m => m.sold);
-  const failure = months.map(m => (m.failure_rate || 0) * 100);
+      <section class="section-block">
+        <div class="chart-grid">
+          <article class="panel chart-box">
+            <h3>Absorption Rate</h3>
+            <p class="chart-subtext">Monthly absorption across the full history.</p>
+            <div class="chart-area">
+              <canvas id="absorptionChart"></canvas>
+            </div>
+          </article>
 
-  summary.textContent = name;
+          <article class="panel chart-box">
+            <h3>Average Price Trend</h3>
+            <p class="chart-subtext">Monthly average sold price history.</p>
+            <div class="chart-area">
+              <canvas id="avgPriceChart"></canvas>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
 
-  destroyCharts();
+  <footer class="site-footer">
+    <div class="footer-shell">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-title">Kyle Housing Data</div>
+          <p>
+            Subdivision-level housing data designed to bring clarity to pricing,
+            demand, and market movement in Kyle, Texas.
+          </p>
+        </div>
 
-  // PRICE
-  priceChart = new Chart(document.getElementById("priceChart"), {
-    type: "line",
-    data: {
-      labels,
-      datasets: [{
-        label: "Median Price",
-        data: prices,
-        borderColor: "#00ff88",
-        tension: 0.3
-      }]
-    }
-  });
+        <div class="footer-col">
+          <div class="footer-title">Explore</div>
+          <a href="/kyle-housing-site/">Home</a>
+          <a href="/kyle-housing-site/data/">Data Page</a>
+          <a href="/kyle-housing-site/contact">Connect</a>
+        </div>
 
-  // SOLD
-  volumeChart = new Chart(document.getElementById("volumeChart"), {
-    type: "bar",
-    data: {
-      labels,
-      datasets: [{
-        label: "Sold",
-        data: sold,
-        backgroundColor: "#00ff88"
-      }]
-    }
-  });
+        <div class="footer-col">
+          <div class="footer-title">About</div>
+          <p>
+            Emmanuel "Manny" Camacho<br />
+            Realtor® in Kyle, TX<br />
+            Dalton Wade Real Estate Group
+          </p>
+        </div>
+      </div>
 
-  // FAILURE
-  failureChart = new Chart(document.getElementById("failureChart"), {
-    type: "line",
-    data: {
-      labels,
-      datasets: [{
-        label: "Failure %",
-        data: failure,
-        borderColor: "#ff4444",
-        tension: 0.3
-      }]
-    }
-  });
-}
+      <div class="footer-bottom">
+        <span>© 2026 Kyle Housing Data</span>
+      </div>
+    </div>
+  </footer>
 
-/* ===== EVENT LISTENER (CORRECT PLACE) ===== */
-subdivisionSelect.addEventListener("change", function (e) {
-  renderSubdivision(e.target.value);
-});
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-/* ===== RUN ===== */
-loadData();
+  <script>
+    (function () {
+      const siteHeader = document.getElementById("siteHeader");
+      if (!siteHeader) return;
 
-</script>
+      function handleHeaderShrink() {
+        if (window.scrollY > 80) {
+          siteHeader.classList.add("shrink");
+        } else {
+          siteHeader.classList.remove("shrink");
+        }
+      }
 
+      window.addEventListener("scroll", handleHeaderShrink, { passive: true });
+      window.addEventListener("load", handleHeaderShrink);
+      handleHeaderShrink();
+    })();
+
+    (function () {
+      const subdivisionSelect = document.getElementById("subdivisionSelect");
+
+      const els = {
+        summary: document.getElementById("subdivisionSummary"),
+        active: document.getElementById("activeListings"),
+        latestSold: document.getElementById("latestSold"),
+        latestMedianPrice: document.getElementById("latestMedianPrice"),
+        painIndex: document.getElementById("painIndex"),
+        liquidityIndex: document.getElementById("liquidityIndex"),
+        failureRisk: document.getElementById("failureRisk")
+      };
+
+      let allData = [];
+      let charts = {};
+
+      const chartTextColor = "rgba(255,255,255,0.75)";
+      const chartGridColor = "rgba(255,255,255,0.12)";
+      const emerald = "#065f46";
+      const emeraldSoft = "rgba(6,95,70,0.20)";
+
+      function fmtNumber(v) {
+        if (v === null || v === undefined || v === "") return "--";
+        return Number(v).toLocaleString();
+      }
+
+      function fmtMoney(v) {
+        if (v === null || v === undefined || v === "") return "--";
+        return "$" + Number(v).toLocaleString();
+      }
+
+      function fmtPercentWhole(v) {
+        if (v === null || v === undefined || v === "") return "--";
+        return Number(v).toFixed(1);
+      }
+
+      function setEmptyState(message) {
+        els.summary.textContent = message || "Select a subdivision to load its market dashboard.";
+        els.active.textContent = "--";
+        els.latestSold.textContent = "--";
+        els.latestMedianPrice.textContent = "--";
+        els.painIndex.textContent = "--";
+        els.liquidityIndex.textContent = "--";
+        els.failureRisk.textContent = "--";
+      }
+
+      function destroyCharts() {
+        Object.values(charts).forEach(chart => {
+          if (chart) chart.destroy();
+        });
+        charts = {};
+      }
+
+      function baseOptions() {
+        return {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: { color: chartTextColor }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: chartTextColor },
+              grid: { color: chartGridColor }
+            },
+            y: {
+              ticks: { color: chartTextColor },
+              grid: { color: chartGridColor }
+            }
+          }
+        };
+      }
+
+      function dualAxisOptions() {
+        return {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: { color: chartTextColor }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: chartTextColor },
+              grid: { color: chartGridColor }
+            },
+            y: {
+              position: "left",
+              ticks: { color: chartTextColor },
+              grid: { color: chartGridColor }
+            },
+            y1: {
+              position: "right",
+              ticks: { color: chartTextColor },
+              grid: { drawOnChartArea: false }
+            }
+          }
+        };
+      }
+
+      function renderSubdivision(name) {
+        const row = allData.find(item => item.subdivision === name);
+
+        if (!row || !row.months || !row.months.length) {
+          setEmptyState();
+          destroyCharts();
+          return;
+        }
+
+        const months = row.months;
+        const latest = months[months.length - 1];
+
+        els.summary.textContent = row.summary || row.subdivision;
+        els.active.textContent = fmtNumber(row.active);
+        els.latestSold.textContent = fmtNumber(latest.sold);
+        els.latestMedianPrice.textContent = fmtMoney(latest.median_price);
+        els.painIndex.textContent = fmtPercentWhole(row.pain_index);
+        els.liquidityIndex.textContent = fmtPercentWhole(row.liquidity_index);
+        els.failureRisk.textContent = fmtPercentWhole(row.failure_risk);
+
+        const labels = months.map(m => m.month);
+        const medianPrices = months.map(m => m.median_price);
+        const avgPrices = months.map(m => m.avg_price);
+        const sold = months.map(m => m.sold);
+        const active = months.map(m => m.active);
+        const sellThrough = months.map(m => m.sell_through_rate != null ? m.sell_through_rate * 100 : null);
+        const failure = months.map(m => m.failure_rate != null ? m.failure_rate * 100 : null);
+        const dom = months.map(m => m.median_dom);
+        const withdrawn = months.map(m => m.withdrawn_expired);
+        const absorption = months.map(m => m.absorption_rate != null ? m.absorption_rate * 100 : null);
+
+        destroyCharts();
+
+        charts.priceTrendChart = new Chart(document.getElementById("priceTrendChart"), {
+          type: "line",
+          data: {
+            labels,
+            datasets: [{
+              label: "Median Price",
+              data: medianPrices,
+              borderColor: emerald,
+              backgroundColor: emeraldSoft,
+              tension: 0.22,
+              pointRadius: 2
+            }]
+          },
+          options: baseOptions()
+        });
+
+        charts.soldActiveChart = new Chart(document.getElementById("soldActiveChart"), {
+          data: {
+            labels,
+            datasets: [
+              {
+                type: "bar",
+                label: "Sold",
+                data: sold,
+                backgroundColor: emeraldSoft,
+                borderColor: emerald,
+                borderWidth: 2
+              },
+              {
+                type: "line",
+                label: "Active",
+                data: active,
+                borderColor: "#ffffff",
+                borderWidth: 2,
+                tension: 0.22,
+                pointRadius: 2
+              }
+            ]
+          },
+          options: baseOptions()
+        });
+
+        charts.conversionChart = new Chart(document.getElementById("conversionChart"), {
+          type: "line",
+          data: {
+            labels,
+            datasets: [
+              {
+                label: "Sell-Through %",
+                data: sellThrough,
+                borderColor: emerald,
+                tension: 0.22,
+                pointRadius: 2
+              },
+              {
+                label: "Failure %",
+                data: failure,
+                borderColor: "#ffffff",
+                tension: 0.22,
+                pointRadius: 2
+              }
+            ]
+          },
+          options: baseOptions()
+        });
+
+        charts.domWithdrawnChart = new Chart(document.getElementById("domWithdrawnChart"), {
+          data: {
+            labels,
+            datasets: [
+              {
+                type: "line",
+                label: "Median DOM",
+                data: dom,
+                borderColor: emerald,
+                borderWidth: 2,
+                tension: 0.22,
+                yAxisID: "y"
+              },
+              {
+                type: "bar",
+                label: "Withdrawn / Expired",
+                data: withdrawn,
+                backgroundColor: "rgba(255,255,255,0.18)",
+                borderColor: "#ffffff",
+                borderWidth: 1,
+                yAxisID: "y1"
+              }
+            ]
+          },
+          options: dualAxisOptions()
+        });
+
+        charts.absorptionChart = new Chart(document.getElementById("absorptionChart"), {
+          type: "line",
+          data: {
+            labels,
+            datasets: [{
+              label: "Absorption %",
+              data: absorption,
+              borderColor: emerald,
+              backgroundColor: emeraldSoft,
+              tension: 0.22,
+              pointRadius: 2
+            }]
+          },
+          options: baseOptions()
+        });
+
+        charts.avgPriceChart = new Chart(document.getElementById("avgPriceChart"), {
+          type: "line",
+          data: {
+            labels,
+            datasets: [{
+              label: "Average Price",
+              data: avgPrices,
+              borderColor: "#ffffff",
+              backgroundColor: "rgba(255,255,255,0.08)",
+              tension: 0.22,
+              pointRadius: 2
+            }]
+          },
+          options: baseOptions()
+        });
+      }
+
+      async function loadData() {
+        try {
+          const response = await fetch("subdivision_dashboard.json", { cache: "no-store" });
+          if (!response.ok) throw new Error("Could not load data file.");
+
+          allData = await response.json();
+
+          const names = [...new Set(allData.map(item => item.subdivision))].sort();
+
+          subdivisionSelect.innerHTML = '<option value="">Choose a subdivision</option>';
+
+          names.forEach(name => {
+            const option = document.createElement("option");
+            option.value = name;
+            option.textContent = name;
+            subdivisionSelect.appendChild(option);
+          });
+
+          if (names.length) {
+            subdivisionSelect.value = names[0];
+            renderSubdivision(names[0]);
+          } else {
+            setEmptyState("No subdivision data found.");
+            destroyCharts();
+          }
+        } catch (error) {
+          console.error(error);
+          setEmptyState("Data file not connected yet.");
+          destroyCharts();
+        }
+      }
+
+      subdivisionSelect.addEventListener("change", function (e) {
+        renderSubdivision(e.target.value);
+      });
+
+      setEmptyState();
+      loadData();
+    })();
+  </script>
 </body>
 </html>
