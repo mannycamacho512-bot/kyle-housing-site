@@ -983,14 +983,6 @@ function yearTickLabel(value, index, labels) {
   return index % 12 === 0 ? str : "";
 }
 
-  box.innerHTML = `
-    <div class="label">${monthLabel || "Hover data"}</div>
-    <div class="row"><span>Median</span><span>${medianValue != null ? moneyCompact(medianValue) : "--"}</span></div>
-    <div class="row"><span>Average</span><span>${avgValue != null ? moneyCompact(avgValue) : "--"}</span></div>
-    <div class="row"><span>Absorption</span><span>${absorptionValue != null ? Number(absorptionValue).toFixed(1) + "%" : "--"}</span></div>
-  `;
-}
-
 function commonInteractionOptions() {
   return {
     responsive: true,
