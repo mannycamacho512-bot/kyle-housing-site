@@ -494,6 +494,18 @@
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.chart-scroll canvas,
+.chart-area canvas {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .chart-scroll-inner {
@@ -755,7 +767,7 @@
       </div>
     </div>
 
-    <div class="chart-scroll">
+    <div class="chart-scroll" id="priceChartScroll">
       <div class="chart-scroll-inner">
         <div class="stacked-chart-wrap">
           <div class="chart-area chart-area-main">
@@ -982,6 +994,80 @@ function yearTickLabel(value, index, labels) {
 
   return index % 12 === 0 ? str : "";
 }
+function scrollPriceChartToLatest() {
+  const scroller = document.getElementById("priceChartScroll");
+  if (!scroller) return;
+
+  requestAnimationFrame(() => {
+    scroller.scrollLeft = scroller.scrollWidth;
+  });
+}
+function updatePriceBoxFromClientX(chart, months, clientX) {
+  if (!chart || !chart.chartArea || !months || !months.length) return;
+
+  const rect = chart.canvas.getBoundingClientRect();
+  const chartArea = chart.chartArea;
+
+  const localX = clientX - rect.left;
+  const left = chartArea.left;
+  const right = chartArea.right;
+
+  const clampedX = Math.max(left, Math.min(right, localX));
+  const ratio = (clampedX - left) / Math.max(1, right - left);
+  const idx = Math.round(ratio * (months.length - 1));
+
+  const point = months[idx];
+  if (!point) return;
+
+  updatePriceCornerBox(
+    point.month,
+    point.median_price,
+    point.avg_price,
+    (point.absorption_rate || 0) * 100
+  );
+}
+function bindPriceChartTouch(chart, months) {
+  const canvas = chart.canvas;
+  if (!canvas) return;
+
+  function handleTouch(evt) {
+    const touch = evt.touches && evt.touches[0] ? evt.touches[0] : evt.changedTouches && evt.changedTouches[0];
+    if (!touch) return;
+    updatePriceBoxFromClientX(chart, months, touch.clientX);
+  }
+
+  canvas.addEventListener("touchstart", handleTouch, { passive: true });
+  canvas.addEventListener("touchmove", handleTouch, { passive: true });
+}
+    charts.soldActiveChart = new Chart(document.getElementById("soldActiveChart"), {
+    data: {
+      labels,
+      datasets: [
+        {
+          type: "bar",
+          label: "Sold",
+          data: months.map(m => m.sold || 0),
+          backgroundColor: emeraldSoft,
+          borderColor: emerald,
+          borderWidth: 1
+        },
+        {
+          type: "line",
+          label: "Active",
+          data: months.map(m => m.active || 0),
+          borderColor: "#fff",
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.2
+        }
+      ]
+    },
+    options: commonInteractionOptions()
+  });
+
+  scrollPriceChartToLatest();
+}
+}
 
 function commonInteractionOptions() {
   return {
@@ -1152,6 +1238,8 @@ function renderSubdivision(name) {
     }
   }
 });
+  
+bindPriceChartTouch(charts.priceTrendChart, months);
 
   charts.avgPriceChart = new Chart(document.getElementById("avgPriceChart"), {
     type: "bar",
