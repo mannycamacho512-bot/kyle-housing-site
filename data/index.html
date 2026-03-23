@@ -600,7 +600,7 @@
             <article class="panel stat-box">
               <div class="stat-label">Active Now</div>
               <div class="stat-value" id="activeListings">--</div>
-              <div class="stat-note">Current active listings.</div>
+              <div class="stat-note">Homes currently listed for sale.</div>
             </article>
 
             <article class="panel stat-box">
@@ -612,25 +612,31 @@
             <article class="panel stat-box">
               <div class="stat-label">Latest Median Price</div>
               <div class="stat-value" id="latestMedianPrice">--</div>
-              <div class="stat-note">Median sold price in latest month.</div>
+              <div class="stat-note">The middle sold price in the latest month.</div>
             </article>
 
             <article class="panel stat-box">
               <div class="stat-label">Pain Index</div>
               <div class="stat-value" id="painIndex">--</div>
-              <div class="stat-note">Current stress / friction signal.</div>
+              <div class="stat-note">
+  Market friction level. Higher = harder to sell. 30%+ is elevated.
+</div>
             </article>
 
             <article class="panel stat-box">
               <div class="stat-label">Liquidity Index</div>
               <div class="stat-value" id="liquidityIndex">--</div>
-              <div class="stat-note">Current market ease of movement.</div>
+              <div class="stat-note">
+  Share of listings that sold. 60%+ is strong, below 40% is weak.
+</div>
             </article>
 
             <article class="panel stat-box">
               <div class="stat-label">Failure Risk</div>
               <div class="stat-value" id="failureRisk">--</div>
-              <div class="stat-note">Current risk of failed listing outcomes.</div>
+              <div class="stat-note">
+  Share of listings that failed. 30%+ means many homes aren’t selling.
+</div>
             </article>
           </div>
         </div>
@@ -640,8 +646,8 @@
   <article class="panel chart-box">
     <h3>Price Structure</h3>
     <p class="chart-subtext">
-      Median price as the main tape, with average price and absorption as supporting strips below.
-    </p>
+  Median shows the middle sold price, average shows the overall average, and absorption shows how quickly inventory is being bought up.
+</p>
 
     <div class="stacked-chart-wrap">
       <div class="chart-area chart-area-main">
@@ -663,7 +669,7 @@
   <div class="chart-grid">
     <article class="panel chart-box">
       <h3>DOM vs Withdrawn / Expired</h3>
-      <p class="chart-subtext">Median days on market against failed listing outcomes.</p>
+      <p class="chart-subtext"> DOM means how long homes took to sell. Withdrawn / expired means listings that came off the market without selling.</p>
       <div class="chart-area">
         <canvas id="domWithdrawnChart"></canvas>
       </div>
@@ -671,7 +677,9 @@
 
     <article class="panel chart-box">
       <h3>Sell-Through vs Failure</h3>
-      <p class="chart-subtext">Whether resolved listings are converting into closings or breaking down.</p>
+      <p class="chart-subtext">
+  Sell-through rate means the share of listings that ended in a sale. Failure rate means the share that ended withdrawn or expired instead.
+</p>
       <div class="chart-area">
         <canvas id="conversionChart"></canvas>
       </div>
@@ -684,8 +692,8 @@
     <article class="panel chart-box">
       <h3>Sold vs Listings</h3>
       <p class="chart-subtext" id="soldListingsSubtext">
-        Needs monthly new-listings data from export. Current JSON does not include that field.
-      </p>
+  Sold shows how many homes closed. Active shows how many homes were still on the market.
+</p>
       <div class="chart-area">
         <canvas id="soldActiveChart"></canvas>
       </div>
