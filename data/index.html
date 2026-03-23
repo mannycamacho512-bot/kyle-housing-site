@@ -1137,7 +1137,26 @@ function bindPriceChartTouch(chart, months) {
   canvas.addEventListener("touchstart", handleTouch, { passive: true });
   canvas.addEventListener("touchmove", handleTouch, { passive: true });
 }
- 
+ function updateMedianRailScale(months) {
+  const rail = document.getElementById("medianRailScale");
+  if (!rail || !months || !months.length) return;
+
+  const values = months
+    .map(m => Number(m.median_price))
+    .filter(v => !Number.isNaN(v));
+
+  if (!values.length) return;
+
+  const max = Math.max(...values);
+  const min = Math.min(...values);
+  const mid = (max + min) / 2;
+
+  rail.innerHTML = `
+    <div>${moneyCompact(max)}</div>
+    <div>${moneyCompact(mid)}</div>
+    <div>${moneyCompact(min)}</div>
+  `;
+}
 function commonInteractionOptions() {
   return {
     responsive: true,
@@ -1297,26 +1316,6 @@ function renderSubdivision(name) {
     );
     return;
   }
-      function updateMedianRailScale(months) {
-  const rail = document.getElementById("medianRailScale");
-  if (!rail || !months || !months.length) return;
-
-  const values = months
-    .map(m => Number(m.median_price))
-    .filter(v => !Number.isNaN(v));
-
-  if (!values.length) return;
-
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const mid = (max + min) / 2;
-
-  rail.innerHTML = `
-    <div>${moneyCompact(max)}</div>
-    <div>${moneyCompact(mid)}</div>
-    <div>${moneyCompact(min)}</div>
-  `;
-}
       const idx = elements[0].index;
       const point = months[idx];
       if (!point) return;
