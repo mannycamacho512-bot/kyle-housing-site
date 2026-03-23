@@ -416,6 +416,76 @@
 .chart-area-strip canvas {
   height: 110px !important;
 }
+.chart-area-strip canvas {
+  height: 110px !important;
+}
+
+/* ADD THIS RIGHT HERE */
+.chart-area,
+.chart-area-main,
+.chart-area-strip {
+  position: relative;
+}
+
+.chart-corner-box {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  min-width: 150px;
+  padding: 8px 10px;
+  background: rgba(0,0,0,0.82);
+  border: 1px solid rgba(255,255,255,0.18);
+  font-size: 12px;
+  line-height: 1.45;
+  color: #fff;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.chart-corner-box .label {
+  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.chart-corner-box .row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.chart-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.chart-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chart-scroll-inner {
+  min-width: 900px;
+}
+
+.chart-scroll-inner-tight {
+  min-width: 760px;
+}
+
+@media (max-width: 768px) {
+  .chart-scroll-inner {
+    min-width: 1100px;
+  }
+
+  .chart-scroll-inner-tight {
+    min-width: 900px;
+  }
+}
 
     .site-footer {
       border-top: 1px solid var(--border);
@@ -649,10 +719,18 @@
   Median shows the middle sold price, average shows the overall average, and absorption shows how quickly inventory is being bought up.
 </p>
 
+    <div class="chart-scroll">
+  <div class="chart-scroll-inner">
     <div class="stacked-chart-wrap">
       <div class="chart-area chart-area-main">
-        <canvas id="priceTrendChart"></canvas>
-      </div>
+  <div class="chart-corner-box" id="priceCornerBox">
+    <div class="label">Hover data</div>
+    <div class="row"><span>Median</span><span>--</span></div>
+    <div class="row"><span>Average</span><span>--</span></div>
+    <div class="row"><span>Absorption</span><span>--</span></div>
+  </div>
+  <canvas id="priceTrendChart"></canvas>
+</div>
 
       <div class="chart-area chart-area-strip">
         <canvas id="avgPriceChart"></canvas>
@@ -662,6 +740,8 @@
         <canvas id="absorptionChart"></canvas>
       </div>
     </div>
+  </div>
+</div>
   </article>
 </section>
 
@@ -844,6 +924,17 @@ function pct1(value) {
   if (value === null || value === undefined) return "--";
   return Number(value).toFixed(1) + "%";
 }
+function updatePriceCornerBox(monthLabel, medianValue, avgValue, absorptionValue) {
+  const box = document.getElementById("priceCornerBox");
+  if (!box) return;
+
+  box.innerHTML = `
+    <div class="label">${monthLabel || "Hover data"}</div>
+    <div class="row"><span>Median</span><span>${medianValue != null ? moneyCompact(medianValue) : "--"}</span></div>
+    <div class="row"><span>Average</span><span>${avgValue != null ? moneyCompact(avgValue) : "--"}</span></div>
+    <div class="row"><span>Absorption</span><span>${absorptionValue != null ? Number(absorptionValue).toFixed(1) + "%" : "--"}</span></div>
+  `;
+}
 
 function commonInteractionOptions() {
   return {
@@ -952,24 +1043,45 @@ function renderSubdivision(name) {
   els.failureRisk.textContent = pct1((latest.failure_rate || 0) * 100);
 
   const labels = months.map(m => m.month);
-
+  updatePriceCornerBox(
+  latest.month,
+  latest.median_price,
+  latest.avg_price,
+  (latest.absorption_rate || 0) * 100
+);
+  
   destroyCharts();
 
   charts.priceTrendChart = new Chart(document.getElementById("priceTrendChart"), {
-    type: "line",
-    data: {
-      labels,
-      datasets: [{
-        label: "Median Price",
-        data: months.map(m => m.median_price),
-        borderColor: emerald,
-        borderWidth: 2.5,
-        pointRadius: 0,
-        tension: 0.18
-      }]
-    },
-    options: priceOptions(false)
-  });
+  type: "line",
+  data: {
+    labels,
+    datasets: [{
+      label: "Median Price",
+      data: months.map(m => m.median_price),
+      borderColor: emerald,
+      borderWidth: 2.5,
+      pointRadius: 0,
+      tension: 0.18
+    }]
+  },
+  options: {
+    ...priceOptions(false),
+    onHover: (event, elements, chart) => {
+      if (!elements.length) return;
+      const idx = elements[0].index;
+      const point = months[idx];
+      if (!point) return;
+
+      updatePriceCornerBox(
+        point.month,
+        point.median_price,
+        point.avg_price,
+        (point.absorption_rate || 0) * 100
+      );
+    }
+  }
+});
 
   charts.avgPriceChart = new Chart(document.getElementById("avgPriceChart"), {
     type: "bar",
