@@ -922,9 +922,6 @@
 <article class="panel chart-box">
   <!-- we'll build this next -->
 </article>
-    <!-- we'll build this next -->
-  </article>
-
 </div>
 </section>
     </div>
@@ -1544,28 +1541,29 @@ Chart.register(pieLabelPlugin);
       ]
     },
     options: {
-  responsive: true,
-  maintainAspectRatio: false,
-  radius: "88%",
-  layout: {
-    padding: 0
-  },
-  plugins: {
-    legend: {
-      position: "bottom",
-      labels: {
-        color: chartTextColor
-      }
-    },
-    tooltip: {
-      callbacks: {
-        label: function(context) {
-          return context.label + ": " + context.raw.toFixed(1) + "%";
+      responsive: true,
+      maintainAspectRatio: false,
+      radius: "88%",
+      layout: {
+        padding: 0
+      },
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {
+            color: chartTextColor
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return context.label + ": " + context.raw.toFixed(1) + "%";
+            }
+          }
         }
       }
     }
   }
-}
 );
         /*
         charts.domWithdrawnChart = new Chart(document.getElementById("domWithdrawnChart"), {
