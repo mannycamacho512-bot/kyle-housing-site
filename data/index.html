@@ -460,13 +460,65 @@
       pointer-events: none;
     }
 
-    .price-right-scroll {
+        .price-right-scroll {
       min-width: 0;
       position: relative;
       border-right: 1px solid var(--border);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       background: #000;
+    }
+
+    .price-title-rail {
+      display: grid;
+      grid-template-rows: 34px 34px 34px;
+      background: #000;
+      position: relative;
+      z-index: 4;
+    }
+
+    .lane-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+      color: rgba(255,255,255,0.92);
+      white-space: nowrap;
+      pointer-events: none;
+      background: #000;
+    }
+
+    .lane-title + .lane-title {
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .lane-title-main {
+      height: 34px;
+    }
+
+    .lane-title-strip {
+      height: 34px;
+    }
+
+    .chart-scroll {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      touch-action: pan-x;
+      user-select: none;
+      -webkit-user-select: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chart-scroll.is-frozen {
+      overflow-x: hidden;
+      touch-action: none;
+      cursor: ew-resize;
     }
 
     .stacked-chart-wrap {
@@ -486,19 +538,6 @@
 
     .chart-area + .chart-area {
       border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .lane-title {
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 3;
-      font-size: 13px;
-      letter-spacing: 0.3px;
-      color: rgba(255,255,255,0.92);
-      pointer-events: none;
-      white-space: nowrap;
     }
 
     .chart-area-main canvas {
@@ -834,7 +873,7 @@
       </div>
     </div>
 
-        <div class="price-layout">
+            <div class="price-layout">
       <div class="price-yaxis-col">
         <div class="axis-rail axis-rail-main" id="medianYAxisFake"></div>
         <div class="axis-rail axis-rail-strip" id="avgYAxisFake"></div>
@@ -842,21 +881,24 @@
       </div>
 
       <div class="price-right-scroll">
+        <div class="price-title-rail">
+          <div class="lane-title lane-title-main">Median Price</div>
+          <div class="lane-title lane-title-strip">Average Price</div>
+          <div class="lane-title lane-title-strip">Absorption</div>
+        </div>
+
         <div class="chart-scroll" id="priceChartScroll">
           <div class="chart-scroll-inner">
             <div class="stacked-chart-wrap">
               <div class="chart-area chart-area-main">
-                <div class="lane-title">Median Price</div>
                 <canvas id="priceTrendChart"></canvas>
               </div>
 
               <div class="chart-area chart-area-strip">
-                <div class="lane-title">Average Price</div>
                 <canvas id="avgPriceChart"></canvas>
               </div>
 
               <div class="chart-area chart-area-strip">
-                <div class="lane-title">Absorption</div>
                 <canvas id="absorptionChart"></canvas>
               </div>
             </div>
@@ -1114,12 +1156,14 @@
         return Math.round(ratio * (months.length - 1));
       }
 
-            function bindPriceChartTouch(chart, months) {
+                  function bindPriceChartTouch(chart, months) {
         const canvas = chart.canvas;
         const scroller = document.getElementById("priceChartScroll");
         if (!canvas || !scroller) return;
 
         let frozen = false;
+        let pressTimer = null;
+        let touchStarted = false;
 
         function syncFromTouch(evt) {
           const touch = evt.touches && evt.touches[0]
@@ -1132,30 +1176,55 @@
           updatePriceBoxFromIndex(chart, months, idx);
         }
 
+        function resetToScrollMode() {
+          frozen = false;
+          touchStarted = false;
+          scroller.classList.remove("is-frozen");
+
+          if (pressTimer) {
+            clearTimeout(pressTimer);
+            pressTimer = null;
+          }
+
+          chart.setActiveElements([]);
+          chart.tooltip.setActiveElements([], { x: 0, y: 0 });
+          chart.update("none");
+
+          const last = months[months.length - 1];
+          updatePriceCornerBox(
+            last.month,
+            last.median_price,
+            last.avg_price,
+            (last.absorption_rate || 0) * 100
+          );
+        }
+
+        canvas.addEventListener("touchstart", function (evt) {
+          touchStarted = true;
+
+          if (pressTimer) clearTimeout(pressTimer);
+
+          pressTimer = setTimeout(() => {
+            if (!touchStarted) return;
+            frozen = true;
+            scroller.classList.add("is-frozen");
+            syncFromTouch(evt);
+          }, 250);
+        }, { passive: true });
+
         canvas.addEventListener("touchmove", function (evt) {
           if (!frozen) return;
           evt.preventDefault();
           syncFromTouch(evt);
         }, { passive: false });
 
-        canvas.addEventListener("dblclick", function () {
-          frozen = !frozen;
-          scroller.classList.toggle("is-frozen", frozen);
+        canvas.addEventListener("touchend", function () {
+          resetToScrollMode();
+        }, { passive: true });
 
-          if (!frozen) {
-            chart.setActiveElements([]);
-            chart.tooltip.setActiveElements([], { x: 0, y: 0 });
-            chart.update("none");
-
-            const last = months[months.length - 1];
-            updatePriceCornerBox(
-              last.month,
-              last.median_price,
-              last.avg_price,
-              (last.absorption_rate || 0) * 100
-            );
-          }
-        });
+        canvas.addEventListener("touchcancel", function () {
+          resetToScrollMode();
+        }, { passive: true });
       }
 
         function commonInteractionOptions() {
