@@ -912,15 +912,27 @@
 </p>
 
   <div class="chart-area" style="min-height: 95px; padding: 4px 6px;">
-    <div style="width: 145px; height: 145px; margin: 0 auto 6px auto;">
+    <div style="width: 145px; height: 155px; margin: 0 auto 6px auto;">
       <canvas id="listingOutcomesChart"></canvas>
     </div>
   </div>
 </article>
 
 <!-- Withdrawn / Expired (placeholder for next step) -->
-<article class="panel chart-box">
-  <!-- we'll build this next -->
+<!-- Withdrawn / Expired -->
+<article class="panel chart-box" style="padding: 12px 12px 10px; max-width: 260px; justify-self: start;">
+  <h3>Withdrawn / Expired</h3>
+  <p class="chart-subtext" style="margin: 0 0 8px;">
+    Last month: homes that left the market unsold.
+  </p>
+
+  <div style="display: flex; align-items: center; gap: 12px; margin-top: 8px;">
+    <div style="width: 14px; height: 14px; border: 1px solid rgba(255,255,255,0.55); background: rgba(255,255,255,0.16);"></div>
+    <div>
+      <div id="withdrawnExpiredCount" style="font-size: 30px; font-weight: 700; line-height: 1; color: #fff;">--</div>
+      <div style="font-size: 12px; color: rgba(255,255,255,0.72); margin-top: 6px;">homes</div>
+    </div>
+  </div>
 </article>
 </div>
 </section>
@@ -985,14 +997,15 @@
       const subdivisionSelect = document.getElementById("subdivisionSelect");
 
       const els = {
-        summary: document.getElementById("subdivisionSummary"),
-        active: document.getElementById("activeListings"),
-        latestSold: document.getElementById("latestSold"),
-        latestMedianPrice: document.getElementById("latestMedianPrice"),
-        painIndex: document.getElementById("painIndex"),
-        liquidityIndex: document.getElementById("liquidityIndex"),
-        failureRisk: document.getElementById("failureRisk")
-      };
+  summary: document.getElementById("subdivisionSummary"),
+  active: document.getElementById("activeListings"),
+  latestSold: document.getElementById("latestSold"),
+  latestMedianPrice: document.getElementById("latestMedianPrice"),
+  painIndex: document.getElementById("painIndex"),
+  liquidityIndex: document.getElementById("liquidityIndex"),
+  failureRisk: document.getElementById("failureRisk"),
+  withdrawnExpiredCount: document.getElementById("withdrawnExpiredCount")
+};
 
       let allData = [];
       let charts = {};
@@ -1067,14 +1080,15 @@
       }
 
       function setEmptyState(message) {
-        els.summary.textContent = message || "Select a subdivision to load its market dashboard.";
-        els.active.textContent = "--";
-        els.latestSold.textContent = "--";
-        els.latestMedianPrice.textContent = "--";
-        els.painIndex.textContent = "--";
-        els.liquidityIndex.textContent = "--";
-        els.failureRisk.textContent = "--";
-      }
+  els.summary.textContent = message || "Select a subdivision to load its market dashboard.";
+  els.active.textContent = "--";
+  els.latestSold.textContent = "--";
+  els.latestMedianPrice.textContent = "--";
+  els.painIndex.textContent = "--";
+  els.liquidityIndex.textContent = "--";
+  els.failureRisk.textContent = "--";
+  els.withdrawnExpiredCount.textContent = "--";
+}
 
       function destroyCharts() {
         Object.values(charts).forEach(chart => {
@@ -1402,6 +1416,7 @@ Chart.register(pieLabelPlugin);
         els.painIndex.textContent = pct1((latest.failure_rate || 0) * 100);
         els.liquidityIndex.textContent = pct1((latest.sell_through_rate || 0) * 100);
         els.failureRisk.textContent = pct1((latest.failure_rate || 0) * 100);
+        els.withdrawnExpiredCount.textContent = fmtNumber(latest.withdrawn_expired || 0);
 
                 updatePriceCornerBox(
           latest.month,
