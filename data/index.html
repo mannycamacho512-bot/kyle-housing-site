@@ -1073,12 +1073,12 @@
         return index % 12 === 0 ? str : "";
       }
 
-      function scrollPriceChartToLatest() {
+            function scrollPriceChartToLatest() {
         const scroller = document.getElementById("priceChartScroll");
         if (!scroller) return;
 
         requestAnimationFrame(() => {
-          scroller.scrollLeft = scroller.scrollWidth;
+          scroller.scrollLeft = scroller.scrollWidth - scroller.clientWidth;
         });
       }
             function updatePriceBoxFromIndex(chart, months, idx) {
@@ -1114,7 +1114,7 @@
         return Math.round(ratio * (months.length - 1));
       }
 
-      function bindPriceChartTouch(chart, months) {
+            function bindPriceChartTouch(chart, months) {
         const canvas = chart.canvas;
         const scroller = document.getElementById("priceChartScroll");
         if (!canvas || !scroller) return;
@@ -1132,19 +1132,13 @@
           updatePriceBoxFromIndex(chart, months, idx);
         }
 
-        canvas.addEventListener("touchstart", function (evt) {
-          frozen = true;
-          scroller.classList.add("is-frozen");
-          syncFromTouch(evt);
-        }, { passive: true });
-
         canvas.addEventListener("touchmove", function (evt) {
           if (!frozen) return;
           evt.preventDefault();
           syncFromTouch(evt);
         }, { passive: false });
 
-        canvas.addEventListener("click", function () {
+        canvas.addEventListener("dblclick", function () {
           frozen = !frozen;
           scroller.classList.toggle("is-frozen", frozen);
 
@@ -1385,7 +1379,8 @@
         requestAnimationFrame(() => {
           syncPriceAxes();
         });
-
+        
+        /*
         charts.domWithdrawnChart = new Chart(document.getElementById("domWithdrawnChart"), {
           data: {
             labels,
@@ -1413,7 +1408,9 @@
           },
           options: dualAxisOptions()
         });
-
+        */
+        
+        /*
         charts.conversionChart = new Chart(document.getElementById("conversionChart"), {
           type: "bar",
           data: {
@@ -1506,6 +1503,7 @@
           },
           options: commonInteractionOptions()
         });
+        */
 
         scrollPriceChartToLatest();
       }
