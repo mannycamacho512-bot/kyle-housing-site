@@ -912,9 +912,10 @@
     </p>
 
     <div class="chart-area" style="min-height: 95px; padding: 4px 6px;">
-      <canvas id="listingOutcomesChart"></canvas>
-    </div>
-  </article>
+  <div style="width: 92px; height: 92px; margin: 0 auto 6px auto;">
+    <canvas id="listingOutcomesChart"></canvas>
+  </div>
+</div>
 
   <!-- Withdrawn / Expired (placeholder for next step) -->
   <article class="panel chart-box">
@@ -1118,7 +1119,7 @@
 
       ctx.save();
       ctx.fillStyle = "#fff";
-      ctx.font = "600 12px Hedvig Letters Serif";
+      ctx.font = "600 10px Hedvig Letters Serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(value.toFixed(0) + "%", position.x, position.y);
@@ -1540,31 +1541,28 @@ Chart.register(pieLabelPlugin);
       ]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      layout: {
-        padding: 0
-      },
-      plugins: {
-        legend: {
-          position: "bottom",
-          labels: {
-            color: chartTextColor,
-            boxWidth: 10,
-            boxHeight: 10,
-            padding: 8
-          }
-        },
-        tooltip: {
-          callbacks: {
-            label: function(context) {
-              return context.label + ": " + context.raw.toFixed(1) + "%";
-            }
-          }
+  responsive: true,
+  maintainAspectRatio: false,
+  radius: "88%",
+  layout: {
+    padding: 0
+  },
+  plugins: {
+    legend: {
+      position: "bottom",
+      labels: {
+        color: chartTextColor
+      }
+    },
+    tooltip: {
+      callbacks: {
+        label: function(context) {
+          return context.label + ": " + context.raw.toFixed(1) + "%";
         }
       }
     }
   }
+}
 );
         /*
         charts.domWithdrawnChart = new Chart(document.getElementById("domWithdrawnChart"), {
