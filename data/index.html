@@ -412,14 +412,16 @@
     .chart-corner-box .median-row span:last-child {
       font-size: 20px;
     }
-        .price-layout {
+            .price-layout {
       display: grid;
-      grid-template-columns: 96px minmax(0, 1fr);
+      grid-template-columns: 54px minmax(0, 1fr);
       gap: 0;
       align-items: start;
     }
 
     .price-yaxis-col {
+      display: grid;
+      grid-template-rows: 420px 140px 140px;
       position: relative;
       z-index: 3;
       background: #000;
@@ -428,38 +430,34 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .yaxis-title-row {
-      height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      letter-spacing: 0.4px;
-      color: rgba(255,255,255,0.86);
-      text-align: center;
+    .axis-rail {
+      position: relative;
       background: #000;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-right: 1px solid rgba(255,255,255,0.10);
+      overflow: hidden;
     }
 
-    .yaxis-box {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-end;
-      padding: 12px 8px 12px 0;
-      color: rgba(255,255,255,0.78);
-      font-size: 11px;
-      line-height: 1;
-      background: #000;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+    .axis-rail + .axis-rail {
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
-    .yaxis-box-main {
+    .axis-rail-main {
       height: 420px;
     }
 
-    .yaxis-box-strip {
+    .axis-rail-strip {
       height: 140px;
+    }
+
+    .axis-tick {
+      position: absolute;
+      right: 6px;
+      transform: translateY(50%);
+      font-size: 10px;
+      line-height: 1;
+      color: rgba(255,255,255,0.76);
+      white-space: nowrap;
+      pointer-events: none;
     }
 
     .price-right-scroll {
@@ -471,32 +469,44 @@
       background: #000;
     }
 
-    .price-chart-titles {
-      position: sticky;
-      top: 0;
-      z-index: 4;
-      background: #000;
-      pointer-events: none;
+    .stacked-chart-wrap {
+      display: grid;
+      grid-template-rows: 420px 140px 140px;
+      gap: 0;
     }
 
-    .chart-lane-title {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
+    .chart-area {
+      position: relative;
+      width: 100%;
+      min-height: 0;
+      border: 0;
+      padding: 0 12px;
+      background: #000;
+    }
+
+    .chart-area + .chart-area {
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .lane-title {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
       font-size: 13px;
-      letter-spacing: 0.4px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: #000;
+      letter-spacing: 0.3px;
+      color: rgba(255,255,255,0.92);
+      pointer-events: none;
+      white-space: nowrap;
     }
 
-    .chart-lane-title-main {
-      height: 34px;
+    .chart-area-main canvas {
+      height: 420px !important;
     }
 
-    .chart-lane-title-strip {
-      height: 34px;
+    .chart-area-strip canvas {
+      height: 140px !important;
     }
 
     .chart-scroll {
@@ -677,18 +687,17 @@
       .chart-strip-title {
         font-size: 10px;
       }
-            .price-layout {
-        grid-template-columns: 74px minmax(0, 1fr);
+                  .price-layout {
+        grid-template-columns: 46px minmax(0, 1fr);
       }
 
-      .yaxis-title-row,
-      .chart-lane-title {
+      .lane-title {
         font-size: 10px;
       }
 
-      .yaxis-box {
-        font-size: 10px;
-        padding-right: 6px;
+      .axis-tick {
+        right: 4px;
+        font-size: 9px;
       }
 
       .chart-scroll-inner {
@@ -825,49 +834,29 @@
       </div>
     </div>
 
-    <div class="price-layout">
+        <div class="price-layout">
       <div class="price-yaxis-col">
-        <div class="yaxis-title-row">Median Price</div>
-        <div class="yaxis-box yaxis-box-main" id="medianYAxisFake">
-          <div>--</div>
-          <div>--</div>
-          <div>--</div>
-        </div>
-
-        <div class="yaxis-title-row">Average Price</div>
-        <div class="yaxis-box yaxis-box-strip" id="avgYAxisFake">
-          <div>--</div>
-          <div>--</div>
-          <div>--</div>
-        </div>
-
-        <div class="yaxis-title-row">Absorption</div>
-        <div class="yaxis-box yaxis-box-strip" id="absorptionYAxisFake">
-          <div>100%</div>
-          <div>50%</div>
-          <div>0%</div>
-        </div>
+        <div class="axis-rail axis-rail-main" id="medianYAxisFake"></div>
+        <div class="axis-rail axis-rail-strip" id="avgYAxisFake"></div>
+        <div class="axis-rail axis-rail-strip" id="absorptionYAxisFake"></div>
       </div>
 
       <div class="price-right-scroll">
-        <div class="price-chart-titles">
-          <div class="chart-lane-title chart-lane-title-main">Median Price</div>
-          <div class="chart-lane-title chart-lane-title-strip">Average Price</div>
-          <div class="chart-lane-title chart-lane-title-strip">Absorption</div>
-        </div>
-
         <div class="chart-scroll" id="priceChartScroll">
           <div class="chart-scroll-inner">
             <div class="stacked-chart-wrap">
               <div class="chart-area chart-area-main">
+                <div class="lane-title">Median Price</div>
                 <canvas id="priceTrendChart"></canvas>
               </div>
 
               <div class="chart-area chart-area-strip">
+                <div class="lane-title">Average Price</div>
                 <canvas id="avgPriceChart"></canvas>
               </div>
 
               <div class="chart-area chart-area-strip">
+                <div class="lane-title">Absorption</div>
                 <canvas id="absorptionChart"></canvas>
               </div>
             </div>
@@ -979,64 +968,45 @@
           notation: "compact"
         }).format(value);
       }
-      function setThreeScaleLabels(el, minValue, maxValue, formatter) {
-  if (!el) return;
+            function renderAxisFromChart(chart, railEl, formatter) {
+        if (!chart || !railEl || !chart.scales || !chart.scales.y) return;
 
-  const mid = (minValue + maxValue) / 2;
+        const y = chart.scales.y;
+        const ticks = Array.isArray(y.ticks) ? y.ticks : [];
+        railEl.innerHTML = "";
 
-  el.innerHTML = `
-    <div>${formatter(maxValue)}</div>
-    <div>${formatter(mid)}</div>
-    <div>${formatter(minValue)}</div>
-  `;
-}
+        ticks.forEach((tick) => {
+          const tickEl = document.createElement("div");
+          tickEl.className = "axis-tick";
+          tickEl.textContent = formatter(tick.value);
 
-function updateFakePriceAxes(months) {
-  if (!months || !months.length) return;
+          const pixel = y.getPixelForValue(tick.value);
+          const top = pixel - chart.chartArea.top;
 
-  const medianVals = months
-    .map(m => Number(m.median_price))
-    .filter(v => !Number.isNaN(v));
+          tickEl.style.top = `${top}px`;
+          railEl.appendChild(tickEl);
+        });
+      }
 
-  const avgVals = months
-    .map(m => Number(m.avg_price))
-    .filter(v => !Number.isNaN(v));
+      function syncPriceAxes() {
+        renderAxisFromChart(
+          charts.priceTrendChart,
+          document.getElementById("medianYAxisFake"),
+          moneyCompact
+        );
 
-  const absorptionVals = months
-    .map(m => Number((m.absorption_rate || 0) * 100))
-    .filter(v => !Number.isNaN(v));
+        renderAxisFromChart(
+          charts.avgPriceChart,
+          document.getElementById("avgYAxisFake"),
+          moneyCompact
+        );
 
-  const medianEl = document.getElementById("medianYAxisFake");
-  const avgEl = document.getElementById("avgYAxisFake");
-  const absorptionEl = document.getElementById("absorptionYAxisFake");
-
-  if (medianVals.length) {
-    setThreeScaleLabels(
-      medianEl,
-      Math.min(...medianVals),
-      Math.max(...medianVals),
-      moneyCompact
-    );
-  }
-
-  if (avgVals.length) {
-    setThreeScaleLabels(
-      avgEl,
-      Math.min(...avgVals),
-      Math.max(...avgVals),
-      moneyCompact
-    );
-  }
-
-  if (absorptionVals.length) {
-    setThreeScaleLabels(
-      absorptionEl,
-      Math.min(...absorptionVals),
-      Math.max(...absorptionVals),
-      (v) => Number(v).toFixed(0) + "%"
-    );
-  }
-}
+        renderAxisFromChart(
+          charts.absorptionChart,
+          document.getElementById("absorptionYAxisFake"),
+          (v) => `${Number(v).toFixed(0)}%`
+        );
+      }
 
       function setEmptyState(message) {
         els.summary.textContent = message || "Select a subdivision to load its market dashboard.";
@@ -1334,8 +1304,6 @@ function updateFakePriceAxes(months) {
           (latest.absorption_rate || 0) * 100
         );
 
-        updateFakePriceAxes(months);
-
         destroyCharts();
 
         charts.priceTrendChart = new Chart(document.getElementById("priceTrendChart"), {
@@ -1413,6 +1381,9 @@ function updateFakePriceAxes(months) {
             }]
           },
           options: percentOptions(false)
+        });
+        requestAnimationFrame(() => {
+          syncPriceAxes();
         });
 
         charts.domWithdrawnChart = new Chart(document.getElementById("domWithdrawnChart"), {
