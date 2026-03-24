@@ -908,10 +908,10 @@
   <article class="panel chart-box">
     <h3>Listing Outcomes</h3>
     <p class="chart-subtext">
-      Not every listing makes it to the finish line. This shows what actually happens.
+      Based on the latest month. Shows the share of listings that sold vs those that left the market without selling.
     </p>
 
-    <div class="chart-area" style="min-height: 260px;">
+    <div class="chart-area" style="min-height: 180px; padding: 10px;">
       <canvas id="listingOutcomesChart"></canvas>
     </div>
   </article>
@@ -1527,17 +1527,24 @@ Chart.register(pieLabelPlugin);
             (latest.failure_rate || 0) * 100
           ],
           backgroundColor: [
-            "rgba(6,95,70,0.85)",
-            "rgba(255,255,255,0.25)"
-          ],
-          borderColor: "#000",
-          borderWidth: 1
+  "rgba(6,95,70,0.55)",   // darker inner green
+  "rgba(255,255,255,0.18)"
+],
+borderColor: [
+  "#10b981",              // lighter emerald edge (glow feel)
+  "rgba(255,255,255,0.5)"
+],
+borderWidth: 2,
+hoverOffset: 6
         }
       ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      layout: {
+  padding: 6
+},
       plugins: {
         legend: {
           position: "bottom",
