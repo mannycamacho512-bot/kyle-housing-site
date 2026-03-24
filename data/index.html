@@ -460,7 +460,7 @@
       pointer-events: none;
     }
 
-        .price-right-scroll {
+            .price-right-scroll {
       min-width: 0;
       position: relative;
       border-right: 1px solid var(--border);
@@ -469,37 +469,30 @@
       background: #000;
     }
 
-    .price-title-rail {
-      display: grid;
-      grid-template-rows: 34px 34px 34px;
-      background: #000;
-      position: relative;
-      z-index: 4;
-    }
-
-    .lane-title {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+    .lane-title-fixed {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
       font-size: 13px;
       letter-spacing: 0.3px;
       color: rgba(255,255,255,0.92);
       white-space: nowrap;
       pointer-events: none;
-      background: #000;
+      text-align: center;
+      text-shadow: 0 0 8px rgba(0,0,0,0.85);
     }
 
-    .lane-title + .lane-title {
-      border-top: 1px solid rgba(255,255,255,0.08);
+    .lane-title-fixed-main {
+      top: 8px;
     }
 
-    .lane-title-main {
-      height: 34px;
+    .lane-title-fixed-avg {
+      top: 428px;
     }
 
-    .lane-title-strip {
-      height: 34px;
+    .lane-title-fixed-abs {
+      top: 568px;
     }
 
     .chart-scroll {
@@ -527,12 +520,12 @@
       gap: 0;
     }
 
-    .chart-area {
+        .chart-area {
       position: relative;
       width: 100%;
       min-height: 0;
       border: 0;
-      padding: 0 12px;
+      padding: 18px 12px 0 12px;
       background: #000;
     }
 
@@ -729,9 +722,20 @@
                   .price-layout {
         grid-template-columns: 46px minmax(0, 1fr);
       }
-
-      .lane-title {
+            .lane-title-fixed {
         font-size: 10px;
+      }
+
+      .lane-title-fixed-main {
+        top: 6px;
+      }
+
+      .lane-title-fixed-avg {
+        top: 426px;
+      }
+
+      .lane-title-fixed-abs {
+        top: 566px;
       }
 
       .axis-tick {
@@ -873,7 +877,7 @@
       </div>
     </div>
 
-            <div class="price-layout">
+                <div class="price-layout">
       <div class="price-yaxis-col">
         <div class="axis-rail axis-rail-main" id="medianYAxisFake"></div>
         <div class="axis-rail axis-rail-strip" id="avgYAxisFake"></div>
@@ -881,11 +885,9 @@
       </div>
 
       <div class="price-right-scroll">
-        <div class="price-title-rail">
-          <div class="lane-title lane-title-main">Median Price</div>
-          <div class="lane-title lane-title-strip">Average Price</div>
-          <div class="lane-title lane-title-strip">Absorption</div>
-        </div>
+        <div class="lane-title-fixed lane-title-fixed-main">Median Price</div>
+        <div class="lane-title-fixed lane-title-fixed-avg">Average Price</div>
+        <div class="lane-title-fixed lane-title-fixed-abs">Absorption</div>
 
         <div class="chart-scroll" id="priceChartScroll">
           <div class="chart-scroll-inner">
