@@ -902,21 +902,26 @@
   </article>
 </section>
       <section class="section-block">
-  <div class="chart-grid">
+  <div class="chart-grid" style="grid-template-columns: 1fr 1fr;">
 
-    <!-- Listing Outcomes -->
-    <article class="panel chart-box">
-      <h3>Listing Outcomes</h3>
-      <p class="chart-subtext">
-        Not every listing makes it to the finish line. This shows what actually happens.
-      </p>
+  <!-- Listing Outcomes -->
+  <article class="panel chart-box">
+    <h3>Listing Outcomes</h3>
+    <p class="chart-subtext">
+      Not every listing makes it to the finish line. This shows what actually happens.
+    </p>
 
-      <div class="chart-area" style="min-height: 320px;">
-        <canvas id="listingOutcomesChart"></canvas>
-      </div>
-    </article>
+    <div class="chart-area" style="min-height: 260px;">
+      <canvas id="listingOutcomesChart"></canvas>
+    </div>
+  </article>
 
-  </div>
+  <!-- Withdrawn / Expired (placeholder for next step) -->
+  <article class="panel chart-box">
+    <!-- we'll build this next -->
+  </article>
+
+</div>
 </section>
     </div>
   </main>
@@ -1096,6 +1101,33 @@
       };
 
       Chart.register(crosshairPlugin);
+      const pieLabelPlugin = {
+  id: "pieLabelPlugin",
+  afterDraw(chart) {
+    if (chart.config.type !== "pie") return;
+
+    const { ctx } = chart;
+    const dataset = chart.data.datasets[0];
+    const meta = chart.getDatasetMeta(0);
+
+    meta.data.forEach((arc, i) => {
+      const value = dataset.data[i];
+      if (!value) return;
+
+      const position = arc.tooltipPosition();
+
+      ctx.save();
+      ctx.fillStyle = "#fff";
+      ctx.font = "600 12px Hedvig Letters Serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(value.toFixed(0) + "%", position.x, position.y);
+      ctx.restore();
+    });
+  }
+};
+
+Chart.register(pieLabelPlugin);
 
       function updatePriceCornerBox(monthLabel, medianValue, avgValue, absorptionValue) {
         const box = document.getElementById("priceCornerBox");
