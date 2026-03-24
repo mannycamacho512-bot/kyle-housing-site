@@ -1228,7 +1228,34 @@
           resetToScrollMode();
         }, { passive: true });
       }
+      function exponentialSmoothing(values, alpha = 0.35) {
+        const nums = values.map(v => {
+          const n = Number(v);
+          return Number.isFinite(n) ? n : null;
+        });
 
+        const result = [];
+        let prev = null;
+
+        for (let i = 0; i < nums.length; i++) {
+          const current = nums[i];
+
+          if (current === null) {
+            result.push(prev);
+            continue;
+          }
+
+          if (prev === null) {
+            prev = current;
+          } else {
+            prev = alpha * current + (1 - alpha) * prev;
+          }
+
+          result.push(Number(prev.toFixed(2)));
+        }
+
+        return result;
+      }
         function commonInteractionOptions() {
         return {
           responsive: true,
@@ -1373,16 +1400,29 @@
 
         charts.priceTrendChart = new Chart(document.getElementById("priceTrendChart"), {
           type: "line",
-          data: {
+                    data: {
             labels,
-            datasets: [{
-              label: "Median Price",
-              data: months.map(m => m.median_price),
-              borderColor: emerald,
-              borderWidth: 2.5,
-              pointRadius: 0,
-              tension: 0.18
-            }]
+            datasets: [
+              {
+                label: "Median Price Trend",
+                data: exponentialSmoothing(months.map(m => m.median_price), 0.35),
+                borderColor: "rgba(255,255,255,0.55)",
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.35,
+                borderDash: [0],
+                order: 1
+              },
+              {
+                label: "Median Price",
+                data: months.map(m => m.median_price),
+                borderColor: emerald,
+                borderWidth: 2.5,
+                pointRadius: 0,
+                tension: 0.18,
+                order: 2
+              }
+            ]
           },
           options: {
             ...priceOptions(true),
