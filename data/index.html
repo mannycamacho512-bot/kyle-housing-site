@@ -908,10 +908,10 @@
   <article class="panel chart-box">
     <h3>Listing Outcomes</h3>
     <p class="chart-subtext">
-      Based on the latest month. Shows the share of listings that sold vs those that left the market without selling.
+      Based on the last month's activity. Shows the share of listings that sold vs those that left the market without selling.
     </p>
 
-    <div class="chart-area" style="min-height: 180px; padding: 10px;">
+    <div class="chart-area" style="min-height: 95px; padding: 4px 6px;">
       <canvas id="listingOutcomesChart"></canvas>
     </div>
   </article>
@@ -1527,15 +1527,15 @@ Chart.register(pieLabelPlugin);
             (latest.failure_rate || 0) * 100
           ],
           backgroundColor: [
-  "rgba(6,95,70,0.55)",   // darker inner green
-  "rgba(255,255,255,0.18)"
-],
-borderColor: [
-  "#10b981",              // lighter emerald edge (glow feel)
-  "rgba(255,255,255,0.5)"
-],
-borderWidth: 2,
-hoverOffset: 6
+            "rgba(6,95,70,0.55)",
+            "rgba(255,255,255,0.18)"
+          ],
+          borderColor: [
+            "#10b981",
+            "rgba(255,255,255,0.5)"
+          ],
+          borderWidth: 2,
+          hoverOffset: 6
         }
       ]
     },
@@ -1543,13 +1543,16 @@ hoverOffset: 6
       responsive: true,
       maintainAspectRatio: false,
       layout: {
-  padding: 6
-},
+        padding: 0
+      },
       plugins: {
         legend: {
           position: "bottom",
           labels: {
-            color: chartTextColor
+            color: chartTextColor,
+            boxWidth: 10,
+            boxHeight: 10,
+            padding: 8
           }
         },
         tooltip: {
