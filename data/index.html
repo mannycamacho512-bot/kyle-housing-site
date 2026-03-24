@@ -50,9 +50,6 @@
       height: auto;
     }
 
-    /* =========================
-       HEADER
-    ========================== */
     .site-header {
       position: fixed;
       top: 0;
@@ -196,9 +193,6 @@
       transform: translateY(-8px);
     }
 
-    /* =========================
-       PAGE
-    ========================== */
     .page-wrap {
       width: 100%;
       margin: 0;
@@ -310,10 +304,6 @@
       grid-template-columns: repeat(6, minmax(0, 1fr));
     }
 
-    .stats-grid-4 {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
     .stat-box {
       min-height: 150px;
     }
@@ -374,232 +364,100 @@
       height: 280px;
       display: block;
     }
-    .chart-area-xl {
-  min-height: 480px;
-}
 
-.chart-area-xl canvas {
-  height: 430px !important;
-}
+    .stacked-chart-wrap {
+      display: grid;
+      grid-template-rows: minmax(380px, auto) minmax(120px, auto) minmax(120px, auto);
+      gap: 10px;
+    }
 
-.chart-area-sm {
-  min-height: 220px;
-}
+    .chart-area-main {
+      min-height: 420px;
+    }
 
-.chart-area-sm canvas {
-  height: 180px !important;
-}
+    .chart-area-main canvas {
+      height: 390px !important;
+    }
 
-.chart-grid-stack {
-  grid-template-columns: 1fr;
-}
-/* NEW — stacked Bloomberg-style layout */
-.stacked-chart-wrap {
-  display: grid;
-  grid-template-rows: minmax(380px, auto) minmax(120px, auto) minmax(120px, auto);
-  gap: 10px;
-}
+    .chart-area-strip {
+      min-height: 140px;
+      padding: 8px 12px;
+    }
 
-.chart-area-main {
-  min-height: 420px;
-}
+    .chart-area-strip canvas {
+      height: 110px !important;
+    }
 
-.chart-area-main canvas {
-  height: 390px !important;
-}
+    .chart-strip-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 6px;
+    }
 
-.chart-area-strip {
-  min-height: 140px;
-  padding: 8px 12px;
-}
+    .price-header-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 12px;
+    }
 
-.chart-area-strip canvas {
-  height: 110px !important;
-}
+    .chart-corner-box {
+      min-width: 220px;
+      padding: 12px 14px;
+      background: rgba(0,0,0,0.86);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 14px;
+      line-height: 1.5;
+      color: #fff;
+    }
 
-/* ADD THIS RIGHT HERE */
-.price-header-row {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 12px;
-}
+    .chart-corner-box .label {
+      color: rgba(255,255,255,0.72);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
 
-.chart-corner-box {
-  min-width: 220px;
-  padding: 12px 14px;
-  background: rgba(0,0,0,0.86);
-  border: 1px solid rgba(255,255,255,0.18);
-  font-size: 14px;
-  line-height: 1.5;
-  color: #fff;
-}
+    .chart-corner-box .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 4px;
+    }
 
-.chart-corner-box-static {
-  position: static;
-}
+    .chart-corner-box .median-row {
+      font-size: 17px;
+      font-weight: 700;
+    }
 
-.chart-corner-box .label {
-  color: rgba(255,255,255,0.72);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 6px;
-}
+    .chart-corner-box .median-row span:last-child {
+      font-size: 20px;
+    }
 
-.chart-corner-box .row {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 4px;
-}
+    .chart-scroll {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      touch-action: pan-x;
+      user-select: none;
+      -webkit-user-select: none;
+    }
 
-.chart-corner-box .median-row {
-  font-size: 17px;
-  font-weight: 700;
-}
+    .chart-scroll canvas,
+    .chart-area canvas {
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-.chart-corner-box .median-row span:last-child {
-  font-size: 20px;
-}
-
-@media (max-width: 768px) {
-  .price-header-row {
-    justify-content: stretch;
-  }
-
-  .chart-corner-box {
-    width: 100%;
-    min-width: 0;
-    padding: 12px;
-    font-size: 14px;
-  }
-
-  .chart-corner-box .median-row {
-    font-size: 16px;
-  }
-
-  .chart-corner-box .median-row span:last-child {
-    font-size: 19px;
-  }
-}
-
-.chart-corner-box .row {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.chart-scroll {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-  touch-action: pan-x;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.chart-scroll canvas,
-.chart-area canvas {
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.chart-scroll-inner {
-  min-width: 900px;
-}
-
-.chart-scroll-inner-tight {
-  min-width: 760px;
-}
-
-@media (max-width: 768px) {
-  .chart-scroll-inner {
-    min-width: 1100px;
-  }
-
-  .chart-scroll-inner-tight {
-    min-width: 900px;
-  }
-}
-    .price-layout {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 12px;
-  align-items: start;
-}
-
-.price-left-rail {
-  display: grid;
-  grid-template-rows: 420px 140px 140px;
-  gap: 10px;
-}
-
-.rail-box {
-  border: 1px solid var(--border);
-  background: #000;
-  padding: 10px 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.rail-box-main {
-  min-height: 420px;
-}
-
-.rail-box-strip {
-  min-height: 140px;
-}
-
-.rail-title {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.rail-scale {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  color: rgba(255,255,255,0.72);
-  font-size: 12px;
-  padding: 4px 0;
-}
-
-.price-right-scroll {
-  min-width: 0;
-}
-
-@media (max-width: 768px) {
-  .price-layout {
-    grid-template-columns: 110px 1fr;
-    gap: 8px;
-  }
-
-  .price-left-rail {
-    grid-template-rows: 420px 140px 140px;
-  }
-
-  .rail-box {
-    padding: 8px;
-  }
-
-  .rail-title {
-    font-size: 11px;
-    letter-spacing: 0.6px;
-  }
-
-  .rail-scale {
-    font-size: 11px;
-  }
-}
+    .chart-scroll-inner {
+      min-width: 900px;
+    }
 
     .site-footer {
       border-top: 1px solid var(--border);
@@ -657,7 +515,6 @@
     @media (max-width: 900px) {
       .toolbar-grid,
       .footer-grid,
-      .stats-grid-4,
       .stats-grid-6,
       .chart-grid {
         grid-template-columns: 1fr;
@@ -704,6 +561,27 @@
 
       .stat-value {
         font-size: 26px;
+      }
+
+      .chart-scroll-inner {
+        min-width: 1100px;
+      }
+
+      .chart-corner-box {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .chart-corner-box .median-row {
+        font-size: 16px;
+      }
+
+      .chart-corner-box .median-row span:last-child {
+        font-size: 19px;
+      }
+
+      .chart-strip-title {
+        font-size: 10px;
       }
     }
   </style>
@@ -802,124 +680,94 @@
             <article class="panel stat-box">
               <div class="stat-label">Pain Index</div>
               <div class="stat-value" id="painIndex">--</div>
-              <div class="stat-note">
-  Market friction level. Higher = harder to sell. 30%+ is elevated.
-</div>
+              <div class="stat-note">Market friction level. Higher = harder to sell. 30%+ is elevated.</div>
             </article>
 
             <article class="panel stat-box">
               <div class="stat-label">Liquidity Index</div>
               <div class="stat-value" id="liquidityIndex">--</div>
-              <div class="stat-note">
-  Share of listings that sold. 60%+ is strong, below 40% is weak.
-</div>
+              <div class="stat-note">Share of listings that sold. 60%+ is strong, below 40% is weak.</div>
             </article>
 
             <article class="panel stat-box">
               <div class="stat-label">Failure Risk</div>
               <div class="stat-value" id="failureRisk">--</div>
-              <div class="stat-note">
-  Share of listings that failed. 30%+ means many homes aren’t selling.
-</div>
+              <div class="stat-note">Share of listings that failed. 30%+ means many homes aren’t selling.</div>
             </article>
           </div>
         </div>
       </section>
 
-<section class="section-block">
-  <article class="panel chart-box">
-    <h3>Price Structure</h3>
-    <p class="chart-subtext">
-      Median shows the middle sold price, average shows the overall average, and absorption shows how quickly inventory is being bought up.
-    </p>
+      <section class="section-block">
+        <article class="panel chart-box">
+          <h3>Price Structure</h3>
+          <p class="chart-subtext">
+            Median shows the middle sold price, average shows the overall average, and absorption shows how quickly inventory is being bought up.
+          </p>
 
-    <div class="price-header-row">
-      <div class="chart-corner-box chart-corner-box-static" id="priceCornerBox">
-        <div class="label">Latest data</div>
-        <div class="row median-row"><span>Median</span><span>--</span></div>
-        <div class="row"><span>Average</span><span>--</span></div>
-        <div class="row"><span>Absorption</span><span>--</span></div>
-      </div>
-    </div>
-
-    <div class="price-layout">
-      <div class="price-left-rail">
-        <div class="rail-box rail-box-main">
-          <div class="rail-title">Median Price</div>
-          <div class="rail-scale" id="medianRailScale">
-            <div>--</div>
-            <div>--</div>
-            <div>--</div>
+          <div class="price-header-row">
+            <div class="chart-corner-box" id="priceCornerBox">
+              <div class="label">Latest data</div>
+              <div class="row median-row"><span>Median</span><span>--</span></div>
+              <div class="row"><span>Average</span><span>--</span></div>
+              <div class="row"><span>Absorption</span><span>--</span></div>
+            </div>
           </div>
-        </div>
 
-        <div class="rail-box rail-box-strip">
-          <div class="rail-title">Average Price</div>
-        </div>
+          <div class="chart-scroll" id="priceChartScroll">
+            <div class="chart-scroll-inner">
+              <div class="stacked-chart-wrap">
+                <div class="chart-area chart-area-main">
+                  <div class="chart-strip-title">Median Price</div>
+                  <canvas id="priceTrendChart"></canvas>
+                </div>
 
-        <div class="rail-box rail-box-strip">
-          <div class="rail-title">Absorption</div>
-        </div>
-      </div>
+                <div class="chart-area chart-area-strip">
+                  <div class="chart-strip-title">Average Price</div>
+                  <canvas id="avgPriceChart"></canvas>
+                </div>
 
-      <div class="price-right-scroll">
-        <div class="chart-scroll" id="priceChartScroll">
-          <div class="chart-scroll-inner">
-            <div class="stacked-chart-wrap">
-              <div class="chart-area chart-area-main">
-                <canvas id="priceTrendChart"></canvas>
-              </div>
-
-              <div class="chart-area chart-area-strip">
-                <canvas id="avgPriceChart"></canvas>
-              </div>
-
-              <div class="chart-area chart-area-strip">
-                <canvas id="absorptionChart"></canvas>
+                <div class="chart-area chart-area-strip">
+                  <div class="chart-strip-title">Absorption</div>
+                  <canvas id="absorptionChart"></canvas>
+                </div>
               </div>
             </div>
           </div>
+        </article>
+      </section>
+
+      <section class="section-block">
+        <div class="chart-grid">
+          <article class="panel chart-box">
+            <h3>DOM vs Withdrawn / Expired</h3>
+            <p class="chart-subtext">DOM means how long homes took to sell. Withdrawn / expired means listings that came off the market without selling.</p>
+            <div class="chart-area">
+              <canvas id="domWithdrawnChart"></canvas>
+            </div>
+          </article>
+
+          <article class="panel chart-box">
+            <h3>Sell-Through vs Failure</h3>
+            <p class="chart-subtext">Sell-through rate means the share of listings that ended in a sale. Failure rate means the share that ended withdrawn or expired instead.</p>
+            <div class="chart-area">
+              <canvas id="conversionChart"></canvas>
+            </div>
+          </article>
         </div>
-      </div>
-    </div>
-  </article>
-</section>
+      </section>
 
-<section class="section-block">
-  <div class="chart-grid">
-    <article class="panel chart-box">
-      <h3>DOM vs Withdrawn / Expired</h3>
-      <p class="chart-subtext"> DOM means how long homes took to sell. Withdrawn / expired means listings that came off the market without selling.</p>
-      <div class="chart-area">
-        <canvas id="domWithdrawnChart"></canvas>
-      </div>
-    </article>
-
-    <article class="panel chart-box">
-      <h3>Sell-Through vs Failure</h3>
-      <p class="chart-subtext">
-  Sell-through rate means the share of listings that ended in a sale. Failure rate means the share that ended withdrawn or expired instead.
-</p>
-      <div class="chart-area">
-        <canvas id="conversionChart"></canvas>
-      </div>
-    </article>
-  </div>
-</section>
-
-<section class="section-block">
-  <div class="chart-grid">
-    <article class="panel chart-box">
-      <h3>Sold vs Listings</h3>
-      <p class="chart-subtext" id="soldListingsSubtext">
-  Sold shows how many homes closed. Active shows how many homes were still on the market.
-</p>
-      <div class="chart-area">
-        <canvas id="soldActiveChart"></canvas>
-      </div>
-    </article>
-  </div>
-</section>
+      <section class="section-block">
+        <div class="chart-grid">
+          <article class="panel chart-box">
+            <h3>Sold vs Listings</h3>
+            <p class="chart-subtext">Sold shows how many homes closed. Active shows how many homes were still on the market.</p>
+            <div class="chart-area">
+              <canvas id="soldActiveChart"></canvas>
+            </div>
+          </article>
+        </div>
+      </section>
     </div>
   </main>
 
@@ -1008,9 +856,19 @@
         return "$" + Number(v).toLocaleString();
       }
 
-      function fmtPercentWhole(v) {
-        if (v === null || v === undefined || v === "") return "--";
-        return Number(v).toFixed(1);
+      function pct1(value) {
+        if (value === null || value === undefined) return "--";
+        return Number(value).toFixed(1) + "%";
+      }
+
+      function moneyCompact(value) {
+        if (value === null || value === undefined) return "--";
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0,
+          notation: "compact"
+        }).format(value);
       }
 
       function setEmptyState(message) {
@@ -1031,505 +889,497 @@
       }
 
       const crosshairPlugin = {
-  id: "crosshairLine",
-  afterDatasetsDraw(chart) {
-    const { ctx, tooltip, chartArea } = chart;
-    if (!tooltip || !tooltip._active || !tooltip._active.length) return;
+        id: "crosshairLine",
+        afterDatasetsDraw(chart) {
+          const { ctx, tooltip, chartArea } = chart;
+          if (!tooltip || !tooltip._active || !tooltip._active.length) return;
 
-    const x = tooltip._active[0].element.x;
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(x, chartArea.top);
-    ctx.lineTo(x, chartArea.bottom);
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = "rgba(255,255,255,0.28)";
-    ctx.stroke();
-    ctx.restore();
-  }
-};
-
-Chart.register(crosshairPlugin);
-
-function moneyCompact(value) {
-  if (value === null || value === undefined) return "--";
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-    notation: "compact"
-  }).format(value);
-}
-
-function pct1(value) {
-  if (value === null || value === undefined) return "--";
-  return Number(value).toFixed(1) + "%";
-}
-
-function updatePriceCornerBox(monthLabel, medianValue, avgValue, absorptionValue) {
-  const box = document.getElementById("priceCornerBox");
-  if (!box) return;
-
-  box.innerHTML = `
-    <div class="label">${monthLabel || "Latest data"}</div>
-    <div class="row median-row"><span>Median</span><span>${medianValue != null ? moneyCompact(medianValue) : "--"}</span></div>
-    <div class="row"><span>Average</span><span>${avgValue != null ? moneyCompact(avgValue) : "--"}</span></div>
-    <div class="row"><span>Absorption</span><span>${absorptionValue != null ? Number(absorptionValue).toFixed(1) + "%" : "--"}</span></div>
-  `;
-}
-
-function yearTickLabel(value, index, labels) {
-  const label = labels[index];
-  if (!label) return "";
-
-  const str = String(label);
-
-  if (str.includes("-")) {
-    const parts = str.split("-");
-    const year = parts[0];
-    const month = parts[1];
-    return month === "01" ? year : "";
-  }
-
-  return index % 12 === 0 ? str : "";
-}
-function scrollPriceChartToLatest() {
-  const scroller = document.getElementById("priceChartScroll");
-  if (!scroller) return;
-
-  requestAnimationFrame(() => {
-    scroller.scrollLeft = scroller.scrollWidth;
-  });
-}
-function updatePriceBoxFromClientX(chart, months, clientX) {
-  if (!chart || !chart.chartArea || !months || !months.length) return;
-
-  const rect = chart.canvas.getBoundingClientRect();
-  const chartArea = chart.chartArea;
-
-  const localX = clientX - rect.left;
-  const left = chartArea.left;
-  const right = chartArea.right;
-
-  const clampedX = Math.max(left, Math.min(right, localX));
-  const ratio = (clampedX - left) / Math.max(1, right - left);
-  const idx = Math.round(ratio * (months.length - 1));
-
-  const point = months[idx];
-  if (!point) return;
-
-  updatePriceCornerBox(
-    point.month,
-    point.median_price,
-    point.avg_price,
-    (point.absorption_rate || 0) * 100
-  );
-}
-function bindPriceChartTouch(chart, months) {
-  const canvas = chart.canvas;
-  if (!canvas) return;
-
-  function handleTouch(evt) {
-    const touch = evt.touches && evt.touches[0] ? evt.touches[0] : evt.changedTouches && evt.changedTouches[0];
-    if (!touch) return;
-    updatePriceBoxFromClientX(chart, months, touch.clientX);
-  }
-
-  canvas.addEventListener("touchstart", handleTouch, { passive: true });
-  canvas.addEventListener("touchmove", handleTouch, { passive: true });
-}
- function updateMedianRailScale(months) {
-  const rail = document.getElementById("medianRailScale");
-  if (!rail || !months || !months.length) return;
-
-  const values = months
-    .map(m => Number(m.median_price))
-    .filter(v => !Number.isNaN(v));
-
-  if (!values.length) return;
-
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const mid = (max + min) / 2;
-
-  rail.innerHTML = `
-    <div>${moneyCompact(max)}</div>
-    <div>${moneyCompact(mid)}</div>
-    <div>${moneyCompact(min)}</div>
-  `;
-}
-function commonInteractionOptions() {
-  return {
-    responsive: true,
-    maintainAspectRatio: false,
-    interaction: {
-      mode: "index",
-      intersect: false
-    },
-    plugins: {
-      legend: {
-        labels: { color: chartTextColor }
-      },
-      tooltip: {
-        backgroundColor: "#111",
-        borderColor: "rgba(255,255,255,0.15)",
-        borderWidth: 1,
-        titleColor: "#fff",
-        bodyColor: "#fff"
-      }
-    },
-    scales: {
-      x: {
-  ticks: {
-    color: chartTextColor,
-    maxRotation: 0,
-    autoSkip: false,
-    callback: function(value, index) {
-      return yearTickLabel(value, index, this.getLabels());
-    }
-  },
-  grid: { color: chartGridColor }
-},
-      y: {
-        ticks: { color: chartTextColor },
-        grid: { color: chartGridColor }
-      }
-    }
-  };
-}
-
-function priceOptions(showXAxis = true) {
-  const opts = commonInteractionOptions();
-  opts.plugins.legend.display = false;
-  opts.scales.y.ticks.callback = (v) => moneyCompact(v);
-  opts.scales.x.display = showXAxis;
-  return opts;
-}
-
-function percentOptions(showXAxis = true) {
-  const opts = commonInteractionOptions();
-  opts.scales.y.ticks.callback = (v) => v + "%";
-  opts.scales.x.display = showXAxis;
-  return opts;
-}
-
-function dualAxisOptions() {
-  return {
-    responsive: true,
-    maintainAspectRatio: false,
-    interaction: {
-      mode: "index",
-      intersect: false
-    },
-    plugins: {
-      legend: {
-        labels: { color: chartTextColor }
-      },
-      tooltip: {
-        backgroundColor: "#111",
-        borderColor: "rgba(255,255,255,0.15)",
-        borderWidth: 1,
-        titleColor: "#fff",
-        bodyColor: "#fff"
-      }
-    },
-    scales: {
-      x: {
-  ticks: {
-    color: chartTextColor,
-    maxRotation: 0,
-    autoSkip: false,
-    callback: function(value, index) {
-      return yearTickLabel(value, index, this.getLabels());
-    }
-  },
-  grid: { color: chartGridColor }
-},
-      y: {
-        position: "left",
-        ticks: { color: chartTextColor, callback: (v) => Number(v).toLocaleString() + " DOM" },
-        grid: { color: chartGridColor },
-        beginAtZero: true
-      },
-      y1: {
-        position: "right",
-        ticks: { color: chartTextColor, precision: 0 },
-        grid: { drawOnChartArea: false },
-        beginAtZero: true
-      }
-    }
-  };
-}
-
-// ======================
-// RENDER FUNCTION (MISSING)
-// ======================
-function renderSubdivision(name) {
-  const row = allData.find(item => item.subdivision === name);
-  if (!row || !row.months || !row.months.length) return;
-
-  const months = row.months;
-  const latest = months[months.length - 1];
-
-  els.summary.textContent = row.summary || row.subdivision;
-  els.active.textContent = fmtNumber(row.active);
-  els.latestSold.textContent = fmtNumber(latest.sold);
-  els.latestMedianPrice.textContent = fmtMoney(latest.median_price);
-  els.painIndex.textContent = pct1((latest.failure_rate || 0) * 100);
-  els.liquidityIndex.textContent = pct1((latest.sell_through_rate || 0) * 100);
-  els.failureRisk.textContent = pct1((latest.failure_rate || 0) * 100);
-
-  const labels = months.map(m => m.month);
-  updateMedianRailScale(months);
-  updatePriceCornerBox(
-  latest.month,
-  latest.median_price,
-  latest.avg_price,
-  (latest.absorption_rate || 0) * 100
-);
-  
-  
-  destroyCharts();
-
-  charts.priceTrendChart = new Chart(document.getElementById("priceTrendChart"), {
-  type: "line",
-  data: {
-    labels,
-    datasets: [{
-      label: "Median Price",
-      data: months.map(m => m.median_price),
-      borderColor: emerald,
-      borderWidth: 2.5,
-      pointRadius: 0,
-      tension: 0.18
-    }]
-  },
-  options: {
-    ...priceOptions(true),
-    onHover: (event, elements, chart) => {
-  if (!elements.length) {
-    const last = months[months.length - 1];
-    updatePriceCornerBox(
-      last.month,
-      last.median_price,
-      last.avg_price,
-      (last.absorption_rate || 0) * 100
-    );
-    return;
-  }
-      const idx = elements[0].index;
-      const point = months[idx];
-      if (!point) return;
-
-      updatePriceCornerBox(
-        point.month,
-        point.median_price,
-        point.avg_price,
-        (point.absorption_rate || 0) * 100
-      );
-    }
-  }
-});
-  
-bindPriceChartTouch(charts.priceTrendChart, months);
-
-  charts.avgPriceChart = new Chart(document.getElementById("avgPriceChart"), {
-    type: "bar",
-    data: {
-      labels,
-      datasets: [{
-        label: "Average Price",
-        data: months.map(m => m.avg_price),
-        backgroundColor: "rgba(255,255,255,0.18)",
-        borderColor: "#ffffff",
-        borderWidth: 1,
-        barPercentage: 0.9,
-        categoryPercentage: 0.9
-      }]
-    },
-    options: priceOptions(false)
-  });
-
-  charts.absorptionChart = new Chart(document.getElementById("absorptionChart"), {
-    type: "bar",
-    data: {
-      labels,
-      datasets: [{
-        label: "Absorption Rate",
-        data: months.map(m => (m.absorption_rate || 0) * 100),
-        backgroundColor: "rgba(6,95,70,0.45)",
-        borderColor: emerald,
-        borderWidth: 1,
-        barPercentage: 0.9,
-        categoryPercentage: 0.9
-      }]
-    },
-    options: percentOptions(false)
-  });
-
-  charts.domWithdrawnChart = new Chart(document.getElementById("domWithdrawnChart"), {
-    data: {
-      labels,
-      datasets: [
-        {
-          type: "line",
-          label: "Median DOM",
-          data: months.map(m => m.median_dom || 0),
-          borderColor: emerald,
-          borderWidth: 2,
-          pointRadius: 0,
-          tension: 0.2,
-          yAxisID: "y"
-        },
-        {
-          type: "bar",
-          label: "Withdrawn / Expired",
-          data: months.map(m => m.withdrawn_expired || 0),
-          backgroundColor: "rgba(255,255,255,0.2)",
-          borderColor: "#ffffff",
-          borderWidth: 1,
-          yAxisID: "y1"
+          const x = tooltip._active[0].element.x;
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(x, chartArea.top);
+          ctx.lineTo(x, chartArea.bottom);
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = "rgba(255,255,255,0.28)";
+          ctx.stroke();
+          ctx.restore();
         }
-      ]
-    },
-    options: dualAxisOptions()
-  });
+      };
 
-  charts.conversionChart = new Chart(document.getElementById("conversionChart"), {
-    type: "bar",
-    data: {
-      labels,
-      datasets: [
-        {
-          label: "Sell-Through",
-          data: months.map(m => (m.sell_through_rate || 0) * 100),
-          backgroundColor: "rgba(6,95,70,0.65)",
-          stack: "conversion"
-        },
-        {
-          label: "Failure",
-          data: months.map(m => (m.failure_rate || 0) * 100),
-          backgroundColor: "rgba(255,255,255,0.28)",
-          borderColor: "#ffffff",
-          borderWidth: 1,
-          stack: "conversion"
+      Chart.register(crosshairPlugin);
+
+      function updatePriceCornerBox(monthLabel, medianValue, avgValue, absorptionValue) {
+        const box = document.getElementById("priceCornerBox");
+        if (!box) return;
+
+        box.innerHTML = `
+          <div class="label">${monthLabel || "Latest data"}</div>
+          <div class="row median-row"><span>Median</span><span>${medianValue != null ? moneyCompact(medianValue) : "--"}</span></div>
+          <div class="row"><span>Average</span><span>${avgValue != null ? moneyCompact(avgValue) : "--"}</span></div>
+          <div class="row"><span>Absorption</span><span>${absorptionValue != null ? Number(absorptionValue).toFixed(1) + "%" : "--"}</span></div>
+        `;
+      }
+
+      function yearTickLabel(value, index, labels) {
+        const label = labels[index];
+        if (!label) return "";
+
+        const str = String(label);
+
+        if (str.includes("-")) {
+          const parts = str.split("-");
+          const year = parts[0];
+          const month = parts[1];
+          return month === "01" ? year : "";
         }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      interaction: {
-        mode: "index",
-        intersect: false
-      },
-      plugins: {
-        legend: {
-          labels: { color: chartTextColor }
-        },
-        tooltip: {
-          backgroundColor: "#111",
-          borderColor: "rgba(255,255,255,0.15)",
-          borderWidth: 1,
-          titleColor: "#fff",
-          bodyColor: "#fff"
+
+        return index % 12 === 0 ? str : "";
+      }
+
+      function scrollPriceChartToLatest() {
+        const scroller = document.getElementById("priceChartScroll");
+        if (!scroller) return;
+
+        requestAnimationFrame(() => {
+          scroller.scrollLeft = scroller.scrollWidth;
+        });
+      }
+
+      function updatePriceBoxFromClientX(chart, months, clientX) {
+        if (!chart || !chart.chartArea || !months || !months.length) return;
+
+        const rect = chart.canvas.getBoundingClientRect();
+        const chartArea = chart.chartArea;
+
+        const localX = clientX - rect.left;
+        const left = chartArea.left;
+        const right = chartArea.right;
+
+        const clampedX = Math.max(left, Math.min(right, localX));
+        const ratio = (clampedX - left) / Math.max(1, right - left);
+        const idx = Math.round(ratio * (months.length - 1));
+
+        const point = months[idx];
+        if (!point) return;
+
+        updatePriceCornerBox(
+          point.month,
+          point.median_price,
+          point.avg_price,
+          (point.absorption_rate || 0) * 100
+        );
+      }
+
+      function bindPriceChartTouch(chart, months) {
+        const canvas = chart.canvas;
+        if (!canvas) return;
+
+        function handleTouch(evt) {
+          const touch = evt.touches && evt.touches[0]
+            ? evt.touches[0]
+            : evt.changedTouches && evt.changedTouches[0];
+
+          if (!touch) return;
+          updatePriceBoxFromClientX(chart, months, touch.clientX);
         }
-      },
-      scales: {
-        x: {
-  stacked: true,
-  ticks: {
-    color: chartTextColor,
-    maxRotation: 0,
-    autoSkip: false,
-    callback: function(value, index) {
-      return yearTickLabel(value, index, this.getLabels());
-    }
-  },
-  grid: { color: chartGridColor }
-},
-        y: {
-          stacked: true,
-          beginAtZero: true,
-          max: 100,
-          ticks: {
-            color: chartTextColor,
-            callback: (v) => v + "%"
+
+        canvas.addEventListener("touchstart", handleTouch, { passive: true });
+        canvas.addEventListener("touchmove", handleTouch, { passive: true });
+      }
+
+      function commonInteractionOptions() {
+        return {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false
           },
-          grid: { color: chartGridColor }
+          plugins: {
+            legend: {
+              labels: { color: chartTextColor }
+            },
+            tooltip: {
+              backgroundColor: "#111",
+              borderColor: "rgba(255,255,255,0.15)",
+              borderWidth: 1,
+              titleColor: "#fff",
+              bodyColor: "#fff"
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: chartTextColor,
+                maxRotation: 0,
+                autoSkip: false,
+                callback: function(value, index) {
+                  return yearTickLabel(value, index, this.getLabels());
+                }
+              },
+              grid: { color: chartGridColor }
+            },
+            y: {
+              ticks: { color: chartTextColor },
+              grid: { color: chartGridColor }
+            }
+          }
+        };
+      }
+
+      function priceOptions(showXAxis = true) {
+        const opts = commonInteractionOptions();
+        opts.plugins.legend.display = false;
+        opts.scales.y.ticks.callback = (v) => moneyCompact(v);
+        opts.scales.x.display = showXAxis;
+        return opts;
+      }
+
+      function percentOptions(showXAxis = true) {
+        const opts = commonInteractionOptions();
+        opts.scales.y.ticks.callback = (v) => v + "%";
+        opts.scales.x.display = showXAxis;
+        return opts;
+      }
+
+      function dualAxisOptions() {
+        return {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              labels: { color: chartTextColor }
+            },
+            tooltip: {
+              backgroundColor: "#111",
+              borderColor: "rgba(255,255,255,0.15)",
+              borderWidth: 1,
+              titleColor: "#fff",
+              bodyColor: "#fff"
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: chartTextColor,
+                maxRotation: 0,
+                autoSkip: false,
+                callback: function(value, index) {
+                  return yearTickLabel(value, index, this.getLabels());
+                }
+              },
+              grid: { color: chartGridColor }
+            },
+            y: {
+              position: "left",
+              ticks: {
+                color: chartTextColor,
+                callback: (v) => Number(v).toLocaleString() + " DOM"
+              },
+              grid: { color: chartGridColor },
+              beginAtZero: true
+            },
+            y1: {
+              position: "right",
+              ticks: { color: chartTextColor, precision: 0 },
+              grid: { drawOnChartArea: false },
+              beginAtZero: true
+            }
+          }
+        };
+      }
+
+      function renderSubdivision(name) {
+        const row = allData.find(
+          item =>
+            item.subdivision === name &&
+            Array.isArray(item.months) &&
+            item.months.length
+        );
+
+        if (!row) {
+          setEmptyState("No monthly history found for this subdivision.");
+          destroyCharts();
+          return;
+        }
+
+        const months = row.months;
+        const latest = months[months.length - 1];
+        const labels = months.map(m => m.month);
+
+        els.summary.textContent = row.summary || row.subdivision;
+        els.active.textContent = fmtNumber(row.active);
+        els.latestSold.textContent = fmtNumber(latest.sold);
+        els.latestMedianPrice.textContent = fmtMoney(latest.median_price);
+        els.painIndex.textContent = pct1((latest.failure_rate || 0) * 100);
+        els.liquidityIndex.textContent = pct1((latest.sell_through_rate || 0) * 100);
+        els.failureRisk.textContent = pct1((latest.failure_rate || 0) * 100);
+
+        updatePriceCornerBox(
+          latest.month,
+          latest.median_price,
+          latest.avg_price,
+          (latest.absorption_rate || 0) * 100
+        );
+
+        destroyCharts();
+
+        charts.priceTrendChart = new Chart(document.getElementById("priceTrendChart"), {
+          type: "line",
+          data: {
+            labels,
+            datasets: [{
+              label: "Median Price",
+              data: months.map(m => m.median_price),
+              borderColor: emerald,
+              borderWidth: 2.5,
+              pointRadius: 0,
+              tension: 0.18
+            }]
+          },
+          options: {
+            ...priceOptions(true),
+            onHover: (event, elements) => {
+              if (!elements.length) {
+                const last = months[months.length - 1];
+                updatePriceCornerBox(
+                  last.month,
+                  last.median_price,
+                  last.avg_price,
+                  (last.absorption_rate || 0) * 100
+                );
+                return;
+              }
+
+              const idx = elements[0].index;
+              const point = months[idx];
+              if (!point) return;
+
+              updatePriceCornerBox(
+                point.month,
+                point.median_price,
+                point.avg_price,
+                (point.absorption_rate || 0) * 100
+              );
+            }
+          }
+        });
+
+        bindPriceChartTouch(charts.priceTrendChart, months);
+
+        charts.avgPriceChart = new Chart(document.getElementById("avgPriceChart"), {
+          type: "bar",
+          data: {
+            labels,
+            datasets: [{
+              label: "Average Price",
+              data: months.map(m => m.avg_price),
+              backgroundColor: "rgba(255,255,255,0.18)",
+              borderColor: "#ffffff",
+              borderWidth: 1,
+              barPercentage: 0.9,
+              categoryPercentage: 0.9
+            }]
+          },
+          options: priceOptions(false)
+        });
+
+        charts.absorptionChart = new Chart(document.getElementById("absorptionChart"), {
+          type: "bar",
+          data: {
+            labels,
+            datasets: [{
+              label: "Absorption Rate",
+              data: months.map(m => (m.absorption_rate || 0) * 100),
+              backgroundColor: "rgba(6,95,70,0.45)",
+              borderColor: emerald,
+              borderWidth: 1,
+              barPercentage: 0.9,
+              categoryPercentage: 0.9
+            }]
+          },
+          options: percentOptions(false)
+        });
+
+        charts.domWithdrawnChart = new Chart(document.getElementById("domWithdrawnChart"), {
+          data: {
+            labels,
+            datasets: [
+              {
+                type: "line",
+                label: "Median DOM",
+                data: months.map(m => m.median_dom || 0),
+                borderColor: emerald,
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.2,
+                yAxisID: "y"
+              },
+              {
+                type: "bar",
+                label: "Withdrawn / Expired",
+                data: months.map(m => m.withdrawn_expired || 0),
+                backgroundColor: "rgba(255,255,255,0.2)",
+                borderColor: "#ffffff",
+                borderWidth: 1,
+                yAxisID: "y1"
+              }
+            ]
+          },
+          options: dualAxisOptions()
+        });
+
+        charts.conversionChart = new Chart(document.getElementById("conversionChart"), {
+          type: "bar",
+          data: {
+            labels,
+            datasets: [
+              {
+                label: "Sell-Through",
+                data: months.map(m => (m.sell_through_rate || 0) * 100),
+                backgroundColor: "rgba(6,95,70,0.65)",
+                stack: "conversion"
+              },
+              {
+                label: "Failure",
+                data: months.map(m => (m.failure_rate || 0) * 100),
+                backgroundColor: "rgba(255,255,255,0.28)",
+                borderColor: "#ffffff",
+                borderWidth: 1,
+                stack: "conversion"
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+              mode: "index",
+              intersect: false
+            },
+            plugins: {
+              legend: {
+                labels: { color: chartTextColor }
+              },
+              tooltip: {
+                backgroundColor: "#111",
+                borderColor: "rgba(255,255,255,0.15)",
+                borderWidth: 1,
+                titleColor: "#fff",
+                bodyColor: "#fff"
+              }
+            },
+            scales: {
+              x: {
+                stacked: true,
+                ticks: {
+                  color: chartTextColor,
+                  maxRotation: 0,
+                  autoSkip: false,
+                  callback: function(value, index) {
+                    return yearTickLabel(value, index, this.getLabels());
+                  }
+                },
+                grid: { color: chartGridColor }
+              },
+              y: {
+                stacked: true,
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  color: chartTextColor,
+                  callback: (v) => v + "%"
+                },
+                grid: { color: chartGridColor }
+              }
+            }
+          }
+        });
+
+        charts.soldActiveChart = new Chart(document.getElementById("soldActiveChart"), {
+          data: {
+            labels,
+            datasets: [
+              {
+                type: "bar",
+                label: "Sold",
+                data: months.map(m => m.sold || 0),
+                backgroundColor: emeraldSoft,
+                borderColor: emerald,
+                borderWidth: 1
+              },
+              {
+                type: "line",
+                label: "Active",
+                data: months.map(m => m.active || 0),
+                borderColor: "#fff",
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.2
+              }
+            ]
+          },
+          options: commonInteractionOptions()
+        });
+
+        scrollPriceChartToLatest();
+      }
+
+      async function loadData() {
+        try {
+          const response = await fetch("subdivision_dashboard.json", { cache: "no-store" });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+          allData = await response.json();
+
+          const validRows = allData.filter(
+            item =>
+              item &&
+              item.subdivision &&
+              Array.isArray(item.months) &&
+              item.months.length
+          );
+
+          const names = [...new Set(validRows.map(item => item.subdivision))].sort();
+
+          subdivisionSelect.innerHTML = '<option value="">Choose a subdivision</option>';
+
+          names.forEach(name => {
+            const option = document.createElement("option");
+            option.value = name;
+            option.textContent = name;
+            subdivisionSelect.appendChild(option);
+          });
+
+          if (!names.length) {
+            setEmptyState("No subdivision data found.");
+            return;
+          }
+
+          subdivisionSelect.value = names[0];
+          renderSubdivision(names[0]);
+        } catch (err) {
+          console.error(err);
+          setEmptyState("Dashboard failed to load.");
         }
       }
-    }
-  });
 
-  charts.soldActiveChart = new Chart(document.getElementById("soldActiveChart"), {
-    data: {
-      labels,
-      datasets: [
-        {
-          type: "bar",
-          label: "Sold",
-          data: months.map(m => m.sold || 0),
-          backgroundColor: emeraldSoft,
-          borderColor: emerald,
-          borderWidth: 1
-        },
-        {
-          type: "line",
-          label: "Active",
-          data: months.map(m => m.active || 0),
-          borderColor: "#fff",
-          borderWidth: 2,
-          pointRadius: 0,
-          tension: 0.2
+      subdivisionSelect.addEventListener("change", function (e) {
+        try {
+          renderSubdivision(e.target.value);
+        } catch (err) {
+          console.error(err);
+          setEmptyState("Dashboard failed to render.");
         }
-      ]
-    },
-    options: commonInteractionOptions()
-  });
-    scrollPriceChartToLatest();
-}
+      });
 
-// ======================
-// LOAD FUNCTION (MISSING)
-// ======================
-async function loadData() {
-  try {
-    const response = await fetch("subdivision_dashboard.json", { cache: "no-store" });
-    if (!response.ok) throw new Error();
-
-    allData = await response.json();
-    console.log("loaded json", allData);
-
-    const names = [...new Set(allData.map(item => item.subdivision))].sort();
-
-    subdivisionSelect.innerHTML = '<option value="">Choose a subdivision</option>';
-
-    names.forEach(name => {
-      const option = document.createElement("option");
-      option.value = name;
-      option.textContent = name;
-      subdivisionSelect.appendChild(option);
-    });
-
-    if (names.length) {
-      subdivisionSelect.value = names[0];
-      renderSubdivision(names[0]);
-    }
-  } catch (err) {
-  console.error(err);
-  setEmptyState("Data file not connected yet.");
-}
-}
-
-// ======================
-subdivisionSelect.addEventListener("change", function (e) {
-  renderSubdivision(e.target.value);
-});
-
-setEmptyState();
-loadData();
-
-})();
-</script>
+      setEmptyState();
+      loadData();
+    })();
+  </script>
 </body>
 </html>
