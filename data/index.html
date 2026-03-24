@@ -569,16 +569,7 @@
       grid-template-rows: 420px 140px 140px;
       gap: 0;
     }
-
-    .chart-area {
-      position: relative;
-      width: 100%;
-      min-height: 0;
-      border: 0;
-      padding: 0 12px 0 12px;
-      background: #000;
-    }
-
+    
     .chart-area + .chart-area {
       border-top: 1px solid rgba(255,255,255,0.08);
     }
@@ -1371,11 +1362,11 @@
 
         destroyCharts();
 
-        charts.priceTrendChart = new Chart(document.getElementById("priceTrendChart"), {
+                charts.priceTrendChart = new Chart(document.getElementById("priceTrendChart"), {
           type: "line",
-                              data: {
+          data: {
             labels,
-                        datasets: [{
+            datasets: [{
               label: "Median Price",
               data: months.map(m => m.median_price),
               borderColor: emerald,
@@ -1399,8 +1390,7 @@
               },
               pointBorderColor: function(context) {
                 const index = context.dataIndex;
-                const lastIndex = context.dataset.data.length - 1;
-                return index === lastIndex ? emerald : emerald;
+                return emerald;
               },
               pointBorderWidth: function(context) {
                 const index = context.dataIndex;
@@ -1409,6 +1399,9 @@
               }
             }]
           },
+          options: {
+            ...priceOptions(true),
+            onHover: (event, elements) => {
               if (!elements.length) {
                 const last = months[months.length - 1];
                 updatePriceCornerBox(
