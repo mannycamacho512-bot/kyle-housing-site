@@ -351,41 +351,18 @@
       color: var(--muted);
     }
 
-    .chart-area {
-      position: relative;
+        .chart-area canvas {
       width: 100%;
-      min-height: 320px;
-      border: 1px solid var(--border);
-      padding: 12px;
-    }
-
-    .chart-area canvas {
-      width: 100%;
-      height: 280px;
       display: block;
-    }
-
-    .stacked-chart-wrap {
-      display: grid;
-      grid-template-rows: minmax(380px, auto) minmax(120px, auto) minmax(120px, auto);
-      gap: 10px;
     }
 
     .chart-area-main {
       min-height: 420px;
     }
 
-    .chart-area-main canvas {
-      height: 390px !important;
-    }
-
     .chart-area-strip {
       min-height: 140px;
       padding: 8px 12px;
-    }
-
-    .chart-area-strip canvas {
-      height: 110px !important;
     }
 
     .chart-strip-title {
@@ -435,6 +412,92 @@
     .chart-corner-box .median-row span:last-child {
       font-size: 20px;
     }
+        .price-layout {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 0;
+      align-items: start;
+    }
+
+    .price-yaxis-col {
+      position: relative;
+      z-index: 3;
+      background: #000;
+      border-left: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .yaxis-title-row {
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      letter-spacing: 0.4px;
+      color: rgba(255,255,255,0.86);
+      text-align: center;
+      background: #000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .yaxis-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 12px 8px 12px 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 11px;
+      line-height: 1;
+      background: #000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .yaxis-box-main {
+      height: 420px;
+    }
+
+    .yaxis-box-strip {
+      height: 140px;
+    }
+
+    .price-right-scroll {
+      min-width: 0;
+      position: relative;
+      border-right: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: #000;
+    }
+
+    .price-chart-titles {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      background: #000;
+      pointer-events: none;
+    }
+
+    .chart-lane-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      font-size: 13px;
+      letter-spacing: 0.4px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: #000;
+    }
+
+    .chart-lane-title-main {
+      height: 34px;
+    }
+
+    .chart-lane-title-strip {
+      height: 34px;
+    }
 
     .chart-scroll {
       width: 100%;
@@ -445,6 +508,45 @@
       touch-action: pan-x;
       user-select: none;
       -webkit-user-select: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chart-scroll.is-frozen {
+      overflow-x: hidden;
+      touch-action: none;
+      cursor: ew-resize;
+    }
+
+    .chart-scroll-inner {
+      min-width: 1100px;
+    }
+
+    .stacked-chart-wrap {
+      display: grid;
+      grid-template-rows: 420px 140px 140px;
+      gap: 0;
+    }
+
+    .chart-area {
+      position: relative;
+      width: 100%;
+      min-height: 0;
+      border: 0;
+      padding: 0 12px 0 12px;
+      background: #000;
+    }
+
+    .chart-area + .chart-area {
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .chart-area-main canvas {
+      height: 420px !important;
+    }
+
+    .chart-area-strip canvas {
+      height: 140px !important;
     }
 
     .chart-scroll canvas,
@@ -453,10 +555,6 @@
       -webkit-user-select: none;
       -webkit-touch-callout: none;
       -webkit-tap-highlight-color: transparent;
-    }
-
-    .chart-scroll-inner {
-      min-width: 900px;
     }
 
     .site-footer {
@@ -563,10 +661,6 @@
         font-size: 26px;
       }
 
-      .chart-scroll-inner {
-        min-width: 1100px;
-      }
-
       .chart-corner-box {
         width: 100%;
         min-width: 0;
@@ -582,6 +676,23 @@
 
       .chart-strip-title {
         font-size: 10px;
+      }
+            .price-layout {
+        grid-template-columns: 74px minmax(0, 1fr);
+      }
+
+      .yaxis-title-row,
+      .chart-lane-title {
+        font-size: 10px;
+      }
+
+      .yaxis-box {
+        font-size: 10px;
+        padding-right: 6px;
+      }
+
+      .chart-scroll-inner {
+        min-width: 1200px;
       }
     }
   </style>
@@ -699,75 +810,73 @@
       </section>
 
       <section class="section-block">
-        <article class="panel chart-box">
-          <h3>Price Structure</h3>
-          <p class="chart-subtext">
-            Median shows the middle sold price, average shows the overall average, and absorption shows how quickly inventory is being bought up.
-          </p>
+  <article class="panel chart-box">
+    <h3>Price Structure</h3>
+    <p class="chart-subtext">
+      Median shows the middle sold price, average shows the overall average, and absorption shows how quickly inventory is being bought up.
+    </p>
 
-          <div class="price-header-row">
-            <div class="chart-corner-box" id="priceCornerBox">
-              <div class="label">Latest data</div>
-              <div class="row median-row"><span>Median</span><span>--</span></div>
-              <div class="row"><span>Average</span><span>--</span></div>
-              <div class="row"><span>Absorption</span><span>--</span></div>
-            </div>
-          </div>
+    <div class="price-header-row">
+      <div class="chart-corner-box" id="priceCornerBox">
+        <div class="label">Latest data</div>
+        <div class="row median-row"><span>Median</span><span>--</span></div>
+        <div class="row"><span>Average</span><span>--</span></div>
+        <div class="row"><span>Absorption</span><span>--</span></div>
+      </div>
+    </div>
 
-          <div class="chart-scroll" id="priceChartScroll">
-            <div class="chart-scroll-inner">
-              <div class="stacked-chart-wrap">
-                <div class="chart-area chart-area-main">
-                  <div class="chart-strip-title">Median Price</div>
-                  <canvas id="priceTrendChart"></canvas>
-                </div>
+    <div class="price-layout">
+      <div class="price-yaxis-col">
+        <div class="yaxis-title-row">Median Price</div>
+        <div class="yaxis-box yaxis-box-main" id="medianYAxisFake">
+          <div>--</div>
+          <div>--</div>
+          <div>--</div>
+        </div>
 
-                <div class="chart-area chart-area-strip">
-                  <div class="chart-strip-title">Average Price</div>
-                  <canvas id="avgPriceChart"></canvas>
-                </div>
+        <div class="yaxis-title-row">Average Price</div>
+        <div class="yaxis-box yaxis-box-strip" id="avgYAxisFake">
+          <div>--</div>
+          <div>--</div>
+          <div>--</div>
+        </div>
 
-                <div class="chart-area chart-area-strip">
-                  <div class="chart-strip-title">Absorption</div>
-                  <canvas id="absorptionChart"></canvas>
-                </div>
+        <div class="yaxis-title-row">Absorption</div>
+        <div class="yaxis-box yaxis-box-strip" id="absorptionYAxisFake">
+          <div>100%</div>
+          <div>50%</div>
+          <div>0%</div>
+        </div>
+      </div>
+
+      <div class="price-right-scroll">
+        <div class="price-chart-titles">
+          <div class="chart-lane-title chart-lane-title-main">Median Price</div>
+          <div class="chart-lane-title chart-lane-title-strip">Average Price</div>
+          <div class="chart-lane-title chart-lane-title-strip">Absorption</div>
+        </div>
+
+        <div class="chart-scroll" id="priceChartScroll">
+          <div class="chart-scroll-inner">
+            <div class="stacked-chart-wrap">
+              <div class="chart-area chart-area-main">
+                <canvas id="priceTrendChart"></canvas>
+              </div>
+
+              <div class="chart-area chart-area-strip">
+                <canvas id="avgPriceChart"></canvas>
+              </div>
+
+              <div class="chart-area chart-area-strip">
+                <canvas id="absorptionChart"></canvas>
               </div>
             </div>
           </div>
-        </article>
-      </section>
-
-      <section class="section-block">
-        <div class="chart-grid">
-          <article class="panel chart-box">
-            <h3>DOM vs Withdrawn / Expired</h3>
-            <p class="chart-subtext">DOM means how long homes took to sell. Withdrawn / expired means listings that came off the market without selling.</p>
-            <div class="chart-area">
-              <canvas id="domWithdrawnChart"></canvas>
-            </div>
-          </article>
-
-          <article class="panel chart-box">
-            <h3>Sell-Through vs Failure</h3>
-            <p class="chart-subtext">Sell-through rate means the share of listings that ended in a sale. Failure rate means the share that ended withdrawn or expired instead.</p>
-            <div class="chart-area">
-              <canvas id="conversionChart"></canvas>
-            </div>
-          </article>
         </div>
-      </section>
-
-      <section class="section-block">
-        <div class="chart-grid">
-          <article class="panel chart-box">
-            <h3>Sold vs Listings</h3>
-            <p class="chart-subtext">Sold shows how many homes closed. Active shows how many homes were still on the market.</p>
-            <div class="chart-area">
-              <canvas id="soldActiveChart"></canvas>
-            </div>
-          </article>
-        </div>
-      </section>
+      </div>
+    </div>
+  </article>
+</section>
     </div>
   </main>
 
@@ -870,6 +979,64 @@
           notation: "compact"
         }).format(value);
       }
+      function setThreeScaleLabels(el, minValue, maxValue, formatter) {
+  if (!el) return;
+
+  const mid = (minValue + maxValue) / 2;
+
+  el.innerHTML = `
+    <div>${formatter(maxValue)}</div>
+    <div>${formatter(mid)}</div>
+    <div>${formatter(minValue)}</div>
+  `;
+}
+
+function updateFakePriceAxes(months) {
+  if (!months || !months.length) return;
+
+  const medianVals = months
+    .map(m => Number(m.median_price))
+    .filter(v => !Number.isNaN(v));
+
+  const avgVals = months
+    .map(m => Number(m.avg_price))
+    .filter(v => !Number.isNaN(v));
+
+  const absorptionVals = months
+    .map(m => Number((m.absorption_rate || 0) * 100))
+    .filter(v => !Number.isNaN(v));
+
+  const medianEl = document.getElementById("medianYAxisFake");
+  const avgEl = document.getElementById("avgYAxisFake");
+  const absorptionEl = document.getElementById("absorptionYAxisFake");
+
+  if (medianVals.length) {
+    setThreeScaleLabels(
+      medianEl,
+      Math.min(...medianVals),
+      Math.max(...medianVals),
+      moneyCompact
+    );
+  }
+
+  if (avgVals.length) {
+    setThreeScaleLabels(
+      avgEl,
+      Math.min(...avgVals),
+      Math.max(...avgVals),
+      moneyCompact
+    );
+  }
+
+  if (absorptionVals.length) {
+    setThreeScaleLabels(
+      absorptionEl,
+      Math.min(...absorptionVals),
+      Math.max(...absorptionVals),
+      (v) => Number(v).toFixed(0) + "%"
+    );
+  }
+}
 
       function setEmptyState(message) {
         els.summary.textContent = message || "Select a subdivision to load its market dashboard.";
@@ -944,22 +1111,11 @@
           scroller.scrollLeft = scroller.scrollWidth;
         });
       }
+            function updatePriceBoxFromIndex(chart, months, idx) {
+        if (!chart || !months || !months.length) return;
 
-      function updatePriceBoxFromClientX(chart, months, clientX) {
-        if (!chart || !chart.chartArea || !months || !months.length) return;
-
-        const rect = chart.canvas.getBoundingClientRect();
-        const chartArea = chart.chartArea;
-
-        const localX = clientX - rect.left;
-        const left = chartArea.left;
-        const right = chartArea.right;
-
-        const clampedX = Math.max(left, Math.min(right, localX));
-        const ratio = (clampedX - left) / Math.max(1, right - left);
-        const idx = Math.round(ratio * (months.length - 1));
-
-        const point = months[idx];
+        const safeIdx = Math.max(0, Math.min(months.length - 1, idx));
+        const point = months[safeIdx];
         if (!point) return;
 
         updatePriceCornerBox(
@@ -968,26 +1124,77 @@
           point.avg_price,
           (point.absorption_rate || 0) * 100
         );
+
+        chart.setActiveElements([{ datasetIndex: 0, index: safeIdx }]);
+        chart.tooltip.setActiveElements([{ datasetIndex: 0, index: safeIdx }], { x: 0, y: 0 });
+        chart.update("none");
+      }
+
+      function getIndexFromClientX(chart, months, clientX) {
+        if (!chart || !chart.chartArea || !months || !months.length) {
+          return months.length - 1;
+        }
+
+        const rect = chart.canvas.getBoundingClientRect();
+        const chartArea = chart.chartArea;
+        const localX = clientX - rect.left;
+        const clampedX = Math.max(chartArea.left, Math.min(chartArea.right, localX));
+        const ratio = (clampedX - chartArea.left) / Math.max(1, chartArea.right - chartArea.left);
+
+        return Math.round(ratio * (months.length - 1));
       }
 
       function bindPriceChartTouch(chart, months) {
         const canvas = chart.canvas;
-        if (!canvas) return;
+        const scroller = document.getElementById("priceChartScroll");
+        if (!canvas || !scroller) return;
 
-        function handleTouch(evt) {
+        let frozen = false;
+
+        function syncFromTouch(evt) {
           const touch = evt.touches && evt.touches[0]
             ? evt.touches[0]
             : evt.changedTouches && evt.changedTouches[0];
 
           if (!touch) return;
-          updatePriceBoxFromClientX(chart, months, touch.clientX);
+
+          const idx = getIndexFromClientX(chart, months, touch.clientX);
+          updatePriceBoxFromIndex(chart, months, idx);
         }
 
-        canvas.addEventListener("touchstart", handleTouch, { passive: true });
-        canvas.addEventListener("touchmove", handleTouch, { passive: true });
+        canvas.addEventListener("touchstart", function (evt) {
+          frozen = true;
+          scroller.classList.add("is-frozen");
+          syncFromTouch(evt);
+        }, { passive: true });
+
+        canvas.addEventListener("touchmove", function (evt) {
+          if (!frozen) return;
+          evt.preventDefault();
+          syncFromTouch(evt);
+        }, { passive: false });
+
+        canvas.addEventListener("click", function () {
+          frozen = !frozen;
+          scroller.classList.toggle("is-frozen", frozen);
+
+          if (!frozen) {
+            chart.setActiveElements([]);
+            chart.tooltip.setActiveElements([], { x: 0, y: 0 });
+            chart.update("none");
+
+            const last = months[months.length - 1];
+            updatePriceCornerBox(
+              last.month,
+              last.median_price,
+              last.avg_price,
+              (last.absorption_rate || 0) * 100
+            );
+          }
+        });
       }
 
-      function commonInteractionOptions() {
+        function commonInteractionOptions() {
         return {
           responsive: true,
           maintainAspectRatio: false,
@@ -1027,17 +1234,18 @@
         };
       }
 
-      function priceOptions(showXAxis = true) {
+            function priceOptions(showXAxis = true) {
         const opts = commonInteractionOptions();
         opts.plugins.legend.display = false;
-        opts.scales.y.ticks.callback = (v) => moneyCompact(v);
+        opts.scales.y.display = false;
         opts.scales.x.display = showXAxis;
         return opts;
       }
 
-      function percentOptions(showXAxis = true) {
+            function percentOptions(showXAxis = true) {
         const opts = commonInteractionOptions();
-        opts.scales.y.ticks.callback = (v) => v + "%";
+        opts.plugins.legend.display = false;
+        opts.scales.y.display = false;
         opts.scales.x.display = showXAxis;
         return opts;
       }
@@ -1119,12 +1327,14 @@
         els.liquidityIndex.textContent = pct1((latest.sell_through_rate || 0) * 100);
         els.failureRisk.textContent = pct1((latest.failure_rate || 0) * 100);
 
-        updatePriceCornerBox(
+                updatePriceCornerBox(
           latest.month,
           latest.median_price,
           latest.avg_price,
           (latest.absorption_rate || 0) * 100
         );
+
+        updateFakePriceAxes(months);
 
         destroyCharts();
 
