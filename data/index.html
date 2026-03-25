@@ -331,18 +331,6 @@
       color: var(--muted);
     }
 
-    .insight-row {
-  grid-template-columns: auto auto auto;
-  gap: 12px;
-  align-items: start;
-}
-
-@media (max-width: 900px) {
-  .insight-row {
-    grid-template-columns: auto auto;
-  }
-}
-
     .chart-box h3 {
       margin: 0 0 12px;
       font-size: 18px;
@@ -908,7 +896,7 @@
   </article>
 </section>
       <section class="section-block">
-  <div class="chart-grid insight-row">
+  <div class="chart-grid insight-row"><div class="chart-grid" style="grid-template-columns: auto auto; gap: 12px;">
 
   <!-- Listing Outcomes -->
 <article class="panel chart-box" style="padding: 12px 12px 10px; max-width: 260px; justify-self: start;">
