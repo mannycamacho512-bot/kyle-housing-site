@@ -703,6 +703,119 @@
   width: 100%;
   justify-self: stretch;
 }
+.buyers-sellers-ladder {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: #050505;
+}
+
+.ladder-header,
+.ladder-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 88px minmax(0, 1fr);
+  align-items: center;
+}
+
+.ladder-header {
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255,255,255,0.68);
+}
+
+.ladder-header div:nth-child(1) {
+  text-align: right;
+  padding-right: 10px;
+}
+
+.ladder-header div:nth-child(2) {
+  text-align: center;
+}
+
+.ladder-header div:nth-child(3) {
+  text-align: left;
+  padding-left: 10px;
+}
+
+.ladder-row {
+  min-height: 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.ladder-row:last-child {
+  border-bottom: 0;
+}
+
+.ladder-side {
+  position: relative;
+  height: 100%;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.ladder-side.buyers {
+  justify-content: flex-end;
+  padding-right: 8px;
+}
+
+.ladder-side.sellers {
+  justify-content: flex-start;
+  padding-left: 8px;
+}
+
+.ladder-bar {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.ladder-bar.buyers {
+  justify-content: flex-end;
+  padding-right: 8px;
+  color: #34d399;
+  background: rgba(6,95,70,0.18);
+  border-left: 1px solid rgba(52,211,153,0.18);
+  border-top: 1px solid rgba(52,211,153,0.10);
+  border-bottom: 1px solid rgba(52,211,153,0.10);
+}
+
+.ladder-bar.sellers {
+  justify-content: flex-start;
+  padding-left: 8px;
+  color: rgba(255,255,255,0.92);
+  background: rgba(255,255,255,0.08);
+  border-right: 1px solid rgba(255,255,255,0.18);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.ladder-month {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.72);
+  border-left: 1px solid rgba(255,255,255,0.08);
+  border-right: 1px solid rgba(255,255,255,0.08);
+  padding: 6px 4px;
+}
+
+.ladder-row.latest .ladder-month {
+  color: #fff;
+  font-weight: 700;
+  background: rgba(255,255,255,0.04);
+}
+
+.ladder-empty {
+  padding: 18px 12px;
+  text-align: center;
+  color: rgba(255,255,255,0.45);
+  font-size: 13px;
+}
 
 @media (min-width: 1200px) {
   .mini-cards-wrap {
@@ -1036,16 +1149,14 @@
       </article>
     </div>
 
-    <!-- Monthly Flow -->
+    <!-- Buyers vs Sellers -->
 <article class="panel chart-box mini-card third-card">
   <h3>Buyers vs Sellers</h3>
   <p class="chart-subtext mini-subtext">
-    New listings vs sold by month.
+    Buyers = sold homes. Sellers = new listings.
   </p>
 
-  <div class="chart-area mini-chart-area" style="min-height: 220px;">
-    <canvas id="monthlyFlowChart"></canvas>
-  </div>
+  <div id="buyersSellersLadder" class="buyers-sellers-ladder"></div>
 </article>
 
   </div>
@@ -1504,7 +1615,57 @@ Chart.register(pieLabelPlugin);
           }
         };
       }
+function renderBuyersSellersLadder(months) {
+  const el = document.getElementById("buyersSellersLadder");
+  if (!el) return;
 
+  if (!Array.isArray(months) || !months.length) {
+    el.innerHTML = '<div class="ladder-empty">No monthly data</div>';
+    return;
+  }
+
+  const maxValue = Math.max(
+    1,
+    ...months.map(m => Math.max(m.sold || 0, m.new_listings || 0))
+  );
+
+  const rowsHtml = months.map((m, idx) => {
+    const sold = Number(m.sold || 0);
+    const newListings = Number(m.new_listings || 0);
+
+    const buyersWidth = (sold / maxValue) * 100;
+    const sellersWidth = (newListings / maxValue) * 100;
+
+    const isLatest = idx === months.length - 1;
+
+    return `
+      <div class="ladder-row ${isLatest ? "latest" : ""}">
+        <div class="ladder-side buyers">
+          <div class="ladder-bar buyers" style="width:${buyersWidth}%;">
+            ${sold > 0 ? sold : ""}
+          </div>
+        </div>
+
+        <div class="ladder-month">${m.month}</div>
+
+        <div class="ladder-side sellers">
+          <div class="ladder-bar sellers" style="width:${sellersWidth}%;">
+            ${newListings > 0 ? newListings : ""}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  el.innerHTML = `
+    <div class="ladder-header">
+      <div>Buyers</div>
+      <div>Month</div>
+      <div>Sellers</div>
+    </div>
+    ${rowsHtml}
+  `;
+}
       function renderSubdivision(name) {
         const row = allData.find(
           item =>
@@ -1531,6 +1692,7 @@ Chart.register(pieLabelPlugin);
         els.liquidityIndex.textContent = pct1((latest.sell_through_rate || 0) * 100);
         els.failureRisk.textContent = pct1((latest.failure_rate || 0) * 100);
         els.withdrawnExpiredCount.textContent = fmtNumber(latest.withdrawn_expired || 0);
+        renderBuyersSellersLadder(months);
 
                 updatePriceCornerBox(
           latest.month,
@@ -1696,87 +1858,7 @@ charts.listingOutcomesChart = new Chart(
   }
 );
 
-charts.monthlyFlowChart = new Chart(
-  document.getElementById("monthlyFlowChart"),
-  {
-    type: "bar",
-    data: {
-      labels,
-      datasets: [
-        {
-          type: "line",
-          label: "Buyers (Sold)",
-          data: months.map(m => m.sold || 0),
-          borderColor: emerald,
-          backgroundColor: emerald,
-          borderWidth: 3,
-          tension: 0.25,
-          pointRadius: 2,
-          pointHoverRadius: 4,
-          fill: false
-        },
-        {
-          type: "line",
-          label: "Sellers (New Listings)",
-          data: months.map(m => m.new_listings || 0),
-          borderColor: "#ffffff",
-          backgroundColor: "#ffffff",
-          borderWidth: 2,
-          tension: 0.25,
-          pointRadius: 2,
-          pointHoverRadius: 4,
-          fill: false
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      interaction: {
-        mode: "index",
-        intersect: false
-      },
-      plugins: {
-        legend: {
-          labels: { color: chartTextColor }
-        },
-        tooltip: {
-          backgroundColor: "#111",
-          borderColor: "rgba(255,255,255,0.15)",
-          borderWidth: 1,
-          titleColor: "#fff",
-          bodyColor: "#fff",
-          callbacks: {
-            label: function(context) {
-              return context.dataset.label + ": " + context.raw;
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: chartTextColor,
-            maxRotation: 0,
-            autoSkip: false,
-            callback: function(value, index) {
-              return yearTickLabel(value, index, this.getLabels());
-            }
-          },
-          grid: { color: chartGridColor }
-        },
-        y: {
-          beginAtZero: true,
-          ticks: {
-            color: chartTextColor,
-            precision: 0
-          },
-          grid: { color: chartGridColor }
-        }
-      }
-    }
-  }
-);
+
         /*
         charts.domWithdrawnChart = new Chart(document.getElementById("domWithdrawnChart"), {
           data: {
