@@ -707,6 +707,23 @@
   width: 100%;
   border: 1px solid rgba(255,255,255,0.08);
   background: #050505;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+}
+
+/* desktop */
+@media (min-width: 1200px) {
+  .buyers-sellers-ladder {
+    max-height: 312px;
+  }
+}
+
+/* tablet + mobile */
+@media (max-width: 1199px) {
+  .buyers-sellers-ladder {
+    max-height: 240px;
+  }
 }
 
 .ladder-header,
@@ -1665,6 +1682,7 @@ function renderBuyersSellersLadder(months) {
     </div>
     ${rowsHtml}
   `;
+    el.scrollTop = el.scrollHeight;
 }
       function renderSubdivision(name) {
         const row = allData.find(
