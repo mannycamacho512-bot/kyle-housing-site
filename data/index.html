@@ -635,10 +635,97 @@
   grid-template-columns: auto auto;
   gap: 12px;
 }
-    @media (min-width: 1200px) {
+
+.mini-cards-stack {
+  display: contents;
+}
+
+.mini-card {
+  padding: 12px 12px 10px;
+  max-width: 260px;
+  justify-self: start;
+}
+
+.mini-subtext {
+  margin: 0 0 8px;
+}
+
+.mini-chart-area {
+  min-height: 95px;
+  padding: 4px 6px;
+}
+
+.mini-pie-box {
+  width: 145px;
+  height: 145px;
+  margin: 0 auto 6px auto;
+}
+
+.mini-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.mini-stat-swatch {
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.16);
+}
+
+.mini-stat-number {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+
+.mini-stat-unit {
+  font-size: 14px;
+  color: rgba(255,255,255,0.72);
+  margin-top: 4px;
+}
+
+.third-card-placeholder {
+  min-height: 140px;
+  border: 1px dashed rgba(255,255,255,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.45);
+  font-size: 13px;
+}
+
+@media (min-width: 1200px) {
   .mini-cards-wrap {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 260px minmax(260px, 1fr);
     align-items: start;
+    gap: 12px;
+  }
+
+  .mini-cards-stack {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 260px;
+  }
+
+  .mini-card {
+    max-width: 260px;
+    width: 260px;
+  }
+
+  .third-card {
+    max-width: none;
+    width: 100%;
+    min-height: 100%;
+    justify-self: stretch;
+  }
+
+  .third-card-placeholder {
+    min-height: 312px;
   }
 }
 
@@ -910,50 +997,51 @@
 <section class="section-block">
   <div class="mini-cards-wrap">
 
-  <!-- Listing Outcomes -->
-<article class="panel chart-box" style="padding: 12px 12px 10px; max-width: 260px; justify-self: start;">
-  <h3>Listing Outcomes</h3>
-  <p class="chart-subtext" style="margin: 0 0 8px;">
-  Last month: sold vs failed.
-</p>
+    <div class="mini-cards-stack">
+      <!-- Listing Outcomes -->
+      <article class="panel chart-box mini-card">
+        <h3>Listing Outcomes</h3>
+        <p class="chart-subtext mini-subtext">
+          Last month: sold vs failed.
+        </p>
 
-  <div class="chart-area" style="min-height: 95px; padding: 4px 6px;">
-    <div style="width: 145px; height: 145px; margin: 0 auto 6px auto;">
-      <canvas id="listingOutcomesChart"></canvas>
+        <div class="chart-area mini-chart-area">
+          <div class="mini-pie-box">
+            <canvas id="listingOutcomesChart"></canvas>
+          </div>
+        </div>
+      </article>
+
+      <!-- Withdrawn / Expired -->
+      <article class="panel chart-box mini-card">
+        <h3>Withdrawn / Expired</h3>
+        <p class="chart-subtext mini-subtext">
+          Last month: homes that left the market unsold.
+        </p>
+
+        <div class="mini-stat-row">
+          <div class="mini-stat-swatch"></div>
+          <div>
+            <div id="withdrawnExpiredCount" class="mini-stat-number">--</div>
+            <div class="mini-stat-unit">homes</div>
+          </div>
+        </div>
+      </article>
     </div>
+
+    <!-- 3rd card -->
+    <article class="panel chart-box mini-card third-card">
+      <h3>3rd Card</h3>
+      <p class="chart-subtext mini-subtext">
+        Placeholder for the next chart.
+      </p>
+
+      <div class="third-card-placeholder">
+        future chart
+      </div>
+    </article>
+
   </div>
-</article>
-
-<!-- Withdrawn / Expired (placeholder for next step) -->
-<!-- Withdrawn / Expired -->
-<article class="panel chart-box" style="padding: 12px 12px 10px; max-width: 260px; justify-self: start;">
-  <h3>Withdrawn / Expired</h3>
-  <p class="chart-subtext" style="margin: 0 0 8px;">
-    Last month: homes that left the market unsold.
-  </p>
-
-  <div style="display: flex; align-items: center; gap: 12px; margin-top: 8px;">
-    <div style="width: 14px; height: 14px; border: 1px solid rgba(255,255,255,0.55); background: rgba(255,255,255,0.16);"></div>
-    <div>
-      <div id="withdrawnExpiredCount" style="font-size: 36px; font-weight: 700; line-height: 1; color: #fff;">--</div>
-<div style="font-size: 14px; color: rgba(255,255,255,0.72); margin-top: 4px;">homes</div>
-    </div>
-  </div>
-</article>
-
-<!-- 3rd card placeholder -->
-<article class="panel chart-box" style="padding: 12px 12px 10px; max-width: 260px; justify-self: start;">
-  <h3>3rd Card</h3>
-  <p class="chart-subtext" style="margin: 0 0 8px;">
-    Placeholder for the next chart.
-  </p>
-
-  <div style="min-height: 140px; border: 1px dashed rgba(255,255,255,0.22); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.45); font-size: 13px;">
-    future chart
-  </div>
-</article>
-
-</div>
 </section>
     </div>
   </main>
