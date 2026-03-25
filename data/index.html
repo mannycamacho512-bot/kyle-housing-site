@@ -1036,17 +1036,17 @@
       </article>
     </div>
 
-    <!-- 3rd card -->
-    <article class="panel chart-box mini-card third-card">
-      <h3>3rd Card</h3>
-      <p class="chart-subtext mini-subtext">
-        Placeholder for the next chart.
-      </p>
+    <!-- Monthly Flow -->
+<article class="panel chart-box mini-card third-card">
+  <h3>Monthly Flow</h3>
+  <p class="chart-subtext mini-subtext">
+    New listings vs sold by month.
+  </p>
 
-      <div class="third-card-placeholder">
-        future chart
-      </div>
-    </article>
+  <div class="chart-area mini-chart-area" style="min-height: 220px;">
+    <canvas id="monthlyFlowChart"></canvas>
+  </div>
+</article>
 
   </div>
 </section>
@@ -1644,51 +1644,80 @@ Chart.register(pieLabelPlugin);
         requestAnimationFrame(() => {
           syncPriceAxes();
         });
+        
         charts.listingOutcomesChart = new Chart(
   document.getElementById("listingOutcomesChart"),
   {
     type: "pie",
+    ...
+  }
+);
+
+charts.monthlyFlowChart = new Chart(
+  document.getElementById("monthlyFlowChart"),
+  {
+    type: "bar",
     data: {
-      labels: ["Sold", "Failed"],
+      labels,
       datasets: [
         {
-          data: [
-            (latest.sell_through_rate || 0) * 100,
-            (latest.failure_rate || 0) * 100
-          ],
-          backgroundColor: [
-            "rgba(6,95,70,0.55)",
-            "rgba(255,255,255,0.18)"
-          ],
-          borderColor: [
-            "#10b981",
-            "rgba(255,255,255,0.5)"
-          ],
-          borderWidth: 2,
-          hoverOffset: 6
+          label: "New Listings",
+          data: months.map(m => m.new_listings || 0),
+          backgroundColor: "rgba(255,255,255,0.18)",
+          borderColor: "#ffffff",
+          borderWidth: 1,
+          barPercentage: 0.9,
+          categoryPercentage: 0.8
+        },
+        {
+          label: "Sold",
+          data: months.map(m => m.sold || 0),
+          backgroundColor: "rgba(6,95,70,0.55)",
+          borderColor: emerald,
+          borderWidth: 1,
+          barPercentage: 0.9,
+          categoryPercentage: 0.8
         }
       ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      radius: "94%",
-      layout: {
-        padding: 0
+      interaction: {
+        mode: "index",
+        intersect: false
       },
       plugins: {
         legend: {
-          position: "bottom",
-          labels: {
-            color: chartTextColor
-          }
+          labels: { color: chartTextColor }
         },
         tooltip: {
-          callbacks: {
-            label: function(context) {
-              return context.label + ": " + context.raw.toFixed(1) + "%";
+          backgroundColor: "#111",
+          borderColor: "rgba(255,255,255,0.15)",
+          borderWidth: 1,
+          titleColor: "#fff",
+          bodyColor: "#fff"
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: chartTextColor,
+            maxRotation: 0,
+            autoSkip: false,
+            callback: function(value, index) {
+              return yearTickLabel(value, index, this.getLabels());
             }
-          }
+          },
+          grid: { color: chartGridColor }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: chartTextColor,
+            precision: 0
+          },
+          grid: { color: chartGridColor }
         }
       }
     }
