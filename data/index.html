@@ -656,8 +656,8 @@
 }
 
 .mini-pie-box {
-  width: 145px;
-  height: 145px;
+  width: 175px;
+  height: 175px;
   margin: 0 auto 6px auto;
 }
 
@@ -697,6 +697,12 @@
   color: rgba(255,255,255,0.45);
   font-size: 13px;
 }
+.third-card {
+  grid-column: 1 / -1;
+  max-width: none;
+  width: 100%;
+  justify-self: stretch;
+}
 
 @media (min-width: 1200px) {
   .mini-cards-wrap {
@@ -717,12 +723,13 @@
     width: 260px;
   }
 
-  .third-card {
-    max-width: none;
-    width: 100%;
-    min-height: 100%;
-    justify-self: stretch;
-  }
+  ..third-card {
+  grid-column: auto;
+  max-width: none;
+  width: 100%;
+  min-height: 100%;
+  justify-self: stretch;
+}
 
   .third-card-placeholder {
     min-height: 312px;
@@ -1665,7 +1672,7 @@ Chart.register(pieLabelPlugin);
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      radius: "88%",
+      radius: "94%",
       layout: {
         padding: 0
       },
