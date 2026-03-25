@@ -1703,25 +1703,29 @@ charts.monthlyFlowChart = new Chart(
     data: {
       labels,
       datasets: [
-        {
-          label: "New Listings",
-          data: months.map(m => m.new_listings || 0),
-          backgroundColor: "rgba(255,255,255,0.18)",
-          borderColor: "#ffffff",
-          borderWidth: 1,
-          barPercentage: 0.9,
-          categoryPercentage: 0.8
-        },
-        {
-          label: "Sold",
-          data: months.map(m => m.sold || 0),
-          backgroundColor: "rgba(6,95,70,0.55)",
-          borderColor: emerald,
-          borderWidth: 1,
-          barPercentage: 0.9,
-          categoryPercentage: 0.8
-        }
-      ]
+  {
+    type: "bar",
+    label: "New Listings",
+    data: months.map(m => m.new_listings || 0),
+    backgroundColor: "rgba(255,255,255,0.18)",
+    borderColor: "#ffffff",
+    borderWidth: 1,
+    barPercentage: 0.9,
+    categoryPercentage: 0.8
+  },
+  {
+    type: "line",
+    label: "Sold",
+    data: months.map(m => m.sold || 0),
+    borderColor: emerald,
+    backgroundColor: emerald,
+    borderWidth: 2.5,
+    tension: 0.2,
+    pointRadius: 2.5,
+    pointHoverRadius: 4,
+    fill: false
+  }
+]
     },
     options: {
       responsive: true,
