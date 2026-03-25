@@ -406,23 +406,16 @@
     .chart-corner-box .median-row span:last-child {
       font-size: 20px;
     }
-            .price-layout {
-      display: grid;
-      grid-template-columns: 54px minmax(0, 1fr);
-      gap: 0;
-      align-items: start;
-    }
+     .price-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  align-items: start;
+}
 
-    .price-yaxis-col {
-      display: grid;
-      grid-template-rows: 420px 140px 140px;
-      position: relative;
-      z-index: 3;
-      background: #000;
-      border-left: 1px solid var(--border);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
+   .price-yaxis-col {
+  display: none;
+}
 
     .axis-rail {
       position: relative;
@@ -945,9 +938,9 @@
       .chart-strip-title {
         font-size: 10px;
       }
-                  .price-layout {
-        grid-template-columns: 46px minmax(0, 1fr);
-      }
+                 .price-layout {
+  grid-template-columns: minmax(0, 1fr);
+}
             .lane-title-fixed {
         font-size: 10px;
       }
@@ -1603,8 +1596,17 @@ Chart.register(pieLabelPlugin);
   opts.plugins.legend.display = false;
   opts.scales.y.display = false;
 
+  opts.layout = {
+    padding: {
+      bottom: 16
+    }
+  };
+
   opts.scales.x.display = true;
   opts.scales.x.grid.display = false;
+  opts.scales.x.border = {
+    display: false
+  };
   opts.scales.x.ticks.color = "#ffffff";
   opts.scales.x.ticks.padding = 10;
   opts.scales.x.ticks.maxRotation = 0;
@@ -1793,8 +1795,8 @@ function renderBuyersSellersLadder(months) {
               }
             }]
           },
-          options: {
-            ...priceOptions(),
+         options: {
+  ...medianPriceOptions(),
             onHover: (event, elements) => {
               if (!elements.length) {
                 const last = months[months.length - 1];
