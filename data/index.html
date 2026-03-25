@@ -1038,7 +1038,7 @@
 
     <!-- Monthly Flow -->
 <article class="panel chart-box mini-card third-card">
-  <h3>Monthly Flow</h3>
+  <h3>Buyers vs Sellers</h3>
   <p class="chart-subtext mini-subtext">
     New listings vs sold by month.
   </p>
@@ -1709,7 +1709,7 @@ charts.monthlyFlowChart = new Chart(
           data: months.map(m => m.sold || 0),
           borderColor: emerald,
           backgroundColor: emerald,
-          borderWidth: 2.5,
+          borderWidth: 3,
           tension: 0.25,
           pointRadius: 2,
           pointHoverRadius: 4,
@@ -1725,7 +1725,6 @@ charts.monthlyFlowChart = new Chart(
           tension: 0.25,
           pointRadius: 2,
           pointHoverRadius: 4,
-          borderDash: [4, 4],
           fill: false
         }
       ]
