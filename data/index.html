@@ -1404,21 +1404,32 @@ Chart.register(pieLabelPlugin);
         `;
       }
 
-      function yearTickLabel(value, index, labels) {
-        const label = labels[index];
-        if (!label) return "";
+      function milestoneTickLabel(value, index, labels) {
+  if (!labels || !labels.length) return "";
 
-        const str = String(label);
+  const lastIndex = labels.length - 1;
+  const currentLabel = labels[index];
 
-        if (str.includes("-")) {
-          const parts = str.split("-");
-          const year = parts[0];
-          const month = parts[1];
-          return month === "01" ? year : "";
-        }
+  const idx3mo = lastIndex - 2;
+  const idx6mo = lastIndex - 5;
+  const idx5yr = lastIndex - 59;
 
-        return index % 12 === 0 ? str : "";
-      }
+  let idxYTD = -1;
+  for (let i = 0; i < labels.length; i++) {
+    const label = String(labels[i] || "");
+    if (label.endsWith("-01")) {
+      idxYTD = i;
+    }
+  }
+
+  if (index === idx5yr) return "5yr";
+  if (index === idxYTD) return "1 YTD";
+  if (index === idx6mo) return "6mo";
+  if (index === idx3mo) return "3mo";
+  if (index === lastIndex) return currentLabel;
+
+  return "";
+}
 
             function scrollPriceChartToLatest() {
         const scroller = document.getElementById("priceChartScroll");
@@ -1559,8 +1570,8 @@ Chart.register(pieLabelPlugin);
                 maxRotation: 0,
                 autoSkip: false,
                 callback: function(value, index) {
-                  return yearTickLabel(value, index, this.getLabels());
-                }
+  return milestoneTickLabel(value, index, this.getLabels());
+}
               },
               grid: { color: chartGridColor }
             },
