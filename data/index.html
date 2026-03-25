@@ -1598,6 +1598,24 @@ Chart.register(pieLabelPlugin);
         opts.scales.x.display = showXAxis;
         return opts;
       }
+      function medianPriceOptions() {
+  const opts = commonInteractionOptions();
+  opts.plugins.legend.display = false;
+  opts.scales.y.display = false;
+
+  opts.scales.x.display = true;
+  opts.scales.x.grid.display = false;
+  opts.scales.x.ticks.color = "#ffffff";
+  opts.scales.x.ticks.padding = 10;
+  opts.scales.x.ticks.maxRotation = 0;
+  opts.scales.x.ticks.minRotation = 0;
+  opts.scales.x.ticks.autoSkip = false;
+  opts.scales.x.ticks.callback = function(value, index) {
+    return milestoneTickLabel(value, index, this.getLabels());
+  };
+
+  return opts;
+}
 
       function dualAxisOptions() {
         return {
@@ -1626,7 +1644,7 @@ Chart.register(pieLabelPlugin);
                 maxRotation: 0,
                 autoSkip: false,
                 callback: function(value, index) {
-                  return yearTickLabel(value, index, this.getLabels());
+                  return milestoneTickLabel(value, index, this.getLabels());;
                 }
               },
               grid: { color: chartGridColor }
@@ -1776,7 +1794,7 @@ function renderBuyersSellersLadder(months) {
             }]
           },
           options: {
-            ...priceOptions(true),
+            ...priceOptions(),
             onHover: (event, elements) => {
               if (!elements.length) {
                 const last = months[months.length - 1];
