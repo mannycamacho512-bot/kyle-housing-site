@@ -1703,32 +1703,32 @@ charts.monthlyFlowChart = new Chart(
     data: {
       labels,
       datasets: [
-  {
-    type: "line",
-    label: "Buyers (Sold)",
-    data: months.map(m => m.sold || 0),
-    borderColor: emerald,
-    backgroundColor: emerald,
-    borderWidth: 2.5,
-    tension: 0.25,
-    pointRadius: 2,
-    pointHoverRadius: 4,
-    fill: false
-  },
-  {
-    type: "line",
-    label: "Sellers (New Listings)",
-    data: months.map(m => m.new_listings || 0),
-    borderColor: "#ffffff",
-    backgroundColor: "#ffffff",
-    borderWidth: 2,
-    tension: 0.25,
-    pointRadius: 2,
-    pointHoverRadius: 4,
-    borderDash: [4, 4], // 👈 THIS makes it visually different
-    fill: false
-  }
-]
+        {
+          type: "line",
+          label: "Buyers (Sold)",
+          data: months.map(m => m.sold || 0),
+          borderColor: emerald,
+          backgroundColor: emerald,
+          borderWidth: 2.5,
+          tension: 0.25,
+          pointRadius: 2,
+          pointHoverRadius: 4,
+          fill: false
+        },
+        {
+          type: "line",
+          label: "Sellers (New Listings)",
+          data: months.map(m => m.new_listings || 0),
+          borderColor: "#ffffff",
+          backgroundColor: "#ffffff",
+          borderWidth: 2,
+          tension: 0.25,
+          pointRadius: 2,
+          pointHoverRadius: 4,
+          borderDash: [4, 4],
+          fill: false
+        }
+      ]
     },
     options: {
       responsive: true,
@@ -1742,17 +1742,18 @@ charts.monthlyFlowChart = new Chart(
           labels: { color: chartTextColor }
         },
         tooltip: {
-  backgroundColor: "#111",
-  borderColor: "rgba(255,255,255,0.15)",
-  borderWidth: 1,
-  titleColor: "#fff",
-  bodyColor: "#fff",
-  callbacks: {
-    label: function(context) {
-      return context.dataset.label + ": " + context.raw;
-    }
-  }
-},
+          backgroundColor: "#111",
+          borderColor: "rgba(255,255,255,0.15)",
+          borderWidth: 1,
+          titleColor: "#fff",
+          bodyColor: "#fff",
+          callbacks: {
+            label: function(context) {
+              return context.dataset.label + ": " + context.raw;
+            }
+          }
+        }
+      },
       scales: {
         x: {
           ticks: {
