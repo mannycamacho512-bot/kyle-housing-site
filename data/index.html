@@ -416,6 +416,36 @@
    .price-yaxis-col {
   display: none;
 }
+  .price-range-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.price-range-btn {
+  appearance: none;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: #000;
+  color: rgba(255,255,255,0.82);
+  padding: 8px 12px;
+  font-family: "Hedvig Letters Serif", serif;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.price-range-btn:hover {
+  border-color: rgba(255,255,255,0.35);
+  color: #fff;
+}
+
+.price-range-btn.is-active {
+  background: rgba(6,95,70,0.22);
+  border-color: #065f46;
+  color: #fff;
+}
 
     .axis-rail {
       position: relative;
@@ -447,14 +477,15 @@
       pointer-events: none;
     }
 
-            .price-right-scroll {
-      min-width: 0;
-      position: relative;
-      border-right: 1px solid var(--border);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: #000;
-    }
+       .price-right-scroll {
+  min-width: 0;
+  position: relative;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: #000;
+}
 
     .lane-title-fixed {
       position: absolute;
@@ -1096,7 +1127,7 @@
       </div>
     </div>
 
-                <div class="price-layout">
+    <div class="price-layout">
       <div class="price-yaxis-col">
         <div class="axis-rail axis-rail-main" id="medianYAxisFake"></div>
         <div class="axis-rail axis-rail-strip" id="avgYAxisFake"></div>
@@ -1127,6 +1158,14 @@
         </div>
       </div>
     </div>
+
+    <div class="price-range-controls" id="priceRangeControls">
+  <button type="button" class="price-range-btn" data-range="3mo">3mo</button>
+  <button type="button" class="price-range-btn" data-range="6mo">6mo</button>
+  <button type="button" class="price-range-btn" data-range="ytd">1 YTD</button>
+  <button type="button" class="price-range-btn" data-range="5yr">5yr</button>
+  <button type="button" class="price-range-btn is-active" data-range="all">All</button>
+</div>
   </article>
 </section>
 
@@ -1249,7 +1288,18 @@
 };
 
       let allData = [];
-      let charts = {};
+let charts = {};
+
+let currentSubdivisionName = "";
+let currentRangeKey = "all";
+
+const RANGE_CONFIG = {
+  "3mo": 3,
+  "6mo": 6,
+  "5yr": 60
+};
+
+const rangeButtons = Array.from(document.querySelectorAll(".price-range-btn"));
 
       const chartTextColor = "rgba(255,255,255,0.75)";
       const chartGridColor = "rgba(255,255,255,0.12)";
@@ -1280,6 +1330,54 @@
           notation: "compact"
         }).format(value);
       }
+      function setActiveRangeButton() {
+  rangeButtons.forEach(btn => {
+    btn.classList.toggle("is-active", btn.dataset.range === currentRangeKey);
+  });
+}
+
+function getFilteredMonths(months, rangeKey) {
+  if (!Array.isArray(months) || !months.length) return [];
+
+  if (rangeKey === "all") {
+    return months.slice();
+  }
+
+  if (rangeKey === "ytd") {
+    const latestMonth = months[months.length - 1];
+    const latestYear = String(latestMonth.month || "").split("-")[0];
+    return months.filter(m => String(m.month || "").startsWith(latestYear + "-"));
+  }
+
+  const take = RANGE_CONFIG[rangeKey];
+  if (!take) return months.slice();
+
+  return months.slice(-take);
+}
+
+function setChartInnerWidth(pointCount) {
+  const inner = document.querySelector(".chart-scroll-inner");
+  if (!inner) return;
+
+  const pxPerPoint = 72;
+  const minWidth = window.innerWidth <= 768 ? 900 : 1100;
+  inner.style.width = `${Math.max(minWidth, pointCount * pxPerPoint)}px`;
+}
+      rangeButtons.forEach(btn => {
+  btn.addEventListener("click", function () {
+    const nextRange = this.dataset.range || "all";
+    if (nextRange === currentRangeKey) return;
+
+    currentRangeKey = nextRange;
+    setActiveRangeButton();
+
+    if (currentSubdivisionName) {
+      renderSubdivision(currentSubdivisionName);
+    }
+  });
+});
+
+setActiveRangeButton();
             function renderAxisFromChart(chart, railEl, formatter) {
         if (!chart || !railEl || !chart.scales || !chart.scales.y) return;
 
@@ -1397,31 +1495,45 @@ Chart.register(pieLabelPlugin);
         `;
       }
 
-      function milestoneTickLabel(value, index, labels) {
+      function formatMonthLabel(monthStr) {
+  if (!monthStr) return "";
+
+  const parts = String(monthStr).split("-");
+  const year = Number(parts[0]);
+  const month = Number(parts[1]);
+
+  if (!year || !month) return monthStr;
+
+  const date = new Date(year, month - 1, 1);
+
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    year: "2-digit"
+  });
+}
+
+function milestoneTickLabel(value, index, labels) {
   if (!labels || !labels.length) return "";
 
-  const lastIndex = labels.length - 1;
-  const currentLabel = labels[index];
+  const label = labels[index];
+  if (!label) return "";
 
-  const idx3mo = lastIndex - 2;
-  const idx6mo = lastIndex - 5;
-  const idx5yr = lastIndex - 59;
-
-  let idxYTD = -1;
-  for (let i = 0; i < labels.length; i++) {
-    const label = String(labels[i] || "");
-    if (label.endsWith("-01")) {
-      idxYTD = i;
-    }
+  if (labels.length <= 6) {
+    return formatMonthLabel(label);
   }
 
-  if (index === idx5yr) return "5yr";
-  if (index === idxYTD) return "1 YTD";
-  if (index === idx6mo) return "6mo";
-  if (index === idx3mo) return "3mo";
-  if (index === lastIndex) return currentLabel;
+  if (labels.length <= 12) {
+    return (index % 2 === 0 || index === labels.length - 1)
+      ? formatMonthLabel(label)
+      : "";
+  }
 
-  return "";
+  const parts = String(label).split("-");
+  const monthNum = Number(parts[1]);
+  const isJanuary = monthNum === 1;
+  const isLast = index === labels.length - 1;
+
+  return (isJanuary || isLast) ? formatMonthLabel(label) : "";
 }
 
             function scrollPriceChartToLatest() {
@@ -1722,22 +1834,34 @@ function renderBuyersSellersLadder(months) {
     el.scrollTop = el.scrollHeight;
 }
       function renderSubdivision(name) {
-        const row = allData.find(
-          item =>
-            item.subdivision === name &&
-            Array.isArray(item.months) &&
-            item.months.length
-        );
+  currentSubdivisionName = name;
 
-        if (!row) {
-          setEmptyState("No monthly history found for this subdivision.");
-          destroyCharts();
-          return;
-        }
+  const row = allData.find(
+    item =>
+      item.subdivision === name &&
+      Array.isArray(item.months) &&
+      item.months.length
+  );
 
-        const months = row.months;
-        const latest = months[months.length - 1];
-        const labels = months.map(m => m.month);
+  if (!row) {
+    setEmptyState("No monthly history found for this subdivision.");
+    destroyCharts();
+    return;
+  }
+
+  const fullMonths = row.months;
+  const months = getFilteredMonths(fullMonths, currentRangeKey);
+
+  if (!months.length) {
+    setEmptyState("No monthly history found for this subdivision.");
+    destroyCharts();
+    return;
+  }
+
+  const latest = months[months.length - 1];
+  const labels = months.map(m => m.month);
+
+  setChartInnerWidth(months.length);
 
         els.summary.textContent = row.summary || row.subdivision;
         els.active.textContent = fmtNumber(row.active);
@@ -1747,7 +1871,7 @@ function renderBuyersSellersLadder(months) {
         els.liquidityIndex.textContent = pct1((latest.sell_through_rate || 0) * 100);
         els.failureRisk.textContent = pct1((latest.failure_rate || 0) * 100);
         els.withdrawnExpiredCount.textContent = fmtNumber(latest.withdrawn_expired || 0);
-        renderBuyersSellersLadder(months);
+        renderBuyersSellersLadder(fullMonths);
 
                 updatePriceCornerBox(
           latest.month,
