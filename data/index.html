@@ -425,7 +425,13 @@
   margin-top: 12px;
   padding: 0 4px 10px 4px;
 }
+.price-range-controls-mobile {
+  display: none;
+}
 
+.price-range-controls-desktop {
+  display: flex;
+}
 .price-range-btn {
   appearance: none;
   border: 1px solid rgba(255,255,255,0.18);
@@ -1034,6 +1040,15 @@
   padding: 5px 7px;
   font-size: 10px;
 }
+.price-range-controls-desktop {
+  display: none !important;
+}
+
+.price-range-controls-mobile {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
     }
   </style>
 </head>
@@ -1171,7 +1186,7 @@
         <div class="axis-rail axis-rail-strip" id="avgYAxisFake"></div>
         <div class="axis-rail axis-rail-strip" id="absorptionYAxisFake"></div>
       </div>
-
+      
       <div class="price-right-scroll">
         <div class="lane-title-fixed lane-title-fixed-main">Median Price</div>
         <div class="lane-title-fixed lane-title-fixed-avg">Average Price</div>
@@ -1183,7 +1198,7 @@
               <div class="chart-area chart-area-main">
   <canvas id="priceTrendChart"></canvas>
 
-  <div class="price-range-controls" id="priceRangeControls">
+ <div class="price-range-controls price-range-controls-desktop" id="priceRangeControls">
     <button type="button" class="price-range-btn" data-range="3mo">3mo</button>
     <button type="button" class="price-range-btn" data-range="6mo">6mo</button>
     <button type="button" class="price-range-btn" data-range="ytd">1 YTD</button>
@@ -1205,6 +1220,14 @@
       </div>
     </div>
   </article>
+        <div class="price-range-controls price-range-controls-mobile" id="priceRangeControlsMobile">
+  <button type="button" class="price-range-btn" data-range="3mo">3mo</button>
+  <button type="button" class="price-range-btn" data-range="6mo">6mo</button>
+  <button type="button" class="price-range-btn" data-range="ytd">1 YTD</button>
+  <button type="button" class="price-range-btn" data-range="5yr">5yr</button>
+  <button type="button" class="price-range-btn is-active" data-range="all">All</button>
+</div>
+
 </section>
 
 <section class="section-block">
