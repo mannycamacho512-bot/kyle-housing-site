@@ -351,9 +351,11 @@
     }
 
     .chart-area-main {
-      min-height: 420px;
-    }
-
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
     .chart-area-strip {
       min-height: 140px;
       padding: 8px 12px;
@@ -420,7 +422,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 14px;
+  margin-top: 12px;
+  padding: 0 4px 10px 4px;
 }
 
 .price-range-btn {
@@ -552,8 +555,9 @@
     }
 
     .chart-area-main canvas {
-      height: 420px !important;
-    }
+  height: 360px !important;
+  flex: 0 0 auto;
+}
 
     .chart-area-strip canvas {
       height: 140px !important;
@@ -1143,8 +1147,16 @@
           <div class="chart-scroll-inner">
             <div class="stacked-chart-wrap">
               <div class="chart-area chart-area-main">
-                <canvas id="priceTrendChart"></canvas>
-              </div>
+  <canvas id="priceTrendChart"></canvas>
+
+  <div class="price-range-controls" id="priceRangeControls">
+    <button type="button" class="price-range-btn" data-range="3mo">3mo</button>
+    <button type="button" class="price-range-btn" data-range="6mo">6mo</button>
+    <button type="button" class="price-range-btn" data-range="ytd">1 YTD</button>
+    <button type="button" class="price-range-btn" data-range="5yr">5yr</button>
+    <button type="button" class="price-range-btn is-active" data-range="all">All</button>
+  </div>
+</div>
 
               <div class="chart-area chart-area-strip">
                 <canvas id="avgPriceChart"></canvas>
@@ -1158,14 +1170,6 @@
         </div>
       </div>
     </div>
-
-    <div class="price-range-controls" id="priceRangeControls">
-  <button type="button" class="price-range-btn" data-range="3mo">3mo</button>
-  <button type="button" class="price-range-btn" data-range="6mo">6mo</button>
-  <button type="button" class="price-range-btn" data-range="ytd">1 YTD</button>
-  <button type="button" class="price-range-btn" data-range="5yr">5yr</button>
-  <button type="button" class="price-range-btn is-active" data-range="all">All</button>
-</div>
   </article>
 </section>
 
@@ -1343,11 +1347,9 @@ function getFilteredMonths(months, rangeKey) {
     return months.slice();
   }
 
-  if (rangeKey === "ytd") {
-    const latestMonth = months[months.length - 1];
-    const latestYear = String(latestMonth.month || "").split("-")[0];
-    return months.filter(m => String(m.month || "").startsWith(latestYear + "-"));
-  }
+ if (rangeKey === "ytd") {
+  return months.slice(-13);
+}
 
   const take = RANGE_CONFIG[rangeKey];
   if (!take) return months.slice();
@@ -1359,8 +1361,20 @@ function setChartInnerWidth(pointCount) {
   const inner = document.querySelector(".chart-scroll-inner");
   if (!inner) return;
 
+  const isMobile = window.innerWidth <= 768;
+
+  if (!isMobile && currentRangeKey === "5yr") {
+    inner.style.width = "100%";
+    return;
+  }
+
+  if (!isMobile && currentRangeKey === "ytd") {
+    inner.style.width = "100%";
+    return;
+  }
+
   const pxPerPoint = 72;
-  const minWidth = window.innerWidth <= 768 ? 900 : 1100;
+  const minWidth = isMobile ? 900 : 1100;
   inner.style.width = `${Math.max(minWidth, pointCount * pxPerPoint)}px`;
 }
       rangeButtons.forEach(btn => {
