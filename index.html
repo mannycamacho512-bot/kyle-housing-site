@@ -48,7 +48,7 @@
       width: 100%;
       background: white;
       z-index: 9999;
-      border-bottom: 0;
+      border-bottom: 1px solid rgba(0,0,0,.08);
       transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
     }
 
@@ -169,28 +169,53 @@
     /* =========================
        FOOTER
     ========================== */
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 24px;
-      margin-top: 40px;
-    }
+    .site-footer {
+  border-top: 1px solid rgba(17,17,17,.12);
+  background: #fff;
+  color: #111;
+  margin-top: 40px;
+}
 
-    .footer-box {
-      min-width: 0;
-    }
+.footer-shell {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
 
-    .footer-box:first-child {
-      grid-column: 1;
-      text-align: left;
-    }
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
 
-    .footer-badge {
-      grid-column: 3;
-      justify-self: end;
-      text-align: right;
-    }
+.footer-col {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(17,17,17,.72);
+}
+
+.footer-col a {
+  display: block;
+  margin-bottom: 6px;
+  text-decoration: underline;
+  color: rgba(17,17,17,.72);
+}
+
+.footer-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.footer-bottom {
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(17,17,17,.12);
+  font-size: 12px;
+  color: rgba(17,17,17,.72);
+}
 
     .footer-box img {
       max-width: 100%;
@@ -307,9 +332,9 @@
       }
 
       .footer-grid {
-        grid-template-columns: 1.2fr 1fr 1.2fr;
-        gap: 12px;
-      }
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
 
       .footer-box div {
         word-wrap: break-word;
@@ -329,29 +354,26 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="topbar">
-      <div class="logo-wrap">
-        <a href="/your-missing-peace-form" class="logo-mini">
-          <img
-            src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/Copilot_20251215_150322-1920w.png"
-            alt="Your Missing Peace"
-          />
-          <span class="logo-mini-label">Your Missing Peace</span>
-        </a>
-      </div>
-
-      <div class="top-link">
-        <a href="/contact" style="text-decoration:underline;">Need Help or Have Questions?</a>
-      </div>
-
-      <div class="top-id">
-        <div>Realtor® in Kyle, TX</div>
-        <div>Emmanuel "Manny" Camacho</div>
-        <div>Dalton Wade Real Estate Group</div>
-      </div>
+  <header class="site-header" id="siteHeader">
+  <div class="topbar">
+    <div class="logo-wrap">
+      <a href="/kyle-housing-site/" class="logo-mini">
+        <img src="/kyle-housing-site/images/logo.png" alt="Your Missing Peace" />
+        <span class="logo-mini-label">Your Missing Peace</span>
+      </a>
     </div>
-  </header>
+
+    <div class="top-link">
+      <a href="/kyle-housing-site/contact" style="text-decoration:underline;">Talk through your options</a>
+    </div>
+
+    <div class="top-id">
+      <div>Realtor® in Kyle, TX</div>
+      <div>Emmanuel "Manny" Camacho</div>
+      <div>Dalton Wade Real Estate Group</div>
+    </div>
+  </div>
+</header>
 
   <div class="page-wrap">
     <h1>Homes for Sale in Kyle, TX</h1>
@@ -597,39 +619,58 @@
       <div class="subdivCard"><a href="/high-meadows" style="text-decoration:none; color:inherit; display:block;"><div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden;"><img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/High-Meadows_2.62.1.png" alt="High Meadows" style="width:100%; height:100%; object-fit:cover; display:block;"></div><div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';"><div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">High Meadows</div><div class="subdivPrice" style="font-size:14px; margin-top:2px;">$407,000 – $459,900</div><div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">5 homes currently available</div></div></a></div>
     </div>
 
+    <footer class="site-footer">
+  <div class="footer-shell">
     <div class="footer-grid">
-      <div class="footer-box">
-        <div style="font-weight:bold; font-size:16px; margin-bottom:10px;">
-          Data-driven guidance: negotiate based on comps, pace, and competition.
-        </div>
-        <div style="font-size:14px;">
-          <a href="/contact" style="color:#000; text-decoration:underline;">
-            Ask me for a quick read on your neighborhood.
-          </a>
-        </div>
+      <div class="footer-col">
+        <div class="footer-title">Kyle Housing</div>
+        <p>
+          Local housing insight designed to bring clarity to pricing,
+          neighborhoods, and decision-making in Kyle, Texas.
+        </p>
       </div>
 
-      <div class="footer-box footer-badge">
-        <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
-          <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
-        </a>
+      <div class="footer-col">
+        <div class="footer-title">Explore</div>
+        <a href="/kyle-housing-site/">Home</a>
+        <a href="/kyle-housing-site/data">Data Page</a>
+        <a href="/kyle-housing-site/contact">Connect</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">About</div>
+        <p>
+          Emmanuel "Manny" Camacho<br />
+          Realtor® in Kyle, TX<br />
+          Dalton Wade Real Estate Group
+        </p>
       </div>
     </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Emmanuel "Manny" Camacho · Kyle Housing</span>
+    </div>
+  </div>
+</footer>
   </div>
 
   <script>
-    const siteHeader = document.querySelector('.site-header');
+  (function () {
+    const siteHeader = document.getElementById("siteHeader");
+    if (!siteHeader) return;
 
     function handleHeaderShrink() {
       if (window.scrollY > 80) {
-        siteHeader.classList.add('shrink');
+        siteHeader.classList.add("shrink");
       } else {
-        siteHeader.classList.remove('shrink');
+        siteHeader.classList.remove("shrink");
       }
     }
 
-    window.addEventListener('scroll', handleHeaderShrink, { passive: true });
-    window.addEventListener('load', handleHeaderShrink);
-  </script>
+    window.addEventListener("scroll", handleHeaderShrink, { passive: true });
+    window.addEventListener("load", handleHeaderShrink);
+    handleHeaderShrink();
+  })();
+</script>
 </body>
 </html>
