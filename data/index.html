@@ -998,7 +998,7 @@
 }
 
 .chart-scroll-inner {
-  min-width: 760px;
+  min-width: 0;
 }
 
 .stacked-chart-wrap {
@@ -1407,8 +1407,19 @@ function setChartInnerWidth(pointCount) {
 
   scroller.style.overflowX = "auto";
 
-  const pxPerPoint = 72;
-  const minWidth = 900;
+  let pxPerPoint = 18;
+  let minWidth = window.innerWidth - 32;
+
+  if (currentRangeKey === "5yr" || currentRangeKey === "all") {
+    pxPerPoint = 10;
+  } else if (currentRangeKey === "ytd") {
+    pxPerPoint = 16;
+  } else if (currentRangeKey === "6mo") {
+    pxPerPoint = 26;
+  } else if (currentRangeKey === "3mo") {
+    pxPerPoint = 42;
+  }
+
   inner.style.width = `${Math.max(minWidth, pointCount * pxPerPoint)}px`;
 }
       rangeButtons.forEach(btn => {
