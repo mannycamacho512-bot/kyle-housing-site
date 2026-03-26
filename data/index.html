@@ -427,6 +427,10 @@
 }
 .price-range-controls-mobile {
   display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 8;
 }
 
 .price-range-controls-desktop {
@@ -1012,7 +1016,7 @@
 }
 
 .chart-area-main {
-  min-height: 260px !important;
+  min-height: 300px !important;
 }
 
 .chart-area-main canvas {
@@ -1048,6 +1052,10 @@
   display: flex !important;
   justify-content: center;
   align-items: center;
+  top: 192px;
+  width: calc(100% - 16px);
+  padding: 0;
+  margin: 0;
 }
     }
   </style>
@@ -1191,6 +1199,13 @@
         <div class="lane-title-fixed lane-title-fixed-main">Median Price</div>
         <div class="lane-title-fixed lane-title-fixed-avg">Average Price</div>
         <div class="lane-title-fixed lane-title-fixed-abs">Absorption</div>
+        <div class="price-range-controls price-range-controls-mobile" id="priceRangeControlsMobile">
+  <button type="button" class="price-range-btn" data-range="3mo">3mo</button>
+  <button type="button" class="price-range-btn" data-range="6mo">6mo</button>
+  <button type="button" class="price-range-btn" data-range="ytd">1 YTD</button>
+  <button type="button" class="price-range-btn" data-range="5yr">5yr</button>
+  <button type="button" class="price-range-btn is-active" data-range="all">All</button>
+</div>
 
         <div class="chart-scroll" id="priceChartScroll">
           <div class="chart-scroll-inner">
@@ -1220,14 +1235,6 @@
       </div>
     </div>
   </article>
-        <div class="price-range-controls price-range-controls-mobile" id="priceRangeControlsMobile">
-  <button type="button" class="price-range-btn" data-range="3mo">3mo</button>
-  <button type="button" class="price-range-btn" data-range="6mo">6mo</button>
-  <button type="button" class="price-range-btn" data-range="ytd">1 YTD</button>
-  <button type="button" class="price-range-btn" data-range="5yr">5yr</button>
-  <button type="button" class="price-range-btn is-active" data-range="all">All</button>
-</div>
-
 </section>
 
 <section class="section-block">
