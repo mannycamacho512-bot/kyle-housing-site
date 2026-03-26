@@ -536,10 +536,10 @@
     }
 
     .stacked-chart-wrap {
-      display: grid;
-      grid-template-rows: 420px 140px 140px;
-      gap: 0;
-    }
+  display: grid;
+  grid-template-rows: 460px 140px 140px;
+  gap: 0;
+}
 
         .chart-area {
       position: relative;
@@ -594,10 +594,6 @@
     
     .chart-area + .chart-area {
       border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .chart-area-main canvas {
-      height: 420px !important;
     }
 
     .chart-area-strip canvas {
@@ -1359,22 +1355,22 @@ function getFilteredMonths(months, rangeKey) {
 
 function setChartInnerWidth(pointCount) {
   const inner = document.querySelector(".chart-scroll-inner");
-  if (!inner) return;
+  const scroller = document.getElementById("priceChartScroll");
+  if (!inner || !scroller) return;
 
   const isMobile = window.innerWidth <= 768;
 
-  if (!isMobile && currentRangeKey === "5yr") {
+  if (!isMobile) {
     inner.style.width = "100%";
+    inner.style.minWidth = "0";
+    scroller.style.overflowX = "hidden";
     return;
   }
 
-  if (!isMobile && currentRangeKey === "ytd") {
-    inner.style.width = "100%";
-    return;
-  }
+  scroller.style.overflowX = "auto";
 
   const pxPerPoint = 72;
-  const minWidth = isMobile ? 900 : 1100;
+  const minWidth = 900;
   inner.style.width = `${Math.max(minWidth, pointCount * pxPerPoint)}px`;
 }
       rangeButtons.forEach(btn => {
