@@ -242,15 +242,16 @@
 }
 
 .footer-shell {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 32px 20px;
+  max-width: none;
+  margin: 0;
+  padding: 32px 32px;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1.2fr 1fr auto 1fr;
   gap: 28px;
+  align-items: start;
 }
 
 .footer-col {
@@ -288,11 +289,17 @@
       display: block;
     }
 
-    .footer-badge img {
-      max-width: 320px;
-      margin-left: auto;
-      margin-right: 0;
-    }
+    .footer-badge {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.footer-badge img {
+  max-width: 90px;
+  height: auto;
+  display: block;
+}
 
     /* =========================
        MOBILE
@@ -729,6 +736,12 @@
         <a href="/kyle-housing-site/">Home</a>
         <a href="/kyle-housing-site/data">Data Page</a>
         <a href="/kyle-housing-site/contact">Connect</a>
+      </div>
+
+      <div class="footer-col footer-badge">
+        <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
+          <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
+        </a>
       </div>
 
       <div class="footer-col">
