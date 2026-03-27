@@ -9,6 +9,325 @@
     content="Looking at 6 Creeks in Kyle TX? Explore available homes, price ranges, traffic insights, and neighborhood details."
   />
   <link rel="stylesheet" href="/kyle-housing-site/styles.css">
+
+  <style>
+    .content-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .page-top-meta {
+      margin-bottom: 22px;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 13px;
+      text-decoration: underline;
+      margin-bottom: 8px;
+    }
+
+    .page-updated {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .hero-section h1 {
+      position: static !important;
+      left: auto !important;
+      margin: 0 0 6px;
+      font-size: 28px;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 14px;
+    }
+
+    .hero-copy {
+      max-width: 880px;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #000;
+      text-align: center;
+    }
+
+    .hero-copy p {
+      margin: 0 0 16px;
+    }
+
+    .section-block {
+      margin-bottom: 28px;
+    }
+
+    .gallery-2,
+    .gallery-3,
+    .gallery-split {
+      display: grid;
+      gap: 16px;
+    }
+
+    .gallery-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gallery-split {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery-card,
+    .feature-image {
+      border-radius: 18px;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .gallery-card img,
+    .feature-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .market-grid,
+    .info-grid,
+    .nearby-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .info-card,
+    .market-card,
+    .nearby-card {
+      background: #fff;
+      border: 1px solid #ececec;
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .market-card {
+      text-align: center;
+    }
+
+    .card-kicker {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .market-value {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #000;
+    }
+
+    .market-note,
+    .fine-note {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .cta-stack {
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .cta-stack a {
+      text-decoration: underline;
+    }
+
+    .dashboard-wrap iframe,
+    .map-wrap iframe {
+      width: 100%;
+      border: 0;
+      border-radius: 18px;
+      display: block;
+    }
+
+    .dashboard-wrap iframe {
+      height: 280px;
+    }
+
+    .map-wrap iframe {
+      height: 480px;
+    }
+
+    .info-card h2,
+    .info-card h3,
+    .nearby-card h3,
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.3;
+    }
+
+    .info-card p,
+    .info-card li,
+    .nearby-card li,
+    .neighborhood-description p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #000;
+    }
+
+    .info-card ul,
+    .nearby-card ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .info-card li,
+    .nearby-card li {
+      margin-bottom: 6px;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .traffic-badges {
+      margin-bottom: 14px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #000;
+    }
+
+    .neighborhood-description {
+      max-width: 880px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .map-heading {
+      margin: 0 0 12px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .footer-box {
+      min-width: 0;
+    }
+
+    .footer-box:first-child {
+      grid-column: 1;
+      text-align: left;
+    }
+
+    .footer-badge {
+      justify-self: end;
+      text-align: right;
+    }
+
+    .footer-box img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .footer-badge img {
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    @media (max-width: 768px) {
+      .content-shell {
+        max-width: 100%;
+      }
+
+      .hero-section h1 {
+        font-size: 24px;
+      }
+
+      .hero-subtitle {
+        font-size: 14px;
+      }
+
+      .hero-copy {
+        font-size: 15px;
+        line-height: 1.65;
+        text-align: left;
+      }
+
+      .gallery-2,
+      .gallery-3,
+      .gallery-split,
+      .market-grid,
+      .info-grid,
+      .nearby-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-2,
+      .gallery-3 {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+
+      .gallery-card {
+        flex: 0 0 88%;
+        scroll-snap-align: start;
+      }
+
+      .dashboard-wrap iframe {
+        height: 260px;
+      }
+
+      .map-wrap iframe {
+        height: 360px;
+      }
+
+      .footer-box,
+      .footer-badge {
+        text-align: left;
+        justify-self: start;
+      }
+
+      .footer-badge img {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        max-width: 110px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header" id="siteHeader">
@@ -301,8 +620,8 @@
         </div>
       </section>
 
-      <div class="footer-grid" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:18px; margin-top:40px;">
-        <div class="footer-box" style="text-align:center;">
+      <div class="footer-grid">
+        <div class="footer-box">
           <div style="font-weight:bold; font-size:16px; margin-bottom:10px;">
             Data-driven guidance: negotiate based on comps, pace, and competition.
           </div>
@@ -313,9 +632,9 @@
           </div>
         </div>
 
-        <div class="footer-box footer-badge" style="justify-self:center; text-align:center;">
+        <div class="footer-box footer-badge">
           <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
-            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge" style="margin:0 auto; max-width:320px;">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
           </a>
         </div>
       </div>
