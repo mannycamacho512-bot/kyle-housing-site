@@ -29,10 +29,14 @@ a {
   text-decoration: none;
 }
 
+/* =========================
+   SECTION LINKS / ARROWS
+========================== */
 .section-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
+  flex-wrap: wrap;
   color: #000;
   text-decoration: none;
 }
@@ -42,10 +46,15 @@ a {
 }
 
 .section-arrow {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 18px;
   line-height: 1;
-  margin-left: 2px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.section-link:hover .section-arrow {
+  transform: translateX(4px);
+  opacity: 0.8;
 }
 
 /* =========================
@@ -129,9 +138,17 @@ a {
   text-align: center;
 }
 
-.connect-btn { width: 90px; }
-.match-btn { width: 80px; }
-.data-btn { width: 82px; }
+.connect-btn {
+  width: 90px;
+}
+
+.match-btn {
+  width: 80px;
+}
+
+.data-btn {
+  width: 82px;
+}
 
 .top-id {
   margin-left: auto;
@@ -244,7 +261,7 @@ a {
 .footer-right-group {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 0;
 }
 
 .footer-col {
@@ -272,7 +289,8 @@ a {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-right: -6px;
+  margin-left: 72px;
+  margin-right: 16px;
 }
 
 .footer-badge img {
@@ -403,8 +421,9 @@ a {
   }
 
   .footer-badge {
-    overflow: hidden;
+    margin-left: 0;
     margin-right: 0;
+    overflow: hidden;
   }
 
   .footer-badge img {
@@ -412,28 +431,4 @@ a {
     max-width: 110px;
     height: auto;
   }
-  .section-arrow {
-  margin-left: 6px;
-  font-size: 18px;
-  display: inline-block;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.section-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-
-.section-arrow {
-  font-size: 18px;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  flex-shrink: 0;
-}
-
-.section-link:hover .section-arrow {
-  transform: translateX(4px);
-  opacity: 0.8;
-}
 }
