@@ -585,7 +585,8 @@
   .content-shell {
     max-width: 100%;
   }
-    /* ===== HEADER MOBILE OVERRIDE ===== */
+
+  /* ===== HEADER MOBILE OVERRIDE ===== */
 
   .site-header {
     position: fixed;
@@ -595,17 +596,39 @@
     max-width: 1120px;
     min-height: 78px;
     padding: 10px 16px;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    text-align: center;
   }
 
   .logo-wrap {
     position: static;
     text-align: center;
+    justify-self: center;
+  }
+
+  .top-link {
+    position: static;
+    transform: none;
+    justify-content: center;
+    margin-top: 8px;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-self: center;
+  }
+
+  .top-id {
+    display: none;
+    text-align: center;
+    font-size: 11px;
+    justify-self: center;
   }
 
   .logo-mini {
     width: 110px;
     margin: 0 auto;
     align-items: center;
+    justify-content: center;
   }
 
   .logo-mini img {
@@ -616,17 +639,7 @@
     margin-top: -10px;
     margin-left: 0;
     text-align: center;
-  }
-
-  .top-link {
-    position: static;
-    transform: none;
-    justify-content: center;
-    margin-top: 8px;
-  }
-
-  .top-id {
-    display: none;
+    font-size: 17px;
   }
 
   .header-action {
@@ -637,9 +650,22 @@
     margin-right: 0;
   }
 
-  .match-btn { width: 62px; }
-  .connect-btn { width: 70px; }
-  .data-btn { width: 64px; }
+  .match-btn {
+    width: 62px;
+  }
+
+  .connect-btn {
+    width: 70px;
+  }
+
+  .data-btn {
+    width: 64px;
+  }
+
+  .action-icon {
+    width: 26px;
+    height: 26px;
+  }
 
   .action-label {
     font-size: 11px;
@@ -648,45 +674,6 @@
 
   .page-wrap {
     padding-top: 120px;
-  }
-
-  /* ===== your existing mobile styles BELOW this ===== */
-
-}
-
-  .topbar {
-    grid-template-columns: 1fr;
-    gap: 14px;
-    text-align: center;
-  }
-
-  .logo-wrap,
-  .top-link,
-  .top-id {
-    justify-self: center;
-  }
-
-  .logo-mini {
-    justify-content: center;
-  }
-
-  .top-link {
-    gap: 18px;
-    flex-wrap: wrap;
-  }
-
-  .top-id {
-    text-align: center;
-    font-size: 11px;
-  }
-
-  .logo-mini-label {
-    font-size: 17px;
-  }
-
-  .action-icon {
-    width: 26px;
-    height: 26px;
   }
 
   .hero-section h1 {
