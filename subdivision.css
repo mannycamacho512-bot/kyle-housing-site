@@ -17,7 +17,7 @@
 
 /* =========================
    HEADER
-   matches styles.css look
+   wider like original styles.css
    ========================= */
 
 .site-header {
@@ -29,21 +29,21 @@
   background: #fff;
   z-index: 9999;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
+  transition: box-shadow 0.25s ease;
 }
 
 .topbar {
   position: relative;
-  max-width: 1120px;
-  margin: 0 auto;
+  width: 100%;
   min-height: 90px;
-  padding: 0 16px;
-  transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+  padding: 0 28px;
+  box-sizing: border-box;
+  transition: min-height 0.25s ease;
 }
 
+.logo-wrap,
 .top-link,
 .top-id,
-.logo-wrap,
 .logo-mini {
   transition: all 0.25s ease;
 }
@@ -101,12 +101,12 @@
   text-align: center;
 }
 
-.connect-btn {
-  width: 90px;
-}
-
 .match-btn {
   width: 80px;
+}
+
+.connect-btn {
+  width: 90px;
 }
 
 .data-btn {
@@ -114,9 +114,9 @@
 }
 
 .top-id {
-  margin-left: auto;
-  padding-top: 8px;
-  padding-right: 14px;
+  position: absolute;
+  top: 8px;
+  right: 28px;
   text-align: right;
   font-size: 14px;
   line-height: 1.4;
@@ -144,8 +144,6 @@
 }
 
 .logo-mini-label {
-  position: static;
-  transform: none;
   margin-top: -18px;
   margin-left: 8px;
   font-size: 10px;
@@ -175,8 +173,6 @@
 .site-header.shrink .top-id {
   opacity: 0;
   pointer-events: none;
-  max-height: 0;
-  overflow: hidden;
   transform: translateY(-8px);
 }
 
