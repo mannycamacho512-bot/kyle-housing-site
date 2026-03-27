@@ -419,6 +419,19 @@ a {
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
+.section-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.section-arrow {
+  font-size: 18px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  flex-shrink: 0;
+}
+
 .section-link:hover .section-arrow {
   transform: translateX(4px);
   opacity: 0.8;
