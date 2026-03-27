@@ -577,34 +577,16 @@
     max-width: 100%;
   }
 
-  .site-header {
-    position: fixed;
-  }
-
-  .topbar {
-    max-width: 1120px;
+    .topbar {
+    width: 100%;
     min-height: 78px;
     padding: 10px 16px;
+    box-sizing: border-box;
   }
 
   .logo-wrap {
     position: static;
     text-align: center;
-    justify-self: center;
-  }
-
-  .top-link {
-    position: static;
-    transform: none;
-    justify-content: center;
-    margin-top: 8px;
-    gap: 18px;
-    flex-wrap: wrap;
-    justify-self: center;
-  }
-
-  .top-id {
-    display: none;
   }
 
   .logo-mini {
@@ -625,6 +607,19 @@
     font-size: 17px;
   }
 
+  .top-link {
+    position: static;
+    transform: none;
+    justify-content: center;
+    margin-top: 8px;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .top-id {
+    display: none;
+  }
+
   .header-action {
     margin-right: -12px;
   }
@@ -643,11 +638,6 @@
 
   .data-btn {
     width: 64px;
-  }
-
-  .action-icon {
-    width: auto;
-    height: auto;
   }
 
   .action-label {
