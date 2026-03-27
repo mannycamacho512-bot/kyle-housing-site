@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Live in Kyle</title>
-  <link rel="stylesheet" href="/kyle-housing-site/styles.css">
+  <link rel="stylesheet" href="/kyle-housing-site/subdivision.css">
 
   <style>
     html,
@@ -340,12 +340,20 @@
   grid-template-columns: 1fr;
   gap: 18px;
 }
+  /* ===== FOOTER OVERRIDE (THIS PAGE ONLY) ===== */
+.footer-left-page .footer-shell {
+  max-width: none;
+  margin: 0;
+  padding: 0 32px;
+}
 
+.footer-left-page .footer-right-group {
+  justify-content: flex-start;
+}
 
-    }
   </style>
 </head>
-<body>
+<body class="footer-left-page">
 
   <header class="site-header">
     <div class="topbar">
