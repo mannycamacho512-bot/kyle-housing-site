@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Live in Kyle</title>
+  <link rel="stylesheet" href="/kyle-housing-site/subdivision.css">
 
   <style>
     html,
@@ -53,102 +54,104 @@
     }
 
     .topbar {
-  position: relative;
-  min-height: 90px;
-  padding: 0;
-  transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
-}
+      position: relative;
+      min-height: 90px;
+      padding: 0;
+      transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+    }
 
-.top-link,
-.top-id,
-.logo-wrap,
-.logo-mini {
-  transition: all 0.25s ease;
-}
+    .top-link,
+    .top-id,
+    .logo-wrap,
+    .logo-mini {
+      transition: all 0.25s ease;
+    }
 
-.logo-wrap {
-  position: absolute;
-  top: 0;
-  left: -8px;
-  margin: 0;
-  text-align: left;
-  z-index: 2;
-}
+    .logo-wrap {
+      position: absolute;
+      top: 0;
+      left: -8px;
+      margin: 0;
+      text-align: left;
+      z-index: 2;
+    }
 
-.top-link {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  font-size: 14px;
-}
+    .top-link {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 14px;
+    }
 
-.top-id {
-  margin-left: auto;
-  padding-top: 8px;
-  text-align: right;
-  font-size: 14px;
-  line-height: 1.4;
-}
+    .top-id {
+      margin-left: auto;
+      padding-top: 8px;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.4;
+    }
 
-.logo-mini {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 132px;
-  text-decoration: none;
-  color: inherit;
-}
+    .logo-mini {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 132px;
+      text-decoration: none;
+      color: inherit;
+    }
 
-.logo-mini:hover {
-  opacity: 0.85;
-}
+    .logo-mini:hover {
+      opacity: 0.85;
+    }
 
-.logo-mini img {
-  display: block;
-  width: 100%;
-  height: auto;
-  transform: translateX(-15px);
-}
+    .logo-mini img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform: translateX(-15px);
+    }
 
-.logo-mini-label {
-  position: static;
-  transform: none;
-  margin-top: -18px;
-  margin-left: 8px;
-  font-size: 10px;
-  font-weight: 700;
-  color: #333;
-  white-space: nowrap;
-  max-width: none;
-  text-align: left;
-  line-height: 1;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-.site-header.shrink .logo-mini-label {
-  opacity: 0;
-  transform: translateY(-6px);
-  pointer-events: none;
-}
-.site-header.shrink .topbar {
-  min-height: 78px;
-  padding-top: 0;
-  padding-bottom: 0;
-}
+    .logo-mini-label {
+      position: static;
+      transform: none;
+      margin-top: -18px;
+      margin-left: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #333;
+      white-space: nowrap;
+      max-width: none;
+      text-align: left;
+      line-height: 1;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
 
-.site-header.shrink .top-link,
-.site-header.shrink .top-id {
-  opacity: 0;
-  pointer-events: none;
-  max-height: 0;
-  overflow: hidden;
-  transform: translateY(-8px);
-}
+    .site-header.shrink .logo-mini-label {
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+    }
 
-.site-header.shrink .logo-mini {
-  width: 120px;
-}
+    .site-header.shrink .topbar {
+      min-height: 78px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .site-header.shrink .top-link,
+    .site-header.shrink .top-id {
+      opacity: 0;
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(-8px);
+    }
+
+    .site-header.shrink .logo-mini {
+      width: 120px;
+    }
 
     /* =========================
        PAGE CONTENT
@@ -157,107 +160,43 @@
       width: 100%;
       max-width: none;
       margin: 0;
-      padding: 190px 32px 20px 32px; /* room for full header */
+      padding: 190px 32px 20px 32px;
       box-sizing: border-box;
     }
 
     .subdivGridDesktop {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin-bottom: 8px;
-}
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      margin-bottom: 8px;
+    }
 
-.subdivCard {
-  min-width: 0;
-}
-
-.wb-card-img {
-  aspect-ratio: 4 / 3;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #f5f5f5;
-}
-
-.wb-card-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.subdivMobileRow {
-  display: none !important;
-}
-
-@media (max-width: 1100px) {
-  .subdivGridDesktop {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-/* =========================
-   FOOTER
-========================== */
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 24px;
-  margin-top: 40px;
-}
-
-.footer-box {
-  min-width: 0;
-}
-
-.footer-box:first-child {
-  grid-column: 1;
-  text-align: left;
-}
-
-.footer-badge {
-  justify-self: end;
-  text-align: right;
-}
-
-.footer-box img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-.footer-badge img {
-  max-width: 320px;
-  margin-left: auto;
-  margin-right: 0;
-}
-
-    .footer-box {
+    .subdivCard {
       min-width: 0;
     }
 
-    .footer-box:first-child {
-      grid-column: 1;
-      text-align: left;
+    .wb-card-img {
+      aspect-ratio: 4 / 3;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f5f5f5;
     }
 
-    .footer-badge {
-      grid-column: 3;
-      justify-self: end;
-      text-align: right;
-    }
-
-    .footer-box img {
-      max-width: 100%;
-      height: auto;
+    .wb-card-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
       display: block;
     }
 
-    .footer-badge img {
-      max-width: 320px;
-      margin-left: auto;
-      margin-right: 0;
+    .subdivMobileRow {
+      display: none !important;
+    }
+
+    @media (max-width: 1100px) {
+      .subdivGridDesktop {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
     }
 
     /* =========================
@@ -265,44 +204,41 @@
     ========================== */
     @media (max-width: 768px) {
       .topbar {
-  min-height: 120px;
-  padding: 0 10px;
-}
+        min-height: 120px;
+        padding: 0 10px;
+      }
 
-.logo-wrap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  text-align: left;
-}
+      .logo-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: left;
+      }
 
-.top-link {
-  position: static;
-  transform: none;
-  display: block;
-  text-align: center;
-  padding-top: 78px;
-}
-
-.top-id {
-  position: static;
-  margin-left: 0;
-  padding-top: 6px;
-  text-align: center;
-}
+      .top-link {
+        position: static;
+        transform: none;
+        display: block;
+        text-align: center;
+        padding-top: 78px;
+      }
 
       .top-id {
+        position: static;
+        margin-left: 0;
+        padding-top: 6px;
+        text-align: center;
         font-size: 12px;
         line-height: 1.5;
         letter-spacing: 0.2px;
       }
 
       .logo-mini-label {
-  white-space: normal;
-  width: 100%;
-  text-align: left;
-  left: auto;
-}
+        white-space: normal;
+        width: 100%;
+        text-align: left;
+        left: auto;
+      }
 
       .page-wrap {
         padding: 190px 14px 14px 14px;
@@ -317,68 +253,116 @@
       }
 
       .subdivGridDesktop {
-  grid-template-columns: 1fr;
-  gap: 18px;
-}
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
 
-.wb-card-img {
-  aspect-ratio: 4 / 3;
-  border-radius: 12px;
-  background: #f5f5f5;
-}
+      .wb-card-img {
+        aspect-ratio: 4 / 3;
+        border-radius: 12px;
+        background: #f5f5f5;
+      }
 
-.subdivTitle {
-  font-size: 13px !important;
-  line-height: 1.15;
-}
+      .subdivTitle {
+        font-size: 13px !important;
+        line-height: 1.15;
+      }
 
-.subdivPrice {
-  font-size: 11px !important;
-  line-height: 1.15;
-}
+      .subdivPrice {
+        font-size: 11px !important;
+        line-height: 1.15;
+      }
 
-.subdivAvail {
-  font-size: 10px !important;
-  line-height: 1.15;
-}
+      .subdivAvail {
+        font-size: 10px !important;
+        line-height: 1.15;
+      }
 
-.subdivMobileRow {
-  display: none !important;
-}
+      .subdivMobileRow {
+        display: none !important;
+      }
 
       .footer-grid {
-  grid-template-columns: 1fr;
-  gap: 18px;
-}
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+    }
 
-.footer-box,
-.footer-badge {
-  text-align: left;
-  justify-self: start;
-}
+    /* =========================
+       FOOTER OVERRIDE - THIS PAGE ONLY
+    ========================== */
+    .footer-left-page .site-footer {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
 
-.footer-badge img {
-  margin-left: 0;
-  margin-right: 0;
-}
+    .footer-left-page .footer-shell {
+      max-width: none !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 32px !important;
+    }
 
-      .footer-box div {
-        word-wrap: break-word;
+    .footer-left-page .footer-grid {
+      grid-template-columns: auto auto !important;
+      gap: 12px !important;
+      align-items: start !important;
+      justify-content: start !important;
+    }
+
+    .footer-left-page .footer-right-group {
+      display: flex !important;
+      align-items: flex-start !important;
+      justify-content: flex-start !important;
+      gap: 42px !important;
+    }
+
+    .footer-left-page .footer-col {
+      text-align: left !important;
+    }
+
+    .footer-left-page .footer-badge {
+      justify-self: start !important;
+      text-align: left !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .footer-left-page .footer-badge a {
+      display: block !important;
+    }
+
+    .footer-left-page .footer-badge img {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    @media (max-width: 768px) {
+      .footer-left-page .footer-shell {
+        padding: 0 14px !important;
       }
 
-      .footer-badge {
-        overflow: hidden;
+      .footer-left-page .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
       }
 
-      .footer-badge img {
-        width: 100%;
-        max-width: 110px;
-        height: auto;
+      .footer-left-page .footer-right-group {
+        flex-direction: column !important;
+        gap: 24px !important;
+      }
+
+      .footer-left-page .footer-badge {
+        justify-self: start !important;
+      }
+
+      .footer-left-page .footer-badge img {
+        max-width: 110px !important;
       }
     }
   </style>
 </head>
-<body>
+<body class="footer-left-page">
 
   <header class="site-header">
     <div class="topbar">
@@ -404,7 +388,7 @@
     </div>
   </header>
 
-    <div class="page-wrap">
+  <div class="page-wrap">
     <h1>Homes for Sale in Kyle, TX</h1>
 
     <div style="margin-top:34px; margin-bottom:10px;">
@@ -416,10 +400,10 @@
     <div style="max-width:900px; margin:0 auto 22px auto; font-size:16px; line-height:1.6; text-align:center;">
       An MPC is a self contained community where the developer lays out a long-term vision that goes beyond just homes. It's planned in phases, often over decades, and includes residential, recreational, commercial and sometimes institutional uses.
     </div>
-        <div style="text-align:center; font-size:12px; color:#666; margin-top:-12px; margin-bottom:18px;">
-  Last updated: March 16, 2026
-</div>
 
+    <div style="text-align:center; font-size:12px; color:#666; margin-top:-12px; margin-bottom:18px;">
+      Last updated: March 16, 2026
+    </div>
 
     <div class="subdivGridDesktop" style="margin-bottom:0px;">
       <div class="subdivCard">
@@ -499,26 +483,49 @@
           </div>
         </a>
       </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-shell">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-title">Kyle Housing</div>
+            <p>
+              Local housing insight designed to bring clarity to pricing,
+              neighborhoods, and decision-making in Kyle, Texas.
+            </p>
+          </div>
+
+          <div class="footer-right-group">
+            <div class="footer-col">
+              <div class="footer-title">Explore</div>
+              <a href="/kyle-housing-site/">Home</a>
+              <a href="/kyle-housing-site/data">Data Page</a>
+              <a href="/kyle-housing-site/contact">Connect</a>
+            </div>
+
+            <div class="footer-badge">
+              <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
+                <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
+              </a>
+            </div>
+
+            <div class="footer-col">
+              <div class="footer-title">About</div>
+              <p>
+                Emmanuel "Manny" Camacho<br />
+                Realtor® in Kyle, TX<br />
+                Dalton Wade Real Estate Group
+              </p>
+            </div>
+          </div>
         </div>
 
-    <div class="footer-grid">
-  <div class="footer-box">
-    <div style="font-weight:bold; font-size:16px; margin-bottom:10px;">
-      Data-driven guidance: negotiate based on comps, pace, and competition.
-    </div>
-    <div style="font-size:14px;">
-      <a href="/contact" style="color:#000; text-decoration:underline;">
-        Ask me for a quick read on your neighborhood.
-      </a>
-    </div>
-  </div>
-
-  <div class="footer-box footer-badge">
-    <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
-      <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
-    </a>
-  </div>
-</div>
+        <div class="footer-bottom">
+          <span>© 2026 Emmanuel "Manny" Camacho · Kyle Housing</span>
+        </div>
+      </div>
+    </footer>
   </div>
 
   <script>
