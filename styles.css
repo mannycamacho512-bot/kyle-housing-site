@@ -412,4 +412,15 @@ a {
     max-width: 110px;
     height: auto;
   }
+  .section-arrow {
+  margin-left: 6px;
+  font-size: 18px;
+  display: inline-block;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.section-link:hover .section-arrow {
+  transform: translateX(4px);
+  opacity: 0.8;
+}
 }
