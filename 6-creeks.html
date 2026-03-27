@@ -11,28 +11,28 @@
   <link rel="stylesheet" href="/kyle-housing-site/styles.css">
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header" id="siteHeader">
     <div class="topbar">
       <div class="logo-wrap">
         <a href="/kyle-housing-site/" class="logo-mini">
-          <img src="images/logo.png" alt="Your Missing Peace" />
+          <img src="/kyle-housing-site/images/logo.png" alt="Your Missing Peace" />
           <span class="logo-mini-label">Your Missing Peace</span>
         </a>
       </div>
 
       <div class="top-link">
         <a href="/kyle-housing-site/match" class="header-action match-action">
-          <img src="images/match2.png" alt="Match" class="action-icon match-btn">
+          <img src="/kyle-housing-site/images/match2.png" alt="Match" class="action-icon match-btn">
           <span class="action-label">Match</span>
         </a>
 
         <a href="/kyle-housing-site/contact" class="header-action connect-action">
-          <img src="images/connect2.png" alt="Connect" class="action-icon connect-btn">
+          <img src="/kyle-housing-site/images/connect2.png" alt="Connect" class="action-icon connect-btn">
           <span class="action-label">Connect</span>
         </a>
 
         <a href="/kyle-housing-site/data" class="header-action data-action">
-          <img src="images/graph.png" alt="Data" class="action-icon data-btn">
+          <img src="/kyle-housing-site/images/graph.png" alt="Data" class="action-icon data-btn">
           <span class="action-label">Data</span>
         </a>
       </div>
@@ -301,8 +301,8 @@
         </div>
       </section>
 
-      <div class="footer-grid">
-        <div class="footer-box">
+      <div class="footer-grid" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:18px; margin-top:40px;">
+        <div class="footer-box" style="text-align:center;">
           <div style="font-weight:bold; font-size:16px; margin-bottom:10px;">
             Data-driven guidance: negotiate based on comps, pace, and competition.
           </div>
@@ -313,9 +313,9 @@
           </div>
         </div>
 
-        <div class="footer-box footer-badge">
+        <div class="footer-box footer-badge" style="justify-self:center; text-align:center;">
           <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
-            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
+            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge" style="margin:0 auto; max-width:320px;">
           </a>
         </div>
       </div>
@@ -323,18 +323,22 @@
   </main>
 
   <script>
-    const siteHeader = document.querySelector('.site-header');
+    (function () {
+      const siteHeader = document.getElementById("siteHeader");
+      if (!siteHeader) return;
 
-    function handleHeaderShrink() {
-      if (window.scrollY > 80) {
-        siteHeader.classList.add('shrink');
-      } else {
-        siteHeader.classList.remove('shrink');
+      function handleHeaderShrink() {
+        if (window.scrollY > 80) {
+          siteHeader.classList.add("shrink");
+        } else {
+          siteHeader.classList.remove("shrink");
+        }
       }
-    }
 
-    window.addEventListener('scroll', handleHeaderShrink, { passive: true });
-    window.addEventListener('load', handleHeaderShrink);
+      window.addEventListener("scroll", handleHeaderShrink, { passive: true });
+      window.addEventListener("load", handleHeaderShrink);
+      handleHeaderShrink();
+    })();
 
     (async function () {
       const subdivisionName = "6 CREEKS";
