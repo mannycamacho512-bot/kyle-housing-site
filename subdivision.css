@@ -573,24 +573,39 @@
    ========================= */
 
 @media (max-width: 768px) {
-  .content-shell {
-    max-width: 100%;
+  .page-wrap {
+    padding-top: 150px;
   }
 
-    .topbar {
+  .content-shell {
+    max-width: 100%;
+    padding: 0 14px;
+  }
+
+  /* Header */
+  .site-header {
+    position: fixed;
+  }
+
+  .topbar {
+    position: relative;
     width: 100%;
-    min-height: 78px;
-    padding: 10px 16px;
+    min-height: 140px;
+    padding: 10px 16px 12px;
     box-sizing: border-box;
   }
 
   .logo-wrap {
-    position: static;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
+    z-index: 2;
   }
 
   .logo-mini {
-    width: 110px;
+    width: 108px;
     margin: 0 auto;
     align-items: center;
     justify-content: center;
@@ -604,16 +619,19 @@
     margin-top: -10px;
     margin-left: 0;
     text-align: center;
-    font-size: 17px;
+    font-size: 10px;
   }
 
   .top-link {
-    position: static;
-    transform: none;
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
     justify-content: center;
-    margin-top: 8px;
-    gap: 18px;
-    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0;
+    flex-wrap: nowrap;
+    width: auto;
   }
 
   .top-id {
@@ -645,10 +663,7 @@
     margin-top: -6px;
   }
 
-  .page-wrap {
-    padding-top: 120px;
-  }
-
+  /* Page content */
   .hero-section h1 {
     font-size: 26px;
   }
@@ -696,6 +711,7 @@
     height: 360px;
   }
 
+  /* Footer */
   .site-footer {
     margin-top: 44px;
     padding: 34px 0 18px;
