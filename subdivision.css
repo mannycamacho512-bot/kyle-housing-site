@@ -290,7 +290,160 @@
 .map-wrap iframe {
   height: 480px;
 }
+/* =========================
+   HEADER
+   ========================= */
 
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  transition: box-shadow 0.2s ease, padding 0.2s ease;
+}
+
+.site-header.shrink {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.topbar {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-wrap {
+  min-width: 0;
+}
+
+.logo-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #000;
+}
+
+.logo-mini img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  display: block;
+}
+
+.logo-mini-label {
+  font-family: 'Hedvig Letters Serif', serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #000;
+}
+
+.top-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+}
+
+.header-action {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: #000;
+}
+
+.action-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}
+
+.action-label {
+  font-size: 12px;
+  line-height: 1.2;
+  color: #000;
+}
+
+.top-id {
+  text-align: right;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #333;
+}
+
+.site-header.shrink .topbar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.site-header.shrink .logo-mini img {
+  width: 38px;
+  height: 38px;
+}
+
+.site-header.shrink .action-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* =========================
+   PAGE WRAP
+   ========================= */
+
+.page-wrap {
+  width: 100%;
+}
+
+/* =========================
+   MOBILE HEADER
+   ========================= */
+
+@media (max-width: 768px) {
+  .topbar {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .logo-wrap,
+  .top-link,
+  .top-id {
+    justify-self: center;
+  }
+
+  .logo-mini {
+    justify-content: center;
+  }
+
+  .top-link {
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .top-id {
+    text-align: center;
+    font-size: 11px;
+  }
+
+  .logo-mini-label {
+    font-size: 17px;
+  }
+
+  .action-icon {
+    width: 26px;
+    height: 26px;
+  }
+}
 /* =========================
    FOOTER
    white version for pasted footer HTML
