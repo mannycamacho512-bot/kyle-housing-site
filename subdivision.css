@@ -1,126 +1,386 @@
 /* =========================
    SUBDIVISION PAGE SYSTEM
-   (6 Creeks + all similar pages)
+   (6 Creeks + similar pages)
    ========================= */
 
-/* Main centered layout */
+/* Base page spacing */
 .content-shell {
   max-width: 1120px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
-/* Hero section */
+/* Top meta */
+.page-top-meta {
+  margin-bottom: 22px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #000;
+  text-decoration: underline;
+}
+
+.page-updated {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Shared section spacing */
+.section,
+.section-block {
+  margin-top: 40px;
+}
+
+.section-block:first-of-type {
+  margin-top: 0;
+}
+
+.section-title,
+.map-heading {
+  margin: 0 0 14px;
+  font-family: 'Hedvig Letters Serif', serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #000;
+}
+
+/* Hero */
 .hero-section {
   margin-top: 20px;
+  margin-bottom: 28px;
   text-align: center;
 }
 
 .hero-section h1 {
-  font-family: 'Hedvig Letters Serif';
+  margin: 0 0 8px;
+  font-family: 'Hedvig Letters Serif', serif;
   font-size: 34px;
-  margin-bottom: 6px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #000;
 }
 
-.hero-section p {
+.hero-subtitle {
+  margin: 0 0 14px;
+  font-size: 15px;
   color: #555;
-  margin: 0;
 }
 
-/* Image galleries */
-.gallery-2 {
+.hero-copy {
+  max-width: 880px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #222;
+}
+
+.hero-copy p {
+  margin: 0 0 16px;
+}
+
+.hero-copy p:last-child {
+  margin-bottom: 0;
+}
+
+/* Galleries */
+.gallery-2,
+.gallery-3,
+.gallery-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 16px;
   margin-top: 18px;
+}
+
+.gallery-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .gallery-3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  margin-top: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gallery-split {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gallery-card,
+.feature-image {
+  overflow: hidden;
+  border-radius: 18px;
+  background: #f4f4f4;
+}
+
+.gallery-card img,
+.feature-image img,
+.gallery-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .gallery-img {
-  width: 100%;
   height: 220px;
-  object-fit: cover;
   border-radius: 14px;
 }
 
-/* Market section */
+/* Market / info / nearby grids */
 .market-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   margin-top: 24px;
 }
 
-.market-card {
-  border: 1px solid #e5e5e5;
-  border-radius: 16px;
-  padding: 18px;
-  text-align: center;
-}
-
-.market-title {
-  font-size: 13px;
-  color: #777;
-  margin-bottom: 6px;
-}
-
-.market-value {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-/* Info sections */
 .info-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
   margin-top: 28px;
 }
 
-.info-block h3 {
-  font-family: 'Hedvig Letters Serif';
-  margin-bottom: 8px;
-}
-
-.info-block p {
-  margin: 0;
-  color: #444;
-  line-height: 1.5;
-}
-
-/* Nearby section */
 .nearby-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   margin-top: 20px;
+}
+
+/* Cards */
+.market-card,
+.info-card,
+.info-block,
+.nearby-card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.market-card {
+  text-align: center;
 }
 
 .nearby-card {
   text-align: center;
 }
 
+.market-title,
+.card-kicker {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #777;
+  line-height: 1.4;
+}
+
+.market-value {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #000;
+}
+
+.market-note,
+.fine-note {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #666;
+}
+
+.info-card h2,
+.info-card h3,
+.info-block h3,
+.nearby-card h3,
+.nearby-title {
+  margin: 0 0 10px;
+  font-family: 'Hedvig Letters Serif', serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #000;
+}
+
+.info-card p,
+.info-block p,
+.nearby-card p,
+.neighborhood-description p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #444;
+}
+
+.info-card ul,
+.nearby-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.info-card li,
+.nearby-card li {
+  margin-bottom: 6px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.quote {
+  margin: 0 0 10px;
+  font-style: italic;
+  color: #333;
+}
+
+.traffic-badges {
+  margin-bottom: 14px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #000;
+}
+
+/* Nearby image cards */
 .nearby-card img {
   width: 100%;
   height: 180px;
   object-fit: cover;
   border-radius: 14px;
+  display: block;
 }
 
 .nearby-title {
-  margin-top: 6px;
+  margin-top: 8px;
   font-size: 14px;
 }
 
-/* Sections spacing */
-.section {
-  margin-top: 40px;
+/* Description block */
+.neighborhood-description {
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* CTA stack */
+.cta-stack {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.cta-stack a {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* Iframes */
+.dashboard-wrap iframe,
+.map-wrap iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 18px;
+}
+
+.dashboard-wrap iframe {
+  height: 280px;
+}
+
+.map-wrap iframe {
+  height: 480px;
+}
+
+/* =========================
+   FOOTER
+   white version for pasted footer HTML
+   ========================= */
+
+.site-footer {
+  margin-top: 60px;
+  padding: 44px 0 18px;
+  background: #fff;
+  border-top: 1px solid #e8e8e8;
+}
+
+.footer-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto;
+  gap: 40px;
+  align-items: start;
+}
+
+.footer-col {
+  min-width: 0;
+}
+
+.footer-title {
+  margin-bottom: 10px;
+  font-family: 'Hedvig Letters Serif', serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #000;
+}
+
+.footer-col p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #333;
+}
+
+.footer-right-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 42px;
+}
+
+.footer-right-group .footer-col {
+  min-width: 110px;
+}
+
+.footer-col a {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #000;
+  text-decoration: none;
+}
+
+.footer-col a:hover {
+  text-decoration: underline;
+}
+
+.footer-badge {
+  flex: 0 0 auto;
+}
+
+.footer-badge a {
+  display: block;
+}
+
+.footer-badge img {
+  display: block;
+  width: 108px;
+  height: auto;
+  border: 0;
+}
+
+.footer-bottom {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid #ececec;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #666;
 }
 
 /* =========================
@@ -128,20 +388,81 @@
    ========================= */
 
 @media (max-width: 768px) {
+  .content-shell {
+    max-width: 100%;
+  }
+
+  .hero-section h1 {
+    font-size: 26px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+  .hero-copy {
+    font-size: 15px;
+    line-height: 1.65;
+    text-align: left;
+  }
+
   .gallery-2,
-  .gallery-3 {
-    grid-template-columns: 1fr;
-  }
-
-  .market-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-
+  .gallery-3,
+  .gallery-split,
+  .market-grid,
+  .info-grid,
   .nearby-grid {
     grid-template-columns: 1fr;
+  }
+
+  .gallery-2,
+  .gallery-3 {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  .gallery-card {
+    flex: 0 0 88%;
+    scroll-snap-align: start;
+  }
+
+  .dashboard-wrap iframe {
+    height: 260px;
+  }
+
+  .map-wrap iframe {
+    height: 360px;
+  }
+
+  .site-footer {
+    margin-top: 44px;
+    padding: 34px 0 18px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-right-group {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-right-group .footer-col {
+    min-width: 0;
+  }
+
+  .footer-badge img {
+    width: 92px;
+  }
+
+  .footer-bottom {
+    margin-top: 22px;
+    padding-top: 14px;
   }
 }
