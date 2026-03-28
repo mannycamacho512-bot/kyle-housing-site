@@ -224,7 +224,9 @@ a {
   box-sizing: border-box;
 }
 
-/* desktop card row */
+/* =========================
+   DESKTOP CARD ROW
+========================== */
 .subdivGridDesktop {
   display: grid;
   grid-template-columns: repeat(auto-fill, 260px);
@@ -239,20 +241,24 @@ a {
 
 /* =========================
    DESKTOP SCROLLER WRAPPER + ARROWS
-   only affects rows if you add the wrapper/buttons in HTML
 ========================== */
 .subdivDesktopWrapper {
   width: 100%;
-  display: grid;
-  grid-template-columns: 40px minmax(0, 1fr) 40px;
-  align-items: stretch;
+  display: flex;
+  align-items: center;
   gap: 10px;
 }
 
 .subdivArrowSlot {
+  flex: 0 0 32px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.subdivDesktopWrapper .subdivGridDesktop {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .sliderArrow {
@@ -292,9 +298,6 @@ a {
   display: none !important;
 }
 
-.subdivDesktopWrapper .subdivGridDesktop {
-  min-width: 0;
-}
 /* =========================
    FOOTER
 ========================== */
@@ -391,23 +394,21 @@ a {
     flex: 0 0 260px;
     width: 260px;
   }
-  .subdivDesktopWrapper {
-  grid-template-columns: 34px minmax(0, 1fr) 34px;
-  gap: 8px;
-}
+
+  .subdivArrowSlot {
+    flex: 0 0 28px;
+  }
 
   .sliderArrow {
-  width: 28px;
-  height: 64px;
-  font-size: 24px;
-  border-radius: 10px;
-}
+    width: 28px;
+    height: 64px;
+    font-size: 24px;
+    border-radius: 10px;
+  }
 }
 
 /* =========================
    LARGE DESKTOP WITH OVERFLOW SUPPORT
-   keeps current look, but if row is wrapped in wrapper + arrows,
-   the row can still scroll horizontally when there are many cards
 ========================== */
 @media (min-width: 1181px) {
   .subdivDesktopWrapper .subdivGridDesktop {
