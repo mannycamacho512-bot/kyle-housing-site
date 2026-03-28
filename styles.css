@@ -224,9 +224,7 @@ a {
   box-sizing: border-box;
 }
 
-/* =========================
-   DESKTOP CARD ROW
-========================== */
+/* desktop card row */
 .subdivGridDesktop {
   display: grid;
   grid-template-columns: repeat(auto-fill, 260px);
@@ -241,66 +239,48 @@ a {
 
 /* =========================
    DESKTOP SCROLLER WRAPPER + ARROWS
-   built to work with current HTML:
-   .subdivDesktopWrapper
-     .subdivArrowSlot.left
-     .subdivGridDesktop
-     .subdivArrowSlot.right
+   only affects rows if you add the wrapper/buttons in HTML
 ========================== */
 .subdivDesktopWrapper {
   position: relative;
   width: 100%;
 }
 
-.subdivDesktopWrapper .subdivGridDesktop {
-  position: relative;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.subdivArrowSlot {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 20;
-  pointer-events: none;
-}
-
-.subdivArrowSlot.left {
-  left: -6px;
-}
-
-.subdivArrowSlot.right {
-  right: -6px;
-}
-
+/* Netflix-style side overlays */
 .sliderArrow {
-  width: 30px;
-  height: 64px;
+  position: absolute;
+  top: 0;
+  bottom: 8px;
+  width: 44px;
   border: none;
-  border-radius: 10px;
   padding: 0;
   margin: 0;
+  z-index: 20;
   display: none;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  pointer-events: auto;
-  color: #111;
-  font-size: 24px;
+  color: #fff;
+  font-size: 54px;
   line-height: 1;
-  background: rgba(0, 0, 0, 0.08);
-  transition: background 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  background: rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  transition: background 0.2s ease, opacity 0.2s ease;
 }
 
 .sliderArrow:hover {
-  background: rgba(0, 0, 0, 0.14);
-  transform: scale(1.03);
+  background: rgba(0, 0, 0, 0.24);
 }
 
-.sliderArrowLeft,
+.sliderArrowLeft {
+  left: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.28), rgba(0,0,0,0.08), transparent);
+}
+
 .sliderArrowRight {
-  position: static;
+  right: 0;
+  background: linear-gradient(to left, rgba(0,0,0,0.28), rgba(0,0,0,0.08), transparent);
 }
 
 .sliderArrow.is-visible {
@@ -309,6 +289,17 @@ a {
 
 .sliderArrow.is-hidden {
   display: none !important;
+}
+
+/* keep arrows above cards, not as cards */
+.subdivDesktopWrapper .subdivGridDesktop {
+  position: relative;
+}
+
+/* keep arrows flush to edges while row can scroll underneath */
+.subdivDesktopWrapper .subdivGridDesktop {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* =========================
@@ -407,25 +398,12 @@ a {
     flex: 0 0 260px;
     width: 260px;
   }
-
-  .subdivArrowSlot.left {
-    left: -4px;
-  }
-
-  .subdivArrowSlot.right {
-    right: -4px;
-  }
-
-  .sliderArrow {
-    width: 28px;
-    height: 60px;
-    font-size: 22px;
-    border-radius: 10px;
-  }
 }
 
 /* =========================
    LARGE DESKTOP WITH OVERFLOW SUPPORT
+   keeps current look, but if row is wrapped in wrapper + arrows,
+   the row can still scroll horizontally when there are many cards
 ========================== */
 @media (min-width: 1181px) {
   .subdivDesktopWrapper .subdivGridDesktop {
@@ -484,7 +462,6 @@ a {
     min-height: 78px;
   }
 
-  .subdivArrowSlot,
   .subdivDesktopWrapper .sliderArrow {
     display: none !important;
   }
