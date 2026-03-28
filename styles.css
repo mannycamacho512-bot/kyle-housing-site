@@ -241,10 +241,6 @@ a {
    DESKTOP SCROLLER WRAPPER + ARROWS
    only affects rows if you add the wrapper/buttons in HTML
 ========================== */
-/* =========================
-   DESKTOP SCROLLER WRAPPER + ARROWS
-   only affects rows if you add the wrapper/buttons in HTML
-========================== */
 .subdivDesktopWrapper {
   width: 100%;
   display: grid;
@@ -400,7 +396,7 @@ a {
   gap: 8px;
 }
 
-.sliderArrow {
+  .sliderArrow {
   width: 28px;
   height: 64px;
   font-size: 24px;
