@@ -223,69 +223,12 @@ a {
   padding: 190px 32px 20px 32px;
   box-sizing: border-box;
 }
-
-.subdivDesktopSlider {
-  position: relative;
-  width: 100%;
-}
-
 .subdivGridDesktop {
-  display: flex;
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 260px);
   gap: 24px;
-  justify-content: flex-start;
-  overflow-x: auto;
-  overflow-y: hidden;
+  justify-content: start;
   margin-bottom: 8px;
-  padding-bottom: 4px;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-}
-
-.subdivGridDesktop::-webkit-scrollbar {
-  display: none;
-}
-
-.subdivGridDesktop .subdivCard {
-  flex: 0 0 260px;
-  width: 260px;
-  min-width: 260px;
-}
-
-.sliderArrow {
-  position: absolute;
-  top: 110px;
-  transform: translateY(-50%);
-  z-index: 5;
-  width: 42px;
-  height: 42px;
-  border: none;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
-  font-size: 28px;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sliderArrowLeft {
-  left: 8px;
-}
-
-.sliderArrowRight {
-  right: 8px;
-}
-
-.sliderArrow:hover {
-  background: #fff;
-}
-
-.sliderArrow:disabled {
-  opacity: 0.35;
-  cursor: default;
 }
 
 .subdivMobileRow {
@@ -362,16 +305,33 @@ a {
   font-size: 12px;
   color: rgba(17, 17, 17, 0.72);
 }
+@media (min-width: 769px) and (max-width: 1180px) {
+  .subdivGridDesktop {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
 
+  .subdivGridDesktop::-webkit-scrollbar {
+    display: none;
+  }
+
+  .subdivGridDesktop > .subdivCard {
+  flex: 0 0 260px;
+  width: 260px;
+}
+}
 /* =========================
    MOBILE
 ========================== */
-@media (max-width: 768px) {
-  .sliderArrow {
-    display: none !important;
-  }
-}
-  .topbar {
+ @media (max-width: 768px) {
+   .topbar {
     min-height: 140px;
     padding: 0 10px;
   }
