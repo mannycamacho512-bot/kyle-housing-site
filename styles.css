@@ -239,6 +239,19 @@ a {
   display: none;
 }
 
+.subdivGridDesktop .wb-card-img {
+  height: 220px !important;
+  overflow: hidden !important;
+  border-radius: 16px !important;
+}
+
+.subdivGridDesktop .wb-card-photo {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
 /* =========================
    DESKTOP SCROLLER WRAPPER + ARROWS
 ========================== */
