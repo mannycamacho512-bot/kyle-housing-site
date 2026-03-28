@@ -367,5 +367,73 @@
     handleHeaderShrink();
   })();
 </script>
+        <!-- your last section above this -->
+
+    <script>
+      function setupSubdivisionSliders() {
+        const wrappers = document.querySelectorAll('.subdivDesktopWrapper');
+
+        wrappers.forEach((wrapper) => {
+          const track = wrapper.querySelector('.subdivGridDesktop');
+          const leftBtn = wrapper.querySelector('.sliderArrowLeft');
+          const rightBtn = wrapper.querySelector('.sliderArrowRight');
+
+          if (!track || !leftBtn || !rightBtn) return;
+
+          const updateArrows = () => {
+            const isMobile = window.innerWidth <= 768;
+            const canOverflow = track.scrollWidth > track.clientWidth + 2;
+            const inTabletLikeMode = window.innerWidth <= 1180;
+
+            if (isMobile || !canOverflow || !inTabletLikeMode) {
+              leftBtn.classList.add('is-hidden');
+              rightBtn.classList.add('is-hidden');
+              leftBtn.classList.remove('is-visible');
+              rightBtn.classList.remove('is-visible');
+              return;
+            }
+
+            leftBtn.classList.add('is-visible');
+            rightBtn.classList.add('is-visible');
+            leftBtn.classList.remove('is-hidden');
+            rightBtn.classList.remove('is-hidden');
+
+            if (track.scrollLeft <= 4) {
+              leftBtn.classList.add('is-hidden');
+            }
+
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            if (track.scrollLeft >= maxScroll - 4) {
+              rightBtn.classList.add('is-hidden');
+            }
+          };
+
+          const scrollAmount = () => {
+            const firstCard = track.querySelector('.subdivCard');
+            if (!firstCard) return 320;
+            return firstCard.offsetWidth * 2 + 24;
+          };
+
+          leftBtn.addEventListener('click', () => {
+            track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+          });
+
+          rightBtn.addEventListener('click', () => {
+            track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+          });
+
+          track.addEventListener('scroll', updateArrows);
+          window.addEventListener('resize', updateArrows);
+
+          setTimeout(updateArrows, 50);
+          setTimeout(updateArrows, 300);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', setupSubdivisionSliders);
+    </script>
+
+</body>
+</html>
 </body>
 </html>
