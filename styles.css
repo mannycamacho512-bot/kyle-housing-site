@@ -223,6 +223,8 @@ a {
   padding: 190px 32px 20px 32px;
   box-sizing: border-box;
 }
+
+/* desktop card row */
 .subdivGridDesktop {
   display: grid;
   grid-template-columns: repeat(auto-fill, 260px);
@@ -233,6 +235,58 @@ a {
 
 .subdivMobileRow {
   display: none;
+}
+
+/* =========================
+   DESKTOP SCROLLER WRAPPER + ARROWS
+   only affects rows if you add the wrapper/buttons in HTML
+========================== */
+.subdivDesktopWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.sliderArrow {
+  position: absolute;
+  top: 0;
+  bottom: 8px; /* lines up with row height */
+  width: 28px;
+  border: none;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111;
+  font-size: 34px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+  margin: 0;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.sliderArrow:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.sliderArrow:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+.sliderArrowLeft {
+  left: 0;
+}
+
+.sliderArrowRight {
+  right: 0;
+}
+
+/* keep arrows flush to edges while row can scroll underneath */
+.subdivDesktopWrapper .subdivGridDesktop {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* =========================
@@ -305,6 +359,10 @@ a {
   font-size: 12px;
   color: rgba(17, 17, 17, 0.72);
 }
+
+/* =========================
+   MID-SIZE DESKTOP / TABLET LANDSCAPE
+========================== */
 @media (min-width: 769px) and (max-width: 1180px) {
   .subdivGridDesktop {
     display: flex;
@@ -316,6 +374,7 @@ a {
     padding-bottom: 4px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    scroll-behavior: smooth;
   }
 
   .subdivGridDesktop::-webkit-scrollbar {
@@ -323,15 +382,34 @@ a {
   }
 
   .subdivGridDesktop > .subdivCard {
-  flex: 0 0 260px;
-  width: 260px;
+    flex: 0 0 260px;
+    width: 260px;
+  }
 }
+
+/* =========================
+   LARGE DESKTOP WITH OVERFLOW SUPPORT
+   keeps current look, but if row is wrapped in wrapper + arrows,
+   the row can still scroll horizontally when there are many cards
+========================== */
+@media (min-width: 1181px) {
+  .subdivDesktopWrapper .subdivGridDesktop {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+  }
+
+  .subdivDesktopWrapper .subdivGridDesktop::-webkit-scrollbar {
+    display: none;
+  }
 }
+
 /* =========================
    MOBILE
 ========================== */
- @media (max-width: 768px) {
-   .topbar {
+@media (max-width: 768px) {
+  .topbar {
     min-height: 140px;
     padding: 0 10px;
   }
@@ -369,6 +447,10 @@ a {
 
   .site-header.shrink .topbar {
     min-height: 78px;
+  }
+
+  .subdivDesktopWrapper .sliderArrow {
+    display: none !important;
   }
 
   .subdivGridDesktop {
