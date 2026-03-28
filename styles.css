@@ -235,11 +235,13 @@ a {
   margin-bottom: 8px;
 }
 
-.subdivMobileRow {
-  display: none;
+.subdivGridDesktop .subdivCard {
+  width: 260px;
+  min-width: 260px;
 }
 
 .subdivGridDesktop .wb-card-img {
+  width: 100% !important;
   height: 220px !important;
   overflow: hidden !important;
   border-radius: 16px !important;
@@ -249,7 +251,12 @@ a {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
+  object-position: center center !important;
   display: block !important;
+}
+
+.subdivMobileRow {
+  display: none;
 }
 
 /* =========================
