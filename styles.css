@@ -228,14 +228,24 @@ a {
    DESKTOP CARD ROW
 ========================== */
 .subdivGridDesktop {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 260px);
+  display: flex;
+  flex-wrap: nowrap;
   gap: 24px;
-  justify-content: start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  justify-content: flex-start;
   margin-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.subdivGridDesktop::-webkit-scrollbar {
+  display: none;
 }
 
 .subdivGridDesktop .subdivCard {
+  flex: 0 0 260px;
   width: 260px;
   min-width: 260px;
 }
