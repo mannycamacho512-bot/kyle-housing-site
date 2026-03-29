@@ -1929,9 +1929,8 @@
           const updateArrows = () => {
             const isMobile = window.innerWidth <= 768;
             const canOverflow = track.scrollWidth > track.clientWidth + 2;
-            const inTabletLikeMode = window.innerWidth <= 1180;
-
-            if (isMobile || !canOverflow || !inTabletLikeMode) {
+            
+            if (isMobile || !canOverflow) {
               leftBtn.classList.add('is-hidden');
               rightBtn.classList.add('is-hidden');
               leftBtn.classList.remove('is-visible');
@@ -1978,6 +1977,7 @@
 
       document.addEventListener('DOMContentLoaded', setupSubdivisionSliders);
     </script>
+  
 
 </body>
 </html>
