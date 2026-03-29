@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Live in Kyle</title>
-  <link rel="stylesheet" href="/styles.css">
-  <!-- Google tag (gtag.js) -->
+  <link rel="stylesheet" href="/subdivision.css">
+  <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CMXSG3DVFY"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -15,1314 +15,481 @@
   gtag('config', 'G-CMXSG3DVFY');
 </script>
 
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Hedvig Letters Serif", serif;
+      background: white;
+      color: black;
+    }
+
+    h1 {
+      position: absolute !important;
+      left: -9999px !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       FIXED HEADER
+    ========================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: white;
+      z-index: 9999;
+      border-bottom: 0;
+      transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .topbar {
+      position: relative;
+      min-height: 90px;
+      padding: 0;
+      transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+    }
+
+    .top-link,
+    .top-id,
+    .logo-wrap,
+    .logo-mini {
+      transition: all 0.25s ease;
+    }
+
+    .logo-wrap {
+      position: absolute;
+      top: -14px;
+      left: -8px;
+      margin: 0;
+      text-align: left;
+      z-index: 2;
+    }
+
+    .top-link {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+    }
+
+    .header-action {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+      text-decoration: none;
+      margin-right: -22px;
+    }
+
+    .header-action:last-child {
+      margin-right: 0;
+    }
+
+    .action-icon {
+      display: block;
+      height: auto;
+      margin: 0;
+      padding: 0;
+    }
+
+    .action-label {
+      margin-top: -8px;
+      font-family: "Hedvig Letters Serif", serif;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+      color: #000;
+      text-align: center;
+    }
+
+    .connect-btn {
+      width: 90px;
+    }
+
+    .match-btn {
+      width: 80px;
+    }
+
+    .data-btn {
+      width: 82px;
+    }
+
+    .top-id {
+      margin-left: auto;
+      padding-top: 8px;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .logo-mini {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 132px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-mini:hover {
+      opacity: 0.85;
+    }
+
+    .logo-mini img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform: translateX(-15px);
+    }
+
+    .logo-mini-label {
+      position: static;
+      transform: none;
+      margin-top: -18px;
+      margin-left: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #333;
+      white-space: nowrap;
+      max-width: none;
+      text-align: left;
+      line-height: 1;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .site-header.shrink .logo-mini-label {
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+    }
+
+    .site-header.shrink .topbar {
+      min-height: 78px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .site-header.shrink .top-link,
+    .site-header.shrink .top-id {
+      opacity: 0;
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(-8px);
+    }
+
+    .site-header.shrink .logo-mini {
+      width: 132px;
+    }
+
+    /* =========================
+       PAGE CONTENT
+    ========================== */
+    .page-wrap {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 190px 32px 20px 32px;
+      box-sizing: border-box;
+    }
+
+    .subdivGridDesktop {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      margin-bottom: 8px;
+    }
+
+    .subdivCard {
+      min-width: 0;
+    }
+
+    .wb-card-img {
+      aspect-ratio: 4 / 3;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .wb-card-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .subdivMobileRow {
+      display: none !important;
+    }
+
+    @media (max-width: 1100px) {
+      .subdivGridDesktop {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+    @media (max-width: 768px) {
+      .topbar {
+        min-height: 140px;
+        padding: 0 10px;
+      }
+
+      .logo-wrap {
+        position: absolute;
+        top: -4px;
+        left: 0;
+        text-align: left;
+      }
+
+      .top-link {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: flex-end;
+        gap: 0;
+      }
+
+      .top-id {
+        position: absolute;
+        top: 8px;
+        right: 6px;
+        text-align: right;
+        font-size: 10px;
+        line-height: 1.2;
+        letter-spacing: 0;
+        max-width: 145px;
+      }
+
+      .logo-mini-label {
+        white-space: nowrap;
+        width: auto;
+        text-align: left;
+        left: auto;
+      }
+
+      .page-wrap {
+        padding: 190px 14px 14px 14px;
+      }
+
+      .site-header.shrink .topbar {
+        min-height: 86px;
+      }
+
+      .site-header.shrink .logo-mini {
+        width: 110px;
+      }
+
+      .subdivGridDesktop {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .wb-card-img {
+        aspect-ratio: 4 / 3;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #f5f5f5;
+      }
+
+      .wb-card-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: inherit;
+      }
+
+      .subdivTitle {
+        font-size: 13px !important;
+        line-height: 1.15;
+      }
+
+      .subdivPrice {
+        font-size: 11px !important;
+        line-height: 1.15;
+      }
+
+      .subdivAvail {
+        font-size: 10px !important;
+        line-height: 1.15;
+      }
+
+      .subdivMobileRow {
+        display: none !important;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+    }
+
+    /* =========================
+       FOOTER OVERRIDE - THIS PAGE ONLY
+    ========================== */
+    .footer-left-page .site-footer {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    .footer-left-page .footer-shell {
+      max-width: none !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 32px !important;
+    }
+
+    .footer-left-page .footer-grid {
+      grid-template-columns: auto auto !important;
+      gap: 12px !important;
+      align-items: start !important;
+      justify-content: start !important;
+    }
+
+    .footer-left-page .footer-right-group {
+      display: flex !important;
+      align-items: flex-start !important;
+      justify-content: flex-start !important;
+      gap: 42px !important;
+    }
+
+    .footer-left-page .footer-col {
+      text-align: left !important;
+    }
+
+    .footer-left-page .footer-badge {
+      justify-self: start !important;
+      text-align: left !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .footer-left-page .footer-badge a {
+      display: block !important;
+    }
+
+    .footer-left-page .footer-badge img {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    @media (max-width: 768px) {
+      .footer-left-page .footer-shell {
+        padding: 0 14px !important;
+      }
+
+      .footer-left-page .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+      }
+
+      .footer-left-page .footer-right-group {
+        flex-direction: column !important;
+        gap: 24px !important;
+      }
+
+      .footer-left-page .footer-badge {
+        justify-self: start !important;
+      }
+
+      .footer-left-page .footer-badge img {
+        max-width: 110px !important;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="footer-left-page">
 
-  <header class="site-header" id="siteHeader">
-  <div class="topbar">
-    <div class="logo-wrap">
-      <a href="/" class="logo-mini">
-        <img src="/images/logo.png" alt="Your Missing Peace" />
-        <span class="logo-mini-label">Your Missing Peace</span>
-      </a>
+  <header class="site-header">
+    <div class="topbar">
+      <div class="logo-wrap">
+        <a href="/" class="logo-mini">
+          <img
+            src="/images/logo.png"
+            alt="Your Missing Peace"
+          />
+          <span class="logo-mini-label">Your Missing Peace</span>
+        </a>
+      </div>
+
+      <div class="top-link">
+        <a href="/match" class="header-action match-action">
+          <img src="/images/match2.png" alt="Match" class="action-icon match-btn">
+          <span class="action-label">Match</span>
+        </a>
+
+        <a href="/contact.html" class="header-action connect-action">
+          <img src="/images/connect2.png" alt="Connect" class="action-icon connect-btn">
+          <span class="action-label">Connect</span>
+        </a>
+
+        <a href="/data" class="header-action data-action">
+          <img src="/images/graph.png" alt="Data" class="action-icon data-btn">
+          <span class="action-label">Data</span>
+        </a>
+      </div>
+
+      <div class="top-id">
+        <div>Realtor® in Kyle, TX</div>
+        <div>Emmanuel "Manny" Camacho</div>
+        <div>Dalton Wade Real Estate Group</div>
+      </div>
     </div>
-
-    <div class="top-link">
-      <a href="/match" class="header-action match-action">
-        <img src="/images/match2.png" alt="Match" class="action-icon match-btn">
-        <span class="action-label">Match</span>
-      </a>
-
-      <a href="/contact.html" class="header-action connect-action">
-        <img src="images/connect2.png" alt="Connect" class="action-icon connect-btn">
-        <span class="action-label">Connect</span>
-      </a>
-
-      <a href="/data" class="header-action data-action">
-        <img src="/images/graph.png" alt="Data" class="action-icon data-btn">
-        <span class="action-label">Data</span>
-      </a>
-    </div>
-
-    <div class="top-id">
-      <div>Realtor® in Kyle, TX</div>
-      <div>Emmanuel "Manny" Camacho</div>
-      <div>Dalton Wade Real Estate Group</div>
-    </div>
-  </div>
-</header>
+  </header>
 
   <div class="page-wrap">
     <h1>Homes for Sale in Kyle, TX</h1>
 
-<div class="page-top-meta">
-  <div class="page-updated">Last updated: March 29, 2026</div>
-</div>
+    <div style="margin-top:34px; margin-bottom:10px;">
+      <h2 style="text-align:center; font-family:'Hedvig Letters Serif'; font-size:22px; font-weight:700; color:#000; margin:0; padding:0;">
+        Southwest Kyle Subdivisions
+      </h2>
+    </div>
 
-<div style="margin-top:34px; margin-bottom:10px;">
-  <h2 style="margin:0; padding:0;">
-    <a href="/master-planned-communities.html" class="section-link" style="font-family:'Hedvig Letters Serif'; font-size:22px; font-weight:700;">
-      <span>Master-Planned Communities</span>
-      <span class="section-arrow">›</span>
-    </a>
-  </h2>
-</div>
+    <div style="max-width:900px; margin:0 auto 22px auto; font-size:16px; line-height:1.6; text-align:center;">
+     In Kyle’s Southwest, neighborhoods sit a little farther out — not distant, but distinct. Fewer subdivisions mean more breathing room, where the pace feels slower and the horizon stretches wider. 
+    </div>
 
-<div class="subdivDesktopWrapper">
-  <div class="subdivArrowSlot left">
-    <button class="sliderArrow sliderArrowLeft" aria-label="Scroll left" type="button">‹</button>
-  </div>
+    <div style="text-align:center; font-size:12px; color:#666; margin-top:-12px; margin-bottom:18px;">
+      Last updated: March 29, 2026
+    </div>
 
-  <div class="subdivGridDesktop" style="margin-bottom:8px;">
+         <div class="subdivGridDesktop" style="margin-bottom:0px;">
 <div class="subdivCard">
-  <a href="/6-creeks.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/6-Creeks_2.81.1.png" alt="6 Creeks" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        6 Creeks
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $369,000 &ndash; $799,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        90 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/plum-creek.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Plum-Creek-Original_2.19.1.png" alt="Plum Creek" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Plum Creek
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $217,990 &ndash; $500,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        51 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/anthem.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Anthem_2.78.1.png" alt="Anthem" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Anthem
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $269,990 &ndash; $699,990
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        41 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/crosswinds.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Crosswinds_2.10.1.png" alt="Crosswinds" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Crosswinds
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $270,000 &ndash; $536,900
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        33 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/waterstone.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Waterstone_2.61.1.png" alt="Waterstone" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Waterstone
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $209,490 &ndash; $406,990
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        22 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/waterleaf.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Waterleaf_2.64.1.png" alt="Waterleaf" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Waterleaf
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $219,000 &ndash; $419,990
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        16 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-  </div>
-
-  <div class="subdivArrowSlot right">
-    <button class="sliderArrow sliderArrowRight" aria-label="Scroll right" type="button">›</button>
-  </div>
-</div>
-
-<div class="subdivMobileRow">
-<div class="subdivCard">
-  <a href="/6-creeks.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/6-Creeks_2.81.1.png" alt="6 Creeks" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        6 Creeks
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $369,000 &ndash; $799,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        90 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/plum-creek.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Plum-Creek-Original_2.19.1.png" alt="Plum Creek" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Plum Creek
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $217,990 &ndash; $500,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        51 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/anthem.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Anthem_2.78.1.png" alt="Anthem" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Anthem
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $269,990 &ndash; $699,990
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        41 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/crosswinds.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Crosswinds_2.10.1.png" alt="Crosswinds" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Crosswinds
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $270,000 &ndash; $536,900
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        33 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/waterstone.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Waterstone_2.61.1.png" alt="Waterstone" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Waterstone
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $209,490 &ndash; $406,990
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        22 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/waterleaf.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Waterleaf_2.64.1.png" alt="Waterleaf" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Waterleaf
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $219,000 &ndash; $419,990
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        16 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-</div><div style="margin-top:34px; margin-bottom:10px;">
-  <h2 style="margin:0; padding:0;">
-    <a href="/northwest/" class="section-link" style="font-family:'Hedvig Letters Serif'; font-size:22px; font-weight:700;">
-      <span>Northwest Kyle Subdivisions</span>
-      <span class="section-arrow">›</span>
-    </a>
-  </h2>
-</div>
-
-<div class="subdivDesktopWrapper">
-  <div class="subdivArrowSlot left">
-    <button class="sliderArrow sliderArrowLeft" aria-label="Scroll left" type="button">‹</button>
-  </div>
-
-  <div class="subdivGridDesktop" style="margin-bottom:8px;">
-<div class="subdivCard">
-  <a href="/northwest/hometown-kyle.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Hometown-Kyle2_2.75.1.png" alt="Hometown Kyle" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Hometown Kyle
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $299,999 &ndash; $579,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        16 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/sage-hollow.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Sage-Hollow_2.42.1.png" alt="Sage Hollow" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Sage Hollow
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $329,999 &ndash; $524,999
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        9 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/cypress-forest.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Cypress-Forest_2.44.1.png" alt="Cypress Forest" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Cypress Forest
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $484,000 &ndash; $593,900
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        3 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/silverado-at-plum-creek.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Silverado2_2.74.1.png" alt="Silverado at Plum Creek" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Silverado at Plum Creek
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $315,000 &ndash; $345,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        3 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/arroyo-ranch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Arroyo-Ranch_2.38.1.png" alt="Arroyo Ranch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Arroyo Ranch
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $589,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        1 home currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/creekside-village.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Creekside-Village_2.23.1.png" alt="Creekside Village" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Creekside Village
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $355,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        1 home currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/brooks-crossing.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Brooks-Crossing_2.32.1.png" alt="Brooks Crossing" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Brooks Crossing
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/brooks-ranch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Brooks-Ranch_2.34.1-294e378b.png" alt="Brooks Ranch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Brooks Ranch
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/dove-hollow.estates.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Dove-Hollow-Estates_2.76.1.png" alt="Dove Hollow Estates" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Dove Hollow Estates
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/meadow-woods.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Meadow-Woods_2.40.1.png" alt="Meadow Woods" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Meadow Woods
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/quail-meadows.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Quail-Meadows_2.36.1.png" alt="Quail Meadows" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Quail Meadows
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/spring-branch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Spring-Branch_2.24.1.png" alt="Spring Branch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Spring Branch
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-  </div>
-
-  <div class="subdivArrowSlot right">
-    <button class="sliderArrow sliderArrowRight" aria-label="Scroll right" type="button">›</button>
-  </div>
-</div>
-
-<div class="subdivMobileRow">
-<div class="subdivCard">
-  <a href="/northwest/hometown-kyle.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Hometown-Kyle2_2.75.1.png" alt="Hometown Kyle" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Hometown Kyle
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $299,999 &ndash; $579,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        16 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/sage-hollow.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Sage-Hollow_2.42.1.png" alt="Sage Hollow" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Sage Hollow
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $329,999 &ndash; $524,999
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        9 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/cypress-forest.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Cypress-Forest_2.44.1.png" alt="Cypress Forest" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Cypress Forest
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $484,000 &ndash; $593,900
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        3 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/silverado-at-plum-creek.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Silverado2_2.74.1.png" alt="Silverado at Plum Creek" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Silverado at Plum Creek
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $315,000 &ndash; $345,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        3 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/arroyo-ranch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Arroyo-Ranch_2.38.1.png" alt="Arroyo Ranch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Arroyo Ranch
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $589,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        1 home currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/creekside-village.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Creekside-Village_2.23.1.png" alt="Creekside Village" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Creekside Village
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $355,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        1 home currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/brooks-crossing.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Brooks-Crossing_2.32.1.png" alt="Brooks Crossing" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Brooks Crossing
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/brooks-ranch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Brooks-Ranch_2.34.1-294e378b.png" alt="Brooks Ranch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Brooks Ranch
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/dove-hollow.estates.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Dove-Hollow-Estates_2.76.1.png" alt="Dove Hollow Estates" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Dove Hollow Estates
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/meadow-woods.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Meadow-Woods_2.40.1.png" alt="Meadow Woods" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Meadow Woods
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/quail-meadows.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Quail-Meadows_2.36.1.png" alt="Quail Meadows" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Quail Meadows
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northwest/spring-branch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Spring-Branch_2.24.1.png" alt="Spring Branch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Spring Branch
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-</div><div style="margin-top:34px; margin-bottom:10px;">
-  <h2 style="margin:0; padding:0;">
-    <a href="/northeast/" class="section-link" style="font-family:'Hedvig Letters Serif'; font-size:22px; font-weight:700;">
-      <span>Northeast Kyle Subdivisions</span>
-      <span class="section-arrow">›</span>
-    </a>
-  </h2>
-</div>
-
-<div class="subdivDesktopWrapper">
-  <div class="subdivArrowSlot left">
-    <button class="sliderArrow sliderArrowLeft" aria-label="Scroll left" type="button">‹</button>
-  </div>
-
-  <div class="subdivGridDesktop" style="margin-bottom:8px;">
-<div class="subdivCard">
-  <a href="/northeast/casetta-ranch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Casetta-Ranch_2.50.1.png" alt="Casetta Ranch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Casetta Ranch
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $239,990 &ndash; $329,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        18 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/kensington-trails.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Kensington_2.72.1.png" alt="Kensington Trails" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Kensington Trails
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $250,000 &ndash; $425,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        8 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/steeplechase.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Steeplechase-Christmas_2.71.1.png" alt="Steeplechase" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Steeplechase
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $250,000 &ndash; $374,900
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        7 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/indian-paintbrush.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Indian-Paintbrush2_2.5.1-d89688c1.png" alt="Indian Paintbrush" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Indian Paintbrush
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $245,000 &ndash; $334,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        5 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/southlake-ranch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Southlake-Ranch_2.53.1.png" alt="Southlake Ranch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Southlake Ranch
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $216,000 &ndash; $269,500
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        4 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/sunset-hills.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Sunset-Hills.png" alt="Sunset Hills" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Sunset Hills
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $340,000 &ndash; $425,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        4 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/amberwood.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Amberwood_2.2.1.png" alt="Amberwood" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Amberwood
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $270,000 &ndash; $298,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        2 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/meadows-at-kyle.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Meadows-of-Kyle_2.13.1.png" alt="Meadows At Kyle" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Meadows At Kyle
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $309,900 &ndash; $350,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        2 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/the-trails.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#f2f2f2; color:#777; font-size:14px;">Image coming soon</div>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        The Trails
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $293,900 &ndash; $365,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        2 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/prairie-on-the-creek.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Prairie-on-the-Creek3_2.82.1.png" alt="Prairie On The Creek" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Prairie On The Creek
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-  </div>
-
-  <div class="subdivArrowSlot right">
-    <button class="sliderArrow sliderArrowRight" aria-label="Scroll right" type="button">›</button>
-  </div>
-</div>
-
-<div class="subdivMobileRow">
-<div class="subdivCard">
-  <a href="/northeast/casetta-ranch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Casetta-Ranch_2.50.1.png" alt="Casetta Ranch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Casetta Ranch
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $239,990 &ndash; $329,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        18 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/kensington-trails.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Kensington_2.72.1.png" alt="Kensington Trails" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Kensington Trails
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $250,000 &ndash; $425,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        8 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/steeplechase.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Steeplechase-Christmas_2.71.1.png" alt="Steeplechase" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Steeplechase
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $250,000 &ndash; $374,900
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        7 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/indian-paintbrush.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Indian-Paintbrush2_2.5.1-d89688c1.png" alt="Indian Paintbrush" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Indian Paintbrush
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $245,000 &ndash; $334,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        5 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/southlake-ranch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Southlake-Ranch_2.53.1.png" alt="Southlake Ranch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Southlake Ranch
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $216,000 &ndash; $269,500
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        4 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/sunset-hills.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Sunset-Hills.png" alt="Sunset Hills" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Sunset Hills
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $340,000 &ndash; $425,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        4 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/amberwood.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Amberwood_2.2.1.png" alt="Amberwood" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Amberwood
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $270,000 &ndash; $298,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        2 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/meadows-at-kyle.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Meadows-of-Kyle_2.13.1.png" alt="Meadows At Kyle" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Meadows At Kyle
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $309,900 &ndash; $350,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        2 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/the-trails.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#f2f2f2; color:#777; font-size:14px;">Image coming soon</div>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        The Trails
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $293,900 &ndash; $365,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        2 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/northeast/prairie-on-the-creek.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Prairie-on-the-Creek3_2.82.1.png" alt="Prairie On The Creek" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Prairie On The Creek
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-</div><div style="margin-top:34px; margin-bottom:10px;">
-  <h2 style="margin:0; padding:0;">
-    <a href="/southwest/" class="section-link" style="font-family:'Hedvig Letters Serif'; font-size:22px; font-weight:700;">
-      <span>Southwest Kyle Subdivisions</span>
-      <span class="section-arrow">›</span>
-    </a>
-  </h2>
-</div>
-
-<div class="subdivDesktopWrapper">
-  <div class="subdivArrowSlot left">
-    <button class="sliderArrow sliderArrowLeft" aria-label="Scroll left" type="button">‹</button>
-  </div>
-
-  <div class="subdivGridDesktop" style="margin-bottom:8px;">
-<div class="subdivCard">
-  <a href="/southwest/paramount.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Paramount_2.70.1.png" alt="Paramount" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
+  <a href="paramount.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Paramount_2.70.1.png" alt="Paramount" />
     </div>
 
     <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
@@ -1341,9 +508,9 @@
   </a>
 </div>
 <div class="subdivCard">
-  <a href="/southwest/stagecoach-crossing.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Stagecoach-Crossing_2.46.1.png" alt="Stagecoach" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
+  <a href="stagecoach-crossing.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Stagecoach-Crossing_2.46.1.png" alt="Stagecoach" />
     </div>
 
     <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
@@ -1362,9 +529,9 @@
   </a>
 </div>
 <div class="subdivCard">
-  <a href="/southwest/opal-ranch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Opal+Ranch.png" alt="Opal Ranch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
+  <a href="opal-ranch.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Opal+Ranch.png" alt="Opal Ranch" />
     </div>
 
     <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
@@ -1383,9 +550,9 @@
   </a>
 </div>
 <div class="subdivCard">
-  <a href="/southwest/bradford-meadows.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Bradford+Meadows.png" alt="Bradford Meadows" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
+  <a href="bradford-meadows.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Bradford+Meadows.png" alt="Bradford Meadows" />
     </div>
 
     <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
@@ -1403,18 +570,13 @@
     </div>
   </a>
 </div>
-  </div>
-
-  <div class="subdivArrowSlot right">
-    <button class="sliderArrow sliderArrowRight" aria-label="Scroll right" type="button">›</button>
-  </div>
 </div>
 
 <div class="subdivMobileRow">
 <div class="subdivCard">
-  <a href="/southwest/paramount.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Paramount_2.70.1.png" alt="Paramount" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
+  <a href="paramount.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Paramount_2.70.1.png" alt="Paramount" />
     </div>
 
     <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
@@ -1433,9 +595,9 @@
   </a>
 </div>
 <div class="subdivCard">
-  <a href="/southwest/stagecoach-crossing.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Stagecoach-Crossing_2.46.1.png" alt="Stagecoach" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
+  <a href="stagecoach-crossing.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Stagecoach-Crossing_2.46.1.png" alt="Stagecoach" />
     </div>
 
     <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
@@ -1454,9 +616,9 @@
   </a>
 </div>
 <div class="subdivCard">
-  <a href="/southwest/opal-ranch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Opal+Ranch.png" alt="Opal Ranch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
+  <a href="opal-ranch.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Opal+Ranch.png" alt="Opal Ranch" />
     </div>
 
     <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
@@ -1475,9 +637,9 @@
   </a>
 </div>
 <div class="subdivCard">
-  <a href="/southwest/bradford-meadows.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Bradford+Meadows.png" alt="Bradford Meadows" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
+  <a href="bradford-meadows.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Bradford+Meadows.png" alt="Bradford Meadows" />
     </div>
 
     <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
@@ -1495,494 +657,65 @@
     </div>
   </a>
 </div>
-</div><div style="margin-top:34px; margin-bottom:10px;">
-  <h2 style="margin:0; padding:0;">
-    <a href="/southeast/" class="section-link" style="font-family:'Hedvig Letters Serif'; font-size:22px; font-weight:700;">
-      <span>Southeast Kyle Subdivisions</span>
-      <span class="section-arrow">›</span>
-    </a>
-  </h2>
 </div>
 
-<div class="subdivDesktopWrapper">
-  <div class="subdivArrowSlot left">
-    <button class="sliderArrow sliderArrowLeft" aria-label="Scroll left" type="button">‹</button>
-  </div>
-
-  <div class="subdivGridDesktop" style="margin-bottom:8px;">
-<div class="subdivCard">
-  <a href="/southeast/bunton-creek.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Bunton-Creek_2.48.1.png" alt="Bunton Creek" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Bunton Creek
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $230,000 &ndash; $319,995
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        13 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/post-oak.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Post-Oak_2.54.1.png" alt="Post Oak" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Post Oak
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $225,000 &ndash; $449,900
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        8 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/woodlands-park.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Woodlands-Park_2.59.1.png" alt="Woodlands Park" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Woodlands Park
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $253,000 &ndash; $359,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        6 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/cool-springs.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Cool-Springs_2.58.1.png" alt="Cool Springs" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Cool Springs
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $262,000 &ndash; $500,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        5 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/high-meadows.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/High-Meadows_2.62.1.png" alt="High Meadows" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        High Meadows
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $407,000 &ndash; $459,900
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        5 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/creekside.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Creekside_2.65.1.png" alt="Creekside" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Creekside
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $229,890 &ndash; $260,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        4 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/four-seasons-farm.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Four-Seasons-Farm_2.68.1.png" alt="Four Seasons Farm" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Four Seasons Farm
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $294,000 &ndash; $425,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        3 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/nan" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#f2f2f2; color:#777; font-size:14px;">Image coming soon</div>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Harvest Creek
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $275,000 &ndash; $365,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        3 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-  </div>
-
-  <div class="subdivArrowSlot right">
-    <button class="sliderArrow sliderArrowRight" aria-label="Scroll right" type="button">›</button>
-  </div>
-</div>
-
-<div class="subdivMobileRow">
-<div class="subdivCard">
-  <a href="/southeast/bunton-creek.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Bunton-Creek_2.48.1.png" alt="Bunton Creek" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Bunton Creek
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $230,000 &ndash; $319,995
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        13 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/post-oak.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Post-Oak_2.54.1.png" alt="Post Oak" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Post Oak
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $225,000 &ndash; $449,900
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        8 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/woodlands-park.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Woodlands-Park_2.59.1.png" alt="Woodlands Park" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Woodlands Park
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $253,000 &ndash; $359,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        6 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/cool-springs.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Cool-Springs_2.58.1.png" alt="Cool Springs" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Cool Springs
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $262,000 &ndash; $500,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        5 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/high-meadows.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/High-Meadows_2.62.1.png" alt="High Meadows" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        High Meadows
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $407,000 &ndash; $459,900
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        5 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/creekside.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Creekside_2.65.1.png" alt="Creekside" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Creekside
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $229,890 &ndash; $260,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        4 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/four-seasons-farm.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Four-Seasons-Farm_2.68.1.png" alt="Four Seasons Farm" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:16px;"/>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Four Seasons Farm
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $294,000 &ndash; $425,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        3 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="/southeast/nan" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img" style="height:220px; border-radius:16px; overflow:hidden; background:#f5f5f5;">
-      <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#f2f2f2; color:#777; font-size:14px;">Image coming soon</div>
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Harvest Creek
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $275,000 &ndash; $365,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        3 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-</div>
 
     <footer class="site-footer">
-  <div class="footer-shell">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-title">Kyle Housing</div>
-        <p>
-          Local housing insight designed to bring clarity to pricing,
-          neighborhoods, and decision-making in Kyle, Texas.
-        </p>
+      <div class="footer-shell">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-title">Kyle Housing</div>
+            <p>
+              Local housing insight designed to bring clarity to pricing,
+              neighborhoods, and decision-making in Kyle, Texas.
+            </p>
+          </div>
+
+          <div class="footer-right-group">
+            <div class="footer-col">
+              <div class="footer-title">Explore</div>
+              <a href="/">Home</a>
+              <a href="/data">Data Page</a>
+              <a href="/contact.html">Connect</a>
+            </div>
+
+            <div class="footer-badge">
+              <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
+                <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
+              </a>
+            </div>
+
+            <div class="footer-col">
+              <div class="footer-title">About</div>
+              <p>
+                Emmanuel "Manny" Camacho<br />
+                Realtor® in Kyle, TX<br />
+                Dalton Wade Real Estate Group
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>© 2026 Emmanuel "Manny" Camacho · Kyle Housing</span>
+        </div>
       </div>
-
-      <div class="footer-right-group">
-        <div class="footer-col">
-          <div class="footer-title">Explore</div>
-          <a href="/">Home</a>
-          <a href="/data/">Data Page</a>
-          <a href="/contact.html">Connect</a>
-        </div>
-
-        <div class="footer-badge">
-          <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
-            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
-          </a>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-title">About</div>
-          <p>
-            Emmanuel "Manny" Camacho<br />
-            Realtor® in Kyle, TX<br />
-            Dalton Wade Real Estate Group
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <span>© 2026 Emmanuel "Manny" Camacho · Kyle Housing</span>
-    </div>
-  </div>
-</footer>
+    </footer>
   </div>
 
   <script>
-  (function () {
-    const siteHeader = document.getElementById("siteHeader");
-    if (!siteHeader) return;
+    const siteHeader = document.querySelector('.site-header');
 
     function handleHeaderShrink() {
       if (window.scrollY > 80) {
-        siteHeader.classList.add("shrink");
+        siteHeader.classList.add('shrink');
       } else {
-        siteHeader.classList.remove("shrink");
+        siteHeader.classList.remove('shrink');
       }
     }
 
-    window.addEventListener("scroll", handleHeaderShrink, { passive: true });
-    window.addEventListener("load", handleHeaderShrink);
-    handleHeaderShrink();
-  })();
-</script>
-        <!-- your last section above this -->
-
-    <script>
-      function setupSubdivisionSliders() {
-        const wrappers = document.querySelectorAll('.subdivDesktopWrapper');
-
-        wrappers.forEach((wrapper) => {
-          const track = wrapper.querySelector('.subdivGridDesktop');
-          const leftBtn = wrapper.querySelector('.sliderArrowLeft');
-          const rightBtn = wrapper.querySelector('.sliderArrowRight');
-
-          if (!track || !leftBtn || !rightBtn) return;
-
-          const updateArrows = () => {
-            const isMobile = window.innerWidth <= 768;
-            const canOverflow = track.scrollWidth > track.clientWidth + 2;
-
-            if (isMobile || !canOverflow) {
-              leftBtn.classList.add('is-hidden');
-              rightBtn.classList.add('is-hidden');
-              leftBtn.classList.remove('is-visible');
-              rightBtn.classList.remove('is-visible');
-              return;
-            }
-
-            leftBtn.classList.add('is-visible');
-            rightBtn.classList.add('is-visible');
-            leftBtn.classList.remove('is-hidden');
-            rightBtn.classList.remove('is-hidden');
-
-            if (track.scrollLeft <= 4) {
-              leftBtn.classList.add('is-hidden');
-            }
-
-            const maxScroll = track.scrollWidth - track.clientWidth;
-            if (track.scrollLeft >= maxScroll - 4) {
-              rightBtn.classList.add('is-hidden');
-            }
-          };
-
-          const scrollAmount = () => {
-            const firstCard = track.querySelector('.subdivCard');
-            if (!firstCard) return 320;
-            return firstCard.offsetWidth * 2 + 24;
-          };
-
-          leftBtn.addEventListener('click', () => {
-            track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
-          });
-
-          rightBtn.addEventListener('click', () => {
-            track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
-          });
-
-          track.addEventListener('scroll', updateArrows);
-          window.addEventListener('resize', updateArrows);
-
-          setTimeout(updateArrows, 50);
-          setTimeout(updateArrows, 300);
-        });
-      }
-
-      document.addEventListener('DOMContentLoaded', setupSubdivisionSliders);
-    </script>
-
-</body>
-</html>
+    window.addEventListener('scroll', handleHeaderShrink, { passive: true });
+    window.addEventListener('load', handleHeaderShrink);
+  </script>
 </body>
 </html>
