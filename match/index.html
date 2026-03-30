@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Your Match | Kyle Housing</title>
+
+  <link rel="stylesheet" href="/subdivision.css">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Hedvig Letters Serif", serif;
+      background: #fff;
+      color: #111;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* =========================
+       HEADER (UNCHANGED)
+    ========================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      z-index: 9999;
+    }
+
+    .topbar {
+      position: relative;
+      min-height: 90px;
+    }
+
+    .logo-wrap {
+      position: absolute;
+      top: -14px;
+      left: -8px;
+    }
+
+    .logo-mini {
+      width: 132px;
+      display: inline-flex;
+      flex-direction: column;
+    }
+
+    .logo-mini img {
+      width: 100%;
+      transform: translateX(-15px);
+    }
+
+    .logo-mini-label {
+      margin-top: -18px;
+      margin-left: 8px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .top-link {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+    }
+
+    .header-action {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: -22px;
+    }
+
+    .header-action:last-child {
+      margin-right: 0;
+    }
+
+    .action-label {
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: -8px;
+    }
+
+    .top-id {
+      margin-left: auto;
+      padding-top: 8px;
+      text-align: right;
+      font-size: 14px;
+    }
+
+    /* =========================
+       PAGE CONTENT
+    ========================== */
+    .page-wrap {
+      padding: 190px 20px 40px;
+    }
+
+    .content-shell {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 15px;
+      color: #555;
+    }
+
+    /* =========================
+       FORM STYLING
+    ========================== */
+    form {
+      background: #fff;
+      padding: 24px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .question {
+      margin-bottom: 18px;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #f9f9f9;
+    }
+
+    .question-label {
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .options input {
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-top: 6px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 14px;
+      width: 100%;
+      background: #065f46;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #054836;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+    .site-footer {
+      border-top: 1px solid #eee;
+      margin-top: 40px;
+    }
+
+    .footer-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .footer-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .footer-col {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .footer-col a {
+      display: block;
+      margin-bottom: 6px;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="topbar">
+    <div class="logo-wrap">
+      <a href="/" class="logo-mini">
+        <img src="/images/logo.png" alt="Your Missing Peace" />
+        <span class="logo-mini-label">Your Missing Peace</span>
+      </a>
+    </div>
+
+    <div class="top-link">
+      <a href="/match" class="header-action">
+        <img src="/images/match2.png" class="match-btn">
+        <span class="action-label">Match</span>
+      </a>
+
+      <a href="/contact.html" class="header-action">
+        <img src="/images/connect2.png" class="connect-btn">
+        <span class="action-label">Connect</span>
+      </a>
+
+      <a href="/data" class="header-action">
+        <img src="/images/graph.png" class="data-btn">
+        <span class="action-label">Data</span>
+      </a>
+    </div>
+
+    <div class="top-id">
+      Realtor® in Kyle, TX<br>
+      Emmanuel "Manny" Camacho<br>
+      Dalton Wade Real Estate Group
+    </div>
+  </div>
+</header>
+
+<main class="page-wrap">
+  <div class="content-shell">
+
+    <h2>Find Your Match</h2>
+    <div class="intro">
+      Answer a few questions and I’ll point you toward neighborhoods that fit your lifestyle.
+    </div>
+
+    <form method="POST" action="https://script.google.com/macros/s/AKfycbxWWn3A0BrX2mT4l0yf_jNyGYFfXqDiRcJKh6yCpV07XxgncM1OcNd0JZDZEXkVDX6z/exec" target="_blank">
+
+      <div class="question">
+        <label class="question-label">What kind of neighborhood feels right?</label>
+        <div class="options">
+          <input type="radio" name="neighborhood" value="Quiet and Peaceful" required> Quiet and Peaceful<br>
+          <input type="radio" name="neighborhood" value="Active and Social"> Active and Social<br>
+          <input type="radio" name="neighborhood" value="Balanced"> Balanced<br>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="question-label">What matters most?</label>
+        <div class="options">
+          <input type="radio" name="matterMost" value="Space" required> Space<br>
+          <input type="radio" name="matterMost" value="Convenience"> Convenience<br>
+          <input type="radio" name="matterMost" value="Community"> Community<br>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="question-label">Price range?</label>
+        <div class="options">
+          <input type="radio" name="priceRange" value="250k" required> under $250k<br>
+          <input type="radio" name="priceRange" value="350k"> $250k-$350k<br>
+          <input type="radio" name="priceRange" value="450k"> $350k-$450k<br>
+          <input type="radio" name="priceRange" value="450k+"> $450k+<br>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="question-label">Email (optional)</label>
+        <input type="email" name="email">
+      </div>
+
+      <button type="submit">Get My Match</button>
+
+    </form>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-shell">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-title">Kyle Housing</div>
+        Local insight for better decisions.
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Explore</div>
+        <a href="/">Home</a>
+        <a href="/data">Data</a>
+        <a href="/contact.html">Connect</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">About</div>
+        Emmanuel "Manny" Camacho<br>
+        Realtor® in Kyle, TX
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Kyle Housing
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
