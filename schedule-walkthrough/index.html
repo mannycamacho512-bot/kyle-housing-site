@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | Emmanuel "Manny" Camacho</title>
+  <title>Schedule a Walkthrough | Emmanuel "Manny" Camacho</title>
   <meta
     name="description"
-    content="Connect with Emmanuel 'Manny' Camacho, Realtor in Kyle, Texas."
+    content="Schedule a walkthrough with Emmanuel 'Manny' Camacho, Realtor in Kyle, Texas."
   />
 
   <style>
@@ -153,7 +153,9 @@
       color: inherit;
     }
 
-    .logo-mini:hover { opacity: 0.85; }
+    .logo-mini:hover {
+      opacity: 0.85;
+    }
 
     .logo-mini img {
       display: block;
@@ -229,21 +231,6 @@
       padding: 24px;
     }
 
-    .contact-hero h1 {
-      margin: 0 0 10px;
-      font-size: 32px;
-      font-weight: 600;
-      line-height: 1.15;
-      color: var(--text);
-    }
-
-    .contact-hero p {
-      margin: 0;
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
     .contact-card {
       text-align: center;
       padding: 26px 24px;
@@ -263,9 +250,16 @@
       color: var(--muted);
     }
 
-    .contact-direct a {
+    .contact-direct {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .contact-direct a,
+    .contact-direct .contact-callout {
       display: block;
-      margin-bottom: 8px;
       font-size: 16px;
       text-decoration: underline;
       color: var(--text);
@@ -284,30 +278,22 @@
       color: var(--muted);
     }
 
-    .contact-form {
-      display: grid;
-      gap: 16px;
+    .question {
+      margin-bottom: 14px;
     }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .form-group label {
+    .question label {
+      display: block;
       font-size: 13px;
       margin-bottom: 8px;
       color: var(--text);
     }
 
-    .form-group input,
-    .form-group textarea {
+    .question input[type="text"],
+    .question input[type="email"],
+    .question input[type="tel"],
+    .question input[type="date"],
+    .question textarea {
       width: 100%;
       padding: 12px 14px;
       border: 1px solid var(--border);
@@ -315,9 +301,10 @@
       color: var(--text);
       font-family: inherit;
       font-size: 15px;
+      border-radius: 4px;
     }
 
-    .form-group textarea {
+    .question textarea {
       min-height: 160px;
       resize: vertical;
     }
@@ -326,6 +313,7 @@
       font-size: 13px;
       line-height: 1.7;
       color: var(--muted);
+      margin-bottom: 14px;
     }
 
     .consent-wrap label {
@@ -352,10 +340,18 @@
       font-family: inherit;
       font-size: 14px;
       cursor: pointer;
+      border-radius: 4px;
     }
 
     .submit-btn:hover {
       border-color: rgba(17,17,17,.4);
+    }
+
+    .dmform-success,
+    .dmform-error {
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
     .site-footer {
@@ -406,8 +402,7 @@
     }
 
     @media (max-width: 900px) {
-      .footer-grid,
-      .form-row {
+      .footer-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -446,7 +441,6 @@
         padding: 190px 14px 24px;
       }
 
-      .contact-hero h1,
       .contact-name {
         font-size: 25px;
       }
@@ -497,92 +491,80 @@
       <section class="section-block">
         <div class="panel contact-card">
           <h2 class="contact-name">Emmanuel "Manny" Camacho</h2>
-          
           <p class="contact-role">
             Realtor® in Kyle, TX<br>
             Dalton Wade Real Estate Group
           </p>
 
           <div class="contact-direct">
-  <div class="contact-name">Call or Text</div>
-  <a href="tel:5122987455">512-298-7455</a>
-  <a href="mailto:mannyc512@outlook.com">mannyc512@outlook.com</a>
-</div>
+            <div class="contact-callout">Call or Text</div>
+            <a href="tel:5122987455">512-298-7455</a>
+            <a href="mailto:mannyc512@outlook.com">mannyc512@outlook.com</a>
+          </div>
         </div>
       </section>
 
       <section class="section-block">
         <div class="panel contact-form-wrap">
-          <h2>Send a Message</h2>
+          <h2>Schedule a Walkthrough</h2>
           <p>
-            Fill out the form below and I’ll get back to you as soon as I can.
+            Choose a preferred date and time below and I’ll follow up to confirm the details.
           </p>
 
-          <!-- IMPORTANT:
-               This plain HTML form layout will display on GitHub Pages,
-               but you need a real form handler to receive submissions.
-               For now, replace the action with Formspree or another service.
-          -->
-         <h3 style="margin-bottom:12px;">Schedule a Walkthrough</h3>
+          <form method="POST" action="https://script.google.com/macros/s/AKfycbxWWn3A0BrX2mT4l0yf_jNyGYFfXqDiRcJKh6yCpV07XxgncM1OcNd0JZDZEXkVDX6z/exec" target="_blank">
+            <div class="question">
+              <label for="walkthrough-name">Name</label>
+              <input type="text" name="dmform-0" id="walkthrough-name" required>
+            </div>
 
-<form method="POST" action="https://script.google.com/macros/s/AKfycbxWWn3A0BrX2mT4l0yf_jNyGYFfXqDiRcJKh6yCpV07XxgncM1OcNd0JZDZEXkVDX6z/exec" target="_blank">
+            <div class="question">
+              <label for="walkthrough-email">Email</label>
+              <input type="email" name="dmform-1" id="walkthrough-email" required>
+            </div>
 
-  <div class="question">
-    <label for="walkthrough-name">Name:</label>
-    <input type="text" name="dmform-0" id="walkthrough-name" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
-  </div>
+            <div class="question">
+              <label for="walkthrough-phone">Phone</label>
+              <input type="tel" name="dmform-2" id="walkthrough-phone" required>
+            </div>
 
-  <div class="question">
-    <label for="walkthrough-email">Email:</label>
-    <input type="email" name="dmform-1" id="walkthrough-email" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
-  </div>
+            <div class="question">
+              <label for="dmform-date">Preferred Date</label>
+              <input type="date" name="dmform-date" id="dmform-date" required>
+            </div>
 
-  <div class="question">
-    <label for="walkthrough-phone">Phone:</label>
-    <input type="tel" name="dmform-2" id="walkthrough-phone" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
-  </div>
+            <div class="question">
+              <label for="dmform-time">Preferred Time</label>
+              <input type="text" name="dmform-time" id="dmform-time" placeholder="e.g., after 4, 4 PM" required>
+            </div>
 
-  <div class="question" style="position:relative;">
-    <label for="dmform-date">Preferred Date:</label>
-    <input type="date" name="dmform-date" id="dmform-date" required style="width:100%; padding:8px 8px 8px 30px; border:1px solid #ccc; border-radius:4px;">
-    <span style="position:absolute; left:8px; top:50%; transform:translateY(-50%); pointer-events:none;">📅</span>
-  </div>
+            <div class="question">
+              <label for="walkthrough-notes">Questions or Notes</label>
+              <textarea name="dmform-3" id="walkthrough-notes"></textarea>
+            </div>
 
-  <div class="question">
-    <label for="dmform-time">Preferred Time:</label>
-    <input type="text" name="dmform-time" id="dmform-time" placeholder="e.g., after 4, 4 PM" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
-  </div>
+            <div class="consent-wrap">
+              <label for="walkthrough-consent">
+                <input type="checkbox" name="dmform-4" id="walkthrough-consent" required>
+                <span>
+                  By submitting this form, you consent to the collection, storage, and use of your personal information as described in our Privacy Policy.
+                </span>
+              </label>
+            </div>
 
-  <div class="question">
-    <label for="walkthrough-notes">Questions or Notes:</label>
-    <textarea name="dmform-3" id="walkthrough-notes" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;"></textarea>
-  </div>
+            <div class="submit-wrap">
+              <button class="submit-btn" type="submit">Schedule Now</button>
+            </div>
+          </form>
 
-  <div class="question">
-    <label for="walkthrough-consent">Consent to Data Collection and Use</label>
-    <div>
-      <label for="walkthrough-consent" style="display:flex; align-items:flex-start; gap:10px;">
-        <input type="checkbox" name="dmform-4" id="walkthrough-consent" required>
-        <span>
-          By submitting this form, you consent to the collection, storage, and use of your personal information as described in our Privacy Policy.
-        </span>
-      </label>
-    </div>
-  </div>
+          <div class="dmform-success" style="display:none">
+            Thank you! We received your walkthrough request. We will confirm your preferred date and time shortly.
+          </div>
 
-  <div>
-    <input type="submit" name="submit" value="Schedule Now" style="padding:10px 20px; cursor:pointer; border-radius:4px; border:none; background-color:#000; color:#fff;">
-  </div>
-</form>
-
-<div class="dmform-success" style="display:none">
-  Thank you! We received your walkthrough request. We will confirm your preferred date and time shortly.
-</div>
-
-<div class="dmform-error" style="display:none">
-  Oops, there was an error sending your message. Please try again later.
-</div>
-
+          <div class="dmform-error" style="display:none">
+            Oops, there was an error sending your message. Please try again later.
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 
