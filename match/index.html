@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Find Your Match | Kyle Housing</title>
-
   <link rel="stylesheet" href="/subdivision.css">
 
   <style>
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       width: 100%;
@@ -18,58 +18,54 @@
 
     body {
       font-family: "Hedvig Letters Serif", serif;
-      background: #fff;
-      color: #111;
+      background: white;
+      color: black;
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
     a {
-      text-decoration: none;
       color: inherit;
+      text-decoration: none;
     }
 
-    /* =========================
-       HEADER (UNCHANGED)
-    ========================== */
     .site-header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
+      width: 100%;
       background: white;
       z-index: 9999;
+      border-bottom: 0;
+      transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
     }
 
     .topbar {
       position: relative;
       min-height: 90px;
+      padding: 0;
+      transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+    }
+
+    .top-link,
+    .top-id,
+    .logo-wrap,
+    .logo-mini {
+      transition: all 0.25s ease;
     }
 
     .logo-wrap {
       position: absolute;
       top: -14px;
       left: -8px;
-    }
-
-    .logo-mini {
-      width: 132px;
-      display: inline-flex;
-      flex-direction: column;
-    }
-
-    .logo-mini img {
-      width: 100%;
-      transform: translateX(-15px);
-    }
-
-    .logo-mini-label {
-      margin-top: -18px;
-      margin-left: 8px;
-      font-size: 10px;
-      font-weight: 700;
+      margin: 0;
+      text-align: left;
+      z-index: 2;
     }
 
     .top-link {
@@ -78,12 +74,19 @@
       left: 50%;
       transform: translateX(-50%);
       display: flex;
+      align-items: flex-end;
+      gap: 0;
     }
 
     .header-action {
       display: inline-flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+      text-decoration: none;
       margin-right: -22px;
     }
 
@@ -91,10 +94,33 @@
       margin-right: 0;
     }
 
+    .action-icon {
+      display: block;
+      height: auto;
+      margin: 0;
+      padding: 0;
+    }
+
     .action-label {
+      margin-top: -8px;
+      font-family: "Hedvig Letters Serif", serif;
       font-size: 12px;
       font-weight: 600;
-      margin-top: -8px;
+      line-height: 1;
+      color: #000;
+      text-align: center;
+    }
+
+    .connect-btn {
+      width: 90px;
+    }
+
+    .match-btn {
+      width: 80px;
+    }
+
+    .data-btn {
+      width: 82px;
     }
 
     .top-id {
@@ -102,249 +128,614 @@
       padding-top: 8px;
       text-align: right;
       font-size: 14px;
+      line-height: 1.4;
     }
 
-    /* =========================
-       PAGE CONTENT
-    ========================== */
+    .logo-mini {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 132px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-mini:hover {
+      opacity: 0.85;
+    }
+
+    .logo-mini img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform: translateX(-15px);
+    }
+
+    .logo-mini-label {
+      position: static;
+      transform: none;
+      margin-top: -18px;
+      margin-left: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #333;
+      white-space: nowrap;
+      text-align: left;
+      line-height: 1;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .site-header.shrink .logo-mini-label {
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+    }
+
+    .site-header.shrink .topbar {
+      min-height: 78px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .site-header.shrink .top-link,
+    .site-header.shrink .top-id {
+      opacity: 0;
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(-8px);
+    }
+
+    .site-header.shrink .logo-mini {
+      width: 132px;
+    }
+
     .page-wrap {
+      width: 100%;
+      max-width: none;
+      margin: 0;
       padding: 190px 20px 40px;
+      box-sizing: border-box;
     }
 
     .content-shell {
-      max-width: 700px;
+      max-width: 760px;
       margin: 0 auto;
     }
 
-    h2 {
+    .page-intro {
       text-align: center;
-      font-size: 24px;
-      margin-bottom: 10px;
+      margin-bottom: 22px;
     }
 
-    .intro {
-      text-align: center;
-      margin-bottom: 24px;
-      font-size: 15px;
-      color: #555;
+    .page-intro h1 {
+      margin: 0 0 10px;
+      font-family: "Hedvig Letters Serif", serif;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: #000;
     }
 
-    /* =========================
-       FORM STYLING
-    ========================== */
+    .page-intro p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #444;
+    }
+
     form {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 20px;
       background: #fff;
-      padding: 24px;
       border-radius: 10px;
       box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     }
 
     .question {
-      margin-bottom: 18px;
-      padding: 14px;
+      margin-bottom: 20px;
+      padding: 15px;
       border: 1px solid #ddd;
       border-radius: 6px;
-      background: #f9f9f9;
+      background-color: #f9f9f9;
     }
 
     .question-label {
-      font-weight: 600;
-      margin-bottom: 10px;
+      font-weight: bold;
       display: block;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      color: #111;
     }
 
-    .options input {
-      margin-right: 6px;
+    .options input[type="radio"] {
+      margin-right: 8px;
       margin-bottom: 6px;
     }
 
     input[type="email"] {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
+      padding: 8px;
+      font-size: 1rem;
       margin-top: 6px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-family: inherit;
     }
 
     button {
-      margin-top: 10px;
-      padding: 14px;
-      width: 100%;
-      background: #065f46;
+      padding: 12px 20px;
+      background-color: #065f46;
       color: white;
       border: none;
       border-radius: 6px;
-      font-size: 16px;
       cursor: pointer;
+      font-size: 1rem;
+      width: 100%;
+      font-family: inherit;
     }
 
     button:hover {
-      background: #054836;
+      background-color: #054836;
     }
 
-    /* =========================
-       FOOTER
-    ========================== */
     .site-footer {
-      border-top: 1px solid #eee;
-      margin-top: 40px;
+      margin-top: 60px;
+      padding: 44px 0 18px;
+      background: #fff;
+      border-top: 1px solid #e8e8e8;
     }
 
     .footer-shell {
-      max-width: 1200px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 30px 20px;
+      padding: 0 16px;
     }
 
     .footer-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .footer-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 10px;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 40px;
+      align-items: start;
     }
 
     .footer-col {
+      min-width: 0;
+    }
+
+    .footer-title {
+      margin-bottom: 10px;
+      font-family: "Hedvig Letters Serif", serif;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: #000;
+    }
+
+    .footer-col p {
+      margin: 0;
       font-size: 14px;
-      color: #555;
+      line-height: 1.75;
+      color: #333;
+    }
+
+    .footer-right-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 42px;
+    }
+
+    .footer-right-group .footer-col {
+      min-width: 110px;
     }
 
     .footer-col a {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .footer-col a:hover {
       text-decoration: underline;
     }
 
+    .footer-badge {
+      flex: 0 0 auto;
+    }
+
+    .footer-badge a {
+      display: block;
+    }
+
+    .footer-badge img {
+      display: block;
+      width: 108px;
+      height: auto;
+      border: 0;
+    }
+
     .footer-bottom {
-      margin-top: 20px;
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid #ececec;
       font-size: 12px;
-      color: #777;
+      line-height: 1.5;
+      color: #666;
     }
 
     @media (max-width: 768px) {
+      .topbar {
+        min-height: 140px;
+        padding: 0 10px;
+      }
+
+      .logo-wrap {
+        position: absolute;
+        top: -4px;
+        left: 0;
+        text-align: left;
+      }
+
+      .top-link {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: flex-end;
+        gap: 0;
+      }
+
+      .top-id {
+        position: absolute;
+        top: 8px;
+        right: 6px;
+        text-align: right;
+        font-size: 10px;
+        line-height: 1.2;
+        letter-spacing: 0;
+        max-width: 145px;
+      }
+
+      .logo-mini-label {
+        white-space: nowrap;
+        width: auto;
+        text-align: left;
+        left: auto;
+      }
+
+      .page-wrap {
+        padding: 190px 14px 24px;
+      }
+
+      .site-header.shrink .topbar {
+        min-height: 86px;
+      }
+
+      .site-header.shrink .logo-mini {
+        width: 110px;
+      }
+
+      .page-intro h1 {
+        font-size: 24px;
+      }
+
+      .question {
+        padding: 12px;
+      }
+
+      .question-label {
+        font-size: 0.95rem;
+      }
+
+      input[type="email"],
+      button {
+        font-size: 0.95rem;
+      }
+
       .footer-grid {
         grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .footer-right-group {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .footer-badge img {
+        width: 92px;
       }
     }
   </style>
 </head>
-
 <body>
 
-<header class="site-header">
-  <div class="topbar">
-    <div class="logo-wrap">
-      <a href="/" class="logo-mini">
-        <img src="/images/logo.png" alt="Your Missing Peace" />
-        <span class="logo-mini-label">Your Missing Peace</span>
-      </a>
+  <header class="site-header" id="siteHeader">
+    <div class="topbar">
+      <div class="logo-wrap">
+        <a href="/" class="logo-mini">
+          <img src="/images/logo.png" alt="Your Missing Peace" />
+          <span class="logo-mini-label">Your Missing Peace</span>
+        </a>
+      </div>
+
+      <div class="top-link">
+        <a href="/match" class="header-action match-action">
+          <img src="/images/match2.png" alt="Match" class="action-icon match-btn">
+          <span class="action-label">Match</span>
+        </a>
+
+        <a href="/contact.html" class="header-action connect-action">
+          <img src="/images/connect2.png" alt="Connect" class="action-icon connect-btn">
+          <span class="action-label">Connect</span>
+        </a>
+
+        <a href="/data" class="header-action data-action">
+          <img src="/images/graph.png" alt="Data" class="action-icon data-btn">
+          <span class="action-label">Data</span>
+        </a>
+      </div>
+
+      <div class="top-id">
+        <div>Realtor® in Kyle, TX</div>
+        <div>Emmanuel "Manny" Camacho</div>
+        <div>Dalton Wade Real Estate Group</div>
+      </div>
     </div>
+  </header>
 
-    <div class="top-link">
-      <a href="/match" class="header-action">
-        <img src="/images/match2.png" class="match-btn">
-        <span class="action-label">Match</span>
-      </a>
+  <main class="page-wrap">
+    <div class="content-shell">
+      <div class="page-intro">
+        <h1>Find Your Match</h1>
+        <p>
+          Answer a few questions and I’ll help point you toward neighborhoods
+          that fit your lifestyle.
+        </p>
+      </div>
 
-      <a href="/contact.html" class="header-action">
-        <img src="/images/connect2.png" class="connect-btn">
-        <span class="action-label">Connect</span>
-      </a>
+      <form method="POST" action="https://script.google.com/macros/s/AKfycbxWWn3A0BrX2mT4l0yf_jNyGYFfXqDiRcJKh6yCpV07XxgncM1OcNd0JZDZEXkVDX6z/exec" target="_blank">
+        <div class="question">
+          <label class="question-label">
+            What kind of neighborhood feels right to you?
+          </label>
+          <div class="options">
+            <input type="radio" name="neighborhood" value="Quiet and Peaceful" required>
+            Quiet and Peaceful
+            <br>
+            <input type="radio" name="neighborhood" value="Active and Social">
+            Active and Social
+            <br>
+            <input type="radio" name="neighborhood" value="Balanced: a little of both">
+            Balanced: a little of both
+            <br>
+            <input type="radio" name="neighborhood" value="Not sure yet">
+            Not sure yet
+          </div>
+        </div>
 
-      <a href="/data" class="header-action">
-        <img src="/images/graph.png" class="data-btn">
-        <span class="action-label">Data</span>
-      </a>
+        <div class="question">
+          <label class="question-label">
+            Describe your household:
+          </label>
+          <div class="options">
+            <input type="radio" name="household" value="Single/couple" required>
+            Single/couple
+            <br>
+            <input type="radio" name="household" value="Young family">
+            Young family
+            <br>
+            <input type="radio" name="household" value="Growing family">
+            Growing family
+            <br>
+            <input type="radio" name="household" value="Empty nest/downsizing">
+            Empty nest/downsizing
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="question-label">
+            What matters more to you right now?
+          </label>
+          <div class="options">
+            <input type="radio" name="matterMost" value="Space and calm" required>
+            Space and calm
+            <br>
+            <input type="radio" name="matterMost" value="Convenience and access">
+            Convenience and access
+            <br>
+            <input type="radio" name="matterMost" value="A sense of community">
+            A sense of community
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="question-label">
+            How do you feel about HOAs?
+          </label>
+          <div class="options">
+            <input type="radio" name="hoa" value="I prefer no HOA" required>
+            I prefer no HOA
+            <br>
+            <input type="radio" name="hoa" value="HOA is fine with me">
+            HOA is fine with me
+            <br>
+            <input type="radio" name="hoa" value="I don’t have a preference">
+            I don’t have a preference
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="question-label">
+            What age home do you prefer?
+          </label>
+          <div class="options">
+            <input type="radio" name="homeAge" value="Built 2020-present" required>
+            Built 2020-present
+            <br>
+            <input type="radio" name="homeAge" value="Built 2011-2019">
+            Built 2011-2019
+            <br>
+            <input type="radio" name="homeAge" value="Built 2000-2010">
+            Built 2000-2010
+            <br>
+            <input type="radio" name="homeAge" value="Built before 2000">
+            Built before 2000
+            <br>
+            <input type="radio" name="homeAge" value="No Preference">
+            No Preference
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="question-label">
+            What price range feels comfortable for you?
+          </label>
+          <div class="options">
+            <input type="radio" name="priceRange" value="under $250k" required>
+            under $250k
+            <br>
+            <input type="radio" name="priceRange" value="$250k-$350k">
+            $250k-$350k
+            <br>
+            <input type="radio" name="priceRange" value="$350k-$450k">
+            $350k-$450k
+            <br>
+            <input type="radio" name="priceRange" value="$450k+">
+            $450k+
+            <br>
+            <input type="radio" name="priceRange" value="Not sure yet">
+            Not sure yet
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="question-label">
+            How important are shared amenities?
+          </label>
+          <div class="options">
+            <input type="radio" name="amenities" value="Very important — I prefer subdivisions with amenities" required>
+            Very important — I prefer subdivisions with amenities
+            <br>
+            <input type="radio" name="amenities" value="Somewhat important — amenities are a nice bonus but not essential">
+            Somewhat important — amenities are a nice bonus but not essential
+            <br>
+            <input type="radio" name="amenities" value="Not important — I don’t consider amenities in my decision">
+            Not important — I don’t consider amenities in my decision
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="question-label">
+            How close do you want to be to everyday conveniences?
+          </label>
+          <div class="options">
+            <input type="radio" name="proximity" value="Very close, I value quick access" required>
+            Very close, I value quick access
+            <br>
+            <input type="radio" name="proximity" value="Somewhat close, balance is fine">
+            Somewhat close, balance is fine
+            <br>
+            <input type="radio" name="proximity" value="Not important, I prefer quiet even if it's farther">
+            Not important, I prefer quiet even if it's farther
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="question-label">
+            Do you enjoy going for walks around your neighborhood?
+          </label>
+          <div class="options">
+            <input type="radio" name="walks" value="Very important — I want walkable streets or trails nearby" required>
+            Very important — I want walkable streets or trails nearby
+            <br>
+            <input type="radio" name="walks" value="Somewhat important — it’s nice to have but not required">
+            Somewhat important — it’s nice to have but not required
+            <br>
+            <input type="radio" name="walks" value="Not important — I don’t really care about walkability">
+            Not important — I don’t really care about walkability
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="question-label">
+            Want me to email you the results? (leave blank if no)
+          </label>
+          <input type="email" name="email">
+        </div>
+
+        <button type="submit">
+          Submit
+        </button>
+      </form>
     </div>
+  </main>
 
-    <div class="top-id">
-      Realtor® in Kyle, TX<br>
-      Emmanuel "Manny" Camacho<br>
-      Dalton Wade Real Estate Group
-    </div>
-  </div>
-</header>
+  <footer class="site-footer">
+    <div class="footer-shell">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-title">Kyle Housing</div>
+          <p>
+            Local housing insight designed to bring clarity to pricing,
+            neighborhoods, and decision-making in Kyle, Texas.
+          </p>
+        </div>
 
-<main class="page-wrap">
-  <div class="content-shell">
+        <div class="footer-right-group">
+          <div class="footer-col">
+            <div class="footer-title">Explore</div>
+            <a href="/">Home</a>
+            <a href="/data">Data Page</a>
+            <a href="/contact.html">Connect</a>
+          </div>
 
-    <h2>Find Your Match</h2>
-    <div class="intro">
-      Answer a few questions and I’ll point you toward neighborhoods that fit your lifestyle.
-    </div>
+          <div class="footer-badge">
+            <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
+              <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
+            </a>
+          </div>
 
-    <form method="POST" action="https://script.google.com/macros/s/AKfycbxWWn3A0BrX2mT4l0yf_jNyGYFfXqDiRcJKh6yCpV07XxgncM1OcNd0JZDZEXkVDX6z/exec" target="_blank">
-
-      <div class="question">
-        <label class="question-label">What kind of neighborhood feels right?</label>
-        <div class="options">
-          <input type="radio" name="neighborhood" value="Quiet and Peaceful" required> Quiet and Peaceful<br>
-          <input type="radio" name="neighborhood" value="Active and Social"> Active and Social<br>
-          <input type="radio" name="neighborhood" value="Balanced"> Balanced<br>
+          <div class="footer-col">
+            <div class="footer-title">About</div>
+            <p>
+              Emmanuel "Manny" Camacho<br />
+              Realtor® in Kyle, TX<br />
+              Dalton Wade Real Estate Group
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="question">
-        <label class="question-label">What matters most?</label>
-        <div class="options">
-          <input type="radio" name="matterMost" value="Space" required> Space<br>
-          <input type="radio" name="matterMost" value="Convenience"> Convenience<br>
-          <input type="radio" name="matterMost" value="Community"> Community<br>
-        </div>
-      </div>
-
-      <div class="question">
-        <label class="question-label">Price range?</label>
-        <div class="options">
-          <input type="radio" name="priceRange" value="250k" required> under $250k<br>
-          <input type="radio" name="priceRange" value="350k"> $250k-$350k<br>
-          <input type="radio" name="priceRange" value="450k"> $350k-$450k<br>
-          <input type="radio" name="priceRange" value="450k+"> $450k+<br>
-        </div>
-      </div>
-
-      <div class="question">
-        <label class="question-label">Email (optional)</label>
-        <input type="email" name="email">
-      </div>
-
-      <button type="submit">Get My Match</button>
-
-    </form>
-
-  </div>
-</main>
-
-<footer class="site-footer">
-  <div class="footer-shell">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-title">Kyle Housing</div>
-        Local insight for better decisions.
-      </div>
-
-      <div class="footer-col">
-        <div class="footer-title">Explore</div>
-        <a href="/">Home</a>
-        <a href="/data">Data</a>
-        <a href="/contact.html">Connect</a>
-      </div>
-
-      <div class="footer-col">
-        <div class="footer-title">About</div>
-        Emmanuel "Manny" Camacho<br>
-        Realtor® in Kyle, TX
+      <div class="footer-bottom">
+        <span>© 2026 Emmanuel "Manny" Camacho · Kyle Housing</span>
       </div>
     </div>
+  </footer>
 
-    <div class="footer-bottom">
-      © 2026 Kyle Housing
-    </div>
-  </div>
-</footer>
+  <script>
+    (function () {
+      const siteHeader = document.getElementById("siteHeader");
+      if (!siteHeader) return;
+
+      function handleHeaderShrink() {
+        if (window.scrollY > 80) {
+          siteHeader.classList.add("shrink");
+        } else {
+          siteHeader.classList.remove("shrink");
+        }
+      }
+
+      window.addEventListener("scroll", handleHeaderShrink, { passive: true });
+      window.addEventListener("load", handleHeaderShrink);
+      handleHeaderShrink();
+    })();
+  </script>
 
 </body>
 </html>
