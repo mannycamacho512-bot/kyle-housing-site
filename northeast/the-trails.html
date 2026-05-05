@@ -397,21 +397,23 @@
           };
           priceRangeEl.textContent = `${money(data.minPrice)} – ${money(data.maxPrice)}`;
         }
-      } catch (err) {
+            } catch (err) {
         console.error(err);
         const homesEl = document.getElementById("homes-available-text");
         const priceRangeEl = document.getElementById("price-range-text");
         if (homesEl) homesEl.textContent = "Data unavailable";
         if (priceRangeEl) priceRangeEl.textContent = "Data unavailable";
       }
-  const equityForm = document.getElementById("equity-form");
+    })();
+
+const equityForm = document.getElementById("equity-form");
 const equityResult = document.getElementById("equity-result");
 
 function formatNegativeMoney(text) {
   if (!text) return "";
 
   return text.replace(/-\$[\d,]+/g, function(match) {
-    return `<span class="negative-money">(${match})</span>`;
+    return `(<span class="negative-money">${match}</span>)`;
   });
 }
 
