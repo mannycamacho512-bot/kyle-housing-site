@@ -403,74 +403,75 @@
         })();
 
     const equityForm = document.getElementById("equity-form");
-    const equityResult = document.getElementById("equity-result");
+const equityResult = document.getElementById("equity-result");
 
-    if (equityForm && equityResult) {
-      equityForm.addEventListener("submit", async function (event) {
-        event.preventDefault();
-
-        equityResult.innerHTML = "Calculating...";
-
-        try {
-          const response = await fetch("https://mannyc512.pythonanywhere.com/estimate", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              subdivision: "CROSSWINDS",
-              beds: document.getElementById("beds").value,
-              baths: document.getElementById("baths").value,
-              sqft: document.getElementById("sqft").value,
-              yearBuilt: document.getElementById("yearBuilt").value,
-              purchasePrice: document.getElementById("purchasePrice").value
-            })
-          });
-
-          const data = await response.json();
-
-          if (!data.success) {
-            equityResult.innerHTML = `
-              <strong>This one needs a closer look.</strong><br>
-              ${data.message || "The calculator could not complete the estimate."}
-            `;
-            return;
-          }
-
-          const result = data.result;
 function formatNegativeMoney(text) {
   if (!text) return "";
 
   return text.replace(/-\$[\d,]+/g, function(match) {
-    return `<span class="negative-money">(${match})</span>`;
+    return `(<span class="negative-money">${match}</span>)`;
   });
 }
-         equityResult.innerHTML = `
-  <strong>Estimated Current Value:</strong> ${result.estimated_value}<br>
-  <strong>Likely Current Range:</strong> ${formatNegativeMoney(result.likely_range)}<br>
-  <strong>Estimated Equity Built:</strong> ${formatNegativeMoney(result.estimated_equity_range)}<br>
-  <br>
-  <small>Based on local Crosswinds sales activity.</small>
 
-  <div class="equity-next-step">
-    <strong>Your number is only useful if it helps you make a decision.</strong><br>
-    My role is to help you slow the decision down and see the full picture — your likely walkaway, selling costs, timing, and next-home options — so you’re not trying to figure out the next step alone.
+if (equityForm && equityResult) {
+  equityForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-    <div style="margin-top: 12px;">
-      <a href="/contact.html" class="equity-result-cta">Help Me See My Next Move</a>
-    </div>
-  </div>
-`;
+    equityResult.innerHTML = "Reviewing local sales activity...";
 
-        } catch (error) {
-          console.error(error);
-          equityResult.innerHTML = `
-            <strong>This one needs a closer look.</strong><br>
-            The calculator could not connect right now.
-          `;
-        }
+    try {
+      const response = await fetch("https://mannyc512.pythonanywhere.com/estimate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          subdivision: "CROSSWINDS",
+          beds: Number(document.getElementById("beds").value),
+          baths: Number(document.getElementById("baths").value),
+          sqft: Number(document.getElementById("sqft").value),
+          yearBuilt: Number(document.getElementById("yearBuilt").value),
+          purchasePrice: Number(document.getElementById("purchasePrice").value)
+        })
       });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        equityResult.innerHTML = `
+          <strong>This one needs a closer look.</strong><br>
+          ${data.message || "The calculator could not complete the estimate."}
+        `;
+        return;
+      }
+
+      const result = data.result;
+
+      equityResult.innerHTML = `
+        <strong>Estimated Current Value:</strong> ${result.estimated_value}<br>
+        <strong>Likely Current Range:</strong> ${formatNegativeMoney(result.likely_range)}<br>
+        <strong>Estimated Equity Built:</strong> ${formatNegativeMoney(result.estimated_equity_range)}<br>
+        <br>
+        <small>Based on local ${result.subdivision} sales activity.</small>
+
+        <div class="equity-next-step">
+          <strong>Your number is only useful if it helps you make a decision.</strong><br>
+          My role is to help you slow the decision down and see the full picture — your likely walkaway, selling costs, timing, and next-home options — so you’re not trying to figure out the next step alone.
+
+          <div style="margin-top: 12px;">
+            <a href="/contact.html" class="equity-result-cta">Help Me See My Next Move</a>
+          </div>
+        </div>
+      `;
+    } catch (error) {
+      console.error(error);
+      equityResult.innerHTML = `
+        <strong>This one needs a closer look.</strong><br>
+        The calculator could not connect right now.
+      `;
     }
+  });
+}
   </script>
   <script src="/js/date.js"></script>
 </body>
