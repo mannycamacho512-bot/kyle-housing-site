@@ -439,39 +439,13 @@
 
           const result = data.result;
 
-          let compsHtml = "";
-
-          if (result.comps_used && result.comps_used.length > 0) {
-            compsHtml = `
-              <details style="margin-top: 14px;">
-                <summary><strong>View comps used</strong></summary>
-                <div style="margin-top: 10px;">
-                  ${result.comps_used.map(comp => `
-                    <div style="padding: 10px 0; border-bottom: 1px solid #ddd;">
-                      <strong>${comp.subdivision}</strong><br>
-                      Sold: ${comp.sold_price}<br>
-                      Close Date: ${comp.close_date}<br>
-                      Beds/Baths: ${comp.beds}/${comp.baths}<br>
-                      SqFt: ${comp.sqft}<br>
-                      Year Built: ${comp.year_built}<br>
-                      PPSF: $${comp.ppsf}<br>
-                      Adjusted Price: ${comp.adjusted_price}<br>
-                      Comp Score: ${comp.comp_score}
-                    </div>
-                  `).join("")}
-                </div>
-              </details>
-            `;
-          }
-
           equityResult.innerHTML = `
-            <strong>Estimated Current Value:</strong> ${result.estimated_value}<br>
-            <strong>Likely Current Range:</strong> ${result.likely_range}<br>
-            <strong>Estimated Equity Built:</strong> ${result.estimated_equity_range}<br>
-            <br>
-            <small>Based on: ${result.current_level_name}</small>
-            ${compsHtml}
-          `;
+  <strong>Estimated Current Value:</strong> ${result.estimated_value}<br>
+  <strong>Likely Current Range:</strong> ${result.likely_range}<br>
+  <strong>Estimated Equity Built:</strong> ${result.estimated_equity_range}<br>
+  <br>
+  <small>Based on local Crosswinds sales activity.</small>
+`;
 
         } catch (error) {
           console.error(error);
