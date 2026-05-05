@@ -709,8 +709,124 @@
     width: 92px;
   }
 
-  .footer-bottom {
+    .footer-bottom {
     margin-top: 22px;
     padding-top: 14px;
+  }
+}
+
+/* Crosswinds Equity Calculator Only */
+
+.equity-tool-card {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 44px 36px;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.equity-tool-card .equity-tool-kicker {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2f5f50;
+  margin-bottom: 14px;
+}
+
+.equity-tool-card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.12;
+}
+
+.equity-tool-card .equity-tool-intro {
+  max-width: 690px;
+  margin: 0 auto 36px auto;
+  font-size: 1.2rem;
+  line-height: 1.75;
+}
+
+.equity-tool-card form {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.equity-tool-card .form-row {
+  margin-bottom: 22px;
+  text-align: left;
+}
+
+.equity-tool-card .form-row label {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+
+.equity-tool-card .form-row input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 17px 16px;
+  border: 1px solid #d7ded9;
+  border-radius: 14px;
+  font-size: 1.14rem;
+  min-height: 56px;
+}
+
+.equity-tool-card button[type="submit"] {
+  margin-top: 10px;
+  width: 100%;
+  padding: 20px 24px;
+  border: none;
+  border-radius: 16px;
+  font-weight: 900;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background: #2f5f50;
+  color: white;
+}
+
+.equity-tool-card button[type="submit"]:hover {
+  background: #274f43;
+}
+
+.equity-tool-card #equity-result {
+  margin-top: 28px;
+  font-size: 1.12rem;
+  line-height: 1.7;
+  text-align: left;
+  background: #f5f8f6;
+  border: 1px solid #dce7e1;
+  border-radius: 16px;
+  padding: 22px;
+}
+
+.equity-tool-card .fine-note {
+  max-width: 680px;
+  margin: 22px auto 0 auto;
+  font-size: 1rem;
+  line-height: 1.65;
+  opacity: 0.85;
+}
+
+@media (max-width: 650px) {
+  .equity-tool-card {
+    padding: 34px 22px;
+  }
+
+  .equity-tool-card h2 {
+    font-size: 2rem;
+  }
+
+  .equity-tool-card .equity-tool-intro {
+    font-size: 1.08rem;
+  }
+
+  .equity-tool-card .form-row {
+    margin-bottom: 18px;
   }
 }
