@@ -438,11 +438,17 @@
           }
 
           const result = data.result;
+function formatNegativeMoney(text) {
+  if (!text) return "";
 
-          equityResult.innerHTML = `
+  return text.replace(/-\$[\d,]+/g, function(match) {
+    return `<span class="negative-money">(${match})</span>`;
+  });
+}
+         equityResult.innerHTML = `
   <strong>Estimated Current Value:</strong> ${result.estimated_value}<br>
-  <strong>Likely Current Range:</strong> ${result.likely_range}<br>
-  <strong>Estimated Equity Built:</strong> ${result.estimated_equity_range}<br>
+  <strong>Likely Current Range:</strong> ${formatNegativeMoney(result.likely_range)}<br>
+  <strong>Estimated Equity Built:</strong> ${formatNegativeMoney(result.estimated_equity_range)}<br>
   <br>
   <small>Based on local Crosswinds sales activity.</small>
 `;
