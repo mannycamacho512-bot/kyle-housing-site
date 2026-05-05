@@ -130,7 +130,57 @@
       <section class="dashboard-wrap section-block">
         <iframe src="https://mannycamacho512-bot.github.io/subdivision-dashboard/?sub=CROSSWINDS" loading="lazy"></iframe>
       </section>
+<section class="section-block">
+  <div class="info-card">
+    <h2>Kyle Home Equity Calculator</h2>
 
+    <p>
+      Thinking of upgrading or downsizing your Kyle home?
+      See the equity you may have built based on local sales activity,
+      not a broad online estimate.
+    </p>
+
+    <p>
+      This tool reviews your home’s equity performance so far by comparing
+      your purchase price against current local market activity.
+    </p>
+
+    <form id="equity-form">
+      <div class="form-row">
+        <label for="beds">Beds</label>
+        <input id="beds" type="number" value="4" required>
+      </div>
+
+      <div class="form-row">
+        <label for="baths">Baths</label>
+        <input id="baths" type="number" step="0.5" value="3" required>
+      </div>
+
+      <div class="form-row">
+        <label for="sqft">SqFt</label>
+        <input id="sqft" type="number" value="2400" required>
+      </div>
+
+      <div class="form-row">
+        <label for="yearBuilt">Year Built</label>
+        <input id="yearBuilt" type="number" value="2021" required>
+      </div>
+
+      <div class="form-row">
+        <label for="purchasePrice">Purchase Price</label>
+        <input id="purchasePrice" type="number" value="390000" required>
+      </div>
+
+      <button type="submit">Review My Equity Range</button>
+    </form>
+
+    <div id="equity-result" style="margin-top: 16px;"></div>
+
+    <div class="fine-note" style="margin-top: 12px;">
+      This is a working estimate based on local sales activity. A full review may adjust for condition, upgrades, lot, location, and current competition.
+    </div>
+  </div>
+</section>
       <section class="info-grid section-block">
         <div class="info-card">
           <h2>Information to Consider</h2>
@@ -350,7 +400,88 @@
         const homesEl = document.getElementById("homes-available-text");
         if (homesEl) homesEl.textContent = "Data unavailable";
       }
-    })();
+        })();
+
+    const equityForm = document.getElementById("equity-form");
+    const equityResult = document.getElementById("equity-result");
+
+    if (equityForm && equityResult) {
+      equityForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        equityResult.innerHTML = "Calculating...";
+
+        try {
+          const response = await fetch("http://127.0.0.1:5000/estimate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              subdivision: "CROSSWINDS",
+              beds: document.getElementById("beds").value,
+              baths: document.getElementById("baths").value,
+              sqft: document.getElementById("sqft").value,
+              yearBuilt: document.getElementById("yearBuilt").value,
+              purchasePrice: document.getElementById("purchasePrice").value
+            })
+          });
+
+          const data = await response.json();
+
+          if (!data.success) {
+            equityResult.innerHTML = `
+              <strong>This one needs a closer look.</strong><br>
+              ${data.message || "The calculator could not complete the estimate."}
+            `;
+            return;
+          }
+
+          const result = data.result;
+
+          let compsHtml = "";
+
+          if (result.comps_used && result.comps_used.length > 0) {
+            compsHtml = `
+              <details style="margin-top: 14px;">
+                <summary><strong>View comps used</strong></summary>
+                <div style="margin-top: 10px;">
+                  ${result.comps_used.map(comp => `
+                    <div style="padding: 10px 0; border-bottom: 1px solid #ddd;">
+                      <strong>${comp.subdivision}</strong><br>
+                      Sold: ${comp.sold_price}<br>
+                      Close Date: ${comp.close_date}<br>
+                      Beds/Baths: ${comp.beds}/${comp.baths}<br>
+                      SqFt: ${comp.sqft}<br>
+                      Year Built: ${comp.year_built}<br>
+                      PPSF: $${comp.ppsf}<br>
+                      Adjusted Price: ${comp.adjusted_price}<br>
+                      Comp Score: ${comp.comp_score}
+                    </div>
+                  `).join("")}
+                </div>
+              </details>
+            `;
+          }
+
+          equityResult.innerHTML = `
+            <strong>Estimated Current Value:</strong> ${result.estimated_value}<br>
+            <strong>Likely Current Range:</strong> ${result.likely_range}<br>
+            <strong>Estimated Equity Built:</strong> ${result.estimated_equity_range}<br>
+            <br>
+            <small>Based on: ${result.current_level_name}</small>
+            ${compsHtml}
+          `;
+
+        } catch (error) {
+          console.error(error);
+          equityResult.innerHTML = `
+            <strong>This one needs a closer look.</strong><br>
+            The calculator could not connect right now.
+          `;
+        }
+      });
+    }
   </script>
   <script src="/js/date.js"></script>
 </body>
