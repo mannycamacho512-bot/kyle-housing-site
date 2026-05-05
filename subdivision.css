@@ -847,3 +847,7 @@
     gap: 18px;
   }
 }
+.negative-money {
+  color: #b42318;
+  font-weight: 800;
+}
