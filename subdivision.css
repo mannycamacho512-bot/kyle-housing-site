@@ -718,12 +718,13 @@
 /* Crosswinds Equity Calculator Only */
 
 .equity-tool-card {
-  max-width: 850px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 44px 36px;
+  padding: 34px 30px;
   border-radius: 22px;
   background: #ffffff;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e3e8e5;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.10);
   text-align: center;
 }
 
@@ -738,16 +739,16 @@
 
 .equity-tool-card h2 {
   margin-top: 0;
-  margin-bottom: 20px;
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.12;
+  margin-bottom: 16px;
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  line-height: 1.15;
 }
 
 .equity-tool-card .equity-tool-intro {
-  max-width: 690px;
-  margin: 0 auto 36px auto;
-  font-size: 1.2rem;
-  line-height: 1.75;
+  max-width: 620px;
+  margin: 0 auto 26px auto;
+  font-size: 1.05rem;
+  line-height: 1.65;
 }
 
 .equity-tool-card form {
