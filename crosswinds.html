@@ -419,20 +419,28 @@ if (equityForm && equityResult) {
 
     equityResult.innerHTML = "Reviewing local sales activity...";
 
-    try {
-      const response = await fetch("https://mannyc512.pythonanywhere.com/estimate", {
+    let equityUserId = localStorage.getItem("equityUserId");
+
+if (!equityUserId) {
+  equityUserId = "user_" + crypto.randomUUID().slice(0, 6);
+  localStorage.setItem("equityUserId", equityUserId);
+}
+
+try {
+  const response = await fetch("https://mannyc512.pythonanywhere.com/estimate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          subdivision: "CROSSWINDS",
-          beds: Number(document.getElementById("beds").value),
-          baths: Number(document.getElementById("baths").value),
-          sqft: Number(document.getElementById("sqft").value),
-          yearBuilt: Number(document.getElementById("yearBuilt").value),
-          purchasePrice: Number(document.getElementById("purchasePrice").value)
-        })
+  userId: equityUserId,
+  subdivision: "CROSSWINDS",
+  beds: Number(document.getElementById("beds").value),
+  baths: Number(document.getElementById("baths").value),
+  sqft: Number(document.getElementById("sqft").value),
+  yearBuilt: Number(document.getElementById("yearBuilt").value),
+  purchasePrice: Number(document.getElementById("purchasePrice").value)
+})
       });
 
       const data = await response.json();
