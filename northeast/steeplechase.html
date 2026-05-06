@@ -71,24 +71,27 @@
       </div>
 
       <section class="hero-section section-block">
-        <h1>Steeplechase</h1>
-        <div class="hero-subtitle">A graceful stride into calm</div>
+  <h1>Steeplechase Homes for Sale in Kyle, TX</h1>
+  <div class="hero-subtitle">An established Kyle neighborhood built around everyday convenience</div>
 
-        <div class="hero-copy">
-          <p>
-            Steeplechase is literally a horse race over a course with obstacles like hedges and jumps. Around here, the race ends where the calm begins.
-          </p>
-          <p>
-            After you’ve hurdled through another workday and weaved through the obstacles of life, you get to come home to calm — a place where peace and movement coexist. Neighbors stroll by getting their daily steps in, and an active lifestyle feels effortless here.
-          </p>
-          <p>
-            Within the neighborhood park, you’ll find baseball and soccer fields, a frisbee golf course, playgrounds for the littles, a splash area, walking trails, and basketball courts. Just beyond, three gyms offer even more ways to stay moving. With five different entrances, getting in and out is simple — perfect for avoiding school traffic when needed. It’s a peaceful sanctuary, infused with convenience.
-          </p>
-          <p>
-            Steeplechase — Calm and Active Neighborhood in Kyle, TX
-          </p>
-        </div>
-      </section>
+  <div class="hero-copy">
+    <p>
+      Steeplechase in Kyle, TX is an established neighborhood that may not feel like a brand-new master-planned community, but it offers something many newer neighborhoods are still trying to build: everyday usefulness.
+    </p>
+
+    <p>
+      With Steeplechase Park, Gregg-Clarke Park, nearby gyms, restaurants, schools, grocery options, and major retail within a short drive, this part of Northeast Kyle can make daily life feel more convenient for buyers who care less about flashy entrances and more about function.
+    </p>
+
+    <p>
+      The tradeoff is that many Steeplechase homes are older compared to Kyle’s newer subdivisions, so condition can vary from one property to the next. One home may need updates, while another may already be move-in ready. That makes pricing, inspection, repair history, and negotiation especially important when comparing homes for sale in Steeplechase.
+    </p>
+
+    <p>
+      For the right buyer, Steeplechase can make a lot of sense — but the details matter.
+    </p>
+  </div>
+</section>
 
       <section class="section-block">
         <div class="gallery-2">
@@ -130,6 +133,58 @@
           </div>
         </div>
       </section>
+        <section class="section-block">
+  <div class="equity-tool-card">
+    <div class="equity-tool-kicker">Kyle Home Equity Calculator</div>
+
+    <h2>See the equity you may have built in your Steeplechase home</h2>
+
+    <p class="equity-tool-intro">
+      Own a home in Steeplechase or thinking about selling in Northeast Kyle?
+      Review your home’s equity performance based on local sales activity,
+      not a broad online estimate.
+    </p>
+
+    <form id="equity-form">
+      <div class="equity-row-3">
+        <div class="form-row">
+          <label for="beds">Beds</label>
+          <input id="beds" type="number" value="3" required>
+        </div>
+
+        <div class="form-row">
+          <label for="baths">Baths</label>
+          <input id="baths" type="number" step="0.5" value="2" required>
+        </div>
+
+        <div class="form-row">
+          <label for="sqft">SqFt</label>
+          <input id="sqft" type="number" value="1800" required>
+        </div>
+      </div>
+
+      <div class="equity-row-2">
+        <div class="form-row">
+          <label for="yearBuilt">Year Built</label>
+          <input id="yearBuilt" type="number" value="2002" required>
+        </div>
+
+        <div class="form-row">
+          <label for="purchasePrice">Purchase Price</label>
+          <input id="purchasePrice" type="number" value="250000" required>
+        </div>
+      </div>
+
+      <button type="submit">Review My Equity Range</button>
+    </form>
+
+    <div id="equity-result" style="margin-top: 16px;"></div>
+
+    <div class="fine-note" style="margin-top: 12px;">
+      This is a working estimate based on local Steeplechase sales activity. A full review may adjust for condition, upgrades, lot, location, repairs, and current competition.
+    </div>
+  </div>
+</section>
 
       <section class="dashboard-wrap section-block">
         <iframe src="https://mannycamacho512-bot.github.io/subdivision-dashboard/?sub=STEEPLECHASE" loading="lazy"></iframe>
@@ -303,58 +358,145 @@
   </main>
 
   <script>
-    const siteHeader = document.querySelector('.site-header');
+  const siteHeader = document.querySelector('.site-header');
 
-    function handleHeaderShrink() {
-      if (window.scrollY > 80) {
-        siteHeader.classList.add('shrink');
-      } else {
-        siteHeader.classList.remove('shrink');
-      }
+  function handleHeaderShrink() {
+    if (window.scrollY > 80) {
+      siteHeader.classList.add('shrink');
+    } else {
+      siteHeader.classList.remove('shrink');
     }
+  }
 
-    window.addEventListener('scroll', handleHeaderShrink, { passive: true });
-    window.addEventListener('load', handleHeaderShrink);
+  window.addEventListener('scroll', handleHeaderShrink, { passive: true });
+  window.addEventListener('load', handleHeaderShrink);
 
-    (async function () {
-      const subdivisionName = "STEEPLECHASE";
-      try {
-        const res = await fetch(
-          "https://mannycamacho512-bot.github.io/subdivision-dashboard/data/subdivision_page_data.json",
-          { cache: "no-store" }
-        );
-        const allData = await res.json();
-        const data = allData[subdivisionName];
-        if (!data) throw new Error("Subdivision not found");
+  (async function () {
+    const subdivisionName = "STEEPLECHASE";
 
-        const homesEl = document.getElementById("homes-available-text");
-        if (homesEl) {
-          const count = Number(data.homesAvailable || 0);
-          homesEl.textContent = `${count} ${count === 1 ? "home" : "homes"} available`;
-        }
+    try {
+      const res = await fetch(
+        "https://mannycamacho512-bot.github.io/subdivision-dashboard/data/subdivision_page_data.json",
+        { cache: "no-store" }
+      );
 
-        const priceRangeEl = document.getElementById("price-range-text");
-        if (priceRangeEl) {
-          const money = (n) => {
-            if (!n) return "n/a";
-            return Number(n).toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-              maximumFractionDigits: 0
-            });
-          };
-          priceRangeEl.textContent = `${money(data.minPrice)} – ${money(data.maxPrice)}`;
-        }
-      } catch (err) {
-        console.error(err);
-        const homesEl = document.getElementById("homes-available-text");
-        const priceRangeEl = document.getElementById("price-range-text");
-        if (homesEl) homesEl.textContent = "Data unavailable";
-        if (priceRangeEl) priceRangeEl.textContent = "Data unavailable";
+      const allData = await res.json();
+      const data = allData[subdivisionName];
+
+      if (!data) throw new Error("Subdivision not found");
+
+      const homesEl = document.getElementById("homes-available-text");
+      if (homesEl) {
+        const count = Number(data.homesAvailable || 0);
+        homesEl.textContent = `${count} ${count === 1 ? "home" : "homes"} available`;
       }
-    })();
-  </script>
-  <script src="/js/date.js"></script>
+
+      const priceRangeEl = document.getElementById("price-range-text");
+      if (priceRangeEl) {
+        const money = (n) => {
+          if (!n) return "n/a";
+          return Number(n).toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits: 0
+          });
+        };
+
+        priceRangeEl.textContent = `${money(data.minPrice)} – ${money(data.maxPrice)}`;
+      }
+    } catch (err) {
+      console.error(err);
+
+      const homesEl = document.getElementById("homes-available-text");
+      const priceRangeEl = document.getElementById("price-range-text");
+
+      if (homesEl) homesEl.textContent = "Data unavailable";
+      if (priceRangeEl) priceRangeEl.textContent = "Data unavailable";
+    }
+  })();
+
+  const equityForm = document.getElementById("equity-form");
+  const equityResult = document.getElementById("equity-result");
+
+  function formatNegativeMoney(text) {
+    if (!text) return "";
+
+    return text.replace(/-\$[\d,]+/g, function(match) {
+      return `(<span class="negative-money">${match}</span>)`;
+    });
+  }
+
+  if (equityForm && equityResult) {
+    equityForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      equityResult.innerHTML = "Reviewing local Steeplechase sales activity...";
+
+      let equityUserId = localStorage.getItem("equityUserId");
+
+      if (!equityUserId) {
+        equityUserId = "user_" + crypto.randomUUID().slice(0, 6);
+        localStorage.setItem("equityUserId", equityUserId);
+      }
+
+      try {
+        const response = await fetch("https://mannyc512.pythonanywhere.com/estimate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            userId: equityUserId,
+            subdivision: "STEEPLECHASE",
+            beds: Number(document.getElementById("beds").value),
+            baths: Number(document.getElementById("baths").value),
+            sqft: Number(document.getElementById("sqft").value),
+            yearBuilt: Number(document.getElementById("yearBuilt").value),
+            purchasePrice: Number(document.getElementById("purchasePrice").value)
+          })
+        });
+
+        const data = await response.json();
+
+        if (!data.success) {
+          equityResult.innerHTML = `
+            <strong>This one needs a closer look.</strong><br>
+            ${data.message || "The calculator could not complete the estimate."}
+          `;
+          return;
+        }
+
+        const result = data.result;
+
+        equityResult.innerHTML = `
+          <strong>Estimated Current Value:</strong> ${result.estimated_value}<br>
+          <strong>Likely Current Range:</strong> ${formatNegativeMoney(result.likely_range)}<br>
+          <strong>Estimated Equity Built:</strong> ${formatNegativeMoney(result.estimated_equity_range)}<br>
+          <br>
+          <small>Based on local ${result.subdivision} sales activity.</small>
+
+          <div class="equity-next-step">
+            <strong>Your number is only useful if it helps you make a decision.</strong><br>
+            My role is to help you slow the decision down and see the full picture — your likely walkaway, selling costs, timing, and next-home options — so you’re not trying to figure out the next step alone.
+
+            <div style="margin-top: 12px;">
+              <a href="/contact.html" class="equity-result-cta">Help Me See My Next Move</a>
+            </div>
+          </div>
+        `;
+      } catch (error) {
+        console.error(error);
+
+        equityResult.innerHTML = `
+          <strong>This one needs a closer look.</strong><br>
+          The calculator could not connect right now.
+        `;
+      }
+    });
+  }
+</script>
+
+<script src="/js/date.js"></script>
 </body>
 </html>
 
