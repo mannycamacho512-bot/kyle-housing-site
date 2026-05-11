@@ -329,6 +329,9 @@ a {
   display: none !important;
 }
 
+.subdivDesktopWrapper:not(:has(.subdivCard:nth-child(7))) .sliderArrow {
+  display: none !important;
+}
 /* =========================
    FOOTER
 ========================== */
