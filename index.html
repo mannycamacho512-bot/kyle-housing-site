@@ -1987,7 +1987,17 @@
           track.addEventListener('scroll', updateArrows);
           window.addEventListener('resize', updateArrows);
 
-          setTimeout(updateArrows, 50);
+                    setTimeout(updateArrows, 50);
           setTimeout(updateArrows, 300);
         });
       }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupSubdivisionSliders);
+      } else {
+        setupSubdivisionSliders();
+      }
+    </script>
+
+</body>
+</html>
