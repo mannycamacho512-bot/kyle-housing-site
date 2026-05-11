@@ -1929,6 +1929,32 @@
     handleHeaderShrink();
   })();
 </script>
+
+<script>
+document.querySelectorAll('.subdivDesktopWrapper').forEach(function(wrapper) {
+  const grid = wrapper.querySelector('.subdivGridDesktop');
+  const left = wrapper.querySelector('.sliderArrowLeft');
+  const right = wrapper.querySelector('.sliderArrowRight');
+
+  if (!grid || !left || !right) return;
+
+  left.addEventListener('click', function() {
+    grid.scrollBy({
+      left: -320,
+      behavior: 'smooth'
+    });
+  });
+
+  right.addEventListener('click', function() {
+    grid.scrollBy({
+      left: 320,
+      behavior: 'smooth'
+    });
+  });
+});
+</script>
+
+        <!-- your last section above this -->
         <!-- your last section above this -->
 
     <script>
