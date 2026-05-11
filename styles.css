@@ -300,7 +300,7 @@ a {
   padding: 0;
   margin: 0;
   z-index: 2;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -321,16 +321,8 @@ a {
   position: static;
 }
 
-.sliderArrow.is-visible {
-  display: flex;
-}
-
-@media (min-width: 769px) {
-  .sliderArrow,
-  .sliderArrow.is-visible,
-  .sliderArrow.is-hidden {
-    display: flex !important;
-  }
+.sliderArrow.is-hidden {
+  display: none !important;
 }
 
 /* =========================
