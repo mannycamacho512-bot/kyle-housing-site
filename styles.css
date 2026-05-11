@@ -321,6 +321,10 @@ a {
   position: static;
 }
 
+.sliderArrow.is-visible {
+  display: flex;
+}
+
 .sliderArrow.is-hidden {
   display: none !important;
 }
