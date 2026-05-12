@@ -959,7 +959,7 @@
 }
 
 /* Mobile/tablet version */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
   .sticky-agent-card {
     display: none;
   }
