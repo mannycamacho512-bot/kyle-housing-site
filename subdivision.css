@@ -733,67 +733,79 @@
 
 .sticky-agent-card {
   position: fixed;
-  top: 165px;
-  right: max(22px, calc((100vw - 1120px) / 2 - 245px));
-  width: 220px;
+  top: 168px;
+  left: calc(50% + 585px);
+  width: 230px;
+  box-sizing: border-box;
   background: #ffffff;
-  border: 1px solid rgba(38, 64, 51, 0.14);
-  border-radius: 18px;
-  padding: 14px;
-  box-shadow: 0 12px 30px rgba(24, 43, 34, 0.12);
-  z-index: 50;
+  border: 1px solid #d8ddd9;
+  border-radius: 22px;
+  padding: 18px 16px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16);
+  z-index: 80;
+  text-align: left;
 }
 
 .sticky-agent-kicker {
-  font-size: 0.72rem;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(47, 95, 80, 0.1);
+  color: #2f5f50;
+  font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-weight: 700;
-  color: #587364;
-  margin-bottom: 7px;
+  font-weight: 900;
 }
 
 .sticky-agent-title {
-  font-size: 1rem;
-  line-height: 1.2;
+  margin-bottom: 13px;
+  font-family: "Hedvig Letters Serif", serif;
+  font-size: 1.08rem;
+  line-height: 1.22;
   font-weight: 700;
-  color: #263f33;
-  margin-bottom: 11px;
+  color: #111;
 }
 
 .sticky-agent-menu {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 13px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+  margin-bottom: 15px;
 }
 
 .sticky-agent-menu span {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  border-radius: 999px;
-  background: rgba(88, 115, 100, 0.09);
-  color: #3f5147;
-  font-size: 0.78rem;
-  line-height: 1;
-  padding: 7px 9px;
-  white-space: nowrap;
+  justify-content: flex-start;
+  min-height: 34px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #f5f8f6;
+  border: 1px solid #dce7e1;
+  color: #35443b;
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.15;
 }
 
 .sticky-agent-cta {
   display: block;
+  width: 100%;
+  box-sizing: border-box;
   text-align: center;
-  background: #263f33;
+  background: #2f5f50;
   color: #ffffff;
   text-decoration: none;
   border-radius: 999px;
-  padding: 9px 10px;
-  font-size: 0.88rem;
-  font-weight: 700;
+  padding: 11px 12px;
+  font-size: 0.92rem;
+  font-weight: 900;
 }
 
 .sticky-agent-cta:hover {
-  opacity: 0.92;
+  background: #274f43;
 }
 
 /* Hide mobile bar on desktop */
@@ -801,60 +813,65 @@
   display: none;
 }
 
-/* Hide side card when screen does not have enough outside space */
-@media (max-width: 1280px) {
+/* 
+   Hide side card unless there is enough room outside the 1120px content shell.
+   1120 content + 230 card + 24 gap on each side = about 1628px needed.
+*/
+@media (max-width: 1628px) {
   .sticky-agent-card {
     display: none;
   }
 }
 
-/* Mobile bottom bar */
-@media (max-width: 800px) {
+/* Mobile / smaller screens bottom bar */
+@media (max-width: 1628px) {
   .mobile-agent-bar {
     position: fixed;
     left: 12px;
     right: 12px;
     bottom: 12px;
-    z-index: 70;
+    z-index: 90;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
     background: #ffffff;
-    border: 1px solid rgba(38, 64, 51, 0.14);
-    border-radius: 18px;
-    padding: 11px 12px;
-    box-shadow: 0 12px 30px rgba(24, 43, 34, 0.16);
+    border: 1px solid #d8ddd9;
+    border-radius: 20px;
+    padding: 12px 13px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
   }
 
   .mobile-agent-bar strong {
     display: block;
-    font-size: 0.9rem;
+    font-family: "Hedvig Letters Serif", serif;
+    font-size: 0.95rem;
     line-height: 1.15;
-    color: #263f33;
+    color: #111;
   }
 
   .mobile-agent-bar span {
     display: block;
-    margin-top: 2px;
+    margin-top: 3px;
     font-size: 0.76rem;
     color: #526158;
+    line-height: 1.2;
   }
 
   .mobile-agent-bar a {
     flex: 0 0 auto;
-    background: #263f33;
+    background: #2f5f50;
     color: #ffffff;
     text-decoration: none;
     border-radius: 999px;
-    padding: 9px 11px;
-    font-size: 0.82rem;
-    font-weight: 700;
+    padding: 10px 12px;
+    font-size: 0.84rem;
+    font-weight: 900;
     white-space: nowrap;
   }
 
   body {
-    padding-bottom: 78px;
+    padding-bottom: 82px;
   }
 }
 .equity-tool-card .equity-tool-kicker {
