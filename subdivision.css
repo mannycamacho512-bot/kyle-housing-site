@@ -727,153 +727,7 @@
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
   text-align: center;
 }
-/* =========================
-   STICKY AGENT HELP
-   ========================= */
 
-.sticky-agent-card {
-  position: fixed;
-  top: 168px;
-  left: calc(50% + 585px);
-  width: 230px;
-  box-sizing: border-box;
-  background: #ffffff;
-  border: 1px solid #d8ddd9;
-  border-radius: 22px;
-  padding: 18px 16px;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16);
-  z-index: 80;
-  text-align: left;
-}
-
-.sticky-agent-kicker {
-  display: inline-block;
-  margin-bottom: 10px;
-  padding: 6px 9px;
-  border-radius: 999px;
-  background: rgba(47, 95, 80, 0.1);
-  color: #2f5f50;
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 900;
-}
-
-.sticky-agent-title {
-  margin-bottom: 13px;
-  font-family: "Hedvig Letters Serif", serif;
-  font-size: 1.08rem;
-  line-height: 1.22;
-  font-weight: 700;
-  color: #111;
-}
-
-.sticky-agent-menu {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 7px;
-  margin-bottom: 15px;
-}
-
-.sticky-agent-menu span {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 34px;
-  padding: 8px 10px;
-  border-radius: 12px;
-  background: #f5f8f6;
-  border: 1px solid #dce7e1;
-  color: #35443b;
-  font-size: 0.86rem;
-  font-weight: 700;
-  line-height: 1.15;
-}
-
-.sticky-agent-cta {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  text-align: center;
-  background: #2f5f50;
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 999px;
-  padding: 11px 12px;
-  font-size: 0.92rem;
-  font-weight: 900;
-}
-
-.sticky-agent-cta:hover {
-  background: #274f43;
-}
-
-/* Hide mobile bar on desktop */
-.mobile-agent-bar {
-  display: none;
-}
-
-/* 
-   Hide side card unless there is enough room outside the 1120px content shell.
-   1120 content + 230 card + 24 gap on each side = about 1628px needed.
-*/
-@media (max-width: 1628px) {
-  .sticky-agent-card {
-    display: none;
-  }
-}
-
-/* Mobile / smaller screens bottom bar */
-@media (max-width: 1628px) {
-  .mobile-agent-bar {
-    position: fixed;
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    z-index: 90;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    background: #ffffff;
-    border: 1px solid #d8ddd9;
-    border-radius: 20px;
-    padding: 12px 13px;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
-  }
-
-  .mobile-agent-bar strong {
-    display: block;
-    font-family: "Hedvig Letters Serif", serif;
-    font-size: 0.95rem;
-    line-height: 1.15;
-    color: #111;
-  }
-
-  .mobile-agent-bar span {
-    display: block;
-    margin-top: 3px;
-    font-size: 0.76rem;
-    color: #526158;
-    line-height: 1.2;
-  }
-
-  .mobile-agent-bar a {
-    flex: 0 0 auto;
-    background: #2f5f50;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 999px;
-    padding: 10px 12px;
-    font-size: 0.84rem;
-    font-weight: 900;
-    white-space: nowrap;
-  }
-
-  body {
-    padding-bottom: 82px;
-  }
-}
 .equity-tool-card .equity-tool-kicker {
   font-size: 1.05rem;
   font-weight: 800;
@@ -1021,148 +875,140 @@
   opacity: 0.9;
 }
 /* =========================
-   STICKY AGENT HELP - FINAL TEST
+   STICKY AGENT HELP
    ========================= */
 
-/* Default: hide mobile bar unless mobile */
+/* Desktop floating card */
+.sticky-agent-card {
+  position: fixed;
+  top: 165px;
+  right: 32px;
+  width: 245px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #d8ddd9;
+  border-radius: 22px;
+  padding: 18px 16px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+  z-index: 9998;
+  text-align: left;
+}
+
+.sticky-agent-kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(47, 95, 80, 0.1);
+  color: #2f5f50;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.sticky-agent-title {
+  margin-bottom: 14px;
+  font-family: "Hedvig Letters Serif", serif;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #111;
+}
+
+.sticky-agent-menu {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.sticky-agent-menu span {
+  display: block;
+  padding: 9px 10px;
+  border-radius: 13px;
+  background: #f5f8f6;
+  border: 1px solid #dce7e1;
+  color: #35443b;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.sticky-agent-cta {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  background: #2f5f50;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.sticky-agent-cta:hover {
+  background: #274f43;
+}
+
+/* Mobile bottom bar hidden on desktop */
 .mobile-agent-bar {
-  display: none !important;
+  display: none;
 }
 
-/* Desktop card */
-@media (min-width: 901px) {
-  .sticky-agent-card {
-    position: fixed !important;
-    top: 165px !important;
-    right: 32px !important;
-    left: auto !important;
-
-    width: 245px !important;
-    box-sizing: border-box !important;
-
-    background: #ffffff !important;
-    border: 1px solid #d8ddd9 !important;
-    border-radius: 22px !important;
-    padding: 18px 16px !important;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18) !important;
-
-    z-index: 9998 !important;
-    text-align: left !important;
-  }
-
-  .sticky-agent-kicker {
-    display: inline-block !important;
-    margin-bottom: 10px !important;
-    padding: 6px 10px !important;
-    border-radius: 999px !important;
-    background: rgba(47, 95, 80, 0.1) !important;
-    color: #2f5f50 !important;
-    font-size: 11px !important;
-    letter-spacing: 0.08em !important;
-    text-transform: uppercase !important;
-    font-weight: 900 !important;
-  }
-
-  .sticky-agent-title {
-    margin-bottom: 14px !important;
-    font-family: "Hedvig Letters Serif", serif !important;
-    font-size: 18px !important;
-    line-height: 1.2 !important;
-    font-weight: 700 !important;
-    color: #111 !important;
-  }
-
-  .sticky-agent-menu {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 8px !important;
-    margin-bottom: 16px !important;
-  }
-
-  .sticky-agent-menu span {
-    display: block !important;
-    padding: 9px 10px !important;
-    border-radius: 13px !important;
-    background: #f5f8f6 !important;
-    border: 1px solid #dce7e1 !important;
-    color: #35443b !important;
-    font-size: 14px !important;
-    font-weight: 800 !important;
-    line-height: 1.2 !important;
-  }
-
-  .sticky-agent-cta {
-    display: block !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    text-align: center !important;
-    background: #2f5f50 !important;
-    color: #ffffff !important;
-    text-decoration: none !important;
-    border-radius: 999px !important;
-    padding: 12px 14px !important;
-    font-size: 14px !important;
-    font-weight: 900 !important;
-  }
-
-  .sticky-agent-cta:hover {
-    background: #274f43 !important;
-  }
-}
-
-/* Mobile bottom bar */
+/* Mobile/tablet version */
 @media (max-width: 900px) {
   .sticky-agent-card {
-    display: none !important;
+    display: none;
   }
 
   .mobile-agent-bar {
-    position: fixed !important;
-    left: 12px !important;
-    right: 12px !important;
-    bottom: 12px !important;
-    z-index: 9998 !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 12px !important;
-
-    background: #ffffff !important;
-    border: 1px solid #d8ddd9 !important;
-    border-radius: 20px !important;
-    padding: 12px 13px !important;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18) !important;
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #ffffff;
+    border: 1px solid #d8ddd9;
+    border-radius: 20px;
+    padding: 12px 13px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
   }
 
   .mobile-agent-bar strong {
-    display: block !important;
-    font-family: "Hedvig Letters Serif", serif !important;
-    font-size: 15px !important;
-    line-height: 1.15 !important;
-    color: #111 !important;
+    display: block;
+    font-family: "Hedvig Letters Serif", serif;
+    font-size: 15px;
+    line-height: 1.15;
+    color: #111;
   }
 
   .mobile-agent-bar span {
-    display: block !important;
-    margin-top: 3px !important;
-    font-size: 12px !important;
-    color: #526158 !important;
+    display: block;
+    margin-top: 3px;
+    font-size: 12px;
+    color: #526158;
   }
 
   .mobile-agent-bar a {
-    flex: 0 0 auto !important;
-    background: #2f5f50 !important;
-    color: #ffffff !important;
-    text-decoration: none !important;
-    border-radius: 999px !important;
-    padding: 10px 13px !important;
-    font-size: 13px !important;
-    font-weight: 900 !important;
-    white-space: nowrap !important;
+    flex: 0 0 auto;
+    background: #2f5f50;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 10px 13px;
+    font-size: 13px;
+    font-weight: 900;
+    white-space: nowrap;
   }
 
   body {
-    padding-bottom: 82px !important;
+    padding-bottom: 82px;
   }
 }
