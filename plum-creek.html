@@ -161,6 +161,65 @@
       <section class="dashboard-wrap section-block">
         <iframe src="https://mannycamacho512-bot.github.io/subdivision-dashboard/?sub=PLUM%20CREEK" loading="lazy"></iframe>
       </section>
+    <section class="section-block">
+  <div class="equity-tool-card">
+    <div class="equity-tool-kicker">Plum Creek Home Equity Calculator</div>
+
+    <h2>See the equity you may have built in your Plum Creek home</h2>
+
+    <p class="equity-tool-intro">
+      Plum Creek has different sections with different pricing patterns. Choose the section that best fits your home before running the estimate.
+    </p>
+
+    <form id="equity-form">
+      <div class="form-row">
+        <label for="plumSection">Plum Creek Section</label>
+        <select id="plumSection" required>
+          <option value="PLUM CREEK">Original Plum Creek</option>
+          <option value="PENINSULA AT PLUM CREEK">The Peninsula</option>
+          <option value="PLUM CREEK NORTH">Plum Creek North</option>
+        </select>
+      </div>
+
+      <div class="equity-row-3">
+        <div class="form-row">
+          <label for="beds">Beds</label>
+          <input id="beds" type="number" value="3" required>
+        </div>
+
+        <div class="form-row">
+          <label for="baths">Baths</label>
+          <input id="baths" type="number" step="0.5" value="2" required>
+        </div>
+
+        <div class="form-row">
+          <label for="sqft">SqFt</label>
+          <input id="sqft" type="number" value="1950" required>
+        </div>
+      </div>
+
+      <div class="equity-row-2">
+        <div class="form-row">
+          <label for="yearBuilt">Year Built</label>
+          <input id="yearBuilt" type="number" value="2013" required>
+        </div>
+
+        <div class="form-row">
+          <label for="purchasePrice">Purchase Price</label>
+          <input id="purchasePrice" type="number" value="290000" required>
+        </div>
+      </div>
+
+      <button type="submit">See What My Equity Could Unlock</button>
+    </form>
+
+    <div id="equity-result" style="margin-top: 16px;"></div>
+
+    <div class="fine-note" style="margin-top: 12px;">
+      This is a working estimate based on local sales activity. A full review may adjust for condition, updates, lot, location, and current competition.
+    </div>
+  </div>
+</section>
 
       <section class="info-grid section-block">
         <div class="info-card">
@@ -451,6 +510,86 @@
         if (priceRangeEl) priceRangeEl.textContent = "Data unavailable";
       }
     })();
+    const equityForm = document.getElementById("equity-form");
+const equityResult = document.getElementById("equity-result");
+
+function formatNegativeMoney(text) {
+  if (!text) return "";
+
+  return text.replace(/-\$[\d,]+/g, function(match) {
+    return `(<span class="negative-money">${match}</span>)`;
+  });
+}
+
+if (equityForm) {
+  equityForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    equityResult.innerHTML = "Reviewing local sales activity...";
+
+    let equityUserId = localStorage.getItem("equityUserId");
+
+    if (!equityUserId) {
+      equityUserId = "user_" + crypto.randomUUID().slice(0, 6);
+      localStorage.setItem("equityUserId", equityUserId);
+    }
+
+    const payload = {
+      userId: equityUserId,
+      subdivision: document.getElementById("plumSection").value,
+      beds: Number(document.getElementById("beds").value),
+      baths: Number(document.getElementById("baths").value),
+      sqft: Number(document.getElementById("sqft").value),
+      yearBuilt: Number(document.getElementById("yearBuilt").value),
+      purchasePrice: Number(document.getElementById("purchasePrice").value)
+    };
+
+    try {
+      const response = await fetch("https://mannyc512.pythonanywhere.com/estimate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        equityResult.innerHTML = `
+          <strong>This one needs a closer look.</strong><br>
+          ${data.message || "The calculator could not complete the estimate."}
+        `;
+        return;
+      }
+
+      const result = data.result;
+
+      equityResult.innerHTML = `
+        <strong>Estimated Current Value:</strong> ${result.estimated_value}<br>
+        <strong>Likely Current Range:</strong> ${formatNegativeMoney(result.likely_range)}<br>
+        <strong>Estimated Equity Built:</strong> ${formatNegativeMoney(result.estimated_equity_range)}<br>
+        <br>
+        <small>Based on local ${result.subdivision} sales activity.</small>
+
+        <div class="equity-next-step">
+          <strong>Your number is only useful if it helps you make a decision.</strong><br>
+          My role is to help you slow the decision down and see the full picture — your likely walkaway, selling costs, timing, and next-home options — so you’re not trying to figure out the next step alone.
+
+          <div style="margin-top: 12px;">
+            <a href="/contact.html" class="equity-result-cta">Help Me See My Next Move</a>
+          </div>
+        </div>
+      `;
+    } catch (err) {
+      console.error(err);
+      equityResult.innerHTML = `
+        <strong>Something went wrong.</strong><br>
+        Please try again or reach out for a full equity review.
+      `;
+    }
+  });
+}
   </script>
   <script src="/js/date.js"></script>
 </body>
