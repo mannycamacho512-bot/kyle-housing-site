@@ -330,6 +330,91 @@
       color: var(--text);
     }
 
+    /* =========================
+   GUIDE / ROLE CARD
+   ========================= */
+
+.guide-card {
+  text-align: left;
+  border-radius: 24px;
+  padding: 32px 30px;
+  background:
+    linear-gradient(135deg, rgba(6,95,70,.08), rgba(255,255,255,1) 62%),
+    #ffffff;
+  box-shadow: 0 14px 34px rgba(0,0,0,.08);
+}
+
+.guide-kicker {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: rgba(6,95,70,.12);
+  color: var(--emerald);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.guide-card .contact-name {
+  max-width: 760px;
+  margin: 0 0 22px;
+  font-size: clamp(27px, 4vw, 44px);
+  line-height: 1.05;
+  color: var(--text);
+}
+
+.guide-card .contact-direct {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.guide-card .contact-direct a {
+  display: inline-block;
+  margin: 0;
+  padding: 11px 14px;
+  border-radius: 999px;
+  background: #f5f8f6;
+  border: 1px solid rgba(6,95,70,.18);
+  color: #23443a;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.guide-card .contact-direct a:hover {
+  background: rgba(6,95,70,.08);
+}
+
+.guide-signature {
+  margin: 16px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+@media (max-width: 768px) {
+  .guide-card {
+    padding: 26px 22px;
+  }
+
+  .guide-card .contact-name {
+    font-size: 27px;
+  }
+
+  .guide-card .contact-direct {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .guide-card .contact-direct a {
+    text-align: center;
+  }
+}
+
     .contact-form-wrap h2 {
       margin: 0 0 16px;
       font-size: 22px;
@@ -574,18 +659,21 @@
 </section>
 
       <section class="section-block">
-  <div class="panel contact-card">
-    <h2 class="contact-name">Emmanuel "Manny" Camacho</h2>
-    <p class="contact-role">
-      Realtor® in Kyle, TX<br>
-      Dalton Wade Real Estate Group
-    </p>
+  <div class="panel contact-card guide-card">
+    <div class="guide-kicker">Helping the missing pieces come together</div>
+
+    <h2 class="contact-name">I help you bring the missing pieces together so your next move feels clearer, calmer, and less like a guess.</h2>
 
     <div class="contact-direct">
       <a href="tel:5122987455">Call: 512-298-7455</a>
       <a href="sms:5122987455">Text: 512-298-7455</a>
       <a href="mailto:mannyc512@outlook.com">mannyc512@outlook.com</a>
     </div>
+
+    <p class="guide-signature">
+      Emmanuel “Manny” Camacho<br>
+      Realtor® in Kyle, TX · Dalton Wade Real Estate Group
+    </p>
   </div>
 </section>
 
