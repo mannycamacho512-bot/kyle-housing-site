@@ -192,6 +192,25 @@
   text-decoration: underline;
 }
 
+.page-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.page-views {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #2f5f50;
+  background: rgba(47, 95, 80, 0.1);
+  border: 1px solid rgba(47, 95, 80, 0.18);
+  border-radius: 999px;
+  padding: 6px 11px;
+  white-space: nowrap;
+}
+
 .page-updated {
   font-size: 12px;
   color: #666;
