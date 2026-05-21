@@ -223,6 +223,25 @@ a {
   padding: 190px 32px 20px 32px;
   box-sizing: border-box;
 }
+.page-top-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.page-views {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #2f5f55;
+  background: #edf7f3;
+  border: 1px solid rgba(47, 95, 85, 0.18);
+  border-radius: 999px;
+  padding: 6px 11px;
+  white-space: nowrap;
+}
 
 /* =========================
    DESKTOP CARD ROW
