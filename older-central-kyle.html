@@ -436,13 +436,6 @@
       background: #ffffff;
     }
 
-    .pocket-modal-dashboard iframe {
-      display: block;
-      width: 100%;
-      height: 300px;
-      border: 0;
-    }
-
     .pocket-modal-dashboard-label {
       padding: 10px 12px;
       border-bottom: 1px solid #e5e7eb;
@@ -452,6 +445,61 @@
       color: #064E3B;
       font-weight: 800;
       background: #f8fafc;
+    }
+
+    .pocket-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+    }
+
+    .pocket-stat {
+      padding: 12px;
+      border-right: 1px solid #eef2f7;
+    }
+
+    .pocket-stat:last-child {
+      border-right: 0;
+    }
+
+    .pocket-stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6b7280;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .pocket-stat-value {
+      font-size: 1.15rem;
+      line-height: 1.1;
+      color: #111827;
+      font-weight: 850;
+    }
+
+    .pocket-stat-note {
+      padding: 10px 12px;
+      border-top: 1px solid #eef2f7;
+      color: #6b7280;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      background: #ffffff;
+    }
+
+    @media (max-width: 560px) {
+      .pocket-stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pocket-stat {
+        border-right: 0;
+        border-bottom: 1px solid #eef2f7;
+      }
+
+      .pocket-stat:last-child {
+        border-bottom: 0;
+      }
     }
 
     .pocket-modal-side p {
@@ -1095,7 +1143,7 @@
           title: "José Addition: Convenience With a Few Tradeoffs to Weigh",
           era: "Older Kyle addition",
           mapEmbed: "https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=29.996385735157986%2C-97.87347812781591&z=15",
-          dashboardUrl: "https://mannycamacho512-bot.github.io/subdivision-dashboard/?dataset=older-central-kyle&sub=JOSE%20ADDITION",
+          dataKey: "JOSE ADDITION",
           description: `
             <div class="pocket-detail-map">
               <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=29.996385735157986%2C-97.87347812781591&z=15" loading="lazy"></iframe>
@@ -1126,7 +1174,7 @@
         "da-young": {
           title: "D.A. Young",
           era: "Older Kyle pocket",
-          dashboardUrl: "https://mannycamacho512-bot.github.io/subdivision-dashboard/?dataset=older-central-kyle&sub=D.A.%20YOUNG",
+          dataKey: "D.A. YOUNG",
           description: "A smaller older Kyle pocket where homes, spacing, upkeep, and street feel can matter more than a clean subdivision-style comparison.",
           images: [
             { src: "/images/dayoung/DAYoung1.jpg", alt: "D.A. Young neighborhood photo 1" },
@@ -1144,7 +1192,7 @@
         "original-town-kyle": {
           title: "Original Town Kyle",
           era: "Historic core",
-          dashboardUrl: "https://mannycamacho512-bot.github.io/subdivision-dashboard/?dataset=older-central-kyle&sub=ORIGINAL%20TOWN%20KYLE",
+          dataKey: "ORIGINAL TOWN KYLE",
           description: "Closest to Kyle’s historic core, with older homes, mature surroundings, downtown access, and more variation than a typical newer subdivision.",
           images: [
             { src: "/images/original_town_kyle/origina_town_of_kyle1.jpg", alt: "Original Town Kyle neighborhood photo 1" },
@@ -1170,6 +1218,64 @@
       const imageWrap = document.getElementById("pocketModalImageWrap");
       const thumbsEl = document.getElementById("pocketModalThumbs");
       const dashboardEl = document.getElementById("pocketModalDashboard");
+      const olderCentralDataUrl = "https://mannycamacho512-bot.github.io/subdivision-dashboard/data/older_central_kyle_12mo_data.json";
+      let olderCentralRows = null;
+
+      function formatMoney(value) {
+        const n = Number(value);
+        if (!Number.isFinite(n) || n <= 0) return "n/a";
+        return n.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0
+        });
+      }
+
+      function formatNumber(value) {
+        const n = Number(value);
+        if (!Number.isFinite(n)) return "n/a";
+        return n.toLocaleString("en-US", { maximumFractionDigits: 0 });
+      }
+
+      function normalizePocketKey(value) {
+        return String(value || "").toUpperCase().trim();
+      }
+
+      async function getOlderCentralRows() {
+        if (olderCentralRows) return olderCentralRows;
+        const res = await fetch(olderCentralDataUrl, { cache: "no-store" });
+        if (!res.ok) throw new Error("Could not load older Central Kyle data");
+        olderCentralRows = await res.json();
+        return olderCentralRows;
+      }
+
+      function renderPocketStats(pocket, row) {
+        if (!dashboardEl) return;
+
+        const sold = row ? row.Sold_12Mo : null;
+        const price = row ? row.MedianSoldPrice_12Mo : null;
+        const dom = row ? row.MedianSoldDOM_12Mo : null;
+
+        dashboardEl.hidden = false;
+        dashboardEl.innerHTML = `
+          <div class="pocket-modal-dashboard-label">12-month market snapshot</div>
+          <div class="pocket-stats-grid">
+            <div class="pocket-stat">
+              <div class="pocket-stat-label">Sold</div>
+              <div class="pocket-stat-value">${formatNumber(sold)}</div>
+            </div>
+            <div class="pocket-stat">
+              <div class="pocket-stat-label">Median Price</div>
+              <div class="pocket-stat-value">${formatMoney(price)}</div>
+            </div>
+            <div class="pocket-stat">
+              <div class="pocket-stat-label">Median DOM</div>
+              <div class="pocket-stat-value">${formatNumber(dom)}</div>
+            </div>
+          </div>
+          <div class="pocket-stat-note">Based on matched closed sales from the last 12 months. Older pockets can have limited sales, so one or two homes can move the numbers.</div>
+        `;
+      }
 
       function renderImage(pocket, index) {
         const images = pocket.images || [];
@@ -1221,16 +1327,23 @@
         renderImage(pocket, 0);
 
         if (dashboardEl) {
-          if (pocket.dashboardUrl) {
-            dashboardEl.hidden = false;
-            dashboardEl.innerHTML = `
-              <div class="pocket-modal-dashboard-label">12-month market snapshot</div>
-              <iframe src="${pocket.dashboardUrl}" loading="lazy"></iframe>
-            `;
-          } else {
-            dashboardEl.hidden = true;
-            dashboardEl.innerHTML = "";
-          }
+          dashboardEl.hidden = false;
+          dashboardEl.innerHTML = `
+            <div class="pocket-modal-dashboard-label">12-month market snapshot</div>
+            <div class="pocket-stat-note">Loading market snapshot...</div>
+          `;
+
+          getOlderCentralRows()
+            .then((rows) => {
+              const row = rows.find((item) => normalizePocketKey(item.Subdivision) === normalizePocketKey(pocket.dataKey));
+              renderPocketStats(pocket, row);
+            })
+            .catch(() => {
+              dashboardEl.innerHTML = `
+                <div class="pocket-modal-dashboard-label">12-month market snapshot</div>
+                <div class="pocket-stat-note">Market snapshot unavailable right now.</div>
+              `;
+            });
         }
 
         modal.classList.add("is-open");
