@@ -428,6 +428,32 @@
       display: block;
     }
 
+    .pocket-modal-dashboard {
+      margin-top: 14px;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .pocket-modal-dashboard iframe {
+      display: block;
+      width: 100%;
+      height: 300px;
+      border: 0;
+    }
+
+    .pocket-modal-dashboard-label {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #064E3B;
+      font-weight: 800;
+      background: #f8fafc;
+    }
+
     .pocket-modal-side p {
       margin: 0 0 14px;
       color: #4b5563;
@@ -982,6 +1008,7 @@
           <div>
             <div class="pocket-modal-image-wrap" id="pocketModalImageWrap"></div>
             <div class="pocket-modal-thumbs" id="pocketModalThumbs"></div>
+            <div class="pocket-modal-dashboard" id="pocketModalDashboard" hidden></div>
           </div>
 
           <div class="pocket-modal-side">
@@ -1068,6 +1095,7 @@
           title: "José Addition: Convenience With a Few Tradeoffs to Weigh",
           era: "Older Kyle addition",
           mapEmbed: "https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=29.996385735157986%2C-97.87347812781591&z=15",
+          dashboardUrl: "https://mannycamacho512-bot.github.io/subdivision-dashboard/?dataset=older-central-kyle&sub=JOSE%20ADDITION",
           description: `
             <div class="pocket-detail-map">
               <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=29.996385735157986%2C-97.87347812781591&z=15" loading="lazy"></iframe>
@@ -1098,6 +1126,7 @@
         "da-young": {
           title: "D.A. Young",
           era: "Older Kyle pocket",
+          dashboardUrl: "https://mannycamacho512-bot.github.io/subdivision-dashboard/?dataset=older-central-kyle&sub=D.A.%20YOUNG",
           description: "A smaller older Kyle pocket where homes, spacing, upkeep, and street feel can matter more than a clean subdivision-style comparison.",
           images: [
             { src: "/images/dayoung/DAYoung1.jpg", alt: "D.A. Young neighborhood photo 1" },
@@ -1115,6 +1144,7 @@
         "original-town-kyle": {
           title: "Original Town Kyle",
           era: "Historic core",
+          dashboardUrl: "https://mannycamacho512-bot.github.io/subdivision-dashboard/?dataset=older-central-kyle&sub=ORIGINAL%20TOWN%20KYLE",
           description: "Closest to Kyle’s historic core, with older homes, mature surroundings, downtown access, and more variation than a typical newer subdivision.",
           images: [
             { src: "/images/original_town_kyle/origina_town_of_kyle1.jpg", alt: "Original Town Kyle neighborhood photo 1" },
@@ -1139,6 +1169,7 @@
       const dataEl = document.getElementById("pocketModalData");
       const imageWrap = document.getElementById("pocketModalImageWrap");
       const thumbsEl = document.getElementById("pocketModalThumbs");
+      const dashboardEl = document.getElementById("pocketModalDashboard");
 
       function renderImage(pocket, index) {
         const images = pocket.images || [];
@@ -1188,6 +1219,20 @@
         });
 
         renderImage(pocket, 0);
+
+        if (dashboardEl) {
+          if (pocket.dashboardUrl) {
+            dashboardEl.hidden = false;
+            dashboardEl.innerHTML = `
+              <div class="pocket-modal-dashboard-label">12-month market snapshot</div>
+              <iframe src="${pocket.dashboardUrl}" loading="lazy"></iframe>
+            `;
+          } else {
+            dashboardEl.hidden = true;
+            dashboardEl.innerHTML = "";
+          }
+        }
+
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
       }
