@@ -471,6 +471,27 @@
       color: #111827;
     }
 
+    .pocket-title-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: #111827;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .pocket-title-trigger:hover,
+    .pocket-title-trigger:focus-visible {
+      color: #064E3B;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
     .pocket-body p {
       margin: 0 0 12px;
       color: #4b5563;
@@ -775,7 +796,7 @@
                   <img src="/images/Jose_Addition/Jose_Addition3.jpg" alt="Jose Addition older Kyle pocket" loading="lazy">
                 </div>
                 <div class="pocket-body">
-                  <h2>Jose Addition</h2>
+                  <h2><button class="pocket-title-trigger" type="button" data-pocket-gallery="jose-addition">Jose Addition</button></h2>
                   <p class="pocket-card-text">
                     Older Central Kyle convenience near everyday stops like H-E-B, Target, restaurants, and major roads. Some homes may also come with tradeoffs like rush-hour traffic, road noise, or train proximity depending on the exact street.
                   </p>
@@ -798,7 +819,7 @@
                   <img src="/images/dayoung/DAYoung3.jpg" alt="D.A. Young street view" loading="lazy">
                 </div>
                 <div class="pocket-body">
-                  <h2>D.A. Young</h2>
+                  <h2><button class="pocket-title-trigger" type="button" data-pocket-gallery="da-young">D.A. Young</button></h2>
                   <p>
                     A smaller older Kyle pocket where homes, spacing, upkeep, and street feel can matter more than a clean subdivision-style comparison.
                   </p>
@@ -818,7 +839,7 @@
                   <img src="/images/original_town_kyle/origina_town_of_kyle3.jpg" alt="Original Town Kyle older Kyle pocket" loading="lazy">
                 </div>
                 <div class="pocket-body">
-                  <h2>Original Town Kyle</h2>
+                  <h2><button class="pocket-title-trigger" type="button" data-pocket-gallery="original-town-kyle">Original Town Kyle</button></h2>
                   <p>
                     Closest to Kyle’s historic core, with older homes, mature surroundings, downtown access, and more variation than a typical newer subdivision.
                   </p>
