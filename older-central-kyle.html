@@ -10,21 +10,10 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <meta
-  name="description"
-  content="Explore Older Central Kyle, including downtown, nearby additions, and older neighborhood pockets where history, lot feel, condition, and location matter more than subdivision name alone."
-/>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CMXSG3DVFY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CMXSG3DVFY');
-</script>
-
-<link rel="stylesheet" href="/subdivision.css">
+    name="description"
+    content="Explore Older Central Kyle, including downtown, nearby additions, and older neighborhood pockets where history, lot feel, condition, and location matter more than subdivision name alone."
+  />
+  <link rel="stylesheet" href="/subdivision.css">
 
   <style>
     /* Page-specific styles for Older Central Kyle. Keep here for testing, then move to subdivision.css if you like it. */
@@ -756,8 +745,11 @@
                 </div>
                 <div class="pocket-body">
                   <h2>Jose Addition</h2>
-                  <p>
-                    An older Kyle addition where the value story is less about a subdivision sign and more about the specific home, lot, street feel, and nearby surroundings.
+                  <p class="pocket-card-text">
+                    Older Central Kyle convenience near everyday stops like H-E-B, Target, restaurants, and major roads. Some homes may also come with tradeoffs like rush-hour traffic, road noise, or train proximity depending on the exact street.
+                  </p>
+                  <p class="pocket-card-fit">
+                    <strong>Best fit:</strong> Buyers who want to stay close to the center of Kyle and are willing to weigh convenience against location-specific noise or traffic.
                   </p>
                   <div class="pocket-meta">
                     <span><strong>Feel:</strong> older pocket</span>
@@ -1021,9 +1013,17 @@
     (function () {
       const pocketData = {
         "jose-addition": {
-          title: "Jose Addition",
+          title: "José Addition: Convenience With a Few Tradeoffs to Weigh",
           era: "Older Kyle addition",
-          description: "An older Kyle addition where the value story is less about a subdivision sign and more about the specific home, lot, street feel, and nearby surroundings.",
+          description: `
+            <p>José Addition offers one of the biggest advantages older Central Kyle areas can offer: convenience.</p>
+            <p>You are close to everyday stops like H-E-B, Target, restaurants, local shops, and major roads, which can make daily life feel easier for someone who wants to stay near the center of Kyle.</p>
+            <p>But like many central locations, the convenience comes with a few things to pay attention to. Depending on the exact street, buyers may want to consider rush-hour traffic, train proximity, and general road noise before making a decision.</p>
+            <p>That does not make the area good or bad. It just means the right home in José Addition depends on fit.</p>
+            <p>For some buyers, being close to everything is worth the tradeoff. For others, the traffic pattern or train location may matter more. This page is meant to help you see both sides clearly so you can make a steady, informed decision.</p>
+            <h3>Recently Sold Homes in José Addition</h3>
+            <p>This section will look at the last 12 months of sold properties in José Addition instead of only using this year’s activity. In an older Central Kyle pocket, a 12-month view gives a better picture because homes can vary a lot by condition, updates, lot feel, and exact street location.</p>
+          `,
           images: [
             { src: "/images/Jose_Addition/Jose_Addition1.jpg", alt: "Jose Addition neighborhood photo 1" },
             { src: "/images/Jose_Addition/Jose_Addition2.jpg", alt: "Jose Addition neighborhood photo 2" },
