@@ -493,6 +493,37 @@
       border: 1px solid #eef2f7;
     }
 
+    .pocket-card-text,
+    .pocket-card-fit {
+      margin: 0 0 12px;
+      color: #4b5563;
+      line-height: 1.55;
+      font-size: 0.96rem;
+    }
+
+    .pocket-card-fit {
+      padding: 12px 13px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+    }
+
+    .pocket-detail-map {
+      margin: 0 0 18px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      background: #f3f4f6;
+    }
+
+    .pocket-detail-map iframe {
+      display: block;
+      width: 100%;
+      min-height: 320px;
+      border: 0;
+    }
+
     .tradeoff-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1015,7 +1046,11 @@
         "jose-addition": {
           title: "José Addition: Convenience With a Few Tradeoffs to Weigh",
           era: "Older Kyle addition",
+          mapEmbed: "https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=29.996385735157986%2C-97.87347812781591&z=18",
           description: `
+            <div class="pocket-detail-map">
+              <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=29.996385735157986%2C-97.87347812781591&z=18" loading="lazy"></iframe>
+            </div>
             <p>José Addition offers one of the biggest advantages older Central Kyle areas can offer: convenience.</p>
             <p>You are close to everyday stops like H-E-B, Target, restaurants, local shops, and major roads, which can make daily life feel easier for someone who wants to stay near the center of Kyle.</p>
             <p>But like many central locations, the convenience comes with a few things to pay attention to. Depending on the exact street, buyers may want to consider rush-hour traffic, train proximity, and general road noise before making a decision.</p>
@@ -1124,7 +1159,7 @@
 
         titleEl.textContent = pocket.title;
         eraEl.textContent = pocket.era;
-        descEl.textContent = pocket.description;
+        descEl.innerHTML = pocket.description;
         dataEl.innerHTML = "";
 
         pocket.data.forEach(([label, value]) => {
