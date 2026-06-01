@@ -1,12 +1,13 @@
 BEGIN:VCARD
 VERSION:3.0
 N:Camacho;Emmanuel;;;
-FN:Emmanuel "Manny" Camacho
+FN:Manny Camacho | Send Me the Home
 ORG:Dalton Wade, Inc.
 TITLE:Texas Real Estate Agent
-TEL;TYPE=CELL:YOUR-PHONE-NUMBER
+TEL;TYPE=CELL:512-298-7455
 EMAIL:mannyc512@outlook.com
 URL:https://liveinkyle.com
+URL;TYPE=Google Business:https://share.google/3D71PsBMG0aTLnEqw
 NOTE:Send me the home you screenshotted before you click Contact Agent.
 PHOTO;VALUE=URI:https://liveinkyle.com/images/logo.png
 END:VCARD
