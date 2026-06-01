@@ -1,12 +1,12 @@
-
 BEGIN:VCARD
 VERSION:3.0
 N:Camacho;Emmanuel;;;
 FN:Emmanuel "Manny" Camacho
 ORG:Dalton Wade, Inc.
 TITLE:Texas Real Estate Agent
-TEL;TYPE=CELL:512-298-7455
+TEL;TYPE=CELL:YOUR-PHONE-NUMBER
 EMAIL:mannyc512@outlook.com
 URL:https://liveinkyle.com
 NOTE:Send me the home you screenshotted before you click Contact Agent.
+PHOTO;VALUE=URI:https://liveinkyle.com/images/logo.png
 END:VCARD
