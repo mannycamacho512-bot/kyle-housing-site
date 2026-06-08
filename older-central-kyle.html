@@ -74,18 +74,7 @@
       line-height: 1.45;
       color: #4b5563;
     }
-    .local-ad-card-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.16s ease, box-shadow 0.16s ease;
-}
-
-.local-ad-card-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.10);
-}
-
+    
 .local-ad-kicker {
   font-size: 0.72rem;
   letter-spacing: 0.08em;
@@ -111,6 +100,11 @@
   color: #ffffff;
   font-size: 0.84rem;
   font-weight: 800;
+  text-decoration: none;
+}
+
+.local-ad-call:hover {
+  filter: brightness(1.08);
 }
 
     .hero-section.old-kyle-hero {
@@ -1062,13 +1056,12 @@
         <aside class="local-ad-rail" aria-label="Local business ads">
           <div class="local-ad-label">Local Kyle Spots</div>
 
-          <a class="local-ad-card local-ad-card-link goodfolk-ad-card" href="tel:5128099179" aria-label="Call Goodfolk HVAC">
+          <div class="local-ad-card goodfolk-ad-card">
   <div class="local-ad-kicker">Local Service Partner</div>
   <img src="/images/sponsors/goodfolkhvac.png" alt="Goodfolk HVAC - 512-809-9179" loading="lazy">
-  <h3>Goodfolk HVAC</h3>
-  <p>Heating and cooling help. Tap to call.</p>
-  <span class="local-ad-call">Tap to call</span>
-</a>
+  <p>Commercial Cooling &amp; HVAC Service</p>
+  <a class="local-ad-call" href="tel:5128099179" aria-label="Call Goodfolk HVAC">Tap to call</a>
+</div>
 
           <div class="local-ad-card">
             <img src="/images/local-ad-placeholder.jpg" alt="Local business feature placeholder" loading="lazy">
