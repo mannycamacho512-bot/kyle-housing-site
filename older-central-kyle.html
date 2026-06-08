@@ -74,6 +74,44 @@
       line-height: 1.45;
       color: #4b5563;
     }
+    .local-ad-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.local-ad-card-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.10);
+}
+
+.local-ad-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #064E3B;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.goodfolk-ad-card img {
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 4px;
+}
+
+.local-ad-call {
+  display: inline-flex;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
 
     .hero-section.old-kyle-hero {
       overflow: hidden;
@@ -1024,11 +1062,13 @@
         <aside class="local-ad-rail" aria-label="Local business ads">
           <div class="local-ad-label">Local Kyle Spots</div>
 
-          <div class="local-ad-card">
-            <img src="/images/local-ad-placeholder.jpg" alt="Local business feature placeholder" loading="lazy">
-            <h3>Local Business Feature</h3>
-            <p>Short sponsor note or featured Kyle business blurb can go here.</p>
-          </div>
+          <a class="local-ad-card local-ad-card-link goodfolk-ad-card" href="tel:5128099179" aria-label="Call Goodfolk HVAC">
+  <div class="local-ad-kicker">Local Service Partner</div>
+  <img src="/images/sponsors/goodfolkhvac.png" alt="Goodfolk HVAC - 512-809-9179" loading="lazy">
+  <h3>Goodfolk HVAC</h3>
+  <p>Heating and cooling help. Tap to call.</p>
+  <span class="local-ad-call">Tap to call</span>
+</a>
 
           <div class="local-ad-card">
             <img src="/images/local-ad-placeholder.jpg" alt="Local business feature placeholder" loading="lazy">
