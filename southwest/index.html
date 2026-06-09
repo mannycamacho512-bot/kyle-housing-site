@@ -1,729 +1,1614 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Live in Kyle</title>
-  <link rel="canonical" href="https://liveinkyle.com/southwest/">
+import re
+from pathlib import Path
+from typing import Optional, Dict, Any, Tuple
 
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="512x512" href="/images/favicon-512.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+import pandas as pd
 
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-  <link rel="stylesheet" href="/subdivision.css">
-  <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CMXSG3DVFY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-CMXSG3DVFY');
-</script>
+# -----------------------------
+# FILE PATHS
+# -----------------------------
+CLOSED_SHEET_NAME = "Closed Properties"
+CLUSTER_SHEET_NAME = "SubdivisionClusters"
 
-  <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
+SALES_DATA_DIR = Path(r"F:\Python Codes for Real Estate\Market Metrics\data")
+CLUSTER_FILE = Path(r"F:\website_builder\data\subdivision_clusters.xlsx")
+PLUM_CREEK_FILE = Path(r"F:\website_builder\data\plum_creek_sections.xlsx")
+
+
+# -----------------------------
+# BASIC HELPERS
+# -----------------------------
+def find_col(df: pd.DataFrame, *candidates: str) -> Optional[str]:
+    if df is None or df.empty:
+        return None
+
+    cols = {str(c).strip().lower(): c for c in df.columns}
+    for cand in candidates:
+        key = str(cand).strip().lower()
+        if key in cols:
+            return cols[key]
+    return None
+
+def make_comp_based_range(comps, anchor_value, round_to=5000):
+    if anchor_value is None:
+        return None, None
+
+    # Default consumer range: +/- 4%
+    default_low = anchor_value * 0.96
+    default_high = anchor_value * 1.04
+
+    if comps is None or comps.empty:
+        low = round(default_low / round_to) * round_to
+        high = round(default_high / round_to) * round_to
+        return low, high
+
+    price_col = "AdjustedPrice" if "AdjustedPrice" in comps.columns else "SoldPrice"
+    prices = comps[price_col].dropna().tolist()
+
+    if not prices:
+        low = round(default_low / round_to) * round_to
+        high = round(default_high / round_to) * round_to
+        return low, high
+
+    # Use a controlled range around the estimate, not raw comp extremes
+    low = default_low
+    high = default_high
+
+    low = round(low / round_to) * round_to
+    high = round(high / round_to) * round_to
+
+    if high < low:
+        high = low
+
+    return low, high
+
+def normalize_subdivision_name(name: str) -> str:
+    if pd.isna(name):
+        return ""
+
+    s = str(name).strip().upper()
+    s = s.replace("_", " ")
+    s = s.replace('"', " ").replace("'", " ")
+    s = re.sub(r"[^\w\s]", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+
+    if not s:
+        return ""
+
+    # direct raw-name mappings first
+    if "THE TRAILS OF KENSINGTON RANCH" in s:
+        return "KENSINGTON TRAILS"
+    if "KENSINGTON TRLS" in s:
+        return "KENSINGTON TRAILS"
+    if "NORTH TRAILS" in s:
+        return "THE TRAILS"
+    if "TRAILS SUBD" in s:
+        return "THE TRAILS"
+    if "TRAILS SUB" in s:
+        return "THE TRAILS"
+    if s == "THE TRAILS":
+        return "THE TRAILS"
+
+    if "SILVERADO AT PLUM CREEK" in s:
+        return "SILVERADO AT PLUM CREEK"
+    if "1880 AT PLUMB CREEK" in s:
+        return "PLUM CREEK"
+    if "AMBER WOOD" in s:
+        return "AMBERWOOD"
+    if "PLUM CREEK" in s:
+        return "PLUM CREEK"
+    if "6 CREEK" in s or "6 CREEKS" in s or "6 CREEL" in s or "6 CREELS" in s or "6 CREKS" in s:
+        return "6 CREEKS"
+    if "BROOKS RANCH AT KYLE LLC" in s or "BROOKS RANCH AT KYLE" in s or s == "BROOKS RANCH":
+        return "BROOKS RANCH"
+    if "KYLE 47 SUB PH 1" in s or "KYLE 47 SUB PH 2" in s or "KYLE 47 SUBDIVISION PHASE 2" in s:
+        return "BROOKS CROSSING"
+    if "COOL SPGS" in s or "COOL SPRINGS" in s:
+        return "COOL SPRINGS"
+    if "ANTHEM COTTAGES" in s or s == "ANTHEM":
+        return "ANTHEM"
+    if "HARVEST CREEK" in s:
+        return "HARVEST CREEK"
+    if "CROSSWINDS" in s:
+        return "CROSSWINDS"
+    if "BROOKSIDE" in s:
+        return "CREEKSIDE"
+    if "PARAMOUNT" in s:
+        return "PARAMOUNT"
+    if "BUNTON CREEK" in s:
+        return "BUNTON CREEK"
+    if "POST OAK" in s:
+        return "POST OAK"
+    if "SOUTHLAKE RANCH" in s:
+        return "SOUTHLAKE RANCH"
+    if "ARROYO RANCH" in s:
+        return "ARROYO RANCH"
+    if "INDIAN PAINTBRUSH" in s:
+        return "INDIAN PAINTBRUSH"
+    if "WOODLANDS PARK" in s:
+        return "WOODLANDS PARK"
+    if "SPRING BRANCH II" in s or s == "SPRING BRANCH":
+        return "SPRING BRANCH"
+    if "STEEPLECHASE SUB" in s or "THE PARK AT STEEPLECHASE" in s:
+        return "STEEPLECHASE"
+    if "THE VILLAS AT CREEKSIDE" in s:
+        return "CREEKSIDE"
+    if "WATERSTONE CROSSING" in s or s == "WATERSTONE":
+        return "WATERSTONE"
+    if "MEADOW WOODS" in s:
+        return "MEADOW WOODS"
+    if "BROOKS CROSSING" in s:
+        return "BROOKS CROSSING"
+    if "QUAIL MEADOWS" in s:
+        return "QUAIL MEADOWS"
+    if "HOMETOWN KYLE" in s:
+        return "HOMETOWN KYLE"
+    if "SCOTT ADDITION" in s or "SCOTT ADD" in s or "SCOTT ADDN" in s:
+        return "SCOTT ADDITION"
+    if "HIGH MEADOWS" in s:
+        return "HIGH MEADOWS"
+    if "AVERY PARK" in s:
+        return "HIGH MEADOWS"
+
+    cut_patterns = [
+        r"\bPHASE\b.*$", r"\bPH\b.*$", r"\bSEC\b.*$", r"\bSECTION\b.*$",
+        r"\bUNIT\b.*$", r"\bBLK\b.*$", r"\bBLOCK\b.*$", r"\bLOT\b.*$",
+        r"\bTRACT\b.*$", r"\bADD\b.*$", r"\bADDN\b.*$", r"\bAMEND\b.*$",
+        r"\bAMENDED\b.*$", r"\bSUB\b.*$", r"\bSUBD\b.*$", r"\bSUBDIVISION\b.*$",
+    ]
+
+    for pat in cut_patterns:
+        if re.search(pat, s):
+            s = re.sub(pat, "", s).strip()
+            break
+
+    s = re.sub(r"\b\d+[A-Z]\d*\b$", "", s).strip()
+    s = re.sub(r"\b\d+\-[A-Z0-9]+\b$", "", s).strip()
+    s = re.sub(r"\b\d+\b$", "", s).strip()
+    s = re.sub(r"\s+", " ", s).strip()
+
+    # exact cleaned-name mappings after cuts
+    if s == "TRAILS":
+        return "THE TRAILS"
+    if s == "KENSINGTON TRAILS":
+        return "KENSINGTON TRAILS"
+    if s == "THE TRAILS OF KENSINGTON RANCH":
+        return "KENSINGTON TRAILS"
+
+    return s
+
+
+def parse_build_era(build_era: str) -> Tuple[Optional[int], Optional[int]]:
+    """
+    Examples:
+    '2003-2009' -> (2003, 2009)
+    '2019+'     -> (2019, None)
+    """
+    if pd.isna(build_era):
+        return None, None
+
+    s = str(build_era).strip()
+
+    if not s:
+        return None, None
+
+    if s.endswith("+"):
+        start = re.sub(r"[^\d]", "", s)
+        return (int(start), None) if start else (None, None)
+
+    m = re.match(r"^\s*(\d{4})\s*-\s*(\d{4})\s*$", s)
+    if m:
+        return int(m.group(1)), int(m.group(2))
+
+    return None, None
+
+def fmt_money(x):
+    if x is None:
+        return None
+    return f"-${abs(x):,.0f}" if x < 0 else f"${x:,.0f}"
+
+def fmt_pct(x):
+    return f"{x:.1f}%" if x is not None else None
+
+def make_value_range(anchor_value, pct=0.03, round_to=5000):
+    if anchor_value is None:
+        return None, None
+
+    low = anchor_value * (1 - pct)
+    high = anchor_value * (1 + pct)
+
+    low = round(low / round_to) * round_to
+    high = round(high / round_to) * round_to
+
+    return low, high
+
+def make_equity_range(current_low, current_high, purchase_value, round_to=5000):
+    if purchase_value is None or current_low is None or current_high is None:
+        return None, None
+
+    equity_low = current_low - purchase_value
+    equity_high = current_high - purchase_value
+
+    equity_low = round(equity_low / round_to) * round_to
+    equity_high = round(equity_high / round_to) * round_to
+
+    low, high = sorted([equity_low, equity_high])
+    return low, high
+
+def fmt_money_range(low, high):
+    if low is None or high is None:
+        return None
+    return f"{fmt_money(low)} – {fmt_money(high)}"
+# -----------------------------
+# LOADERS
+# -----------------------------
+def list_excel_files(data_dir: Path) -> list[Path]:
+    files = sorted([p for p in data_dir.glob("*.xlsx") if p.is_file()])
+    if not files:
+        raise FileNotFoundError(f"No .xlsx files found in: {data_dir}")
+    return files
+
+
+def load_sales_data(
+    data_dir: Path,
+    plum_creek_df: Optional[pd.DataFrame] = None,
+    sheet_name: str = CLOSED_SHEET_NAME
+) -> pd.DataFrame:
+    dfs = []
+
+    for path in list_excel_files(data_dir):
+        try:
+            df = pd.read_excel(path, sheet_name=sheet_name)
+        except Exception as e:
+            print(f"Skipped {path.name}: {e}")
+            continue
+
+        if df is None or df.empty:
+            print(f"Skipped {path.name}: sheet empty")
+            continue
+
+        df.columns = [str(c).strip() for c in df.columns]
+        df["SourceFile"] = path.name
+        dfs.append(df)
+
+    if not dfs:
+        raise ValueError(f"No usable sales data found in: {data_dir}")
+
+    df = pd.concat(dfs, ignore_index=True)
+
+    sub_col = find_col(df, "Subdivision")
+    beds_col = find_col(df, "# Beds", "Beds")
+    baths_col = find_col(df, "# Full Baths", "Full Baths")
+    sqft_col = find_col(df, "SqFt", "Sq Ft", "Square Feet")
+    close_col = find_col(df, "Close Date")
+    price_col = find_col(df, "Sold Price", "Close Price", "List Price")
+    year_built_col = find_col(df, "Year Built", "Yr Built")
+    status_col = find_col(df, "Status")
+
+    required = {
+        "Subdivision": sub_col,
+        "Beds": beds_col,
+        "Baths": baths_col,
+        "SqFt": sqft_col,
+        "Close Date": close_col,
+        "Price": price_col,
+    }
+    missing = [k for k, v in required.items() if v is None]
+    if missing:
+        raise ValueError(f"Missing required columns in sales data: {missing}")
+
+    df["SubdivisionKey"] = df[sub_col].map(normalize_subdivision_name)
+    df["BedsNum"] = pd.to_numeric(df[beds_col], errors="coerce")
+    df["BathsNum"] = pd.to_numeric(df[baths_col], errors="coerce")
+    df["SqFtNum"] = pd.to_numeric(df[sqft_col], errors="coerce")
+    df["SoldPrice"] = pd.to_numeric(df[price_col], errors="coerce")
+    df["CloseDate"] = pd.to_datetime(df[close_col], errors="coerce")
+    df["PPSF"] = df["SoldPrice"] / df["SqFtNum"]
+
+    if year_built_col:
+        df["YearBuiltNum"] = pd.to_numeric(df[year_built_col], errors="coerce")
+    else:
+        df["YearBuiltNum"] = pd.NA
+
+    if status_col:
+        df["StatusClean"] = df[status_col].astype(str).str.strip().str.upper()
+    else:
+        df["StatusClean"] = ""
+
+    df = df.dropna(
+        subset=["SubdivisionKey", "BedsNum", "BathsNum", "SqFtNum", "SoldPrice", "CloseDate"]
+    )
+
+    if plum_creek_df is not None:
+        df = relabel_plum_creek_sections(df, plum_creek_df)
+
+    return df
+
+def load_subdivision_clusters(path: Path, sheet_name: str = CLUSTER_SHEET_NAME) -> pd.DataFrame:
+    df = pd.read_excel(path, sheet_name=sheet_name)
+    df.columns = [str(c).strip() for c in df.columns]
+
+    sub_col = find_col(df, "SubdivisionKey", "Subdivision")
+    cluster_col = find_col(df, "Cluster")
+    price_band_col = find_col(df, "PriceBand")
+    build_era_col = find_col(df, "BuildEra")
+    analog1_col = find_col(df, "AnalogTier1")
+    analog2_col = find_col(df, "AnalogTier2")
+    analog3_col = find_col(df, "AnalogTier3")
+
+    required = {
+        "SubdivisionKey": sub_col,
+        "Cluster": cluster_col,
+        "PriceBand": price_band_col,
+        "BuildEra": build_era_col,
+    }
+    missing = [k for k, v in required.items() if v is None]
+    if missing:
+        raise ValueError(f"Missing required columns in cluster file: {missing}")
+
+    selected_cols = [sub_col, cluster_col, price_band_col, build_era_col]
+
+    analog_cols = [analog1_col, analog2_col, analog3_col]
+    analog_cols = [c for c in analog_cols if c is not None]
+
+    out = df[selected_cols + analog_cols].copy()
+
+    rename_map = {
+        sub_col: "SubdivisionKey",
+        cluster_col: "Cluster",
+        price_band_col: "PriceBand",
+        build_era_col: "BuildEra",
     }
 
-    body {
-      font-family: "Hedvig Letters Serif", serif;
-      background: white;
-      color: black;
+    if analog1_col:
+        rename_map[analog1_col] = "AnalogTier1"
+    if analog2_col:
+        rename_map[analog2_col] = "AnalogTier2"
+    if analog3_col:
+        rename_map[analog3_col] = "AnalogTier3"
+
+    out = out.rename(columns=rename_map)
+    out["SubdivisionKey"] = out["SubdivisionKey"].map(normalize_subdivision_name)
+    out["Cluster"] = out["Cluster"].astype(str).str.strip().str.upper()
+    out["PriceBand"] = out["PriceBand"].astype(str).str.strip().str.upper()
+    out["BuildEra"] = out["BuildEra"].astype(str).str.strip()
+    for col in ["AnalogTier1", "AnalogTier2", "AnalogTier3"]:
+        if col in out.columns:
+            out[col] = out[col].apply(
+                lambda x: normalize_subdivision_name(x) if pd.notna(x) and str(x).strip() else None
+            )
+
+    starts, ends = [], []
+    for val in out["BuildEra"]:
+        start, end = parse_build_era(val)
+        starts.append(start)
+        ends.append(end)
+
+    out["BuildEraStart"] = starts
+    out["BuildEraEnd"] = ends
+
+    return out.drop_duplicates(subset=["SubdivisionKey"]).reset_index(drop=True)
+
+def load_plum_creek_sections(path: Path) -> pd.DataFrame:
+    df = pd.read_excel(path)
+    df.columns = [str(c).strip() for c in df.columns]
+
+    street_col = find_col(df, "StreetName")
+    section_col = find_col(df, "PlumCreekSection")
+
+    required = {
+        "StreetName": street_col,
+        "PlumCreekSection": section_col,
+    }
+    missing = [k for k, v in required.items() if v is None]
+    if missing:
+        raise ValueError(f"Missing required columns in Plum Creek file: {missing}")
+
+    out = df[[street_col, section_col]].copy()
+    out.columns = ["StreetName", "PlumCreekSection"]
+
+    out["StreetName"] = (
+        out["StreetName"]
+        .astype(str)
+        .str.strip()
+        .str.upper()
+    )
+
+    out["PlumCreekSection"] = out["PlumCreekSection"].map(normalize_subdivision_name)
+
+    out = out.drop_duplicates(subset=["StreetName"]).reset_index(drop=True)
+    return out
+
+
+# -----------------------------
+# PROFILE LOOKUP
+# -----------------------------
+def get_subdivision_profile(
+    subdivision_name: str,
+    cluster_df: pd.DataFrame
+) -> Optional[Dict[str, Any]]:
+    key = normalize_subdivision_name(subdivision_name)
+    row = cluster_df.loc[cluster_df["SubdivisionKey"] == key]
+
+    if row.empty:
+        return None
+
+    rec = row.iloc[0]
+    return {
+        "SubdivisionKey": rec["SubdivisionKey"],
+        "Cluster": rec["Cluster"],
+        "PriceBand": rec["PriceBand"],
+        "BuildEra": rec["BuildEra"],
+        "BuildEraStart": rec["BuildEraStart"],
+        "BuildEraEnd": rec["BuildEraEnd"],
+        "AnalogTier1": rec["AnalogTier1"] if "AnalogTier1" in rec else None,
+        "AnalogTier2": rec["AnalogTier2"] if "AnalogTier2" in rec else None,
+        "AnalogTier3": rec["AnalogTier3"] if "AnalogTier3" in rec else None,
+    }
+def get_analog_subdivisions(subdivision_name: str, cluster_df: pd.DataFrame) -> list[str]:
+    profile = get_subdivision_profile(subdivision_name, cluster_df)
+    if profile is None:
+        return []
+
+    analogs = [
+        profile.get("AnalogTier1"),
+        profile.get("AnalogTier2"),
+        profile.get("AnalogTier3"),
+    ]
+
+    return [a for a in analogs if a]
+
+def relabel_plum_creek_sections(
+    sales_df: pd.DataFrame,
+    plum_creek_df: pd.DataFrame
+) -> pd.DataFrame:
+    df = sales_df.copy()
+
+    street_col = find_col(df, "Street Name", "StreetName", "Street", "Address")
+    if street_col is None:
+        print("Warning: No street/address column found. Plum Creek section relabel skipped.")
+        return df
+
+    street_lookup = dict(
+        zip(
+            plum_creek_df["StreetName"].astype(str).str.upper(),
+            plum_creek_df["PlumCreekSection"]
+        )
+    )
+
+    street_series = (
+        df[street_col]
+        .astype(str)
+        .str.strip()
+        .str.upper()
+        .str.replace(r"^\d+\s+", "", regex=True)
+        .str.split()
+        .str[0]
+    )
+
+    is_plum_creek = df["SubdivisionKey"].astype(str).str.upper().eq("PLUM CREEK")
+    matched_section = street_series.map(street_lookup)
+
+    df.loc[
+        is_plum_creek & matched_section.notna(),
+        "SubdivisionKey"
+    ] = matched_section[is_plum_creek & matched_section.notna()]
+
+    return df
+# -----------------------------
+# COMP FILTERS
+# -----------------------------
+def apply_basic_filters(
+    df: pd.DataFrame,
+    beds: float,
+    baths: float,
+    sqft: float,
+    sqft_pct: float = 0.15,
+    allow_bed_variance: int = 0,
+    allow_bath_variance: float = 0.0,
+) -> pd.DataFrame:
+    sqft_min = sqft * (1 - sqft_pct)
+    sqft_max = sqft * (1 + sqft_pct)
+
+    out = df[
+        (df["BedsNum"].between(beds - allow_bed_variance, beds + allow_bed_variance)) &
+        (df["BathsNum"].between(baths - allow_bath_variance, baths + allow_bath_variance)) &
+        (df["SqFtNum"].between(sqft_min, sqft_max))
+    ].copy()
+
+    return out
+
+
+def apply_date_window(
+    df: pd.DataFrame,
+    center_date: pd.Timestamp,
+    months_before: int,
+    months_after: int
+) -> pd.DataFrame:
+    start = center_date - pd.DateOffset(months=months_before)
+    end = center_date + pd.DateOffset(months=months_after)
+    return df[(df["CloseDate"] >= start) & (df["CloseDate"] <= end)].copy()
+
+
+def apply_build_era_filter(
+    df: pd.DataFrame,
+    build_era_start: Optional[int],
+    build_era_end: Optional[int],
+    variance_years: int = 3
+) -> pd.DataFrame:
+    if pd.isna(build_era_start) or build_era_start is None:
+        return df.copy()
+
+    min_year = build_era_start - variance_years
+    max_year = (build_era_end if build_era_end is not None else build_era_start + 10) + variance_years
+
+    if "YearBuiltNum" not in df.columns:
+        return df.copy()
+
+    return df[
+        df["YearBuiltNum"].isna() | df["YearBuiltNum"].between(min_year, max_year)
+    ].copy()
+
+def apply_subject_year_filter(
+    df: pd.DataFrame,
+    subject_year: Optional[int],
+    variance_years: int = 3
+) -> pd.DataFrame:
+    if subject_year is None or pd.isna(subject_year):
+        return df.copy()
+
+    if "YearBuiltNum" not in df.columns:
+        return df.copy()
+
+    low = subject_year - variance_years
+    high = subject_year + variance_years
+
+    return df[
+        df["YearBuiltNum"].isna() | df["YearBuiltNum"].between(low, high)
+    ].copy()
+
+def apply_price_proximity_filter(
+    df: pd.DataFrame,
+    target_price: float,
+    pct_band: float = 0.20
+) -> pd.DataFrame:
+    if target_price is None or pd.isna(target_price) or target_price <= 0:
+        return df.copy()
+
+    low = target_price * (1 - pct_band)
+    high = target_price * (1 + pct_band)
+    return df[df["SoldPrice"].between(low, high)].copy()
+
+def adjust_comp_price_to_subject(
+    comp_row: pd.Series,
+    subject_beds: float,
+    subject_baths: float,
+    subject_sqft: float,
+    subject_year_built: Optional[int] = None,
+    bed_adjustment: float = 20000,
+    bath_adjustment: float = 5000,
+    ppsf_adjustment: float = 175,
+    year_adjustment: float = 1500,
+) -> float:
+    adjusted_price = comp_row["SoldPrice"]
+
+    bed_diff = subject_beds - comp_row["BedsNum"]
+    bath_diff = subject_baths - comp_row["BathsNum"]
+    sqft_diff = subject_sqft - comp_row["SqFtNum"]
+    sqft_diff = max(min(sqft_diff, 500), -500)
+
+    adjusted_price += bed_diff * bed_adjustment
+    adjusted_price += bath_diff * bath_adjustment
+    pct_diff = abs(subject_sqft - comp_row["SqFtNum"]) / subject_sqft
+
+    if pct_diff < 0.05:
+        sqft_adjustment = 0
+    elif pct_diff < 0.10:
+        sqft_adjustment = sqft_diff * (ppsf_adjustment * 0.25)
+    else:
+        sqft_adjustment = sqft_diff * (ppsf_adjustment * 0.50)
+
+    adjusted_price += sqft_adjustment
+
+    if subject_year_built is not None and pd.notna(comp_row.get("YearBuiltNum")):
+        year_diff = subject_year_built - comp_row["YearBuiltNum"]
+        year_diff = max(min(year_diff, 10), -10)
+        adjusted_price += year_diff * year_adjustment
+
+    return adjusted_price
+# -----------------------------
+# MAIN FALLBACK LOGIC
+# -----------------------------
+def find_analog_comp_set(
+    sales_df: pd.DataFrame,
+    cluster_df: pd.DataFrame,
+    subdivision_name: str,
+    beds: float,
+    baths: float,
+    sqft: float,
+    center_date: pd.Timestamp,
+    months_before: int,
+    months_after: int,
+    target_price: Optional[float] = None,
+    subject_year_built: Optional[int] = None,
+    min_comps: int = 3,
+) -> Dict[str, Any]:
+    analogs = get_analog_subdivisions(subdivision_name, cluster_df)
+
+    if not analogs:
+        empty = pd.DataFrame()
+        return {
+            "level_name": "No analog subdivisions configured",
+            "summary": summarize_comps(empty),
+            "comps": empty,
+        }
+
+    base = apply_basic_filters(
+        sales_df,
+        beds=beds,
+        baths=baths,
+        sqft=sqft,
+        sqft_pct=0.15,
+        allow_bed_variance=0,
+        allow_bath_variance=0.0,
+    )
+
+    base = apply_date_window(base, center_date, months_before, months_after)
+    base = apply_subject_year_filter(base, subject_year_built, variance_years=4)
+    base = apply_price_proximity_filter(base, target_price=target_price, pct_band=0.20)
+
+    used = []
+    combined = pd.DataFrame()
+
+    for i, analog in enumerate(analogs, start=1):
+        tier_df = base[base["SubdivisionKey"] == analog].copy()
+
+        if not tier_df.empty:
+            used.append(analog)
+            combined = pd.concat([combined, tier_df], ignore_index=True)
+
+        if len(combined) >= min_comps:
+            return {
+                "level_name": f"Analog fallback - tiers used: {', '.join(used)}",
+                "summary": summarize_comps(combined),
+                "comps": combined.sort_values("CloseDate").copy(),
+            }
+
+    if combined.empty:
+        return {
+            "level_name": "Analog fallback - insufficient comps",
+            "summary": summarize_comps(combined),
+            "comps": combined.copy(),
+        }
+
+    return {
+        "level_name": "Analog fallback - insufficient comps",
+        "summary": summarize_comps(combined),
+        "comps": combined.sort_values("CloseDate").copy(),
     }
 
-    h1 {
-      position: absolute !important;
-      left: -9999px !important;
+def summarize_comps(df: pd.DataFrame) -> Dict[str, Any]:
+    if df.empty:
+        return {
+            "count": 0,
+            "avg_price": None,
+            "median_price": None,
+            "avg_ppsf": None,
+            "median_ppsf": None,
+        }
+
+    price_col = "AdjustedPrice" if "AdjustedPrice" in df.columns else "SoldPrice"
+    ppsf_col = "AdjustedPPSF" if "AdjustedPPSF" in df.columns else "PPSF"
+
+    return {
+        "count": int(len(df)),
+        "avg_price": float(df[price_col].mean()),
+        "median_price": float(df[price_col].median()),
+        "avg_ppsf": float(df[ppsf_col].mean()),
+        "median_ppsf": float(df[ppsf_col].median()),
     }
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
+def find_ranked_fallback_comps(
+    sales_df: pd.DataFrame,
+    cluster_df: pd.DataFrame,
+    subdivision_name: str,
+    beds: float,
+    baths: float,
+    sqft: float,
+    center_date: pd.Timestamp,
+    months_before: int,
+    months_after: int,
+    target_price: Optional[float] = None,
+    subject_year_built: Optional[int] = None,
+    max_comps: int = 5,
+) -> Dict[str, Any]:
+    profile = get_subdivision_profile(subdivision_name, cluster_df)
+    if profile is None:
+        empty = pd.DataFrame()
+        return {
+            "level_name": "Ranked fallback - no profile",
+            "summary": summarize_comps(empty),
+            "comps": empty,
+        }
+
+    sub_key = profile["SubdivisionKey"]
+    cluster_name = profile["Cluster"]
+    cluster_members = cluster_df.loc[
+        cluster_df["Cluster"] == cluster_name, "SubdivisionKey"
+    ].tolist()
+    analogs = get_analog_subdivisions(subdivision_name, cluster_df)
+
+    def rank_pool(candidate_keys, label):
+        df = sales_df[sales_df["SubdivisionKey"].isin(candidate_keys)].copy()
+        df = apply_date_window(df, center_date, months_before, months_after)
+        df = apply_subject_year_filter(df, subject_year_built, variance_years=4)
+
+        if df.empty:
+            return {
+                "level_name": label,
+                "summary": summarize_comps(df),
+                "comps": df,
+            }
+
+        if target_price is not None and sqft:
+            target_ppsf = target_price / sqft
+        else:
+            target_ppsf = None
+
+        if target_price is not None and target_price > 0:
+            df["PriceDiff"] = (df["SoldPrice"] - target_price).abs()
+        else:
+            df["PriceDiff"] = 0
+
+        if target_ppsf is not None:
+            df["PPSFDiff"] = (df["PPSF"] - target_ppsf).abs()
+        else:
+            df["PPSFDiff"] = 0
+
+        df["SqFtDiff"] = (df["SqFtNum"] - sqft).abs()
+        df["BedDiff"] = (df["BedsNum"] - beds).abs()
+        df["BathDiff"] = (df["BathsNum"] - baths).abs()
+        if subject_year_built is not None:
+            df["YearBuiltDiff"] = (df["YearBuiltNum"] - subject_year_built).abs()
+        else:
+            df["YearBuiltDiff"] = 0
+
+        df["ExactMatch"] = (
+                (df["BedsNum"] == beds) &
+                (df["BathsNum"] == baths)
+        ).astype(int)
+        df["SameSubdivision"] = (df["SubdivisionKey"] == sub_key).astype(int)
+
+        df = df.sort_values(
+            by=["SameSubdivision", "ExactMatch", "SqFtDiff", "CloseDate", "YearBuiltDiff", "PriceDiff", "PPSFDiff",
+                "BedDiff", "BathDiff"],
+            ascending=[False, False, True, False, True, True, True, True, True]
+        )
+
+        best = df.head(max_comps).copy()
+        local_ppsf = best["PPSF"].median()
+
+        best["AdjustedPrice"] = best.apply(
+            lambda row: adjust_comp_price_to_subject(
+                row,
+                subject_beds=beds,
+                subject_baths=baths,
+                subject_sqft=sqft,
+                subject_year_built=subject_year_built,
+                bed_adjustment=20000,
+                bath_adjustment=5000,
+                ppsf_adjustment=local_ppsf,
+            ),
+            axis=1
+        )
+
+        best["AdjustedPPSF"] = best["AdjustedPrice"] / sqft
+
+        if best.empty:
+            return {
+                "level_name": label,
+                "summary": summarize_comps(best),
+                "comps": best,
+            }
+
+        median_ppsf = best["AdjustedPPSF"].median()
+        low = median_ppsf * 0.75
+        high = median_ppsf * 1.25
+        best = best[best["AdjustedPPSF"].between(low, high)].copy()
+
+        return {
+            "level_name": label,
+            "summary": summarize_comps(best),
+            "comps": best.sort_values("CloseDate").copy(),
+        }
+
+    # Stage 1: subdivision only
+    result1 = rank_pool([sub_key], "Ranked fallback - subdivision only")
+
+    # Stage 2: subdivision + cluster
+    stage2_keys = [x for x in cluster_members if x != sub_key]
+    result2 = rank_pool(stage2_keys, "Ranked fallback - cluster only")
+
+    # Keep subdivision-only only if it has enough comps and they are truly close
+    if not result1["comps"].empty and len(result1["comps"]) >= 3:
+        sub_sqft_diff = result1["comps"]["SqFtDiff"].median()
+        sub_bed_diff = result1["comps"]["BedDiff"].median()
+        sub_bath_diff = result1["comps"]["BathDiff"].median()
+
+        if (
+                sub_sqft_diff <= sqft * 0.08
+                and sub_bed_diff == 0
+                and sub_bath_diff == 0
+        ):
+            return result1
+
+    # Otherwise use cluster if it has enough comps
+    if not result2["comps"].empty and len(result2["comps"]) >= 3:
+        return result2
+
+    # If cluster didn't help, fall back to subdivision-only
+    if not result1["comps"].empty:
+        return result1
+
+    # Stage 3: subdivision + cluster + analogs
+    stage3_keys = stage2_keys + [x for x in analogs if x not in stage2_keys]
+    result3 = rank_pool(stage3_keys, "Ranked fallback - subdivision + cluster + analogs")
+    return result3
+# -----------------------------
+# MAIN FALLBACK LOGIC
+# -----------------------------
+def find_best_comp_set(
+    sales_df: pd.DataFrame,
+    cluster_df: pd.DataFrame,
+    subdivision_name: str,
+    beds: float,
+    baths: float,
+    sqft: float,
+    purchase_date: str,
+    min_comps: int = 3,
+    target_price: Optional[float] = None,
+    subject_year_built: Optional[int] = None,
+) -> Dict[str, Any]:
+    """
+    Returns the first comp set that meets the minimum comp threshold.
+
+    Fallback order:
+    1. Same subdivision + tight date window
+    2. Same subdivision + wider date window
+    3. Same cluster + wider date window
+    4. Kyle-wide + build era + price proximity
+    """
+    purchase_dt = pd.to_datetime(purchase_date)
+    profile = get_subdivision_profile(subdivision_name, cluster_df)
+
+    if profile is None:
+        raise ValueError(f"Subdivision not found in cluster file: {subdivision_name}")
+
+    sub_key = profile["SubdivisionKey"]
+    cluster_name = profile["Cluster"]
+    build_era_start = profile["BuildEraStart"]
+    build_era_end = profile["BuildEraEnd"]
+
+    base = apply_basic_filters(
+        sales_df,
+        beds=beds,
+        baths=baths,
+        sqft=sqft,
+        sqft_pct=0.15,
+        allow_bed_variance=0,
+        allow_bath_variance=0.0,
+    )
+
+    # ---- LEVEL 1: same subdivision, tight date window
+    level1 = base[base["SubdivisionKey"] == sub_key].copy()
+    level1 = apply_date_window(level1, purchase_dt, months_before=2, months_after=1)
+    level1 = apply_build_era_filter(level1, build_era_start, build_era_end, variance_years=2)
+    level1 = apply_subject_year_filter(level1, subject_year_built, variance_years=3)
+    print("\nLEVEL 1 COMPS:")
+    print(level1[["SubdivisionKey", "CloseDate", "SqFtNum", "SoldPrice", "YearBuiltNum"]])
+
+    if len(level1) >= 2:
+        return {
+            "level_used": 1,
+            "level_name": "Same subdivision + tight date window",
+            "profile": profile,
+            "summary": summarize_comps(level1),
+            "comps": level1.sort_values("CloseDate").copy(),
+        }
+
+    # ---- LEVEL 2: same subdivision, wider date window
+    level2 = base[base["SubdivisionKey"] == sub_key].copy()
+    level2 = apply_date_window(level2, purchase_dt, months_before=3, months_after=3)
+    level2 = apply_build_era_filter(level2, build_era_start, build_era_end, variance_years=2)
+    level2 = apply_subject_year_filter(level2, subject_year_built, variance_years=4)
+    print("\nLEVEL 2 COMPS:")
+    print(level2[["SubdivisionKey", "CloseDate", "SqFtNum", "SoldPrice", "YearBuiltNum"]])
+
+    if len(level2) >= min_comps:
+        return {
+            "level_used": 2,
+            "level_name": "Same subdivision + wider date window",
+            "profile": profile,
+            "summary": summarize_comps(level2),
+            "comps": level2.sort_values("CloseDate").copy(),
+        }
+
+    # ---- LEVEL 3: same cluster, wider date window
+    cluster_members = cluster_df.loc[cluster_df["Cluster"] == cluster_name, "SubdivisionKey"].tolist()
+
+    level3_base = apply_basic_filters(
+        sales_df,
+        beds=beds,
+        baths=baths,
+        sqft=sqft,
+        sqft_pct=0.15,
+        allow_bed_variance=0,
+        allow_bath_variance=0.0,
+    )
+
+    level3 = level3_base[level3_base["SubdivisionKey"].isin(cluster_members)].copy()
+    level3 = apply_date_window(level3, purchase_dt, months_before=3, months_after=3)
+    level3 = apply_build_era_filter(level3, build_era_start, build_era_end, variance_years=2)
+    level3 = apply_subject_year_filter(level3, subject_year_built, variance_years=5)
+
+    # extra safety: remove out-of-range prices
+    median_price = level3["SoldPrice"].median()
+
+    low = median_price * 0.8
+    high = median_price * 1.2
+
+    level3 = level3[level3["SoldPrice"].between(low, high)]
+
+    print("\nLEVEL 3 COMPS (CLUSTER):")
+    print(level3[["SubdivisionKey", "CloseDate", "SqFtNum", "SoldPrice", "YearBuiltNum"]])
+
+    if len(level3) >= min_comps:
+        return {
+            "level_used": 3,
+            "level_name": "Cluster fallback",
+            "profile": profile,
+            "summary": summarize_comps(level3),
+            "comps": level3.sort_values("CloseDate").copy(),
+        }
+
+    # ---- LEVEL 4: ranked fallback
+    ranked_result = find_ranked_fallback_comps(
+        sales_df=sales_df,
+        cluster_df=cluster_df,
+        subdivision_name=subdivision_name,
+        beds=beds,
+        baths=baths,
+        sqft=sqft,
+        center_date=purchase_dt,
+        months_before=3,
+        months_after=3,
+        target_price=target_price,
+        subject_year_built=subject_year_built,
+        max_comps=5,
+    )
+
+    print("\nLEVEL 4 COMPS (RANKED FALLBACK):")
+    if not ranked_result["comps"].empty:
+        print(ranked_result["comps"][["SubdivisionKey", "CloseDate", "SqFtNum", "SoldPrice", "YearBuiltNum"]])
+    else:
+        print("Empty DataFrame")
+
+    if not ranked_result["comps"].empty:
+        return {
+            "level_used": 4,
+            "level_name": ranked_result["level_name"],
+            "profile": profile,
+            "summary": ranked_result["summary"],
+            "comps": ranked_result["comps"],
+        }
+
+    # ---- LEVEL 4: analog subdivision fallback
+    analog_result = find_analog_comp_set(
+        sales_df=sales_df,
+        cluster_df=cluster_df,
+        subdivision_name=subdivision_name,
+        beds=beds,
+        baths=baths,
+        sqft=sqft,
+        center_date=purchase_dt,
+        months_before=3,
+        months_after=3,
+        target_price=target_price,
+        subject_year_built=subject_year_built,
+        min_comps=min_comps,
+    )
+
+    print("\nLEVEL 4 COMPS (ANALOG):")
+    if not analog_result["comps"].empty:
+        print(analog_result["comps"][["SubdivisionKey", "CloseDate", "SqFtNum", "SoldPrice", "YearBuiltNum"]])
+    else:
+        print("Empty DataFrame")
+
+    if len(analog_result["comps"]) >= 1:
+        return {
+            "level_used": 4,
+            "level_name": analog_result["level_name"],
+            "profile": profile,
+            "summary": analog_result["summary"],
+            "comps": analog_result["comps"],
+        }
+    # ---- LEVEL 4: Kyle-wide price/build-era fallback
+    level4 = base.copy()
+    level4 = apply_date_window(level4, purchase_dt, months_before=3, months_after=3)
+    level4 = apply_build_era_filter(level4, build_era_start, build_era_end, variance_years=3)
+    level4 = apply_price_proximity_filter(level4, target_price=target_price, pct_band=0.20)
+
+    if len(level4) >= min_comps:
+        return {
+            "level_used": 4,
+            "level_name": "Kyle-wide price/build-era fallback",
+            "profile": profile,
+            "summary": summarize_comps(level4),
+            "comps": level4.sort_values("CloseDate").copy(),
+        }
+
+    # ---- If still not enough, return best available from level 4
+    return {
+        "level_used": 4,
+        "level_name": "Kyle-wide price/build-era fallback (insufficient comps)",
+        "profile": profile,
+        "summary": summarize_comps(level4),
+        "comps": level4.sort_values("CloseDate").copy(),
+    }
+def measure_purchase_value(
+    sales_df,
+    cluster_df,
+    subdivision_name,
+    beds,
+    baths,
+    sqft,
+    purchase_date,
+    user_price=None,
+    subject_year_built=None
+):
+    profile = get_subdivision_profile(subdivision_name, cluster_df)
+    purchase_dt = pd.to_datetime(purchase_date)
+    purchase_year = purchase_dt.year
+
+    if profile is None:
+        raise ValueError(f"Subdivision not found in cluster file: {subdivision_name}")
+
+    build_era_start = profile["BuildEraStart"]
+
+    if build_era_start is not None and purchase_year < int(build_era_start):
+        return {
+            "value": user_price if user_price is not None else None,
+            "median_ppsf": None,
+            "method": "user price required" if user_price is None else "user price",
+            "result": None,
+            "warning": (
+                f"Purchase year {purchase_year} is earlier than the typical build start "
+                f"for {profile['SubdivisionKey']} ({int(build_era_start)}). "
+                f"Please enter the actual purchase price."
+            )
+        }
+    result = find_best_comp_set(
+        sales_df=sales_df,
+        cluster_df=cluster_df,
+        subdivision_name=subdivision_name,
+        beds=beds,
+        baths=baths,
+        sqft=sqft,
+        purchase_date=purchase_date,
+        target_price=user_price,
+        subject_year_built=subject_year_built
+    )
+
+    comps = result["comps"]
+
+    if comps.empty:
+        return {
+            "value": None,
+            "method": "no comps",
+            "result": result
+        }
+
+    median_ppsf = comps["AdjustedPPSF"].median() if "AdjustedPPSF" in comps.columns else comps["PPSF"].median()
+
+    if user_price:
+        baseline_value = user_price
+        method = "user price"
+    else:
+        baseline_value = median_ppsf * sqft
+        method = "median ppsf"
+
+    return {
+        "value": baseline_value,
+        "median_ppsf": median_ppsf,
+        "method": method,
+        "result": result
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+def find_best_scored_current_comps(
+    sales_df,
+    cluster_df,
+    subdivision_name,
+    beds,
+    baths,
+    sqft,
+    current_date,
+    target_price=None,
+    subject_year_built=None,
+    max_comps=5,
+):
+    profile = get_subdivision_profile(subdivision_name, cluster_df)
+
+    if profile is None:
+        empty = pd.DataFrame()
+        return {
+            "level_used": 99,
+            "level_name": "Scored comps - no profile",
+            "profile": None,
+            "summary": summarize_comps(empty),
+            "comps": empty,
+        }
+
+    sub_key = profile["SubdivisionKey"]
+    cluster_name = profile["Cluster"]
+
+    cluster_members = cluster_df.loc[
+        cluster_df["Cluster"] == cluster_name, "SubdivisionKey"
+    ].tolist()
+
+    analogs = get_analog_subdivisions(subdivision_name, cluster_df)
+
+    # -----------------------------
+    # helper: prepare and score pool
+    # -----------------------------
+    def prepare_pool(candidate_keys, label, months_before=6):
+        df = sales_df[sales_df["SubdivisionKey"].isin(candidate_keys)].copy()
+        df = apply_date_window(df, current_date, months_before=months_before, months_after=0)
+
+        if df.empty:
+            return df, label
+
+        df["SqFtDiff"] = (df["SqFtNum"] - sqft).abs()
+        df["SqFtPctDiff"] = df["SqFtDiff"] / sqft
+        df["BedDiff"] = (df["BedsNum"] - beds).abs()
+        df["BathDiff"] = (df["BathsNum"] - baths).abs()
+
+        if subject_year_built is not None:
+            df["YearBuiltDiff"] = (df["YearBuiltNum"] - subject_year_built).abs()
+        else:
+            df["YearBuiltDiff"] = 0
+
+        df["DaysOld"] = (current_date - df["CloseDate"]).dt.days
+        df["DaysOld"] = df["DaysOld"].clip(lower=0)
+
+        if target_price is not None and target_price > 0:
+            df["PricePctDiff"] = (df["SoldPrice"] - target_price).abs() / target_price
+        else:
+            df["PricePctDiff"] = 0
+
+        df["LocationPenalty"] = 300
+        df.loc[df["SubdivisionKey"] == sub_key, "LocationPenalty"] = 0
+        df.loc[
+            (df["SubdivisionKey"] != sub_key) &
+            (df["SubdivisionKey"].isin(cluster_members)),
+            "LocationPenalty"
+        ] = 125
+        df.loc[
+            (df["SubdivisionKey"] != sub_key) &
+            (df["SubdivisionKey"].isin(analogs)),
+            "LocationPenalty"
+        ] = 200
+
+        # basic safety filters — not too strict
+        df = df[df["SqFtPctDiff"] <= 0.40].copy()
+
+        if subject_year_built is not None:
+            # avoid wildly different eras if possible
+            year_tight = df[df["YearBuiltDiff"] <= 6].copy()
+            if len(year_tight) >= 2:
+                df = year_tight
+
+        if df.empty:
+            return df, label
+
+        df["CompScore"] = (
+            df["LocationPenalty"] +
+            (df["SqFtPctDiff"] * 1000) +
+            (df["BedDiff"] * 175) +
+            (df["BathDiff"] * 90) +
+            (df["YearBuiltDiff"].fillna(0) * 18) +
+            (df["DaysOld"] * 0.25) +
+            (df["PricePctDiff"] * 600)
+        )
+
+        df = df.sort_values(
+            by=["CompScore", "SqFtPctDiff", "BedDiff", "BathDiff", "YearBuiltDiff", "CloseDate"],
+            ascending=[True, True, True, True, True, False]
+        )
+
+        return df, label
+
+    # -----------------------------
+    # STAGE 1: same subdivision only
+    # -----------------------------
+    same_df, same_label = prepare_pool(
+        [sub_key],
+        "Unified scored comps - same subdivision"
+    )
+
+    # same-sub usable count
+    same_usable = same_df.copy()
+
+    if not same_usable.empty:
+        exact_same = same_usable[
+            (same_usable["BedDiff"] == 0) &
+            (same_usable["BathDiff"] == 0)
+        ].copy()
+
+        # If we have at least 2 exact same-sub comps, use those.
+        if len(exact_same) >= 2:
+            df = exact_same
+            level_name = "Unified scored comps - exact same subdivision"
+
+        # If we have at least 2 usable same-sub comps, stay same-sub.
+        elif len(same_usable) >= 3:
+            df = same_usable
+            level_name = "Unified scored comps - same subdivision imperfect"
+
+        # Only 0–1 usable same-sub comps: expand.
+        else:
+            df = pd.DataFrame()
+            level_name = "Needs expansion"
+    else:
+        df = pd.DataFrame()
+        level_name = "Needs expansion"
+
+    # -----------------------------
+    # STAGE 2: expand to cluster only if same-sub is weak
+    # -----------------------------
+    if df.empty or len(df) < 2:
+        cluster_keys = list(dict.fromkeys([sub_key] + cluster_members))
+        cluster_df_scored, cluster_label = prepare_pool(
+            cluster_keys,
+            "Unified scored comps - cluster expansion"
+        )
+
+        if not cluster_df_scored.empty:
+            df = cluster_df_scored
+            level_name = cluster_label
+
+    # -----------------------------
+    # STAGE 3: expand to analogs only if still weak
+    # -----------------------------
+    if df.empty or len(df) < 2:
+        expanded_keys = list(dict.fromkeys([sub_key] + cluster_members + analogs))
+        expanded_df, expanded_label = prepare_pool(
+            expanded_keys,
+            "Unified scored comps - cluster + analog expansion"
+        )
+
+        if not expanded_df.empty:
+            df = expanded_df
+            level_name = expanded_label
+
+    if df.empty:
+        return {
+            "level_used": 99,
+            "level_name": "Scored comps - no usable comps",
+            "profile": profile,
+            "summary": summarize_comps(df),
+            "comps": df,
+        }
+    # -----------------------------
+    # ALWAYS preserve at least 1 older same-sub comp if current same-sub is missing
+    # -----------------------------
+    same_sub_anchor, _ = prepare_pool(
+        [sub_key],
+        "Same-sub anchor",
+        months_before=36
+    )
+
+    if not same_sub_anchor.empty:
+        best_same = same_sub_anchor.head(1).copy()
+
+        if df is not None and len(df) > 0:
+            df = pd.concat([df, best_same], ignore_index=True)
+            df = df.drop_duplicates(
+                subset=["SubdivisionKey", "CloseDate", "SoldPrice", "SqFtNum", "BedsNum", "BathsNum"],
+                keep="first"
+            )
+
+    # -----------------------------
+    # final best-comp selection
+    # -----------------------------
+    best_score = df["CompScore"].min()
+    best = df[df["CompScore"] <= best_score + 125].copy()
+
+    # If the score window leaves only 1 comp, allow the top 2–3,
+    # but don't force terrible extras.
+    if len(best) < 2:
+        fallback_best = df.head(3).copy()
+
+        if len(fallback_best) >= 2:
+            if fallback_best["CompScore"].max() <= best_score + 250:
+                best = fallback_best
+            else:
+                best = df.head(2).copy()
+        else:
+            best = fallback_best
+
+    else:
+        best = best.head(max_comps).copy()
+
+    local_ppsf = best["PPSF"].median()
+
+    best["AdjustedPrice"] = best.apply(
+        lambda row: adjust_comp_price_to_subject(
+            row,
+            subject_beds=beds,
+            subject_baths=baths,
+            subject_sqft=sqft,
+            subject_year_built=subject_year_built,
+            bed_adjustment=20000,
+            bath_adjustment=5000,
+            ppsf_adjustment=local_ppsf,
+        ),
+        axis=1
+    )
+
+    best["AdjustedPPSF"] = best["AdjustedPrice"] / sqft
+
+    return {
+        "level_used": 10,
+        "level_name": level_name,
+        "profile": profile,
+        "summary": summarize_comps(best),
+        "comps": best.sort_values("CloseDate").copy(),
+    }
+# -----------------------------
+# EXAMPLE RUN
+# -----------------------------
+
+
+def measure_current_value(
+    sales_df,
+    cluster_df,
+    subdivision_name,
+    beds,
+    baths,
+    sqft,
+    target_price=None,
+    subject_year_built=None
+):
+    current_date = pd.Timestamp.today().normalize()
+
+    scored_result = find_best_scored_current_comps(
+        sales_df=sales_df,
+        cluster_df=cluster_df,
+        subdivision_name=subdivision_name,
+        beds=beds,
+        baths=baths,
+        sqft=sqft,
+        current_date=current_date,
+        target_price=target_price,
+        subject_year_built=subject_year_built,
+        max_comps=5,
+    )
+
+    comps = scored_result["comps"]
+
+    if comps.empty:
+        return {
+            "value": None,
+            "median_ppsf": None,
+            "method": "no comps",
+            "level_used": scored_result["level_used"],
+            "level_name": scored_result["level_name"],
+            "profile": scored_result["profile"],
+            "summary": scored_result["summary"],
+            "comps": comps,
+        }
+
+    median_ppsf = comps["AdjustedPPSF"].median()
+    current_value = median_ppsf * sqft
+
+    return {
+        "value": current_value,
+        "median_ppsf": median_ppsf,
+        "method": "scored adjusted ppsf",
+        "level_used": scored_result["level_used"],
+        "level_name": scored_result["level_name"],
+        "profile": scored_result["profile"],
+        "summary": scored_result["summary"],
+        "comps": comps,
+    }
+def run_equity_estimate(
+    subdivision_name,
+    beds,
+    baths,
+    sqft,
+    year_built,
+    purchase_date=None,
+    user_price=None
+):
+    plum_creek_df = load_plum_creek_sections(PLUM_CREEK_FILE)
+    sales_df = load_sales_data(SALES_DATA_DIR, plum_creek_df=plum_creek_df)
+    cluster_df = load_subdivision_clusters(CLUSTER_FILE)
+
+    current = measure_current_value(
+        sales_df=sales_df,
+        cluster_df=cluster_df,
+        subdivision_name=subdivision_name,
+        beds=beds,
+        baths=baths,
+        sqft=sqft,
+        target_price=user_price,
+        subject_year_built=year_built
+    )
+
+    current_low, current_high = make_comp_based_range(
+        current["comps"],
+        anchor_value=current["value"],
+        round_to=5000
+    )
+
+    equity_low, equity_high = make_equity_range(
+        current_low=current_low,
+        current_high=current_high,
+        purchase_value=user_price,
+        round_to=5000
+    )
+
+    comps = current["comps"]
+
+    comp_records = []
+    if comps is not None and not comps.empty:
+        show_cols = [
+            "SubdivisionKey",
+            "CloseDate",
+            "BedsNum",
+            "BathsNum",
+            "SqFtNum",
+            "SoldPrice",
+            "PPSF",
+            "YearBuiltNum",
+            "AdjustedPrice",
+            "AdjustedPPSF",
+            "CompScore"
+        ]
+
+        show_cols = [col for col in show_cols if col in comps.columns]
+
+        for _, row in comps[show_cols].iterrows():
+            comp_records.append({
+                "subdivision": row.get("SubdivisionKey"),
+                "close_date": row.get("CloseDate").strftime("%Y-%m-%d") if pd.notna(row.get("CloseDate")) else None,
+                "beds": row.get("BedsNum"),
+                "baths": row.get("BathsNum"),
+                "sqft": row.get("SqFtNum"),
+                "sold_price": fmt_money(row.get("SoldPrice")),
+                "ppsf": round(row.get("PPSF"), 2) if pd.notna(row.get("PPSF")) else None,
+                "year_built": row.get("YearBuiltNum"),
+                "adjusted_price": fmt_money(row.get("AdjustedPrice")) if "AdjustedPrice" in row else None,
+                "adjusted_ppsf": round(row.get("AdjustedPPSF"), 2) if "AdjustedPPSF" in row and pd.notna(row.get("AdjustedPPSF")) else None,
+                "comp_score": round(row.get("CompScore"), 2) if "CompScore" in row and pd.notna(row.get("CompScore")) else None,
+            })
+
+    return {
+        "subdivision": subdivision_name,
+        "estimated_value": fmt_money(current["value"]),
+        "likely_range": fmt_money_range(current_low, current_high),
+        "estimated_equity_range": fmt_money_range(equity_low, equity_high),
+        "purchase_price_entered": fmt_money(user_price),
+        "current_method": current.get("method"),
+        "current_level_used": current.get("level_used"),
+        "current_level_name": current.get("level_name"),
+        "comps_used": comp_records
     }
 
-    /* =========================
-       FIXED HEADER
-    ========================== */
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      background: white;
-      z-index: 9999;
-      border-bottom: 0;
-      transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .topbar {
-      position: relative;
-      min-height: 90px;
-      padding: 0;
-      transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
-    }
-
-    .top-link,
-    .top-id,
-    .logo-wrap,
-    .logo-mini {
-      transition: all 0.25s ease;
-    }
-
-    .logo-wrap {
-      position: absolute;
-      top: -14px;
-      left: -8px;
-      margin: 0;
-      text-align: left;
-      z-index: 2;
-    }
-
-    .top-link {
-      position: absolute;
-      bottom: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: flex-end;
-      gap: 0;
-    }
-
-    .header-action {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      margin: 0;
-      padding: 0;
-      line-height: 1;
-      text-decoration: none;
-      margin-right: -22px;
-    }
-
-    .header-action:last-child {
-      margin-right: 0;
-    }
-
-    .action-icon {
-      display: block;
-      height: auto;
-      margin: 0;
-      padding: 0;
-    }
-
-    .action-label {
-      margin-top: -8px;
-      font-family: "Hedvig Letters Serif", serif;
-      font-size: 12px;
-      font-weight: 600;
-      line-height: 1;
-      color: #000;
-      text-align: center;
-    }
-
-    .connect-btn {
-      width: 90px;
-    }
-
-    .match-btn {
-      width: 80px;
-    }
-
-    .data-btn {
-      width: 82px;
-    }
-
-    .top-id {
-      margin-left: auto;
-      padding-top: 8px;
-      text-align: right;
-      font-size: 14px;
-      line-height: 1.4;
-    }
-
-    .logo-mini {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-start;
-      width: 132px;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .logo-mini:hover {
-      opacity: 0.85;
-    }
-
-    .logo-mini img {
-      display: block;
-      width: 100%;
-      height: auto;
-      transform: translateX(-15px);
-    }
-
-    .logo-mini-label {
-      position: static;
-      transform: none;
-      margin-top: -18px;
-      margin-left: 8px;
-      font-size: 10px;
-      font-weight: 700;
-      color: #333;
-      white-space: nowrap;
-      max-width: none;
-      text-align: left;
-      line-height: 1;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .site-header.shrink .logo-mini-label {
-      opacity: 0;
-      transform: translateY(-6px);
-      pointer-events: none;
-    }
-
-    .site-header.shrink .topbar {
-      min-height: 78px;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-
-    .site-header.shrink .top-link,
-    .site-header.shrink .top-id {
-      opacity: 0;
-      pointer-events: none;
-      max-height: 0;
-      overflow: hidden;
-      transform: translateY(-8px);
-    }
-
-    .site-header.shrink .logo-mini {
-      width: 132px;
-    }
-
-    /* =========================
-       PAGE CONTENT
-    ========================== */
-    .page-wrap {
-      width: 100%;
-      max-width: none;
-      margin: 0;
-      padding: 190px 32px 20px 32px;
-      box-sizing: border-box;
-    }
-
-    .subdivGridDesktop {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px;
-      margin-bottom: 8px;
-    }
-
-    .subdivCard {
-      min-width: 0;
-    }
-
-    .wb-card-img {
-      aspect-ratio: 4 / 3;
-      border-radius: 20px;
-      overflow: hidden;
-      background: #f5f5f5;
-    }
-
-    .wb-card-photo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .subdivMobileRow {
-      display: none !important;
-    }
-
-    @media (max-width: 1100px) {
-      .subdivGridDesktop {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
-    /* =========================
-       MOBILE
-    ========================== */
-    @media (max-width: 768px) {
-      .topbar {
-        min-height: 140px;
-        padding: 0 10px;
-      }
-
-      .logo-wrap {
-        position: absolute;
-        top: -4px;
-        left: 0;
-        text-align: left;
-      }
-
-      .top-link {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: flex-end;
-        gap: 0;
-      }
-
-      .top-id {
-        position: absolute;
-        top: 8px;
-        right: 6px;
-        text-align: right;
-        font-size: 10px;
-        line-height: 1.2;
-        letter-spacing: 0;
-        max-width: 145px;
-      }
-
-      .logo-mini-label {
-        white-space: nowrap;
-        width: auto;
-        text-align: left;
-        left: auto;
-      }
-
-      .page-wrap {
-        padding: 190px 14px 14px 14px;
-      }
-
-      .site-header.shrink .topbar {
-        min-height: 86px;
-      }
-
-      .site-header.shrink .logo-mini {
-        width: 110px;
-      }
-
-      .subdivGridDesktop {
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
-
-      .wb-card-img {
-        aspect-ratio: 4 / 3;
-        border-radius: 20px;
-        overflow: hidden;
-        background: #f5f5f5;
-      }
-
-      .wb-card-photo {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        border-radius: inherit;
-      }
-
-      .subdivTitle {
-        font-size: 13px !important;
-        line-height: 1.15;
-      }
-
-      .subdivPrice {
-        font-size: 11px !important;
-        line-height: 1.15;
-      }
-
-      .subdivAvail {
-        font-size: 10px !important;
-        line-height: 1.15;
-      }
-
-      .subdivMobileRow {
-        display: none !important;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
-    }
-
-    /* =========================
-       FOOTER OVERRIDE - THIS PAGE ONLY
-    ========================== */
-    .footer-left-page .site-footer {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-
-    .footer-left-page .footer-shell {
-      max-width: none !important;
-      width: 100% !important;
-      margin: 0 !important;
-      padding: 0 32px !important;
-    }
-
-    .footer-left-page .footer-grid {
-      grid-template-columns: auto auto !important;
-      gap: 12px !important;
-      align-items: start !important;
-      justify-content: start !important;
-    }
-
-    .footer-left-page .footer-right-group {
-      display: flex !important;
-      align-items: flex-start !important;
-      justify-content: flex-start !important;
-      gap: 42px !important;
-    }
-
-    .footer-left-page .footer-col {
-      text-align: left !important;
-    }
-
-    .footer-left-page .footer-badge {
-      justify-self: start !important;
-      text-align: left !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-    }
-
-    .footer-left-page .footer-badge a {
-      display: block !important;
-    }
-
-    .footer-left-page .footer-badge img {
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-    }
-
-    @media (max-width: 768px) {
-      .footer-left-page .footer-shell {
-        padding: 0 14px !important;
-      }
-
-      .footer-left-page .footer-grid {
-        grid-template-columns: 1fr !important;
-        gap: 18px !important;
-      }
-
-      .footer-left-page .footer-right-group {
-        flex-direction: column !important;
-        gap: 24px !important;
-      }
-
-      .footer-left-page .footer-badge {
-        justify-self: start !important;
-      }
-
-      .footer-left-page .footer-badge img {
-        max-width: 110px !important;
-      }
-    }
-  </style>
-</head>
-<body class="footer-left-page">
-
-  <header class="site-header">
-    <div class="topbar">
-      <div class="logo-wrap">
-        <a href="/" class="logo-mini">
-          <img
-            src="/images/logo.png"
-            alt="Your Missing Peace"
-          />
-          <span class="logo-mini-label">Your Missing Peace</span>
-        </a>
-      </div>
-
-      <div class="top-link">
-        <a href="/match" class="header-action match-action">
-          <img src="/images/match2.png" alt="Match" class="action-icon match-btn">
-          <span class="action-label">Match</span>
-        </a>
-
-        <a href="/contact.html" class="header-action connect-action">
-          <img src="/images/connect2.png" alt="Connect" class="action-icon connect-btn">
-          <span class="action-label">Connect</span>
-        </a>
-
-        <a href="/data" class="header-action data-action">
-          <img src="/images/graph.png" alt="Data" class="action-icon data-btn">
-          <span class="action-label">Data</span>
-        </a>
-      </div>
-
-      <div class="top-id">
-        <div>Realtor® in Kyle, TX</div>
-        <div>Emmanuel "Manny" Camacho</div>
-        <div>Dalton Wade Real Estate Group</div>
-      </div>
-    </div>
-  </header>
-
-  <div class="page-wrap">
-    <h1>Homes for Sale in Kyle, TX</h1>
-
-    <div style="margin-top:34px; margin-bottom:10px;">
-      <h2 style="text-align:center; font-family:'Hedvig Letters Serif'; font-size:22px; font-weight:700; color:#000; margin:0; padding:0;">
-        Southwest Kyle Subdivisions
-      </h2>
-    </div>
-
-    <div style="max-width:900px; margin:0 auto 22px auto; font-size:16px; line-height:1.6; text-align:center;">
-     In Kyle’s Southwest, neighborhoods sit a little farther out — not distant, but distinct. Fewer subdivisions mean more breathing room, where the pace feels slower and the horizon stretches wider. 
-    </div>
-
-    <div style="text-align:center; font-size:12px; color:#666; margin-top:-12px; margin-bottom:18px;">
-      Last updated: June 08, 2026
-    </div>
-
-         <div class="subdivGridDesktop" style="margin-bottom:0px;">
-<div class="subdivCard">
-  <a href="paramount.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Paramount_2.70.1.png" alt="Paramount" />
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Paramount
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $249,990 &ndash; $443,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        36 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="opal-ranch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Opal+Ranch.png" alt="Opal Ranch" />
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Opal Ranch
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $339,990 &ndash; $389,990
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        4 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="stagecoach-crossing.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Stagecoach-Crossing_2.46.1.png" alt="Stagecoach" />
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Stagecoach
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $299,000 &ndash; $485,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        4 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="bradford-meadows.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Bradford+Meadows.png" alt="Bradford Meadows" />
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Bradford Meadows
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-</div>
-
-<div class="subdivMobileRow">
-<div class="subdivCard">
-  <a href="paramount.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Paramount_2.70.1.png" alt="Paramount" />
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Paramount
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $249,990 &ndash; $443,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        36 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="opal-ranch.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Opal+Ranch.png" alt="Opal Ranch" />
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Opal Ranch
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $339,990 &ndash; $389,990
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        4 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="stagecoach-crossing.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Stagecoach-Crossing_2.46.1.png" alt="Stagecoach" />
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Stagecoach
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        $299,000 &ndash; $485,000
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        4 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-<div class="subdivCard">
-  <a href="bradford-meadows.html" style="text-decoration:none; color:inherit; display:block;">
-    <div class="wb-card-img">
-      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Bradford+Meadows.png" alt="Bradford Meadows" />
-    </div>
-
-    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
-      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
-        Bradford Meadows
-      </div>
-
-      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
-        
-      </div>
-
-      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
-        0 homes currently available
-      </div>
-    </div>
-  </a>
-</div>
-</div>
-
-
-    <footer class="site-footer">
-      <div class="footer-shell">
-        <div class="footer-grid">
-          <div class="footer-col">
-            <div class="footer-title">Kyle Housing</div>
-            <p>
-              Local housing insight designed to bring clarity to pricing,
-              neighborhoods, and decision-making in Kyle, Texas.
-            </p>
-          </div>
-
-          <div class="footer-right-group">
-            <div class="footer-col">
-              <div class="footer-title">Explore</div>
-              <a href="/">Home</a>
-              <a href="/data">Data Page</a>
-              <a href="/contact.html">Connect</a>
-              <a href="/privacy-policy.html">Privacy Policy</a>
-            </div>
-
-            <div class="footer-badge">
-              <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
-                <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
-              </a>
-            </div>
-
-            <div class="footer-col">
-              <div class="footer-title">About</div>
-              <p>
-                Emmanuel "Manny" Camacho<br />
-                Realtor® in Kyle, TX<br />
-                Dalton Wade Real Estate Group
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <span>© 2026 Emmanuel "Manny" Camacho · Kyle Housing</span>
-        </div>
-      </div>
-    </footer>
-  </div>
-
-  <script>
-    const siteHeader = document.querySelector('.site-header');
-
-    function handleHeaderShrink() {
-      if (window.scrollY > 80) {
-        siteHeader.classList.add('shrink');
-      } else {
-        siteHeader.classList.remove('shrink');
-      }
-    }
-
-    window.addEventListener('scroll', handleHeaderShrink, { passive: true });
-    window.addEventListener('load', handleHeaderShrink);
-  </script>
-</body>
-</html>
+def main():
+    plum_creek_df = load_plum_creek_sections(PLUM_CREEK_FILE)
+    sales_df = load_sales_data(SALES_DATA_DIR, plum_creek_df=plum_creek_df)
+
+    cluster_df = load_subdivision_clusters(CLUSTER_FILE)
+    subject_year_built = 2002
+
+    purchase = measure_purchase_value(
+        sales_df=sales_df,
+        cluster_df=cluster_df,
+        subdivision_name="ORIGINAL PLUM CREEK",
+        beds=3,
+        baths=2,
+        sqft=1950,
+        purchase_date="2020-09-02",
+        user_price=214810,
+        subject_year_built=subject_year_built
+    )
+
+    current = measure_current_value(
+        sales_df=sales_df,
+        cluster_df=cluster_df,
+        subdivision_name="ORIGINAL PLUM CREEK",
+        beds=3,
+        baths=2,
+        sqft=1950,
+        target_price=purchase["value"],
+        subject_year_built=subject_year_built
+    )
+
+    equity_change = None
+    equity_pct_change = None
+
+    current_low = current_high = None
+    equity_low = equity_high = None
+
+    if purchase["value"] is not None and current["value"] is not None:
+        equity_change = current["value"] - purchase["value"]
+        equity_pct_change = (equity_change / purchase["value"]) * 100
+
+        current_low, current_high = make_comp_based_range(
+            current["comps"],
+            anchor_value=current["value"],
+            round_to=5000
+        )
+
+        equity_low, equity_high = make_equity_range(
+            current_low=current_low,
+            current_high=current_high,
+            purchase_value=purchase["value"],
+            round_to=5000
+        )
+
+        print("\nFINAL CONSUMER OUTPUT:")
+        print("Estimated Value:", fmt_money(current["value"]))
+        print("Likely Range:", fmt_money_range(current_low, current_high))
+        print("Estimated Equity:", fmt_money_range(equity_low, equity_high))
+        print()
+        print(
+            "Where you land in that range depends on how your home compares to others and how it’s positioned in the market.")
+        print("We can also walk through what it would take to be toward the top of that range.")
+
+
+    print("\nPURCHASE VALUE:")
+    print("Estimated Value:", fmt_money(purchase["value"]))
+    print("Method:", purchase["method"])
+    print("Median PPSF:", round(purchase.get("median_ppsf"), 2) if purchase.get("median_ppsf") is not None else None)
+
+    purchase_result = purchase["result"]
+    if purchase.get("warning"):
+        print("WARNING:", purchase["warning"])
+
+    if purchase_result is not None:
+        print("\nPURCHASE LEVEL USED:", purchase_result["level_used"])
+        print("PURCHASE LEVEL NAME:", purchase_result["level_name"])
+        print("PURCHASE SUMMARY:", purchase_result["summary"])
+
+    print("\nCURRENT VALUE:")
+    print("Estimated Value:", fmt_money(current["value"]))
+    print("Method:", current["method"])
+    print("Median PPSF:", round(current.get("median_ppsf"), 2) if current.get("median_ppsf") is not None else None)
+    print("CURRENT LEVEL USED:", current["level_used"])
+    print("CURRENT LEVEL NAME:", current["level_name"])
+    print("CURRENT SUMMARY:", current["summary"])
+
+    print("\nEQUITY PERFORMANCE:")
+    print("Dollar Change:", fmt_money(equity_change))
+    print("Percent Change:", fmt_pct(equity_pct_change))
+
+    comps = current["comps"]
+    if not comps.empty:
+        show_cols = [
+            col for col in [
+                "SubdivisionKey", "CloseDate", "BedsNum", "BathsNum",
+                "SqFtNum", "SoldPrice", "PPSF", "YearBuiltNum", "SourceFile",
+                "AdjustedPrice", "AdjustedPPSF",
+                "CompScore", "LocationPenalty", "SqFtPctDiff",
+                "BedDiff", "BathDiff", "YearBuiltDiff", "PricePctDiff"
+            ] if col in comps.columns
+        ]
+        print("\nCURRENT COMPS:")
+        print(comps[show_cols].tail(15).to_string(index=False))
+    else:
+        print("\nNo current comps found.")
+if __name__ == "__main__":
+    main()
