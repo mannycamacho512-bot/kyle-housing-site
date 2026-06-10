@@ -1031,3 +1031,27 @@
     padding-bottom: 82px;
   }
 }
+
+.portal-question {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.portal-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border: 1px solid #d8ddd9;
+  border-radius: 10px;
+  background: #f7faf8;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
