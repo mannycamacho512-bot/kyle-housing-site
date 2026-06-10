@@ -1083,6 +1083,32 @@
   font-size: 0.95rem;
   line-height: 1.5;
 }
+/* Desktop contact / mobile text switch */
+.mobile-text {
+  display: none !important;
+}
+
+.desktop-contact {
+  display: inline-block;
+}
+
+.sticky-agent-card .desktop-contact {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .desktop-contact {
+    display: none !important;
+  }
+
+  .mobile-text {
+    display: inline-block !important;
+  }
+
+  .sticky-agent-card .mobile-text {
+    display: block !important;
+  }
+}
 
   body {
     padding-bottom: 82px;
