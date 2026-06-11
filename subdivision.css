@@ -1112,10 +1112,13 @@
   }
 }
 
-.partner-ad-link {
+.partner-ad-link,
+.partner-ad-link:visited,
+.partner-ad-link:hover,
+.partner-ad-link:active {
   display: block;
   color: inherit;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .partner-ad-visit {
@@ -1124,12 +1127,14 @@
   padding: 9px 10px;
   border-radius: 999px;
   background: #2f5f50;
-  color: #ffffff;
+  color: #ffffff !important;
   font-size: 13px;
   font-weight: 900;
   text-align: center;
+  text-decoration: none !important;
 }
 
 .partner-ad-link:hover .partner-ad-visit {
   background: #274f43;
+  text-decoration: none !important;
 }
