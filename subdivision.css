@@ -1111,5 +1111,25 @@
     margin: 0 auto;
   }
 }
-  }
+
+.partner-ad-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.partner-ad-visit {
+  display: block;
+  margin-top: 9px;
+  padding: 9px 10px;
+  border-radius: 999px;
+  background: #2f5f50;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.partner-ad-link:hover .partner-ad-visit {
+  background: #274f43;
 }
