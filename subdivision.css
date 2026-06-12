@@ -1140,3 +1140,42 @@
 .partner-ad-visit:hover {
   background: #274f43;
 }
+.dashboard-preview-arroyo {
+  height: auto !important;
+  min-height: 0 !important;
+  margin-top: 28px !important;
+  margin-bottom: 24px !important;
+  overflow: hidden;
+}
+
+.dashboard-preview-arroyo iframe {
+  width: 100% !important;
+  height: 360px !important;
+  min-height: 0 !important;
+  border: 0 !important;
+  border-radius: 18px !important;
+  display: block !important;
+  overflow: hidden !important;
+}
+
+.dashboard-preview-link-arroyo {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.dashboard-preview-link-arroyo a {
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .dashboard-preview-arroyo iframe {
+    height: 620px !important;
+    pointer-events: none;
+  }
+
+  .dashboard-preview-link-arroyo {
+    margin-top: 12px;
+  }
+}
