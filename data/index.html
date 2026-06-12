@@ -2311,8 +2311,15 @@ charts.listingOutcomesChart = new Chart(
             return;
           }
 
-          subdivisionSelect.value = names[0];
-          renderSubdivision(names[0]);
+          const params = new URLSearchParams(window.location.search);
+const requestedSub = params.get("sub");
+
+const defaultSub = requestedSub && names.includes(requestedSub)
+  ? requestedSub
+  : names[0];
+
+subdivisionSelect.value = defaultSub;
+renderSubdivision(defaultSub);
         } catch (err) {
           console.error(err);
           setEmptyState("Dashboard failed to load.");
@@ -2320,13 +2327,20 @@ charts.listingOutcomesChart = new Chart(
       }
 
       subdivisionSelect.addEventListener("change", function (e) {
-        try {
-          renderSubdivision(e.target.value);
-        } catch (err) {
-          console.error(err);
-          setEmptyState("Dashboard failed to render.");
-        }
-      });
+  try {
+    const selected = e.target.value;
+
+    if (selected) {
+      const newUrl = `${window.location.pathname}?sub=${encodeURIComponent(selected)}`;
+      window.history.replaceState({}, "", newUrl);
+    }
+
+    renderSubdivision(selected);
+  } catch (err) {
+    console.error(err);
+    setEmptyState("Dashboard failed to render.");
+  }
+});
 
       setEmptyState();
       loadData();
