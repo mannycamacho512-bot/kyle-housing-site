@@ -1191,11 +1191,14 @@
 
   .dashboard-preview-button-wrap-arroyo {
     padding: 14px 10px 16px;
+    text-align: center;
   }
 
   .dashboard-preview-button-arroyo {
     width: 100%;
     max-width: 320px;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
