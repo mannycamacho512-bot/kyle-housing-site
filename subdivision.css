@@ -1190,15 +1190,16 @@
   }
 
   .dashboard-preview-button-wrap-arroyo {
-    padding: 14px 10px 16px;
+    padding: 12px 10px 14px;
     text-align: center;
   }
 
   .dashboard-preview-button-arroyo {
-    width: 100%;
-    max-width: 320px;
+    width: auto;
+    max-width: none;
+    display: inline-block;
+    padding: 9px 14px;
+    font-size: 13px;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
