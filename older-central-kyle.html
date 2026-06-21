@@ -3,109 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Older Central Kyle Neighborhood Pockets | Kyle, TX</title>
   <link rel="canonical" href="https://liveinkyle.com/older-central-kyle.html">
+
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="512x512" href="/images/favicon-512.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
   <meta
     name="description"
-    content="Explore Older Central Kyle, including downtown, nearby additions, and older neighborhood pockets where history, lot feel, condition, and location matter more than subdivision name alone."
+    content="Explore Older Central Kyle, including downtown, nearby additions, and older neighborhood pockets where lot feel, condition, street feel, and location matter more than subdivision name alone."
   />
+
   <link rel="stylesheet" href="/subdivision.css">
 
   <style>
-    /* Page-specific styles for Older Central Kyle. Keep here for testing, then move to subdivision.css if you like it. */
     .old-kyle-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 280px;
-      gap: 24px;
-      align-items: start;
+      display: block;
     }
 
     .old-kyle-main {
       min-width: 0;
     }
-
-    .local-ad-rail {
-      position: sticky;
-      top: 92px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .local-ad-label {
-      font-size: 0.74rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #6b7280;
-      font-weight: 700;
-    }
-
-    .local-ad-card {
-      border: 1px solid #e5e7eb;
-      border-radius: 18px;
-      background: #ffffff;
-      padding: 16px;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
-    }
-
-    .local-ad-card img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      border-radius: 14px;
-      background: #f3f4f6;
-      margin-bottom: 12px;
-    }
-
-    .local-ad-card h3 {
-      margin: 0 0 6px;
-      font-size: 1rem;
-      line-height: 1.25;
-      color: #111827;
-    }
-
-    .local-ad-card p {
-      margin: 0;
-      font-size: 0.9rem;
-      line-height: 1.45;
-      color: #4b5563;
-    }
-    
-.local-ad-kicker {
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #064E3B;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-
-.goodfolk-ad-card img {
-  aspect-ratio: auto;
-  object-fit: contain;
-  background: #ffffff;
-  padding: 4px;
-}
-
-.local-ad-call {
-  display: inline-flex;
-  margin-top: 12px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: #111827;
-  color: #ffffff;
-  font-size: 0.84rem;
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.local-ad-call:hover {
-  filter: brightness(1.08);
-}
 
     .hero-section.old-kyle-hero {
       overflow: hidden;
@@ -137,113 +58,6 @@
       max-width: 840px;
       margin-left: auto;
       margin-right: auto;
-    }
-
-    .field-guide-section {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 360px;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .old-kyle-hero-art {
-      border-radius: 24px;
-      border: 1px solid #e5e7eb;
-      background:
-        linear-gradient(135deg, rgba(6, 78, 59, 0.92), rgba(17, 24, 39, 0.94)),
-        radial-gradient(circle at top left, rgba(255,255,255,0.26), transparent 38%);
-      min-height: 300px;
-      padding: 24px;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
-    }
-
-    .map-card-label {
-      display: inline-flex;
-      width: fit-content;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .map-lines {
-      position: relative;
-      height: 150px;
-      margin: 24px 0;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-    }
-
-    .map-lines::before,
-    .map-lines::after {
-      content: "";
-      position: absolute;
-      inset: 20px;
-      border: 2px solid rgba(255, 255, 255, 0.22);
-      border-radius: 50%;
-      transform: rotate(-12deg);
-    }
-
-    .map-lines::after {
-      inset: 48px 28px 28px 56px;
-      transform: rotate(16deg);
-      border-color: rgba(255, 255, 255, 0.16);
-    }
-
-    .map-dot {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      background: #ffffff;
-      box-shadow: 0 0 0 6px rgba(255,255,255,0.14);
-    }
-
-    .dot-1 { left: 24%; top: 34%; }
-    .dot-2 { left: 48%; top: 54%; }
-    .dot-3 { left: 66%; top: 30%; }
-    .dot-4 { left: 76%; top: 66%; }
-
-    .old-kyle-hero-art strong {
-      display: block;
-      font-size: 1.2rem;
-      line-height: 1.3;
-    }
-
-    .old-kyle-hero-art span {
-      display: block;
-      margin-top: 6px;
-      color: rgba(255, 255, 255, 0.78);
-      font-size: 0.95rem;
-      line-height: 1.45;
-    }
-
-    .toc-strip {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .toc-strip a {
-      border: 1px solid #e5e7eb;
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 12px 10px;
-      text-decoration: none;
-      color: #111827;
-      font-weight: 700;
-      font-size: 0.88rem;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
     }
 
     .story-band {
@@ -347,10 +161,118 @@
       filter: brightness(0.96);
     }
 
-    .pocket-gallery-note {
-      margin-top: 10px;
-      font-size: 0.82rem;
-      color: #6b7280;
+    .pocket-body {
+      padding: 18px;
+    }
+
+    .pocket-body h2 {
+      margin: 0 0 8px;
+      font-size: 1.18rem;
+      color: #111827;
+    }
+
+    .pocket-body p {
+      margin: 0 0 12px;
+      color: #4b5563;
+      line-height: 1.55;
+      font-size: 0.96rem;
+    }
+
+    .pocket-title-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: #111827;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .pocket-title-trigger:hover,
+    .pocket-title-trigger:focus-visible {
+      color: #064E3B;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .pocket-card-text,
+    .pocket-card-fit {
+      margin: 0 0 12px;
+      color: #4b5563;
+      line-height: 1.55;
+      font-size: 0.96rem;
+    }
+
+    .pocket-card-fit {
+      padding: 12px 13px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+    }
+
+    .pocket-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .pocket-meta span {
+      border-radius: 12px;
+      background: #f9fafb;
+      padding: 9px 10px;
+      font-size: 0.84rem;
+      color: #374151;
+      border: 1px solid #eef2f7;
+    }
+
+    .tradeoff-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .tradeoff-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      background: #ffffff;
+      padding: 16px;
+    }
+
+    .tradeoff-card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #111827;
+    }
+
+    .tradeoff-card p {
+      margin: 0;
+      color: #4b5563;
+      line-height: 1.5;
+      font-size: 0.92rem;
+    }
+
+    .map-wrap.old-kyle-map iframe {
+      min-height: 420px;
+    }
+
+    .pocket-detail-map {
+      margin: 0 0 18px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      background: #f3f4f6;
+    }
+
+    .pocket-detail-map iframe {
+      display: block;
+      width: 100%;
+      min-height: 320px;
+      border: 0;
     }
 
     .pocket-modal {
@@ -460,6 +382,27 @@
       display: block;
     }
 
+    .pocket-modal-side p {
+      margin: 0 0 14px;
+      color: #4b5563;
+      line-height: 1.55;
+    }
+
+    .pocket-modal-data {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .pocket-modal-data div {
+      border: 1px solid #eef2f7;
+      border-radius: 12px;
+      padding: 10px;
+      background: #f9fafb;
+      font-size: 0.92rem;
+      color: #374151;
+    }
+
     .pocket-modal-dashboard {
       margin-top: 14px;
       border: 1px solid #e5e7eb;
@@ -519,40 +462,14 @@
       background: #ffffff;
     }
 
-    @media (max-width: 560px) {
-      .pocket-stats-grid {
+    @media (max-width: 1000px) {
+      .story-band {
         grid-template-columns: 1fr;
       }
 
-      .pocket-stat {
-        border-right: 0;
-        border-bottom: 1px solid #eef2f7;
+      .tradeoff-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-
-      .pocket-stat:last-child {
-        border-bottom: 0;
-      }
-    }
-
-    .pocket-modal-side p {
-      margin: 0 0 14px;
-      color: #4b5563;
-      line-height: 1.55;
-    }
-
-    .pocket-modal-data {
-      display: grid;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .pocket-modal-data div {
-      border: 1px solid #eef2f7;
-      border-radius: 12px;
-      padding: 10px;
-      background: #f9fafb;
-      font-size: 0.92rem;
-      color: #374151;
     }
 
     @media (max-width: 760px) {
@@ -567,193 +484,30 @@
       }
     }
 
-    .pocket-body {
-      padding: 18px;
-    }
-
-    .pocket-body h2 {
-      margin: 0 0 8px;
-      font-size: 1.18rem;
-      color: #111827;
-    }
-
-    .pocket-title-trigger {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border: 0;
-      padding: 0;
-      background: transparent;
-      color: #111827;
-      font: inherit;
-      font-weight: 800;
-      cursor: pointer;
-      text-align: left;
-    }
-
-    .pocket-title-trigger:hover,
-    .pocket-title-trigger:focus-visible {
-      color: #064E3B;
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-
-    .pocket-body p {
-      margin: 0 0 12px;
-      color: #4b5563;
-      line-height: 1.55;
-      font-size: 0.96rem;
-    }
-
-    .pocket-meta {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    .pocket-meta span {
-      border-radius: 12px;
-      background: #f9fafb;
-      padding: 9px 10px;
-      font-size: 0.84rem;
-      color: #374151;
-      border: 1px solid #eef2f7;
-    }
-
-    .pocket-card-text,
-    .pocket-card-fit {
-      margin: 0 0 12px;
-      color: #4b5563;
-      line-height: 1.55;
-      font-size: 0.96rem;
-    }
-
-    .pocket-card-fit {
-      padding: 12px 13px;
-      border-radius: 14px;
-      background: #f8fafc;
-      border: 1px solid #e5e7eb;
-      color: #374151;
-    }
-
-    .pocket-detail-map {
-      margin: 0 0 18px;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid #e5e7eb;
-      background: #f3f4f6;
-    }
-
-    .pocket-detail-map iframe {
-      display: block;
-      width: 100%;
-      min-height: 320px;
-      border: 0;
-    }
-
-    .tradeoff-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .tradeoff-card {
-      border: 1px solid #e5e7eb;
-      border-radius: 18px;
-      background: #ffffff;
-      padding: 16px;
-    }
-
-    .tradeoff-card h3 {
-      margin: 0 0 8px;
-      font-size: 1rem;
-      color: #111827;
-    }
-
-    .tradeoff-card p {
-      margin: 0;
-      color: #4b5563;
-      line-height: 1.5;
-      font-size: 0.92rem;
-    }
-
-    .data-summary-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .data-summary-card {
-      border: 1px solid #e5e7eb;
-      border-radius: 18px;
-      background: #ffffff;
-      padding: 16px;
-    }
-
-    .data-summary-card .label {
-      color: #6b7280;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .data-summary-card .value {
-      font-size: 1.55rem;
-      font-weight: 800;
-      color: #111827;
-    }
-
-    .data-summary-card .note {
-      margin-top: 6px;
-      color: #4b5563;
-      font-size: 0.9rem;
-      line-height: 1.45;
-    }
-
-    .map-wrap.old-kyle-map iframe {
-      min-height: 420px;
-    }
-
-    @media (max-width: 1000px) {
-      .old-kyle-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .local-ad-rail {
-        position: static;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .story-band,
-      .field-guide-section {
-        grid-template-columns: 1fr;
-      }
-
-      .toc-strip,
-      .tradeoff-grid,
-      .data-summary-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
     @media (max-width: 680px) {
-      .toc-strip,
       .pocket-grid,
-      .tradeoff-grid,
-      .data-summary-grid,
-      .local-ad-rail {
+      .tradeoff-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .pocket-stats-grid {
         grid-template-columns: 1fr;
       }
 
-      .old-kyle-hero-art {
-        min-height: 260px;
+      .pocket-stat {
+        border-right: 0;
+        border-bottom: 1px solid #eef2f7;
+      }
+
+      .pocket-stat:last-child {
+        border-bottom: 0;
       }
     }
   </style>
 </head>
+
 <body>
   <header class="site-header" id="siteHeader">
     <div class="topbar">
@@ -790,29 +544,41 @@
   </header>
 
   <main class="page-wrap">
-  <div class="content-shell">
+    <div class="content-shell">
 
-    <aside class="sticky-agent-card">
-      <div class="sticky-agent-kicker">Before You Tour</div>
-      <div class="sticky-agent-title">Found an older Kyle home online?</div>
+      <aside class="partner-ad-card desktop-partner-ad">
+        <div class="partner-ad-label">Local Partner</div>
 
-      <div class="sticky-agent-menu">
-        <span>Comps</span>
-        <span>Condition</span>
-        <span>Street feel</span>
-        <span>Worth touring?</span>
+        <a href="https://bloodworthbbq.com/" target="_blank" rel="noopener" class="partner-ad-image-link" aria-label="Visit Bloodworth BBQ">
+          <img src="/images/sponsors/bloodworth_bbq.jpg" alt="Bloodworth BBQ in Central Kyle" loading="lazy">
+        </a>
+
+        <a href="https://bloodworthbbq.com/" target="_blank" rel="noopener" class="partner-ad-visit">
+          Visit Bloodworth BBQ →
+        </a>
+      </aside>
+
+      <aside class="sticky-agent-card">
+        <div class="sticky-agent-kicker">Before You Tour</div>
+        <div class="sticky-agent-title">Found an older Kyle home online?</div>
+
+        <div class="sticky-agent-menu">
+          <span>Comps</span>
+          <span>Condition</span>
+          <span>Street feel</span>
+          <span>Worth touring?</span>
+        </div>
+
+        <a href="/contact.html" class="sticky-agent-cta">Send Me the Home</a>
+      </aside>
+
+      <div class="mobile-agent-bar">
+        <div>
+          <strong>Found an older Kyle home?</strong>
+          <span>Text me the address before you tour</span>
+        </div>
+        <a href="sms:5122987455">Text Manny</a>
       </div>
-
-      <a href="/contact.html" class="sticky-agent-cta">Send Me the Home</a>
-    </aside>
-
-    <div class="mobile-agent-bar">
-      <div>
-        <strong>Found an older Kyle home?</strong>
-        <span>Text me the address before you tour</span>
-      </div>
-      <a href="sms:5122987455">Text Manny</a>
-    </div>
 
       <div class="page-top-meta">
         <a href="/" class="back-link">&larr; Back to Kyle Housing</a>
@@ -821,34 +587,35 @@
 
       <div class="old-kyle-layout">
         <div class="old-kyle-main">
+
           <section class="hero-section section-block old-kyle-hero">
-  <div class="old-kyle-hero-grid">
-    <div class="old-kyle-hero-text">
-      <h1>Older Central Kyle Homes and Neighborhood Pockets</h1>
+            <div class="old-kyle-hero-grid">
+              <div class="old-kyle-hero-text">
+                <h1>Older Central Kyle Homes and Neighborhood Pockets</h1>
 
-      <div class="hero-subtitle">Found a home online? Check the street, condition, and price before you tour.</div>
+                <div class="hero-subtitle">Found a home online? Check the street, condition, and price before you tour.</div>
 
-      <div class="hero-copy">
-        <p>
-          Older Central Kyle is not one clean subdivision. It is a group of smaller neighborhood pockets around downtown and nearby parts of Kyle where homes, streets, lot sizes, and condition can change quickly from one block to the next.
-        </p>
+                <div class="hero-copy">
+                  <p>
+                    Older Central Kyle is not one clean subdivision. It is a group of smaller neighborhood pockets around downtown and nearby parts of Kyle where homes, streets, lot sizes, and condition can change quickly from one block to the next.
+                  </p>
 
-        <p>
-          Some homes offer older trees, larger lots, central location, and more flexibility than newer HOA neighborhoods. Others may come with tradeoffs like age, repairs, road noise, train proximity, or harder-to-read comps.
-        </p>
+                  <p>
+                    Some homes offer older trees, larger lots, central location, and more flexibility than newer HOA neighborhoods. Others may come with tradeoffs like age, repairs, road noise, train proximity, or harder-to-read comps.
+                  </p>
 
-        <p>
-          Before you tour one of these homes, send me the address, link, or screenshot. I’ll help you look at the condition, nearby sales, street feel, and whether the price is supported.
-        </p>
+                  <p>
+                    Before you tour one of these homes, send me the address, link, or screenshot. I’ll help you look at the condition, nearby sales, street feel, and whether the price is supported.
+                  </p>
 
-        <div class="cta-stack" style="justify-content:center; margin-top:18px;">
-          <div><a href="sms:5122987455">Text Manny the home</a></div>
-          <div>Or <a href="/contact.html">send it here</a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+                  <div class="cta-stack" style="justify-content:center; margin-top:18px;">
+                    <div><a href="sms:5122987455">Text Manny the home</a></div>
+                    <div>Or <a href="/contact.html">send it here</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <section class="section-block" id="before-growth">
             <div class="story-band">
@@ -877,20 +644,25 @@
 
           <section class="section-block">
             <div class="pocket-grid">
+
               <article class="pocket-card">
                 <div class="pocket-gallery-preview" role="button" tabindex="0" data-pocket-gallery="jose-addition" aria-label="Open Jose Addition photos and notes">
                   <img src="/images/Jose_Addition/Jose_Addition1.jpg" alt="Jose Addition neighborhood photo" loading="lazy">
                   <img src="/images/Jose_Addition/Jose_Addition2.jpg" alt="Jose Addition street view" loading="lazy">
                   <img src="/images/Jose_Addition/Jose_Addition3.jpg" alt="Jose Addition older Kyle pocket" loading="lazy">
                 </div>
+
                 <div class="pocket-body">
                   <h2><button class="pocket-title-trigger" type="button" data-pocket-gallery="jose-addition">Jose Addition</button></h2>
+
                   <p class="pocket-card-text">
                     Older Central Kyle convenience near everyday stops like H-E-B, Target, restaurants, and major roads. Some homes may also come with tradeoffs like rush-hour traffic, road noise, or train proximity depending on the exact street.
                   </p>
+
                   <p class="pocket-card-fit">
                     <strong>Best fit:</strong> Buyers who want to stay close to the center of Kyle and are willing to weigh convenience against location-specific noise or traffic.
                   </p>
+
                   <div class="pocket-meta">
                     <span><strong>Feel:</strong> older pocket</span>
                     <span><strong>Watch:</strong> condition</span>
@@ -906,11 +678,14 @@
                   <img src="/images/dayoung/DAYoung2.jpg" alt="D.A. Young older Kyle pocket" loading="lazy">
                   <img src="/images/dayoung/DAYoung3.jpg" alt="D.A. Young street view" loading="lazy">
                 </div>
+
                 <div class="pocket-body">
                   <h2><button class="pocket-title-trigger" type="button" data-pocket-gallery="da-young">D.A. Young</button></h2>
+
                   <p>
                     A smaller older Kyle pocket where homes, spacing, upkeep, and street feel can matter more than a clean subdivision-style comparison.
                   </p>
+
                   <div class="pocket-meta">
                     <span><strong>Feel:</strong> varied</span>
                     <span><strong>Watch:</strong> upkeep</span>
@@ -926,11 +701,14 @@
                   <img src="/images/original_town_kyle/origina_town_of_kyle2.jpg" alt="Original Town Kyle older street view" loading="lazy">
                   <img src="/images/original_town_kyle/origina_town_of_kyle3.jpg" alt="Original Town Kyle older Kyle pocket" loading="lazy">
                 </div>
+
                 <div class="pocket-body">
                   <h2><button class="pocket-title-trigger" type="button" data-pocket-gallery="original-town-kyle">Original Town Kyle</button></h2>
+
                   <p>
                     Closest to Kyle’s historic core, with older homes, mature surroundings, downtown access, and more variation than a typical newer subdivision.
                   </p>
+
                   <div class="pocket-meta">
                     <span><strong>Feel:</strong> historic core</span>
                     <span><strong>Watch:</strong> street feel</span>
@@ -939,6 +717,7 @@
                   </div>
                 </div>
               </article>
+
             </div>
           </section>
 
@@ -953,12 +732,12 @@
           <section class="section-block">
             <div class="tradeoff-grid">
               <div class="tradeoff-card">
-                <h3>Lot Size & Spacing</h3>
+                <h3>Lot Size &amp; Spacing</h3>
                 <p>Some properties feel more open than newer subdivisions, but the layout is less predictable.</p>
               </div>
 
               <div class="tradeoff-card">
-                <h3>Age & Condition</h3>
+                <h3>Age &amp; Condition</h3>
                 <p>Updates, maintenance, roof age, systems, and remodel quality can change the value picture quickly.</p>
               </div>
 
@@ -975,23 +754,19 @@
           </section>
 
           <section class="info-grid section-block">
-  <div class="info-card">
-    <h2>Older Kyle Needs a Closer Look</h2>
-    <p>
-      In these older pockets, the neighborhood name alone does not tell the whole story. Condition, updates, lot size, nearby streets, road noise, and recent sales can all change the value picture.
-    </p>
-  </div>
+            <div class="info-card">
+              <h2>Older Kyle Needs a Closer Look</h2>
+              <p>
+                In these older pockets, the neighborhood name alone does not tell the whole story. Condition, updates, lot size, nearby streets, road noise, and recent sales can all change the value picture.
+              </p>
+            </div>
 
-  <div class="info-card">
-    <h2>Before You Compare Prices</h2>
-    <p>
-      A home may look cheaper or more expensive online, but the real question is whether the price is supported by the specific property and the nearby sales that actually matter.
-    </p>
-  </div>
-</section>
-
-          <section class="dashboard-wrap section-block">
-            <iframe src="https://mannycamacho512-bot.github.io/subdivision-dashboard/" loading="lazy"></iframe>
+            <div class="info-card">
+              <h2>Before You Compare Prices</h2>
+              <p>
+                A home may look cheaper or more expensive online, but the real question is whether the price is supported by the specific property and the nearby sales that actually matter.
+              </p>
+            </div>
           </section>
 
           <section class="info-grid section-block">
@@ -1009,36 +784,53 @@
               </p>
             </div>
           </section>
+
+          <section class="section-block mobile-partner-ad">
+            <div class="partner-ad-card">
+              <div class="partner-ad-label">Local Partner</div>
+
+              <a href="https://bloodworthbbq.com/" target="_blank" rel="noopener" class="partner-ad-image-link" aria-label="Visit Bloodworth BBQ">
+                <img src="/images/sponsors/bloodworth_bbq.jpg" alt="Bloodworth BBQ in Central Kyle" loading="lazy">
+              </a>
+
+              <a href="https://bloodworthbbq.com/" target="_blank" rel="noopener" class="partner-ad-visit">
+                Visit Bloodworth BBQ →
+              </a>
+            </div>
+          </section>
+
           <section class="info-grid section-block">
-  <div class="info-card">
-    <h2>What the Data Does Not Tell You</h2>
-    <ul>
-      <li>Whether the home’s condition supports the asking price.</li>
-      <li>Whether the street feels different from the surrounding area.</li>
-      <li>Whether nearby sales are actually good comps.</li>
-      <li>Whether road noise, train proximity, updates, or repairs change the value picture.</li>
-      <li>Whether the home is worth touring or better to skip.</li>
-    </ul>
-  </div>
+            <div class="info-card">
+              <h2>What the Data Does Not Tell You</h2>
+              <ul>
+                <li>Whether the home’s condition supports the asking price.</li>
+                <li>Whether the street feels different from the surrounding area.</li>
+                <li>Whether nearby sales are actually good comps.</li>
+                <li>Whether road noise, train proximity, updates, or repairs change the value picture.</li>
+                <li>Whether the home is worth touring or better to skip.</li>
+              </ul>
+            </div>
 
-  <div class="info-card">
-    <h2>Before You Tour</h2>
-    <p>
-      Older Central Kyle homes are more property-specific than newer subdivision homes. Two homes close together can have very different value stories.
-    </p>
-    <p>
-      Send me the address, link, or screenshot and I’ll help you check the home against nearby sales, condition, location, and street-level tradeoffs.
-    </p>
+            <div class="info-card">
+              <h2>Before You Tour</h2>
+              <p>
+                Older Central Kyle homes are more property-specific than newer subdivision homes. Two homes close together can have very different value stories.
+              </p>
 
-    <div class="cta-stack">
-      <div><a href="sms:5122987455">Text Manny the home</a></div>
-      <div>Or <a href="/contact.html">send it here</a></div>
-    </div>
-  </div>
-</section>
+              <p>
+                Send me the address, link, or screenshot and I’ll help you check the home against nearby sales, condition, location, and street-level tradeoffs.
+              </p>
+
+              <div class="cta-stack">
+                <div><a href="sms:5122987455">Text Manny the home</a></div>
+                <div>Or <a href="/contact.html">send it here</a></div>
+              </div>
+            </div>
+          </section>
 
           <section class="section-block" id="central-map">
             <div class="map-heading">Map of Older Central Kyle Pockets</div>
+
             <div class="map-wrap old-kyle-map">
               <iframe
                 src="https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F"
@@ -1046,39 +838,10 @@
               </iframe>
             </div>
           </section>
+
         </div>
-
-        <aside class="local-ad-rail" aria-label="Local business ads">
-          <div class="local-ad-label">Local Kyle Spots</div>
-
-          <div class="local-ad-card">
-  <div class="local-ad-kicker">Local Kyle BBQ</div>
-
-  <a href="https://bloodworthbbq.com/" target="_blank" rel="noopener" aria-label="Visit Bloodworth BBQ">
-    <img src="/images/sponsors/bloodworth_bbq.jpg" alt="Bloodworth BBQ in Kyle, Texas" loading="lazy">
-  </a>
-
-  <h3>Bloodworth BBQ</h3>
-  <p>A local Kyle BBQ spot featured on Live in Kyle.</p>
-
-  <a class="local-ad-call" href="https://bloodworthbbq.com/" target="_blank" rel="noopener">
-    Visit Bloodworth BBQ
-  </a>
-</div>
-
-          <div class="local-ad-card">
-            <img src="/images/local-ad-placeholder.jpg" alt="Local business feature placeholder" loading="lazy">
-            <h3>Near Downtown Kyle</h3>
-            <p>A clean ad card for restaurants, services, coffee shops, or local resources.</p>
-          </div>
-
-          <div class="local-ad-card">
-            <img src="/images/local-ad-placeholder.jpg" alt="Local business feature placeholder" loading="lazy">
-            <h3>Want to be featured?</h3>
-            <p>Simple contact line for future local business placements.</p>
-          </div>
-        </aside>
       </div>
+
     </div>
 
     <div class="pocket-modal" id="pocketGalleryModal" aria-hidden="true">
@@ -1165,20 +928,10 @@
     })();
 
     (function () {
-      const activeEl = document.getElementById("older-active-count");
-      const priceEl = document.getElementById("older-price-range");
-
-      // Temporary placeholders until the older-pocket data is wired in.
-      if (activeEl) activeEl.textContent = "Add data";
-      if (priceEl) priceEl.textContent = "Add range";
-    })();
-
-    (function () {
       const pocketData = {
         "jose-addition": {
           title: "José Addition: Convenience With a Few Tradeoffs to Weigh",
           era: "Older Kyle addition",
-          mapEmbed: "https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=29.996385735157986%2C-97.87347812781591&z=15",
           dataKey: "JOSE ADDITION",
           description: `
             <div class="pocket-detail-map">
@@ -1207,11 +960,21 @@
             ["Photo set", "8 images"]
           ]
         },
+
         "da-young": {
-          title: "D.A. Young",
+          title: "D.A. Young: Street-by-Street Older Kyle Fit",
           era: "Older Kyle pocket",
           dataKey: "D.A. YOUNG",
-          description: "A smaller older Kyle pocket where homes, spacing, upkeep, and street feel can matter more than a clean subdivision-style comparison.",
+          description: `
+            <div class="pocket-detail-map">
+              <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=29.997932813272326%2C-97.87995157501231&z=16" loading="lazy"></iframe>
+            </div>
+            <p>D.A. Young is one of those older Kyle pockets where the value is not always obvious from the listing alone.</p>
+            <p>The homes can sit close to central Kyle, but the feel depends heavily on the exact street, the condition of the home, the lot, and what has or has not been updated.</p>
+            <p>This is the kind of area where square footage and list price are not enough. A buyer should slow down and look at roof age, systems, remodel quality, nearby properties, and whether recent sales are actually comparable.</p>
+            <p>That does not make D.A. Young a bad area or a good area by default. It means the right home depends on the specific property.</p>
+            <p>For some buyers, an older central pocket can offer location and character. For others, the repairs, upkeep, or street-by-street variation may matter more than the price.</p>
+          `,
           images: [
             { src: "/images/dayoung/DAYoung1.jpg", alt: "D.A. Young neighborhood photo 1" },
             { src: "/images/dayoung/DAYoung2.jpg", alt: "D.A. Young neighborhood photo 2" },
@@ -1225,11 +988,21 @@
             ["Photo set", "4 images"]
           ]
         },
+
         "original-town-kyle": {
-          title: "Original Town Kyle",
+          title: "Original Town Kyle: Historic Core and Property-by-Property Value",
           era: "Historic core",
           dataKey: "ORIGINAL TOWN KYLE",
-          description: "Closest to Kyle’s historic core, with older homes, mature surroundings, downtown access, and more variation than a typical newer subdivision.",
+          description: `
+            <div class="pocket-detail-map">
+              <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=29.989875857935045%2C-97.87616290765823&z=16" loading="lazy"></iframe>
+            </div>
+            <p>Original Town Kyle sits closest to Kyle’s historic core, which makes it very different from a newer subdivision.</p>
+            <p>Here, the appeal is often the location, older surroundings, mature feel, and proximity to downtown Kyle. But that also means the homes can vary a lot from one property to the next.</p>
+            <p>One home may be updated and easier to compare. Another may need work, have older systems, sit near more activity, or require a much closer look before the list price makes sense.</p>
+            <p>This is not an area where the subdivision name tells you everything. The specific home, street, lot, condition, and recent nearby sales matter more.</p>
+            <p>For buyers who want character and central Kyle access, Original Town Kyle can be worth watching. The key is making sure the home itself supports the price before you tour or make an offer.</p>
+          `,
           images: [
             { src: "/images/original_town_kyle/origina_town_of_kyle1.jpg", alt: "Original Town Kyle neighborhood photo 1" },
             { src: "/images/original_town_kyle/origina_town_of_kyle2.jpg", alt: "Original Town Kyle neighborhood photo 2" },
@@ -1260,6 +1033,7 @@
       function formatMoney(value) {
         const n = Number(value);
         if (!Number.isFinite(n) || n <= 0) return "n/a";
+
         return n.toLocaleString("en-US", {
           style: "currency",
           currency: "USD",
@@ -1279,13 +1053,16 @@
 
       async function getOlderCentralRows() {
         if (olderCentralRows) return olderCentralRows;
+
         const res = await fetch(olderCentralDataUrl, { cache: "no-store" });
+
         if (!res.ok) throw new Error("Could not load older Central Kyle data");
+
         olderCentralRows = await res.json();
         return olderCentralRows;
       }
 
-      function renderPocketStats(pocket, row) {
+      function renderPocketStats(row) {
         if (!dashboardEl) return;
 
         const sold = row ? row.Sold_12Mo : null;
@@ -1347,6 +1124,7 @@
 
       function openPocketGallery(key) {
         const pocket = pocketData[key];
+
         if (!pocket || !modal) return;
 
         titleEl.textContent = pocket.title;
@@ -1372,7 +1150,7 @@
           getOlderCentralRows()
             .then((rows) => {
               const row = rows.find((item) => normalizePocketKey(item.Subdivision) === normalizePocketKey(pocket.dataKey));
-              renderPocketStats(pocket, row);
+              renderPocketStats(row);
             })
             .catch(() => {
               dashboardEl.innerHTML = `
@@ -1388,12 +1166,14 @@
 
       function closePocketGallery() {
         if (!modal) return;
+
         modal.classList.remove("is-open");
         modal.setAttribute("aria-hidden", "true");
       }
 
       document.querySelectorAll("[data-pocket-gallery]").forEach((trigger) => {
         trigger.addEventListener("click", () => openPocketGallery(trigger.dataset.pocketGallery));
+
         trigger.addEventListener("keydown", (event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
@@ -1403,16 +1183,19 @@
       });
 
       if (closeBtn) closeBtn.addEventListener("click", closePocketGallery);
+
       if (modal) {
         modal.addEventListener("click", (event) => {
           if (event.target === modal) closePocketGallery();
         });
       }
+
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") closePocketGallery();
       });
     })();
   </script>
+
   <script src="/js/date.js"></script>
 </body>
 </html>
