@@ -869,7 +869,7 @@
 
           <div class="pocket-modal-side">
             <div class="section-eyebrow" id="pocketModalEra">Older Kyle pocket</div>
-            <p id="pocketModalDescription"></p>
+            <div id="pocketModalDescription" class="pocket-modal-description"></div>
             <div class="pocket-modal-data" id="pocketModalData"></div>
           </div>
         </div>
@@ -942,6 +942,8 @@
   title: "José Addition: Convenience With a Few Tradeoffs to Weigh",
   era: "Older Kyle addition",
   dataKey: "JOSE ADDITION",
+  videoEmbed: "https://www.youtube.com/embed/47v1ZdUgFfo",
+  videoTitle: "José Addition video",
   description: `
     <div class="pocket-detail-video">
               <iframe
@@ -1109,37 +1111,79 @@
         `;
       }
 
-      function renderImage(pocket, index) {
-        const images = pocket.images || [];
-        imageWrap.innerHTML = "";
-        thumbsEl.innerHTML = "";
+      function renderVideo(pocket) {
+  imageWrap.innerHTML = "";
 
-        if (!images.length) {
-          const empty = document.createElement("div");
-          empty.className = "pocket-modal-empty";
-          empty.textContent = "Images coming soon";
-          imageWrap.appendChild(empty);
-          return;
-        }
+  const videoWrap = document.createElement("div");
+  videoWrap.className = "pocket-detail-video";
 
-        const img = document.createElement("img");
-        img.src = images[index].src;
-        img.alt = images[index].alt || pocket.title;
-        imageWrap.appendChild(img);
+  videoWrap.innerHTML = `
+    <iframe
+      src="${pocket.videoEmbed}"
+      title="${pocket.videoTitle || pocket.title}"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  `;
 
-        images.forEach((item, thumbIndex) => {
-          const btn = document.createElement("button");
-          btn.type = "button";
-          btn.className = thumbIndex === index ? "is-active" : "";
-          btn.addEventListener("click", () => renderImage(pocket, thumbIndex));
+  imageWrap.appendChild(videoWrap);
+}
 
-          const thumb = document.createElement("img");
-          thumb.src = item.src;
-          thumb.alt = item.alt || pocket.title;
-          btn.appendChild(thumb);
-          thumbsEl.appendChild(btn);
-        });
-      }
+function renderImage(pocket, index) {
+  const images = pocket.images || [];
+  imageWrap.innerHTML = "";
+  thumbsEl.innerHTML = "";
+
+  if (!images.length) {
+    const empty = document.createElement("div");
+    empty.className = "pocket-modal-empty";
+    empty.textContent = "Images coming soon";
+    imageWrap.appendChild(empty);
+    return;
+  }
+
+  if (pocket.videoEmbed) {
+    const videoBtn = document.createElement("button");
+    videoBtn.type = "button";
+    videoBtn.className = index === "video" ? "is-active" : "";
+    videoBtn.innerHTML = `
+      <span style="display:flex; align-items:center; justify-content:center; height:100%; font-size:.8rem; font-weight:900; color:#111827; background:#f3f4f6;">
+        ▶ Video
+      </span>
+    `;
+    videoBtn.addEventListener("click", () => {
+      renderVideo(pocket);
+      document.querySelectorAll(".pocket-modal-thumbs button").forEach(btn => btn.classList.remove("is-active"));
+      videoBtn.classList.add("is-active");
+    });
+    thumbsEl.appendChild(videoBtn);
+
+    if (index === "video") {
+      renderVideo(pocket);
+    }
+  }
+
+  images.forEach((item, thumbIndex) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = thumbIndex === index ? "is-active" : "";
+    btn.addEventListener("click", () => renderImage(pocket, thumbIndex));
+
+    const thumb = document.createElement("img");
+    thumb.src = item.src;
+    thumb.alt = item.alt || pocket.title;
+    btn.appendChild(thumb);
+    thumbsEl.appendChild(btn);
+  });
+
+  if (index !== "video") {
+    const img = document.createElement("img");
+    img.src = images[index].src;
+    img.alt = images[index].alt || pocket.title;
+    imageWrap.appendChild(img);
+  }
+}
 
       function openPocketGallery(key) {
         const pocket = pocketData[key];
@@ -1157,7 +1201,11 @@
           dataEl.appendChild(row);
         });
 
-        renderImage(pocket, 0);
+        if (pocket.videoEmbed) {
+  renderImage(pocket, "video");
+} else {
+  renderImage(pocket, 0);
+}
 
         if (dashboardEl) {
           dashboardEl.hidden = false;
