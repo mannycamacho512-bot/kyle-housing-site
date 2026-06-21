@@ -259,7 +259,21 @@
     .map-wrap.old-kyle-map iframe {
       min-height: 420px;
     }
+.pocket-detail-video {
+  margin: 0 0 18px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: #111827;
+  aspect-ratio: 16 / 9;
+}
 
+.pocket-detail-video iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
     .pocket-detail-map {
       margin: 0 0 18px;
       border-radius: 18px;
@@ -893,6 +907,17 @@
           era: "Older Kyle addition",
           dataKey: "JOSE ADDITION",
           description: `
+            description: `
+            <div class="pocket-detail-video">
+              <iframe
+                src="https://www.youtube.com/embed/47v1ZdUgFfo"
+                title="José Addition video"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+
             <div class="pocket-detail-map">
               <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1BNsXqEAlmqjzfvsO79I8-yJf_Zt1qo8&ehbc=2E312F&ll=29.996385735157986%2C-97.87347812781591&z=15" loading="lazy"></iframe>
             </div>
