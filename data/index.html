@@ -1963,8 +1963,24 @@ function renderBuyersSellersLadder(months) {
     return;
   }
 
-  const fullMonths = row.months;
-  const months = getFilteredMonths(fullMonths, currentRangeKey);
+  const fullMonths = row.months.map((m, index, arr) => {
+  const last6 = arr
+    .slice(Math.max(0, index - 5), index + 1)
+    .map(x => x.median_price)
+    .filter(x => x !== null && x !== undefined && !isNaN(Number(x)));
+
+  const rolling6Median =
+    last6.length
+      ? last6.reduce((sum, x) => sum + Number(x), 0) / last6.length
+      : null;
+
+  return {
+    ...m,
+    rolling_6_median_price: rolling6Median
+  };
+});
+
+const months = getFilteredMonths(fullMonths, currentRangeKey);
 
   if (!months.length) {
     setEmptyState("No monthly history found for this subdivision.");
@@ -2001,8 +2017,8 @@ function renderBuyersSellersLadder(months) {
           data: {
             labels,
             datasets: [{
-              label: "Median Price",
-              data: months.map(m => m.median_price),
+              label: "6-Month Rolling Median Price",
+              data: months.map(m => m.rolling_6_median_price),
               borderColor: emerald,
               borderWidth: 2.5,
               tension: 0.18,
