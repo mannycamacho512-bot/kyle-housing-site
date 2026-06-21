@@ -112,6 +112,34 @@
       overflow: hidden;
       box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
     }
+    .pocket-video-preview {
+  border-bottom: 1px solid #eef2f7;
+  background: #111827;
+  aspect-ratio: 16 / 9;
+}
+
+.pocket-video-preview iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.pocket-open-button {
+  width: calc(100% - 16px);
+  margin: 8px;
+  border: 0;
+  border-radius: 14px;
+  padding: 11px 12px;
+  background: #2f5f50;
+  color: #ffffff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.pocket-open-button:hover {
+  filter: brightness(1.05);
+}
 
     .pocket-gallery-preview {
       display: grid;
@@ -660,11 +688,19 @@
             <div class="pocket-grid">
 
               <article class="pocket-card">
-                <div class="pocket-gallery-preview" role="button" tabindex="0" data-pocket-gallery="jose-addition" aria-label="Open Jose Addition photos and notes">
-                  <img src="/images/Jose_Addition/Jose_Addition1.jpg" alt="Jose Addition neighborhood photo" loading="lazy">
-                  <img src="/images/Jose_Addition/Jose_Addition2.jpg" alt="Jose Addition street view" loading="lazy">
-                  <img src="/images/Jose_Addition/Jose_Addition3.jpg" alt="Jose Addition older Kyle pocket" loading="lazy">
-                </div>
+                <div class="pocket-video-preview">
+  <iframe
+    src="https://www.youtube.com/embed/47v1ZdUgFfo"
+    title="José Addition video"
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<button class="pocket-open-button" type="button" data-pocket-gallery="jose-addition">
+  View José Addition photos, map, and notes
+</button>
 
                 <div class="pocket-body">
                   <h2><button class="pocket-title-trigger" type="button" data-pocket-gallery="jose-addition">Jose Addition</button></h2>
@@ -903,12 +939,11 @@
     (function () {
       const pocketData = {
         "jose-addition": {
-          title: "José Addition: Convenience With a Few Tradeoffs to Weigh",
-          era: "Older Kyle addition",
-          dataKey: "JOSE ADDITION",
-          description: `
-            description: `
-            <div class="pocket-detail-video">
+  title: "José Addition: Convenience With a Few Tradeoffs to Weigh",
+  era: "Older Kyle addition",
+  dataKey: "JOSE ADDITION",
+  description: `
+    <div class="pocket-detail-video">
               <iframe
                 src="https://www.youtube.com/embed/47v1ZdUgFfo"
                 title="José Addition video"
