@@ -3,18 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Infinity Square Homes for Sale | Kyle, TX</title>
-  <link rel="canonical" href="https://liveinkyle.com/northeast/infinity-square.html">
-  
-  <link rel="icon" href="/favicon.ico" sizes="any">
+  <title>Live in Kyle</title>
+  <link rel="canonical" href="https://liveinkyle.com/southeast/">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="512x512" href="/images/favicon-512.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
 
 <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-  <meta
-    name="description"
-    content="Looking at Infinity Square in Kyle TX? Explore available homes, current asking-price ranges, neighborhood details, and buyer-side market data."
-  />
   <link rel="stylesheet" href="/subdivision.css">
   <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CMXSG3DVFY"></script>
@@ -25,14 +21,431 @@
 
   gtag('config', 'G-CMXSG3DVFY');
 </script>
-  
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Hedvig Letters Serif", serif;
+      background: white;
+      color: black;
+    }
+
+    h1 {
+      position: absolute !important;
+      left: -9999px !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       FIXED HEADER
+    ========================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: white;
+      z-index: 9999;
+      border-bottom: 0;
+      transition: padding 0.25s ease, min-height 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .topbar {
+      position: relative;
+      min-height: 90px;
+      padding: 0;
+      transition: min-height 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+    }
+
+    .top-link,
+    .top-id,
+    .logo-wrap,
+    .logo-mini {
+      transition: all 0.25s ease;
+    }
+
+    .logo-wrap {
+      position: absolute;
+      top: -14px;
+      left: -8px;
+      margin: 0;
+      text-align: left;
+      z-index: 2;
+    }
+
+    .top-link {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+    }
+
+    .header-action {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+      text-decoration: none;
+      margin-right: -22px;
+    }
+
+    .header-action:last-child {
+      margin-right: 0;
+    }
+
+    .action-icon {
+      display: block;
+      height: auto;
+      margin: 0;
+      padding: 0;
+    }
+
+    .action-label {
+      margin-top: -8px;
+      font-family: "Hedvig Letters Serif", serif;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+      color: #000;
+      text-align: center;
+    }
+
+    .connect-btn {
+      width: 90px;
+    }
+
+    .match-btn {
+      width: 80px;
+    }
+
+    .data-btn {
+      width: 82px;
+    }
+
+    .top-id {
+      margin-left: auto;
+      padding-top: 8px;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .logo-mini {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 132px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-mini:hover {
+      opacity: 0.85;
+    }
+
+    .logo-mini img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform: translateX(-15px);
+    }
+
+    .logo-mini-label {
+      position: static;
+      transform: none;
+      margin-top: -18px;
+      margin-left: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #333;
+      white-space: nowrap;
+      max-width: none;
+      text-align: left;
+      line-height: 1;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .site-header.shrink .logo-mini-label {
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+    }
+
+    .site-header.shrink .topbar {
+      min-height: 78px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .site-header.shrink .top-link,
+    .site-header.shrink .top-id {
+      opacity: 0;
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(-8px);
+    }
+
+    .site-header.shrink .logo-mini {
+      width: 132px;
+    }
+
+    /* =========================
+       PAGE CONTENT
+    ========================== */
+    .page-wrap {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 190px 32px 20px 32px;
+      box-sizing: border-box;
+    }
+
+    .subdivGridDesktop {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      margin-bottom: 8px;
+    }
+
+    .subdivCard {
+      min-width: 0;
+    }
+
+    .wb-card-img {
+      aspect-ratio: 4 / 3;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .wb-card-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .subdivMobileRow {
+      display: none !important;
+    }
+
+    @media (max-width: 1100px) {
+      .subdivGridDesktop {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+    @media (max-width: 768px) {
+      .topbar {
+        min-height: 140px;
+        padding: 0 10px;
+      }
+
+      .logo-wrap {
+        position: absolute;
+        top: -4px;
+        left: 0;
+        text-align: left;
+      }
+
+      .top-link {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: flex-end;
+        gap: 0;
+      }
+
+      .top-id {
+        position: absolute;
+        top: 8px;
+        right: 6px;
+        text-align: right;
+        font-size: 10px;
+        line-height: 1.2;
+        letter-spacing: 0;
+        max-width: 145px;
+      }
+
+      .logo-mini-label {
+        white-space: nowrap;
+        width: auto;
+        text-align: left;
+        left: auto;
+      }
+
+      .page-wrap {
+        padding: 190px 14px 14px 14px;
+      }
+
+      .site-header.shrink .topbar {
+        min-height: 86px;
+      }
+
+      .site-header.shrink .logo-mini {
+        width: 110px;
+      }
+
+      .subdivGridDesktop {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .wb-card-img {
+        aspect-ratio: 4 / 3;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #f5f5f5;
+      }
+
+      .wb-card-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: inherit;
+      }
+
+      .subdivTitle {
+        font-size: 13px !important;
+        line-height: 1.15;
+      }
+
+      .subdivPrice {
+        font-size: 11px !important;
+        line-height: 1.15;
+      }
+
+      .subdivAvail {
+        font-size: 10px !important;
+        line-height: 1.15;
+      }
+
+      .subdivMobileRow {
+        display: none !important;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+    }
+
+    /* =========================
+       FOOTER OVERRIDE - THIS PAGE ONLY
+    ========================== */
+    .footer-left-page .site-footer {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    .footer-left-page .footer-shell {
+      max-width: none !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 32px !important;
+    }
+
+    .footer-left-page .footer-grid {
+      grid-template-columns: auto auto !important;
+      gap: 12px !important;
+      align-items: start !important;
+      justify-content: start !important;
+    }
+
+    .footer-left-page .footer-right-group {
+      display: flex !important;
+      align-items: flex-start !important;
+      justify-content: flex-start !important;
+      gap: 42px !important;
+    }
+
+    .footer-left-page .footer-col {
+      text-align: left !important;
+    }
+
+    .footer-left-page .footer-badge {
+      justify-self: start !important;
+      text-align: left !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .footer-left-page .footer-badge a {
+      display: block !important;
+    }
+
+    .footer-left-page .footer-badge img {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    @media (max-width: 768px) {
+      .footer-left-page .footer-shell {
+        padding: 0 14px !important;
+      }
+
+      .footer-left-page .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+      }
+
+      .footer-left-page .footer-right-group {
+        flex-direction: column !important;
+        gap: 24px !important;
+      }
+
+      .footer-left-page .footer-badge {
+        justify-self: start !important;
+      }
+
+      .footer-left-page .footer-badge img {
+        max-width: 110px !important;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="footer-left-page">
+
   <header class="site-header">
     <div class="topbar">
       <div class="logo-wrap">
         <a href="/" class="logo-mini">
-          <img src="/images/logo.png" alt="Your Missing Peace" />
+          <img
+            src="/images/logo.png"
+            alt="Your Missing Peace"
+          />
           <span class="logo-mini-label">Your Missing Peace</span>
         </a>
       </div>
@@ -62,257 +475,454 @@
     </div>
   </header>
 
-  <main class="page-wrap">
-  <div class="content-shell">
+  <div class="page-wrap">
+    <h1>Homes for Sale in Kyle, TX</h1>
 
-    <aside class="sticky-agent-card">
-  <div class="sticky-agent-kicker">Before You Tour</div>
-  <div class="sticky-agent-title">Found a home in Infinity Square online?</div>
-
-  <div class="sticky-agent-menu">
-    <span>Comps</span>
-    <span>Price support</span>
-    <span>Negotiation angle</span>
-    <span>Worth touring?</span>
-  </div>
-
-  <a href="/contact.html" class="sticky-agent-cta">Send Me the Home</a>
-</aside>
-
-    <div class="mobile-agent-bar">
-  <div>
-    <strong>Found a home online?</strong>
-    <span>Text me the address before you tour</span>
-  </div>
-  <a href="sms:5122987455">Text Manny</a>
-</div>
-
-    <div class="page-top-meta">
-        <a href="/northeast/" class="back-link">
-          &larr; Back to Northeast Kyle neighborhoods
-        </a>
-        <div class="page-updated">Last updated: <span id="last-updated-date"></span></div>
-      </div>
-
-      <section class="hero-section section-block">
-  <h1>Infinity Square Homes in Kyle, TX</h1>
-  <div class="hero-subtitle">Found a home online? Check the deal before you tour.</div>
-
-  <div class="hero-copy">
-    <div style="max-width:760px; margin:20px auto 0; padding:30px 26px; border:2px solid #2f5f50; border-radius:22px; background:#ffffff; box-shadow:0 18px 45px rgba(0,0,0,0.10); text-align:center;">
-      <div style="font-size:13px; font-weight:900; letter-spacing:.09em; text-transform:uppercase; color:#2f5f50; margin-bottom:14px;">
-        Before You Click Contact Agent
-      </div>
-
-      <p style="margin:0 0 14px; font-size:30px; line-height:1.15; font-weight:950; color:#111;">
-        Found a home on <strong>Zillow</strong>, <strong>Redfin</strong>, or <strong>Realtor.com</strong>?
-      </p>
-
-      <p style="margin:0 0 8px; font-size:18px; line-height:1.45; color:#333; font-weight:700;">
-        Send it to me before you tour.
-      </p>
-
-      <p style="margin:0 0 22px; font-size:15px; line-height:1.5; color:#555;">
-        Before you accept the list price, confirm the data supports it.
-      </p>
-
-      <a href="/contact.html" class="hero-cta-button">Send Me the Home</a>
+    <div style="margin-top:34px; margin-bottom:10px;">
+      <h2 style="text-align:center; font-family:'Hedvig Letters Serif'; font-size:22px; font-weight:700; color:#000; margin:0; padding:0;">
+        Southeast Kyle Subdivisions
+      </h2>
     </div>
-  </div>
-</section>
 
-      <section class="section-block">
-        <div style="max-width:760px; margin:0 auto;">
-          <div class="gallery-card">
-            <img
-              src="/images/subdivisions/infinity-square.png"
-              alt="Infinity Square neighborhood in Kyle, Texas"
-              loading="lazy"
-              style="width:100%; height:auto; display:block;"
-            >
-          </div>
-        </div>
-      </section>
+    <div style="max-width:900px; margin:0 auto 22px auto; font-size:16px; line-height:1.6; text-align:center;">
+     Most neighborhoods here line FM 150, shaped by HOAs and steady growth, a corridor of connection and community.
+    </div>
 
-      <section class="market-grid section-block">
-        <div class="market-card">
-          <h2 class="card-kicker">Homes Available in Infinity Square, Kyle TX</h2>
-          <div id="homes-available-text" class="market-value">Loading...</div>
-          <div class="market-note">
-  Found one you like? Text me the address, link, or screenshot before you tour.
+    <div style="text-align:center; font-size:12px; color:#666; margin-top:-12px; margin-bottom:18px;">
+      Last updated: July 20, 2026
+    </div>
+
+         <div class="subdivGridDesktop" style="margin-bottom:0px;">
+<div class="subdivCard">
+  <a href="bunton-creek.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Bunton-Creek_2.48.1.png" alt="Bunton Creek" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Bunton Creek
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $232,950 &ndash; $299,900
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        16 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="post-oak.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Post-Oak_2.54.1.png" alt="Post Oak" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Post Oak
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $200,000 &ndash; $439,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        11 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="nan" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="nan" alt="Harvest Creek" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Harvest Creek
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $228,500 &ndash; $370,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        7 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="creekside.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Creekside_2.65.1.png" alt="Creekside" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Creekside
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $209,890 &ndash; $259,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        5 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="four-seasons-farm.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Four-Seasons-Farm_2.68.1.png" alt="Four Seasons Farm" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Four Seasons Farm
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $275,000 &ndash; $345,500
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        4 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="infinity-square.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="/images/subdivisions/infinity-square.png" alt="Infinity Square" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Infinity Square
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $319,990 &ndash; $364,990
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        4 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="woodlands-park.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Woodlands-Park_2.59.1.png" alt="Woodlands Park" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Woodlands Park
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $259,900 &ndash; $299,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        4 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="cool-springs.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Cool-Springs_2.58.1.png" alt="Cool Springs" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Cool Springs
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $320,000 &ndash; $339,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        3 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="high-meadows.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/High-Meadows_2.62.1.png" alt="High Meadows" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        High Meadows
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $369,900 &ndash; $444,900
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        2 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard subdivCard--placeholder" aria-hidden="true"></div>
+<div class="subdivCard subdivCard--placeholder" aria-hidden="true"></div>
+<div class="subdivCard subdivCard--placeholder" aria-hidden="true"></div>
 </div>
 
-          <div class="cta-stack">
-            <div>
-              <a href="/schedule-walkthrough">🏡 Plan a walkthrough at your pace</a>
-            </div>
-            <div>Need help or Have Questions?</div>
-            <div>Call or text: <a href="tel:5122987455">512-298-7455</a></div>
-            <div>Or <a href="/contact.html">email me here</a></div>
-          </div>
-        </div>
+<div class="subdivMobileRow">
+<div class="subdivCard">
+  <a href="bunton-creek.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Bunton-Creek_2.48.1.png" alt="Bunton Creek" />
+    </div>
 
-        <div class="market-card">
-          <h2 class="card-kicker">Price Ranges in Infinity Square, Kyle TX</h2>
-          <div class="market-value">
-            <div>
-              <span>Value around:</span>
-              <span>🏷️</span>
-              <span id="price-range-text">Loading...</span>
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Bunton Creek
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $232,950 &ndash; $299,900
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        16 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="post-oak.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Post-Oak_2.54.1.png" alt="Post Oak" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Post Oak
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $200,000 &ndash; $439,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        11 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="nan" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="nan" alt="Harvest Creek" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Harvest Creek
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $228,500 &ndash; $370,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        7 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="creekside.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Creekside_2.65.1.png" alt="Creekside" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Creekside
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $209,890 &ndash; $259,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        5 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="four-seasons-farm.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Four-Seasons-Farm_2.68.1.png" alt="Four Seasons Farm" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Four Seasons Farm
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $275,000 &ndash; $345,500
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        4 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="infinity-square.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="/images/subdivisions/infinity-square.png" alt="Infinity Square" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Infinity Square
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $319,990 &ndash; $364,990
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        4 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="woodlands-park.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Woodlands-Park_2.59.1.png" alt="Woodlands Park" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Woodlands Park
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $259,900 &ndash; $299,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        4 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="cool-springs.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/Cool-Springs_2.58.1.png" alt="Cool Springs" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        Cool Springs
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $320,000 &ndash; $339,000
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        3 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+<div class="subdivCard">
+  <a href="high-meadows.html" style="text-decoration:none; color:inherit; display:block;">
+    <div class="wb-card-img">
+      <img class="wb-card-photo" src="https://irp.cdn-website.com/b20eb2c7/dms3rep/multi/High-Meadows_2.62.1.png" alt="High Meadows" />
+    </div>
+
+    <div style="text-align:center; margin-top:8px; line-height:1.25; font-family:'Hedvig Letters Serif';">
+      <div class="subdivTitle" style="font-weight:600; font-size:18px; margin:0;">
+        High Meadows
+      </div>
+
+      <div class="subdivPrice" style="font-size:14px; margin-top:2px;">
+        $369,900 &ndash; $444,900
+      </div>
+
+      <div class="subdivAvail" style="font-size:13px; color:#555; margin-top:2px;">
+        2 homes currently available
+      </div>
+    </div>
+  </a>
+</div>
+</div>
+
+
+    <footer class="site-footer">
+      <div class="footer-shell">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-title">Kyle Housing</div>
+            <p>
+              Local housing insight designed to bring clarity to pricing,
+              neighborhoods, and decision-making in Kyle, Texas.
+            </p>
+          </div>
+
+          <div class="footer-right-group">
+            <div class="footer-col">
+              <div class="footer-title">Explore</div>
+              <a href="/">Home</a>
+              <a href="/data">Data Page</a>
+              <a href="/contact.html">Connect</a>
+              <a href="/privacy-policy.html">Privacy Policy</a>
             </div>
-            
-            <div style="margin-top: 10px;">
-              <a href="https://emmanuelcamacho.daltonwade.com/" style="text-decoration: underline;">
-                Explore available homes in Infinity Square
+
+            <div class="footer-badge">
+              <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
+                <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
               </a>
             </div>
-          </div>
-        </div>
-      </section>
 
-      
-    <section class="dashboard-wrap section-block dashboard-preview-arroyo">
-  <iframe 
-    src="https://mannycamacho512-bot.github.io/subdivision-dashboard/?sub=CASETTA%20RANCH" 
-    loading="lazy">
-  </iframe>
-
-  <div class="dashboard-preview-button-wrap-arroyo">
-    <a href="/data?sub=CASETTA%20RANCH" class="dashboard-preview-button-arroyo">
-      View full Infinity Square data
-    </a>
-  </div>
-</section>
-
-      <section class="info-grid section-block">
-        <div class="info-card">
-          <h2>Information to Consider</h2>
-          <ul>
-            <li>Confirm the current HOA dues, tax rate, and any special district charges for the specific property.</li>
-            <li>Pricing can vary based on the home’s size, condition, upgrades, and location within the neighborhood.</li>
-            <li>Compare the asking price with recent sales and nearby active listings before scheduling a tour.</li>
-          </ul>
-
-          <div class="cta-stack">
-            <div><strong>Need help or have questions?</strong></div>
-            <div>Call or text: <a href="tel:5122987455">512-298-7455</a></div>
-            <div>Or <a href="/contact.html">email me here</a></div>
+            <div class="footer-col">
+              <div class="footer-title">About</div>
+              <p>
+                Emmanuel "Manny" Camacho<br />
+                Realtor® in Kyle, TX<br />
+                Dalton Wade Real Estate Group
+              </p>
+            </div>
           </div>
         </div>
 
-        <div class="info-card">
-          <h2>Specifics</h2>
-          <ul>
-            <li>Residential neighborhood in Kyle, Texas</li>
-            <li>Home styles, sizes, and floor plans may vary</li>
-            <li>Availability changes as homes are listed and sold</li>
-            <li>Review the condition and upgrades of each individual property</li>
-            <li>Compare nearby competition before accepting the list price</li>
-            <li>Send me the address or listing link for a buyer-side price check</li>
-          </ul>
+        <div class="footer-bottom">
+          <span>© 2026 Emmanuel "Manny" Camacho · Kyle Housing</span>
         </div>
-      </section>
-
-      <section class="info-grid section-block">
-        <div class="info-card">
-          <h2>Road &amp; Traffic Conditions</h2>
-
-          <div class="traffic-badges">
-            <div>🚗 <strong>Neighborhood Traffic:</strong> Generally residential</div>
-            <div>📍 <strong>Location:</strong> Kyle, Texas</div>
-          </div>
-
-          <h3>Nearby Schools</h3>
-          <div class="fine-note" style="margin-bottom: 8px;">
-            School assignments can vary by address and may change. Verify current attendance boundaries directly with the school district.
-          </div>
-        </div>
-      </section>
-
-        <section class="info-grid section-block">
-  <div class="info-card">
-    <h2>What the Data Does Not Tell You</h2>
-    <ul>
-      <li>Whether a specific home is priced correctly for its condition.</li>
-      <li>Whether nearby active listings are weakening the seller’s position.</li>
-      <li>Whether the list price is supported by recent sales.</li>
-      <li>Whether it is worth touring or better to skip.</li>
-    </ul>
-  </div>
-
-  <div class="info-card">
-    <h2>Before You Tour</h2>
-    <p>
-      Neighborhood data gives you the range. The specific home still needs a second look.
-    </p>
-    <p>
-      Send me the address, link, or screenshot and I’ll help you check whether the data supports the price.
-    </p>
-
-    <div class="cta-stack">
-      <div><a href="sms:5122987455">Text Manny the home</a></div>
-      <div>Or <a href="/contact.html">send it here</a></div>
-    </div>
-  </div>
-</section>
-
-      <section class="section-block">
-        <div class="map-heading">Explore Nearby Subdivisions</div>
-        <div class="map-wrap">
-          <iframe
-            src="https://www.google.com/maps?q=Infinity%20Square%20Kyle%20TX&output=embed"
-            loading="lazy">
-          </iframe>
-        </div>
-      </section>
-
-      <footer class="site-footer">
-  <div class="footer-shell">
-    <div class="footer-grid">
-
-      <div class="footer-col">
-        <div class="footer-title">Kyle Housing</div>
-        <p>
-          Local housing insight designed to bring clarity to pricing,
-          neighborhoods, and decision-making in Kyle, Texas.
-        </p>
       </div>
-
-      <div class="footer-right-group">
-
-        <div class="footer-col">
-  <div class="footer-title">Explore</div>
-  <a href="/">Home</a>
-  <a href="/data">Data Page</a>
-  <a href="/contact.html">Connect</a>
-  <a href="/privacy-policy.html">Privacy Policy</a>
-</div>
-
-        <div class="footer-badge">
-          <a href="https://www.tsahc.org/homebuyers-renters/ready-to-buy-a-home" target="_blank" rel="noopener">
-            <img src="https://lirp.cdn-website.com/b20eb2c7/dms3rep/multi/opt/2026_REALTOR_Badge-1920w.jpg" alt="Realtor badge">
-          </a>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-title">About</div>
-          <p>
-            Emmanuel "Manny" Camacho<br />
-            Realtor® in Kyle, TX<br />
-            Dalton Wade Real Estate Group
-          </p>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <span>© 2026 Emmanuel "Manny" Camacho · Kyle Housing</span>
-    </div>
+    </footer>
   </div>
-</footer>
-  </main>
 
   <script>
     const siteHeader = document.querySelector('.site-header');
@@ -327,45 +937,6 @@
 
     window.addEventListener('scroll', handleHeaderShrink, { passive: true });
     window.addEventListener('load', handleHeaderShrink);
-
-    (async function () {
-      const subdivisionName = "INFINITY SQUARE";
-      try {
-        const res = await fetch(
-          "https://mannycamacho512-bot.github.io/subdivision-dashboard/data/subdivision_page_data.json",
-          { cache: "no-store" }
-        );
-        const allData = await res.json();
-        const data = allData[subdivisionName];
-        if (!data) throw new Error("Subdivision not found");
-
-        const homesEl = document.getElementById("homes-available-text");
-        if (homesEl) {
-          const count = Number(data.homesAvailable || 0);
-          homesEl.textContent = `${count} ${count === 1 ? "home" : "homes"} available`;
-        }
-
-        const priceRangeEl = document.getElementById("price-range-text");
-        if (priceRangeEl) {
-          const money = (n) => {
-            if (!n) return "n/a";
-            return Number(n).toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-              maximumFractionDigits: 0
-            });
-          };
-          priceRangeEl.textContent = `${money(data.minPrice)} – ${money(data.maxPrice)}`;
-        }
-      } catch (err) {
-        console.error(err);
-        const homesEl = document.getElementById("homes-available-text");
-        const priceRangeEl = document.getElementById("price-range-text");
-        if (homesEl) homesEl.textContent = "Data unavailable";
-        if (priceRangeEl) priceRangeEl.textContent = "Data unavailable";
-      }
-    })();
   </script>
-  <script src="/js/date.js"></script>
 </body>
 </html>
