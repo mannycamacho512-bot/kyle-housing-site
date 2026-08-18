@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Emmanuel Camacho | Data & Reporting Analyst</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <div>
+      <div class="name">Emmanuel “Manny” Camacho</div>
+      <div class="role">Data & Reporting Analyst</div>
+    </div>
+    <nav>
+      <a href="#project">Project</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#problems">Problems Solved</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="project">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Portfolio Case Study</div>
+      <h1>Kyle Residential Market Intelligence</h1>
+      <p class="lede">An end-to-end residential real-estate analytics project focused on neighborhood-level market performance in Kyle, Texas.</p>
+      <div class="tool-row">
+        <span>Power BI</span><span>Excel</span><span>Python</span><span>Data Cleaning</span><span>Automation</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-label">Business Problem</div>
+      <p>Citywide housing statistics can hide meaningful differences between individual neighborhoods. I built a workflow to analyze sales, inventory, pricing, market time, and other trends at the subdivision level.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-kicker">Workflow</div>
+    <h2>From raw MLS data to market insight</h2>
+    <div class="pipeline">
+      <div class="pipe-step"><strong>1</strong><span>Raw MLS Data</span></div><div class="arrow">→</div>
+      <div class="pipe-step"><strong>2</strong><span>Data Cleaning</span></div><div class="arrow">→</div>
+      <div class="pipe-step"><strong>3</strong><span>Python Processing</span></div><div class="arrow">→</div>
+      <div class="pipe-step"><strong>4</strong><span>Power BI</span></div><div class="arrow">→</div>
+      <div class="pipe-step"><strong>5</strong><span>Market Insights</span></div>
+    </div>
+    <p class="small-note">SQL can be added later once it becomes part of the workflow.</p>
+  </div>
+</section>
+
+<section class="section" id="dashboard">
+  <div class="wrap">
+    <div class="section-kicker">Dashboard & Analysis</div>
+    <h2>Examples of the work</h2>
+    <p class="section-intro">Replace these placeholders with your strongest Power BI, Excel, or published market-analysis screenshots.</p>
+    <div class="gallery">
+      <article class="shot-card">
+        <div class="placeholder"><span>POWER BI SCREENSHOT</span><small>Overview dashboard</small></div>
+        <h3>Market Overview</h3>
+        <p>Show sales, active inventory, median price, DOM, or other key market metrics.</p>
+      </article>
+      <article class="shot-card">
+        <div class="placeholder"><span>POWER BI SCREENSHOT</span><small>Subdivision comparison</small></div>
+        <h3>Subdivision Performance</h3>
+        <p>Compare neighborhoods by sales volume, median price, days on market, or another metric.</p>
+      </article>
+      <article class="shot-card">
+        <div class="placeholder"><span>EXCEL / DATA SCREENSHOT</span><small>Cleaning or processing example</small></div>
+        <h3>Data Preparation</h3>
+        <p>Show mapping, validation, transformation, or another meaningful data-preparation step.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="problems">
+  <div class="wrap">
+    <div class="section-kicker">Problem Solving</div>
+    <h2>Problems I solved</h2>
+    <div class="problem-grid">
+      <article class="problem-card">
+        <div class="case-no">01</div>
+        <h3>Inconsistent subdivision names</h3>
+        <p class="label">Problem</p>
+        <p>MLS records may use several names for the same neighborhood, fragmenting sales and inventory counts.</p>
+        <div class="code-box">
+          <div>TALAVERA</div><div>TALAVERA PH 1</div><div>TALAVERA PH 2</div>
+          <div class="map-line">↓ standardized as ↓</div><div class="final">TALAVERA</div>
+        </div>
+        <p class="label">Solution</p>
+        <p>Created normalization rules that group subdivision variants into standardized neighborhood categories before aggregation.</p>
+        <p class="label">Result</p>
+        <p>More consistent neighborhood-level sales, inventory, and pricing statistics.</p>
+      </article>
+
+      <article class="problem-card">
+        <div class="case-no">02</div>
+        <h3>Incorrect sold-count output</h3>
+        <p class="label">Problem</p>
+        <p>A published subdivision sold count did not match the underlying YTD dataset.</p>
+        <p class="label">Investigation</p>
+        <div class="mini-flow"><span>Source</span><b>→</b><span>Aggregation</span><b>→</b><span>JSON</span><b>→</b><span>Page Logic</span></div>
+        <p class="label">Solution</p>
+        <p>Traced the metric through the reporting pipeline to isolate where the incorrect value was introduced.</p>
+        <p class="label">Result</p>
+        <p>Corrected the reporting issue and created a repeatable validation approach for future discrepancies.</p>
+      </article>
+
+      <article class="problem-card">
+        <div class="case-no">03</div>
+        <h3>Recurring reporting automation</h3>
+        <p class="label">Problem</p>
+        <p>Refreshing neighborhood-level analysis manually each month is repetitive and error-prone.</p>
+        <p class="label">Solution</p>
+        <p>Built repeatable Python- and Excel-based processing steps to transform updated source data into standardized reporting outputs.</p>
+        <p class="label">Result</p>
+        <p>Reduced repeated manual work and created a workflow that can be refreshed as new market data becomes available.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-kicker">Market Insights</div>
+    <h2>Analysis, not just charts</h2>
+    <div class="insight-grid">
+      <article><h3>Question</h3><p>Which Kyle subdivisions are experiencing the most sales activity?</p></article>
+      <article><h3>Finding</h3><p>Add one short real-world finding here after you choose the dashboard or month you want to feature.</p></article>
+      <article><h3>Business Meaning</h3><p>Explain why the result matters to a buyer, homeowner, operator, or decision-maker.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="section-kicker">Contact</div>
+      <h2>Emmanuel “Manny” Camacho</h2>
+      <p>Data & Reporting Analyst · Kyle, Texas</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:Mannyc512@outlook.com">Mannyc512@outlook.com</a>
+      <span>512-298-7455</span>
+      <a href="#">Resume link — add later</a>
+      <a href="#">LinkedIn — add later</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">Portfolio case study · Kyle Residential Market Intelligence</div></footer>
+</body>
+</html>
