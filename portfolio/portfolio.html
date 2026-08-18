@@ -5,11 +5,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kyle Residential Market Intelligence</title>
+<title>Kyle Residential Market Intelligence | Emmanuel Camacho</title>
 
 <style>
-
-/* ===== PAGE ===== */
 
 * {
   box-sizing: border-box;
@@ -20,6 +18,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #08111b;
   color: white;
+  line-height: 1.5;
 }
 
 .wrap {
@@ -27,29 +26,12 @@ body {
   margin: auto;
 }
 
-.portfolio-section {
-  padding: 70px 0;
+section {
+  padding: 75px 0;
 }
 
 .dark-section {
   background: #0d1721;
-}
-
-
-/* ===== HEADINGS ===== */
-
-.section-header {
-  margin-bottom: 30px;
-}
-
-.section-header h2 {
-  margin: 5px 0 8px;
-  font-size: 38px;
-}
-
-.section-header p {
-  margin: 0;
-  color: #8c9aa7;
 }
 
 .eyebrow {
@@ -60,8 +42,145 @@ body {
   color: #3ea6ff;
 }
 
+.section-header {
+  margin-bottom: 30px;
+}
 
-/* ===== SCREENSHOT GALLERY ===== */
+.section-header h2 {
+  margin: 6px 0 8px;
+  font-size: 38px;
+}
+
+.section-header p {
+  margin: 0;
+  max-width: 700px;
+  color: #93a1ad;
+  font-size: 15px;
+}
+
+
+/* HERO */
+
+.hero {
+  padding: 100px 0 85px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(62,166,255,.18), transparent 35%),
+    #08111b;
+}
+
+.hero-label {
+  color: #3ea6ff;
+  text-transform: uppercase;
+  letter-spacing: .17em;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.hero h1 {
+  max-width: 950px;
+  margin: 15px 0;
+  font-size: clamp(48px, 7vw, 82px);
+  line-height: .98;
+  letter-spacing: -.05em;
+}
+
+.hero-text {
+  max-width: 760px;
+  color: #a2b0bc;
+  font-size: 19px;
+  margin-bottom: 28px;
+}
+
+.tools {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.tools span {
+  padding: 8px 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(255,255,255,.04);
+}
+
+
+/* PROJECT OVERVIEW */
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.overview-grid h2 {
+  font-size: 42px;
+  margin: 6px 0 15px;
+}
+
+.overview-grid p {
+  color: #9ba9b5;
+  font-size: 17px;
+}
+
+.overview-highlight {
+  background: #111d28;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px;
+  padding: 30px;
+}
+
+.overview-highlight strong {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.overview-highlight p {
+  margin: 0;
+  font-size: 14px;
+}
+
+
+/* PIPELINE */
+
+.pipeline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pipeline-step {
+  flex: 1;
+  min-height: 110px;
+  padding: 18px;
+  background: #111d28;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 13px;
+}
+
+.pipeline-step span {
+  display: block;
+  color: #3ea6ff;
+  font-size: 11px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.pipeline-step strong {
+  font-size: 15px;
+}
+
+.pipeline-arrow {
+  color: #687987;
+  font-size: 23px;
+}
+
+
+/* IMAGE GALLERIES */
 
 .gallery-grid {
   display: grid;
@@ -69,16 +188,16 @@ body {
   gap: 18px;
 }
 
-.small-grid {
+.gallery-grid.two {
   grid-template-columns: repeat(2, 1fr);
 }
 
 .gallery-item {
   margin: 0;
   background: #111d28;
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,.08);
 }
 
 .gallery-item img {
@@ -86,45 +205,39 @@ body {
   display: block;
   aspect-ratio: 16 / 10;
   object-fit: cover;
+  background: #152330;
 }
 
 .gallery-item figcaption {
-  padding: 12px 14px;
-  font-weight: 700;
+  padding: 13px 15px;
   font-size: 14px;
+  font-weight: 700;
 }
 
 
-/* ===== PIPELINE ===== */
+/* PUBLISHED REPORTING */
 
-.pipeline {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.reporting-intro {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 45px;
+  align-items: end;
+  margin-bottom: 30px;
 }
 
-.pipeline-step {
-  flex: 1;
-  padding: 20px;
-  background: #111d28;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.08);
+.reporting-intro h2 {
+  font-size: 42px;
+  margin: 6px 0 0;
 }
 
-.pipeline-step span {
-  display: block;
-  font-size: 11px;
-  color: #3ea6ff;
-  margin-bottom: 5px;
-}
-
-.pipeline-arrow {
-  font-size: 24px;
-  color: #6f7c88;
+.reporting-intro p {
+  color: #9ba9b5;
+  font-size: 16px;
+  margin: 0;
 }
 
 
-/* ===== PROBLEMS ===== */
+/* PROBLEMS */
 
 .problem-grid {
   display: grid;
@@ -134,42 +247,65 @@ body {
 
 .problem-card {
   background: #111d28;
-  padding: 22px;
-  border-radius: 14px;
   border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  padding: 23px;
+}
+
+.problem-number {
+  color: #3ea6ff;
+  font-size: 11px;
+  font-weight: 800;
 }
 
 .problem-card h3 {
-  margin: 8px 0;
+  margin: 8px 0 9px;
+  font-size: 21px;
 }
 
 .problem-card p {
+  margin: 0;
   color: #93a1ad;
   font-size: 14px;
 }
 
-.problem-number {
-  font-size: 11px;
-  color: #3ea6ff;
-  font-weight: 800;
-}
-
 .code-example {
-  margin-top: 15px;
+  margin-top: 16px;
+  padding: 13px;
   background: #081018;
-  padding: 12px;
-  border-radius: 10px;
+  border-radius: 9px;
   font-family: monospace;
   font-size: 12px;
+  line-height: 1.6;
 }
 
 
-/* ===== MOBILE ===== */
+/* FINAL */
 
-@media (max-width: 900px) {
+.final {
+  text-align: center;
+  padding: 90px 20px;
+}
 
+.final h2 {
+  font-size: 44px;
+  max-width: 800px;
+  margin: auto auto 15px;
+}
+
+.final p {
+  color: #93a1ad;
+  max-width: 650px;
+  margin: auto;
+}
+
+
+@media (max-width: 850px) {
+
+  .overview-grid,
+  .reporting-intro,
   .gallery-grid,
-  .small-grid,
+  .gallery-grid.two,
   .problem-grid {
     grid-template-columns: 1fr;
   }
@@ -180,8 +316,8 @@ body {
   }
 
   .pipeline-arrow {
-    transform: rotate(90deg);
     text-align: center;
+    transform: rotate(90deg);
   }
 
 }
@@ -193,16 +329,165 @@ body {
 <body>
 
 
-<!-- POWER BI -->
+<!-- HERO -->
 
-<section class="portfolio-section">
+<section class="hero">
+
+<div class="wrap">
+
+  <span class="hero-label">Data Analytics Portfolio</span>
+
+  <h1>
+    Kyle Residential<br>
+    Market Intelligence
+  </h1>
+
+  <p class="hero-text">
+    An end-to-end residential real-estate analytics system built to
+    understand how individual Kyle neighborhoods are actually performing.
+  </p>
+
+  <div class="tools">
+    <span>Power BI</span>
+    <span>Excel</span>
+    <span>Python</span>
+    <span>Data Cleaning</span>
+    <span>Automation</span>
+    <span>Web Reporting</span>
+  </div>
+
+</div>
+
+</section>
+
+
+
+<!-- WHAT I BUILT -->
+
+<section class="dark-section">
+
+<div class="wrap overview-grid">
+
+  <div>
+
+    <span class="eyebrow">The Project</span>
+
+    <h2>What I Built</h2>
+
+    <p>
+      I built a neighborhood-level market intelligence system using
+      residential MLS data from Kyle, Texas.
+    </p>
+
+    <p>
+      The project takes raw housing data through cleaning, processing
+      and analysis, then turns it into Power BI reporting and
+      public-facing market reports.
+    </p>
+
+  </div>
+
+
+  <div class="overview-highlight">
+
+    <strong>The goal wasn't just to build dashboards.</strong>
+
+    <p>
+      The goal was to create a repeatable system that turns raw
+      property data into useful market information for buyers,
+      homeowners and real-estate decision making.
+    </p>
+
+  </div>
+
+</div>
+
+</section>
+
+
+
+<!-- DATA PIPELINE -->
+
+<section>
+
 <div class="wrap">
 
   <div class="section-header">
-    <span class="eyebrow">Power BI</span>
-    <h2>Market Analysis</h2>
-    <p>Residential market reporting built from Kyle MLS data.</p>
+
+    <span class="eyebrow">Workflow</span>
+
+    <h2>How the Data Moves</h2>
+
+    <p>
+      From the original MLS export to the final market information
+      published online.
+    </p>
+
   </div>
+
+
+  <div class="pipeline">
+
+    <div class="pipeline-step">
+      <span>01</span>
+      <strong>MLS Data</strong>
+    </div>
+
+    <div class="pipeline-arrow">→</div>
+
+    <div class="pipeline-step">
+      <span>02</span>
+      <strong>Clean & Standardize</strong>
+    </div>
+
+    <div class="pipeline-arrow">→</div>
+
+    <div class="pipeline-step">
+      <span>03</span>
+      <strong>Python / Excel</strong>
+    </div>
+
+    <div class="pipeline-arrow">→</div>
+
+    <div class="pipeline-step">
+      <span>04</span>
+      <strong>Power BI Analysis</strong>
+    </div>
+
+    <div class="pipeline-arrow">→</div>
+
+    <div class="pipeline-step">
+      <span>05</span>
+      <strong>Website Reporting</strong>
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+
+<!-- POWER BI -->
+
+<section class="dark-section">
+
+<div class="wrap">
+
+  <div class="section-header">
+
+    <span class="eyebrow">Power BI</span>
+
+    <h2>Market Analysis</h2>
+
+    <p>
+      Power BI is used to explore the market from multiple angles
+      rather than relying on a single citywide statistic.
+    </p>
+
+  </div>
+
 
   <div class="gallery-grid">
 
@@ -223,7 +508,7 @@ body {
 
     <figure class="gallery-item">
       <img src="images/powerbi-median-price.png">
-      <figcaption>Median Price</figcaption>
+      <figcaption>Price Trends</figcaption>
     </figure>
 
     <figure class="gallery-item">
@@ -233,116 +518,142 @@ body {
 
     <figure class="gallery-item">
       <img src="images/powerbi-price-reductions.png">
-      <figcaption>Price Reductions</figcaption>
+      <figcaption>Listing & Price Activity</figcaption>
     </figure>
 
   </div>
 
 </div>
+
 </section>
 
 
 
 <!-- EXCEL -->
 
-<section class="portfolio-section dark-section">
+<section>
+
 <div class="wrap">
 
   <div class="section-header">
+
     <span class="eyebrow">Excel + Data</span>
-    <h2>Cleaning & Preparation</h2>
+
+    <h2>Behind the Reporting</h2>
+
+    <p>
+      Before the data becomes a chart or market report, it has to be
+      cleaned, organized and checked.
+    </p>
+
   </div>
 
-  <div class="gallery-grid small-grid">
+
+  <div class="gallery-grid two">
 
     <figure class="gallery-item">
       <img src="images/excel-clean-data.png">
-      <figcaption>Cleaned Dataset</figcaption>
+      <figcaption>Data Cleaning & Preparation</figcaption>
     </figure>
 
     <figure class="gallery-item">
       <img src="images/excel-subdivision-mapping.png">
-      <figcaption>Subdivision Mapping</figcaption>
+      <figcaption>Subdivision Standardization</figcaption>
     </figure>
 
   </div>
 
 </div>
+
 </section>
 
 
 
-<!-- PIPELINE -->
+<!-- WEBSITE OUTPUT -->
 
-<section class="portfolio-section">
+<section class="dark-section">
+
 <div class="wrap">
 
-  <div class="section-header">
-    <span class="eyebrow">Workflow</span>
-    <h2>From MLS Data to Market Insight</h2>
+
+  <div class="reporting-intro">
+
+    <div>
+
+      <span class="eyebrow">Final Output</span>
+
+      <h2>Published Market Reporting</h2>
+
+    </div>
+
+
+    <p>
+      The analysis doesn't stop inside Power BI. The processed data is
+      translated into public-facing market reports and neighborhood
+      pages so the information can actually be used.
+    </p>
+
   </div>
 
-  <div class="pipeline">
 
-    <div class="pipeline-step">
-      <span>01</span>
-      <strong>MLS Export</strong>
-    </div>
+  <div class="gallery-grid">
 
-    <div class="pipeline-arrow">→</div>
+    <figure class="gallery-item">
+      <img src="images/website-data-page.png">
+      <figcaption>Kyle Market Data</figcaption>
+    </figure>
 
-    <div class="pipeline-step">
-      <span>02</span>
-      <strong>Clean Data</strong>
-    </div>
+    <figure class="gallery-item">
+      <img src="images/website-subdivision.png">
+      <figcaption>Subdivision Market Reporting</figcaption>
+    </figure>
 
-    <div class="pipeline-arrow">→</div>
-
-    <div class="pipeline-step">
-      <span>03</span>
-      <strong>Python Processing</strong>
-    </div>
-
-    <div class="pipeline-arrow">→</div>
-
-    <div class="pipeline-step">
-      <span>04</span>
-      <strong>Power BI</strong>
-    </div>
-
-    <div class="pipeline-arrow">→</div>
-
-    <div class="pipeline-step">
-      <span>05</span>
-      <strong>Market Insight</strong>
-    </div>
+    <figure class="gallery-item">
+      <img src="images/market-report.png">
+      <figcaption>Consumer Market Report</figcaption>
+    </figure>
 
   </div>
+
 
 </div>
+
 </section>
 
 
 
 <!-- PROBLEMS -->
 
-<section class="portfolio-section dark-section">
+<section>
+
 <div class="wrap">
 
   <div class="section-header">
+
     <span class="eyebrow">Problem Solving</span>
+
     <h2>Problems I Solved</h2>
+
+    <p>
+      Building the reporting system required more than creating
+      visualizations.
+    </p>
+
   </div>
+
 
   <div class="problem-grid">
 
+
     <div class="problem-card">
+
       <span class="problem-number">01</span>
+
       <h3>Subdivision Naming</h3>
 
       <p>
-        Standardized multiple MLS subdivision names into one
-        consistent neighborhood.
+        Standardized multiple MLS names that represented the same
+        neighborhood so activity wasn't split across separate groups.
       </p>
 
       <div class="code-example">
@@ -357,33 +668,58 @@ body {
 
 
     <div class="problem-card">
+
       <span class="problem-number">02</span>
 
-      <h3>Incorrect Counts</h3>
+      <h3>Data Validation</h3>
 
       <p>
-        Traced incorrect sold totals through source data,
-        processing, JSON output, and webpage logic.
+        Traced incorrect subdivision totals through the source data,
+        processing output, JSON files and webpage logic to identify
+        reporting discrepancies.
       </p>
 
     </div>
 
 
     <div class="problem-card">
+
       <span class="problem-number">03</span>
 
-      <h3>Recurring Reporting</h3>
+      <h3>Reporting Automation</h3>
 
       <p>
-        Built repeatable workflows instead of manually rebuilding
-        market reports.
+        Built repeatable processing workflows so updated market data
+        could feed recurring analysis and reporting without rebuilding
+        everything manually.
       </p>
 
     </div>
 
+
   </div>
 
 </div>
+
+</section>
+
+
+
+<!-- END -->
+
+<section class="final dark-section">
+
+  <span class="eyebrow">End-to-End Analytics</span>
+
+  <h2>
+    From raw housing data to usable market intelligence.
+  </h2>
+
+  <p>
+    Data preparation, analysis, visualization, automation and
+    public-facing reporting built as one connected system.
+  </p>
+
 </section>
 
 
