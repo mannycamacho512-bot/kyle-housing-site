@@ -2,46 +2,390 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Kyle Residential Market Intelligence</title>
+<title>Kyle Residential Market Intelligence</title>
 
-  <style>
+<style>
 
-    /* ALL OF YOUR CSS GOES HERE */
+/* ===== PAGE ===== */
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #08111b;
-      color: white;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #08111b;
+  color: white;
+}
 
-    .gallery-item img {
-      width: 100%;
-      display: block;
-    }
+.wrap {
+  width: min(1200px, calc(100% - 40px));
+  margin: auto;
+}
 
-    /* etc... */
+.portfolio-section {
+  padding: 70px 0;
+}
 
-  </style>
+.dark-section {
+  background: #0d1721;
+}
 
+
+/* ===== HEADINGS ===== */
+
+.section-header {
+  margin-bottom: 30px;
+}
+
+.section-header h2 {
+  margin: 5px 0 8px;
+  font-size: 38px;
+}
+
+.section-header p {
+  margin: 0;
+  color: #8c9aa7;
+}
+
+.eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  font-weight: 800;
+  color: #3ea6ff;
+}
+
+
+/* ===== SCREENSHOT GALLERY ===== */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.small-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.gallery-item {
+  margin: 0;
+  background: #111d28;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.gallery-item img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.gallery-item figcaption {
+  padding: 12px 14px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+
+/* ===== PIPELINE ===== */
+
+.pipeline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pipeline-step {
+  flex: 1;
+  padding: 20px;
+  background: #111d28;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.pipeline-step span {
+  display: block;
+  font-size: 11px;
+  color: #3ea6ff;
+  margin-bottom: 5px;
+}
+
+.pipeline-arrow {
+  font-size: 24px;
+  color: #6f7c88;
+}
+
+
+/* ===== PROBLEMS ===== */
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.problem-card {
+  background: #111d28;
+  padding: 22px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.problem-card h3 {
+  margin: 8px 0;
+}
+
+.problem-card p {
+  color: #93a1ad;
+  font-size: 14px;
+}
+
+.problem-number {
+  font-size: 11px;
+  color: #3ea6ff;
+  font-weight: 800;
+}
+
+.code-example {
+  margin-top: 15px;
+  background: #081018;
+  padding: 12px;
+  border-radius: 10px;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 900px) {
+
+  .gallery-grid,
+  .small-grid,
+  .problem-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pipeline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pipeline-arrow {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-  <!-- ALL OF YOUR WEBSITE CONTENT GOES HERE -->
 
-  <section>
-    <h1>Kyle Residential Market Intelligence</h1>
-  </section>
+<!-- POWER BI -->
+
+<section class="portfolio-section">
+<div class="wrap">
+
+  <div class="section-header">
+    <span class="eyebrow">Power BI</span>
+    <h2>Market Analysis</h2>
+    <p>Residential market reporting built from Kyle MLS data.</p>
+  </div>
+
+  <div class="gallery-grid">
+
+    <figure class="gallery-item">
+      <img src="images/powerbi-sales-trends.png">
+      <figcaption>Sales Trends</figcaption>
+    </figure>
+
+    <figure class="gallery-item">
+      <img src="images/powerbi-inventory.png">
+      <figcaption>Inventory</figcaption>
+    </figure>
+
+    <figure class="gallery-item">
+      <img src="images/powerbi-subdivisions.png">
+      <figcaption>Subdivision Performance</figcaption>
+    </figure>
+
+    <figure class="gallery-item">
+      <img src="images/powerbi-median-price.png">
+      <figcaption>Median Price</figcaption>
+    </figure>
+
+    <figure class="gallery-item">
+      <img src="images/powerbi-dom.png">
+      <figcaption>Days on Market</figcaption>
+    </figure>
+
+    <figure class="gallery-item">
+      <img src="images/powerbi-price-reductions.png">
+      <figcaption>Price Reductions</figcaption>
+    </figure>
+
+  </div>
+
+</div>
+</section>
+
+
+
+<!-- EXCEL -->
+
+<section class="portfolio-section dark-section">
+<div class="wrap">
+
+  <div class="section-header">
+    <span class="eyebrow">Excel + Data</span>
+    <h2>Cleaning & Preparation</h2>
+  </div>
+
+  <div class="gallery-grid small-grid">
+
+    <figure class="gallery-item">
+      <img src="images/excel-clean-data.png">
+      <figcaption>Cleaned Dataset</figcaption>
+    </figure>
+
+    <figure class="gallery-item">
+      <img src="images/excel-subdivision-mapping.png">
+      <figcaption>Subdivision Mapping</figcaption>
+    </figure>
+
+  </div>
+
+</div>
+</section>
+
+
+
+<!-- PIPELINE -->
+
+<section class="portfolio-section">
+<div class="wrap">
+
+  <div class="section-header">
+    <span class="eyebrow">Workflow</span>
+    <h2>From MLS Data to Market Insight</h2>
+  </div>
+
+  <div class="pipeline">
+
+    <div class="pipeline-step">
+      <span>01</span>
+      <strong>MLS Export</strong>
+    </div>
+
+    <div class="pipeline-arrow">→</div>
+
+    <div class="pipeline-step">
+      <span>02</span>
+      <strong>Clean Data</strong>
+    </div>
+
+    <div class="pipeline-arrow">→</div>
+
+    <div class="pipeline-step">
+      <span>03</span>
+      <strong>Python Processing</strong>
+    </div>
+
+    <div class="pipeline-arrow">→</div>
+
+    <div class="pipeline-step">
+      <span>04</span>
+      <strong>Power BI</strong>
+    </div>
+
+    <div class="pipeline-arrow">→</div>
+
+    <div class="pipeline-step">
+      <span>05</span>
+      <strong>Market Insight</strong>
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+
+
+<!-- PROBLEMS -->
+
+<section class="portfolio-section dark-section">
+<div class="wrap">
+
+  <div class="section-header">
+    <span class="eyebrow">Problem Solving</span>
+    <h2>Problems I Solved</h2>
+  </div>
+
+  <div class="problem-grid">
+
+    <div class="problem-card">
+      <span class="problem-number">01</span>
+      <h3>Subdivision Naming</h3>
+
+      <p>
+        Standardized multiple MLS subdivision names into one
+        consistent neighborhood.
+      </p>
+
+      <div class="code-example">
+        TALAVERA<br>
+        TALAVERA PH 1<br>
+        TALAVERA PH 2<br>
+        ↓<br>
+        <strong>TALAVERA</strong>
+      </div>
+
+    </div>
+
+
+    <div class="problem-card">
+      <span class="problem-number">02</span>
+
+      <h3>Incorrect Counts</h3>
+
+      <p>
+        Traced incorrect sold totals through source data,
+        processing, JSON output, and webpage logic.
+      </p>
+
+    </div>
+
+
+    <div class="problem-card">
+      <span class="problem-number">03</span>
+
+      <h3>Recurring Reporting</h3>
+
+      <p>
+        Built repeatable workflows instead of manually rebuilding
+        market reports.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+
 
 </body>
 </html>
