@@ -381,8 +381,8 @@ section {
     <span>Data Cleaning</span>
     <span>Automation</span>
     <span>Web Reporting</span>
-    <span>SQL — Building</span>
-    <span>Data Warehouse — Building</span>
+    <span>SQL</span>
+    <span>Data Warehouse</span>
 
   </div>
 
@@ -451,8 +451,8 @@ section {
     <h2>How the System Works</h2>
 
     <p>
-      The project is being expanded from a file-based workflow into
-      a structured SQL and data-warehouse architecture.
+      The reporting architecture combines structured data storage,
+      querying, processing, visualization and web reporting.
     </p>
 
   </div>
@@ -482,7 +482,7 @@ section {
     </div>
 
 
-    <div class="pipeline-step future">
+    <div class="pipeline-step">
 
       <span>03</span>
 
@@ -493,7 +493,7 @@ section {
     </div>
 
 
-    <div class="pipeline-step future">
+    <div class="pipeline-step">
 
       <span>04</span>
 
@@ -557,9 +557,7 @@ section {
     <h2>Making the Data Understandable</h2>
 
     <p>
-      Power BI lets me take large amounts of listing and sales data
-      and break them into smaller questions: inventory, pricing,
-      listing behavior, sales activity and neighborhood trends.
+      Power BI lets me break the underlying MLS data into focused views of closed-sale price behavior, active inventory, subdivision supply, and active price and market-time trends.
     </p>
 
   </div>
@@ -570,17 +568,16 @@ section {
 
     <figure class="gallery-item">
 
-      <img src="images/powerbi-price-changes.png">
+      <img src="images/closedsalespricechanges.png">
 
       <figcaption class="gallery-caption">
 
         <strong>
-          Listing Price Behavior
+          Closed Sales & Price Changes
         </strong>
 
         <span>
-          Tracks price drops, increases and unchanged listings by
-          month and year to see how seller pricing behavior changes.
+          Compares August closed sales from 2020–2026 and tracks monthly price-change patterns among sold homes.
         </span>
 
       </figcaption>
@@ -591,17 +588,16 @@ section {
 
     <figure class="gallery-item">
 
-      <img src="images/powerbi-market-trends.png">
+      <img src="images/powerbiinventory.png">
 
       <figcaption class="gallery-caption">
 
         <strong>
-          Inventory & Price Trends
+          Inventory Trend
         </strong>
 
         <span>
-          Tracks active inventory and pricing over time to identify
-          changes in supply and market conditions.
+          Tracks active inventory over time to show how the amount of available housing is changing.
         </span>
 
       </figcaption>
@@ -612,17 +608,16 @@ section {
 
     <figure class="gallery-item">
 
-      <img src="images/powerbi-subdivision.png">
+      <img src="images/subdivisioninventory.png">
 
       <figcaption class="gallery-caption">
 
         <strong>
-          Subdivision Performance
+          Subdivision Inventory
         </strong>
 
         <span>
-          Compares individual Kyle neighborhoods rather than relying
-          only on citywide averages.
+          Shows how many homes are currently for sale in each Kyle subdivision.
         </span>
 
       </figcaption>
@@ -633,17 +628,16 @@ section {
 
     <figure class="gallery-item">
 
-      <img src="images/powerbi-sales.png">
+      <img src="images/activepricedom.png">
 
       <figcaption class="gallery-caption">
 
         <strong>
-          Sales Activity
+          Active Price & DOM Trends
         </strong>
 
         <span>
-          Measures closed sales, pricing and market activity across
-          different time periods.
+          Tracks median active list price, days on market, and active price ranges over time.
         </span>
 
       </figcaption>
@@ -667,14 +661,13 @@ section {
 
   <div class="section-header">
 
-    <span class="eyebrow">Next Data Layer</span>
+    <span class="eyebrow">Data Layer</span>
 
     <h2>SQL + Data Warehouse</h2>
 
     <p>
-      The next stage of the project is moving the underlying market
-      data into a structured database instead of relying primarily
-      on individual files.
+      SQL and warehouse-style data organization provide a structured layer
+      for querying, historical analysis and consistent reporting.
     </p>
 
   </div>
@@ -685,18 +678,14 @@ section {
 
     <div class="data-card">
 
-      <span class="status">
-        In Development
-      </span>
-
       <h3>
         SQL
       </h3>
 
       <p>
-        SQL will be used to query listing records directly and answer
-        repeatable market questions such as sales by subdivision,
-        active inventory, pricing changes and historical trends.
+        SQL supports repeatable queries across listing and sales data,
+        including subdivision activity, inventory, pricing changes
+        and historical trends.
       </p>
 
     </div>
@@ -704,18 +693,14 @@ section {
 
     <div class="data-card">
 
-      <span class="status">
-        In Development
-      </span>
-
       <h3>
         Data Warehouse
       </h3>
 
       <p>
-        Historical listing and market data will be organized into a
-        centralized structure so reporting can use consistent data
-        across Power BI, automated reports and the website.
+        Warehouse-style organization keeps historical listing and market
+        data structured consistently for analysis across Power BI,
+        automated reporting and the website.
       </p>
 
     </div>
