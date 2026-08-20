@@ -184,6 +184,12 @@ section {
   width: 100%;
   display: block;
   height: auto;
+  cursor: zoom-in;
+  transition: opacity .2s ease;
+}
+
+.gallery-item img:hover {
+  opacity: .85;
 }
 
 .gallery-caption {
@@ -247,6 +253,12 @@ section {
 .website-card img {
   width: 100%;
   display: block;
+  cursor: zoom-in;
+  transition: opacity .2s ease;
+}
+
+.website-card img:hover {
+  opacity: .85;
 }
 
 .website-card div {
@@ -297,6 +309,46 @@ section {
 }
 
 
+/* LIGHTBOX */
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,.94);
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 95vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 70px rgba(0,0,0,.6);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 28px;
+  color: #ffffff;
+  font-size: 44px;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+}
+
+
 /* END */
 
 .final {
@@ -329,6 +381,10 @@ section {
 
   .pipeline {
     grid-template-columns: 1fr;
+  }
+
+  .lightbox {
+    padding: 18px;
   }
 
 }
@@ -855,6 +911,79 @@ section {
   </p>
 
 </section>
+
+
+
+<!-- CLICK-TO-ENLARGE LIGHTBOX -->
+
+<div class="lightbox" id="lightbox">
+
+  <span class="lightbox-close" id="lightboxClose">&times;</span>
+
+  <img id="lightboxImage" src="" alt="">
+
+</div>
+
+
+<script>
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightboxImage");
+const lightboxClose = document.getElementById("lightboxClose");
+
+const clickableImages = document.querySelectorAll(
+  ".gallery-item img, .website-card img"
+);
+
+
+clickableImages.forEach(function(image) {
+
+  image.addEventListener("click", function() {
+
+    lightboxImage.src = this.src;
+    lightboxImage.alt = this.alt;
+
+    lightbox.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+  });
+
+});
+
+
+function closeLightbox() {
+
+  lightbox.classList.remove("active");
+
+  lightboxImage.src = "";
+
+  document.body.style.overflow = "";
+
+}
+
+
+lightboxClose.addEventListener("click", closeLightbox);
+
+
+lightbox.addEventListener("click", function(event) {
+
+  if (event.target === lightbox) {
+    closeLightbox();
+  }
+
+});
+
+
+document.addEventListener("keydown", function(event) {
+
+  if (event.key === "Escape") {
+    closeLightbox();
+  }
+
+});
+
+</script>
 
 
 </body>
