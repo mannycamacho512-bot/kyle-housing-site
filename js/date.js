@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const dateText = "September 9, 2026";
+  const dateText = "September 10, 2026";
   const el = document.getElementById("last-updated-date");
   if (el) {
     el.textContent = dateText;
